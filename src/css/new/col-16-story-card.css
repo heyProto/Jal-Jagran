@@ -31,3 +31,19 @@
 	font-weight: 100;
 	letter-spacing: 0.5px;
 }
+
+@media only screen and (max-width: 500px){
+	.col-16-story-card{
+		margin-top: 0px;
+	}
+
+	.col-16-story-card .article-title{
+		font-size: 22px;
+	    max-width: 100%;
+	    font-weight: 600;
+	    line-height: 30px;
+	    letter-spacing: 0.5px;
+	    padding-right: 20px;
+	    margin-left: 0px;
+	}
+}
