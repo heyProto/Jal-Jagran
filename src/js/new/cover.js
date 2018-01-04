@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         article_container;
 
     if (mode === 'laptop') {
+    }
 
-
-    } else {
+    if (mode === 'mobile')  {
         //Set Tab counts and container counts.
         $('.proto-mobile-grid-navigation .proto-mobile-grid-navigatio-tab').each((i, e) => {
             $(e).attr('data-tab', i);
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 $(tab_content).addClass('proto-tab-active-content');
             }
         });
+        $('.proto-mobile-grid-navigation').sticky();
         $('.proto-mobile-grid-navigation .proto-mobile-grid-navigatio-tab').on('click', (e) => {
             let tabIndex = +e.currentTarget.getAttribute('data-tab'),
                 $tab = $($('.proto-mobile-grid-navigatio-tab')[tabIndex]),
