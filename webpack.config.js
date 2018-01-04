@@ -7,7 +7,7 @@ const district = require('./webpack.config.district.js');
 // Generic css
 const input = ['./src/css/proto-grid.css', './src/css/jal-jagran-style.css'];
 const options = {
-  output: "jaljagran-style.min.css"
+  output: "proto-app-style.min.css"
 };
 minifier.minify(input, options);
 

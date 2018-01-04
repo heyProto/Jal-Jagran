@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 
 // CSS bundle
-const input = './src/css/home.css';
+const input = './src/css/new/cover.css';
 const options = {
-  output: "jaljagran-home.min.css"
+  output: "proto-app-cover-page.min.css"
 };
 minifier.minify(input, options);
 
@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: 'jaljagran-home.min.js',
+    filename: 'proto-app-cover-page.min.js',
   },
   plugins: [
     new webpack.DefinePlugin({

@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const minifier = require('minifier');
-const input = ['./src/css/data.css', './src/css/filter.css']
+const input = ['./src/css/new/data.css', './src/css/new/filter.css']
 const options = {
-  output: "jaljagran-data.min.css"
+  output: "proto-app-grid-page.min.css"
 }
 minifier.minify(input, options);
 
@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: __dirname,
     publicPath: '/',
-    filename: 'jaljagran-data.min.js',
+    filename: 'proto-app-grid-page.min.js',
   },
   plugins: [
     new webpack.DefinePlugin({

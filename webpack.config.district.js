@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 
 // CSS bundle
-const input = './src/css/district.css';
+const input = './src/css/new/district.css';
 const options = {
-  output: "jaljagran-district.min.css"
+  output: "proto-app-article-page.min.css"
 };
 minifier.minify(input, options);
 
@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: 'jaljagran-district.min.js',
+    filename: 'proto-app-article-page.min.js',
   },
   plugins: [
     new webpack.DefinePlugin({
