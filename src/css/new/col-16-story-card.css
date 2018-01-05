@@ -32,9 +32,14 @@
 	letter-spacing: 0.5px;
 }
 
+.stick-to-top{
+	margin-top: -70px;
+}
+
 @media only screen and (max-width: 500px){
 	.col-16-story-card{
 		margin-top: 0px;
+		width: 100%;
 	}
 
 	.col-16-story-card .article-title{

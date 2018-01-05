@@ -17,6 +17,7 @@
         padding: 17px 15px;
         font-size: 12px;
         display: inline-block;
+        font-family: "cabin";
     }
     .proto-mobile-grid-navigatio-tab.proto-active-tab {
         color: #ee6723;
