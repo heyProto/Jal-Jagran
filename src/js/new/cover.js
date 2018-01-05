@@ -65,10 +65,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             cover_container = document.getElementById("cover_container")
             data.map((d,i) => {
               let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-article'+i
-              createDiv.className= 'ProtoCard-article'
+              createDiv.id = 'ProtoCard-cover'+i
+              createDiv.className= 'ProtoCard-cover'
               cover_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col16");
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover"+i), data[i].iframe_url, "col16");
             })
         }
     });
@@ -80,10 +80,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             originals_container = document.getElementById("originals_container")
             data.map((d,i) => {
               let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-article'+i
-              createDiv.className= 'ProtoCard-article'
+              createDiv.id = 'ProtoCard-originals'+i
+              createDiv.className= 'ProtoCard-originals'
               originals_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col7");
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col7");
             })
         }
     });
@@ -92,16 +92,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (err != null) {
             alert('Something went wrong: ' + err);
         } else {
-            digests_container = document.getElementById("digests_container")
+            digests_container = document.getElementById("digests_container");
             data.map((d,i) => {
               let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-article'+i
-              createDiv.className= 'ProtoCard-article'
+              createDiv.id = 'ProtoCard-digests'+i
+              createDiv.className= 'ProtoCard-digests'
               digests_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col4");
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests"+i), data[i].iframe_url, "col4");
             })
         }
     });
+
 
     Util.getJSON('https://cdn.protograph.pykih.com/cfe6f16da89adfb6c6f79430/index.json', function (err, data){
         if (err != null) {
@@ -110,10 +111,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             opinions_container = document.getElementById("opinions_container")
             data.map((d,i) => {
               let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-article'+i
-              createDiv.className= 'ProtoCard-article'
+              createDiv.id = 'ProtoCard-opinions'+i
+              createDiv.className= 'ProtoCard-opinions'
               opinions_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col2");
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions"+i), data[i].iframe_url, "col2");
             })
         }
     });
@@ -125,10 +126,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             feeds_container = document.getElementById("feeds_container")
             data.map((d,i) => {
               let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-article'+i
-              createDiv.className= 'ProtoCard-article'
+              createDiv.id = 'ProtoCard-feeds'+i
+              createDiv.className= 'ProtoCard-feeds'
               feeds_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col3");
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col3");
             })
         }
     });
