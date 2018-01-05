@@ -245,6 +245,10 @@ body {
   .col-16 {
     width: 100%; }
 
+  .col-7 {
+    margin-left: 50%;
+    transform: translate(-50%, 0); }
+
   .col-4 {
     margin-left: 50%;
     transform: translate(-50%, 0); }

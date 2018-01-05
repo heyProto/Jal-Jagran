@@ -7,12 +7,29 @@
 .proto-tab-active-content {
     display: block;
 }
+
+.ProtoCard-feeds{
+    height: 70px;
+}
+
+.ProtoCard-originals, .ProtoCard-digests, .ProtoCard-opinions{
+    height: 250px;
+}
+
 @media only screen and (max-width: 500px) {
     .proto-mobile-grid-navigation {
         display: block;
         background: #ffffff;
         height: 50px;
+        border-bottom: 1px solid #efefef;
+        margin-bottom: 12px;
+        margin-top: -20px;
     }
+
+    .sticky-wrapper{
+        margin-bottom: 20px;
+    }
+
     .proto-mobile-grid-navigatio-tab {
         padding: 17px 15px;
         font-size: 12px;
