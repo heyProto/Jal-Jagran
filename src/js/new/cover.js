@@ -4,8 +4,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
-        more_article_container,
-        article_container;
+        originals_container,
+        cover_container,
+        feeds_container,
+        digests_container,
+        opinions_container;
 
     if (mode === 'laptop') {
     }
@@ -54,6 +57,81 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     }
     // $(".banner-div a:empty").parent("p").css("display", "none");
+
+    Util.getJSON('https://cdn.protograph.pykih.com/221bde652489999ea84390c4/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            cover_container = document.getElementById("cover_container")
+            data.map((d,i) => {
+              let createDiv = document.createElement('div');
+              createDiv.id = 'ProtoCard-article'+i
+              createDiv.className= 'ProtoCard-article'
+              cover_container.appendChild(createDiv);
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col16");
+            })
+        }
+    });
+
+    Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            originals_container = document.getElementById("originals_container")
+            data.map((d,i) => {
+              let createDiv = document.createElement('div');
+              createDiv.id = 'ProtoCard-article'+i
+              createDiv.className= 'ProtoCard-article'
+              originals_container.appendChild(createDiv);
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col7");
+            })
+        }
+    });
+
+    Util.getJSON('https://cdn.protograph.pykih.com/178f693945af992b3139a8cc/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            digests_container = document.getElementById("digests_container")
+            data.map((d,i) => {
+              let createDiv = document.createElement('div');
+              createDiv.id = 'ProtoCard-article'+i
+              createDiv.className= 'ProtoCard-article'
+              digests_container.appendChild(createDiv);
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col4");
+            })
+        }
+    });
+
+    Util.getJSON('https://cdn.protograph.pykih.com/cfe6f16da89adfb6c6f79430/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            opinions_container = document.getElementById("opinions_container")
+            data.map((d,i) => {
+              let createDiv = document.createElement('div');
+              createDiv.id = 'ProtoCard-article'+i
+              createDiv.className= 'ProtoCard-article'
+              opinions_container.appendChild(createDiv);
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col2");
+            })
+        }
+    });
+
+    Util.getJSON('https://cdn.protograph.pykih.com/d73d44a8ec34af0919a09b78/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            feeds_container = document.getElementById("feeds_container")
+            data.map((d,i) => {
+              let createDiv = document.createElement('div');
+              createDiv.id = 'ProtoCard-article'+i
+              createDiv.className= 'ProtoCard-article'
+              feeds_container.appendChild(createDiv);
+              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article"+i), data[i].iframe_url, "col3");
+            })
+        }
+    });
 
 
 });
