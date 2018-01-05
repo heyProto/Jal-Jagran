@@ -64,11 +64,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         } else {
             cover_container = document.getElementById("cover_container")
             data.map((d,i) => {
-              let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-cover'+i
-              createDiv.className= 'ProtoCard-cover'
-              cover_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover"+i), data[i].iframe_url, "col16");
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-cover'+i;
+                createDiv.className= 'ProtoCard-cover';
+                cover_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                cover_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover"+i), data[i].iframe_url, "col16");
+                },0)
             })
         }
     });
@@ -77,13 +82,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (err != null) {
             alert('Something went wrong: ' + err);
         } else {
-            originals_container = document.getElementById("originals_container")
+            originals_container = document.getElementById("originals_container");
             data.map((d,i) => {
-              let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-originals'+i
-              createDiv.className= 'ProtoCard-originals'
-              originals_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col7");
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-originals'+i;
+                createDiv.className= 'ProtoCard-originals';
+                originals_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                originals_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col7");
+                },0)
             })
         }
     });
@@ -94,11 +104,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         } else {
             digests_container = document.getElementById("digests_container");
             data.map((d,i) => {
-              let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-digests'+i
-              createDiv.className= 'ProtoCard-digests'
-              digests_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests"+i), data[i].iframe_url, "col4");
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-digests'+i;
+                createDiv.className= 'ProtoCard-digests';
+                digests_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                digests_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests"+i), data[i].iframe_url, "col4");
+                },0)
             })
         }
     });
@@ -108,13 +123,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (err != null) {
             alert('Something went wrong: ' + err);
         } else {
-            opinions_container = document.getElementById("opinions_container")
+            opinions_container = document.getElementById("opinions_container");
             data.map((d,i) => {
-              let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-opinions'+i
-              createDiv.className= 'ProtoCard-opinions'
-              opinions_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions"+i), data[i].iframe_url, "col2");
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-opinions'+i;
+                createDiv.className= 'ProtoCard-opinions';
+                opinions_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                opinions_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions"+i), data[i].iframe_url, "col2");
+                },0)
             })
         }
     });
@@ -123,13 +143,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (err != null) {
             alert('Something went wrong: ' + err);
         } else {
-            feeds_container = document.getElementById("feeds_container")
+            feeds_container = document.getElementById("feeds_container");
             data.map((d,i) => {
-              let createDiv = document.createElement('div');
-              createDiv.id = 'ProtoCard-feeds'+i
-              createDiv.className= 'ProtoCard-feeds'
-              feeds_container.appendChild(createDiv);
-              new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col3");
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-feeds'+i;
+                createDiv.className= 'ProtoCard-feeds';
+                feeds_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                feeds_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col3");
+                },0)
             })
         }
     });
