@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             data.map((d,i) => {
                 let createDiv = document.createElement('div');
                 createDiv.id = 'ProtoCard-opinions'+i;
-                createDiv.className= 'ProtoCard-opinions';
+                createDiv.className= (mode == "mobile" && (i+1)%2 == 0) ? 'ProtoCard-opinions div-without-margin-right' : 'ProtoCard-opinions'  ;
                 opinions_container.appendChild(createDiv);
                 let createMarginDiv = document.createElement('div');
                 createMarginDiv.style.marginBottom = "20px";
