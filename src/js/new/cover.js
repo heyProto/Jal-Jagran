@@ -11,6 +11,47 @@ document.addEventListener("DOMContentLoaded", function (event) {
         opinions_container;
 
     if (mode === 'laptop') {
+        Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data){
+            if (err != null) {
+                alert('Something went wrong: ' + err);
+            } else {
+                originals_container = document.getElementById("originals_container");
+                data.map((d,i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-originals'+i;
+                    createDiv.className= 'ProtoCard-originals';
+                    originals_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    originals_container.appendChild(createMarginDiv);
+                    setTimeout(function(){
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col7");
+                    },0)
+                })
+            }
+        });
+
+        Util.getJSON('https://cdn.protograph.pykih.com/d73d44a8ec34af0919a09b78/index.json', function (err, data){
+            if (err != null) {
+                alert('Something went wrong: ' + err);
+            } else {
+                feeds_container = document.getElementById("feeds_container");
+                data.map((d,i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-feeds'+i;
+                    createDiv.className= 'ProtoCard-feeds';
+                    feeds_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    feeds_container.appendChild(createMarginDiv);
+                    setTimeout(function(){
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col3");
+                    },0)
+                })
+            }
+        });
+
+
     }
 
     if (mode === 'mobile')  {
@@ -55,6 +96,47 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //     $('.container.proto-container').css('overflow', 'initial');
         // });
 
+        Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data){
+            if (err != null) {
+                alert('Something went wrong: ' + err);
+            } else {
+                originals_container = document.getElementById("originals_container");
+                data.map((d,i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-originals'+i;
+                    createDiv.className= 'ProtoCard-originals';
+                    originals_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    originals_container.appendChild(createMarginDiv);
+                    setTimeout(function(){
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col4");
+                    },0)
+                })
+            }
+        });
+
+        Util.getJSON('https://cdn.protograph.pykih.com/d73d44a8ec34af0919a09b78/index.json', function (err, data){
+            if (err != null) {
+                alert('Something went wrong: ' + err);
+            } else {
+                feeds_container = document.getElementById("feeds_container");
+                data.map((d,i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-feeds'+i;
+                    createDiv.className= 'ProtoCard-feeds';
+                    feeds_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    feeds_container.appendChild(createMarginDiv);
+                    setTimeout(function(){
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col4");
+                    },0)
+                })
+            }
+        });
+
+
     }
     // $(".banner-div a:empty").parent("p").css("display", "none");
 
@@ -73,26 +155,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 cover_container.appendChild(createMarginDiv);
                 setTimeout(function(){
                     new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover"+i), data[i].iframe_url, "col16");
-                },0)
-            })
-        }
-    });
-
-    Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data){
-        if (err != null) {
-            alert('Something went wrong: ' + err);
-        } else {
-            originals_container = document.getElementById("originals_container");
-            data.map((d,i) => {
-                let createDiv = document.createElement('div');
-                createDiv.id = 'ProtoCard-originals'+i;
-                createDiv.className= 'ProtoCard-originals';
-                originals_container.appendChild(createDiv);
-                let createMarginDiv = document.createElement('div');
-                createMarginDiv.style.marginBottom = "20px";
-                originals_container.appendChild(createMarginDiv);
-                setTimeout(function(){
-                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col7");
                 },0)
             })
         }
@@ -138,26 +200,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
             })
         }
     });
-
-    Util.getJSON('https://cdn.protograph.pykih.com/d73d44a8ec34af0919a09b78/index.json', function (err, data){
-        if (err != null) {
-            alert('Something went wrong: ' + err);
-        } else {
-            feeds_container = document.getElementById("feeds_container");
-            data.map((d,i) => {
-                let createDiv = document.createElement('div');
-                createDiv.id = 'ProtoCard-feeds'+i;
-                createDiv.className= 'ProtoCard-feeds';
-                feeds_container.appendChild(createDiv);
-                let createMarginDiv = document.createElement('div');
-                createMarginDiv.style.marginBottom = "20px";
-                feeds_container.appendChild(createMarginDiv);
-                setTimeout(function(){
-                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds"+i), data[i].iframe_url, "col3");
-                },0)
-            })
-        }
-    });
-
 
 });
