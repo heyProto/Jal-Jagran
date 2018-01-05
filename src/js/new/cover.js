@@ -33,6 +33,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
             $tabContent.addClass('proto-tab-active-content');
         });
 
+        $('.hamburger-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
+        });
+
+        $('.close-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
+        })
+
         // $('#dropdownMenuButton').on('click', (e) => {
         //     $('.protograph-app-navbar').addClass('protograph-app-navbar-slide-in');
         //     $('body').css('overflow', 'hidden');
