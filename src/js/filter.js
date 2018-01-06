@@ -15,42 +15,27 @@ export default class Filter extends React.Component {
 
     var stateVars = {
       moveIn: undefined,
-      moveOut: undefined,
-      showAllFilters: undefined,
       activeTab: 0,
       currentViewLevel: 0,
       filterParams: [],
       filteredData: [],
-      allFilters: {},
       dataJSON: this.props.dataJSON,
       filterJSON: filterJSON,
-      activeTabJSON: this.props.filterJSON.filter((e,i) => {return e.is_active === true;})
-    },
-    itemsJSON = stateVars.activeTabJSON;
-    for(let i = 0; i <= stateVars.currentViewLevel; i++) {
-      itemsJSON = itemsJSON.reduce((filtered, data) => {
-        if (data.is_active) {
-          filtered = filtered.concat(data);
-        }
-        return filtered;
-      }, [])
-    }
-    stateVars.itemsJSON = itemsJSON[0];
+      activeTabJSON: this.props.filterJSON.filter((e, i) => { return e.is_active === true; })[0]
+    };
+
     this.state = stateVars;
 
-    this.moveIn = this.moveIn.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.registerFilter = this.registerFilter.bind(this);
     this.unRegisterFilter = this.unRegisterFilter.bind(this);
-
-    this.showAllFilters = this.showAllFilters.bind(this);
-    this.hideAllFilters = this.hideAllFilters.bind(this);
   }
 
   setIDs(previous_ids, items) {
     return items.map((e, i) => {
       e.id = this.uuidv4();
       e.parent_ids = [...previous_ids, i];
-      if(e.filters && e.filters.length > 0) {
+      if (e.filters && e.filters.length > 0) {
         e.filters = this.setIDs(e.parent_ids, e.filters)
       }
       return e;
@@ -104,17 +89,45 @@ export default class Filter extends React.Component {
       })
     })
 
+    activeTabJSON = filterJSON[activeTab];
 
-    activeTabJSON = [filterJSON[activeTab]];
+    // Changing the id of filter items.
+    filterParams = filterParams.map((e, i) => {
+      var item = this.getItemJSON(e.parent_ids);
+      e.id = item.id;
+      return e;
+    });
 
     this.setState({
       filterJSON: filterJSON,
-      activeTabJSON: activeTabJSON
+      activeTabJSON: activeTabJSON,
+      filterParams: filterParams
     });
   }
 
+  componentDidMount() {
+    this.setCSS();
+  }
+
+  setCSS() {
+    let filterItemsContainer = document.querySelector('.protograph-filter-items-container'),
+      filterHeader = document.querySelector('.protograph-filters-header'),
+      filterTabs = document.querySelector('.protograph-filters-tabs-container'),
+      top = 0;
+
+    if (filterHeader) {
+      top += filterHeader.getBoundingClientRect().height;
+    }
+
+    if (filterTabs) {
+      top += filterTabs.getBoundingClientRect().height;
+    }
+
+    filterItemsContainer.style.top = `${top}px`;
+  }
+
   uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
@@ -132,7 +145,7 @@ export default class Filter extends React.Component {
 
     filterParams.forEach((e) => {
       parent_ids = e.parent_ids;
-      for ( let i = 0; i < parent_ids.length; i++) {
+      for (let i = 0; i < parent_ids.length; i++) {
         if (i === 0) {
           tempJSON = filterJSON[parent_ids[i]]
         } else {
@@ -142,93 +155,80 @@ export default class Filter extends React.Component {
       }
     });
 
+    this.resetFilterItems();
+
     this.setState({
       filterParams: [],
-      allFilters: {},
-      showAllFilters: false,
       filterJSON: filterJSON
     }, this.filterData)
   }
 
+  resetFilterItems() {
+    let active_filters = document.querySelectorAll('.protograph-filter-item-detail.protograph-show-more-filters');
+
+    for (let i = 0; i < active_filters.length; i++) {
+      let filter = active_filters[i],
+        chevron = filter.querySelector('i.chevron');
+
+      filter.classList.remove('protograph-show-more-filters');
+      chevron.classList.remove('up');
+      chevron.classList.add('down');
+    }
+  }
+
   //Reset the currentViewLevel
-  handleTabClick (e) {
+  handleTabClick(e) {
     var tabID = +e.target.closest('.protograph-filters-tab').getAttribute('data-tab_id'),
       activeTab = document.querySelector('.protograph-filters-tab.protograph-filters-tab-active'),
       activeTabId = activeTab.getAttribute('data-tab_id'),
       filterJSON = this.state.filterJSON,
-      currentViewLevel = 0,
       activeTabJSON;
 
     filterJSON[activeTabId].is_active = false;
     filterJSON[tabID].is_active = true;
 
-    activeTabJSON = this.props.filterJSON.filter((e,i) => {return e.is_active === true;})
+    activeTabJSON = this.props.filterJSON.filter((e, i) => { return e.is_active === true; })[0];
 
     this.setState({
       activeTab: tabID,
       filterJSON: filterJSON,
-      activeTabJSON: activeTabJSON,
-      itemsJSON: activeTabJSON[0],
-      currentViewLevel: currentViewLevel
+      activeTabJSON: activeTabJSON
     });
   }
 
-  moveIn(e) {
-    var itemID = +e.target.closest('.protograph-filter-item').getAttribute('data-item_id'),
-      currentViewLevel = this.state.currentViewLevel + 1,
-      items = this.state.itemsJSON.filters[itemID];
+  toggleFilter(e) {
+    let filter_details = e.target.closest('.protograph-filter-item-detail'),
+      chevron = filter_details.querySelector('i.chevron');
 
-    this.setState({
-      moveIn: true
-    }, ((e) => {
-      setTimeout((x) => {
-        this.setState({
-          moveIn: false,
-          itemsJSON: items,
-          currentViewLevel: currentViewLevel
-        })
-      }, 500);
-    }));
+    filter_details.classList.toggle('protograph-show-more-filters');
+
+    if (chevron.classList.contains('up')) {
+      chevron.classList.remove('up');
+      chevron.classList.add('down');
+    } else {
+      chevron.classList.add('up');
+      chevron.classList.remove('down');
+    }
   }
 
-  moveOut(e) {
-    var itemID = +e.target.closest('.protograph-filter-item.protograph-filters-dulled').getAttribute('data-item_id'),
-      currentViewLevel = this.state.currentViewLevel - 1,
-      itemsJSON = this.state.activeTabJSON;
-
-    for(let i = 0; i <= currentViewLevel; i++) {
-      itemsJSON = itemsJSON.reduce((filtered, data) => {
-        if (data.is_active) {
-          filtered = filtered.concat(data);
-        }
-        return filtered;
-      }, [])
-    }
-    itemsJSON = itemsJSON[0];
-
-    this.setState({
-      moveOut: true
-    }, ((e) => {
-      setTimeout((x) => {
-        this.setState({
-          moveOut: false,
-          itemsJSON: itemsJSON,
-          currentViewLevel: currentViewLevel
-        })
-      }, 500);
-    }));
+  getItemJSON(parent_ids, filterJSON) {
+    return parent_ids.reduce((prev, current) => {
+      let itemJSON = prev[current];
+      if (itemJSON.filters) {
+        itemJSON = itemJSON.filters;
+      }
+      return itemJSON;
+    }, filterJSON || this.state.filterJSON);
   }
 
   registerFilter(e) {
     //Set filterParams
     //Update the filterJSON: Mark the filters as active.
-    var itemID = +e.target.closest('.protograph-filter-item').getAttribute('data-item_id'),
-      item = this.state.itemsJSON.filters[itemID],
-      parent_ids = item.parent_ids,
+    var parent_ids = e.target.closest('.protograph-filter-item').getAttribute('data-item_parent_ids').split(',').map((e) => +e),
+      item = this.getItemJSON(parent_ids),
       filterJSON = this.state.filterJSON,
       tempJSON = filterJSON[parent_ids[0]],
       filterParams = this.state.filterParams,
-      allFilters = this.state.allFilters,
       activeTabJSON;
 
     filterParams.push(item);
@@ -238,29 +238,25 @@ export default class Filter extends React.Component {
       tempJSON = tempJSON.filters[parent_ids[i]];
     }
 
-    activeTabJSON = [filterJSON[parent_ids[0]]];
-
-    allFilters = this.groupAllFilters(filterParams, filterJSON);
+    activeTabJSON = filterJSON[parent_ids[0]];
 
     this.setState({
       filterJSON: filterJSON,
       activeTabJSON: activeTabJSON,
-      filterParams: filterParams,
-      allFilters: allFilters
+      filterParams: filterParams
     }, this.filterData);
   }
 
   unRegisterFilter(e) {
-    var itemID = +e.target.closest('.protograph-filter-item').getAttribute('data-item_id'),
-      item = this.state.itemsJSON.filters[itemID],
+    var parent_ids = e.target.closest('.protograph-filter-item').getAttribute('data-item_parent_ids').split(',').map((e) => +e),
+      item = this.getItemJSON(parent_ids),
       parent_ids = item.parent_ids,
       filterJSON = this.state.filterJSON,
       tempJSON = filterJSON[parent_ids[0]],
       filterParams = this.state.filterParams,
-      allFilters,
       activeTabJSON;
 
-    filterParams = filterParams.filter((e, i ) => {
+    filterParams = filterParams.filter((e, i) => {
       return e.id !== item.id;
     });
 
@@ -269,13 +265,12 @@ export default class Filter extends React.Component {
       tempJSON = tempJSON.filters[parent_ids[i]];
     }
 
-    activeTabJSON = [filterJSON[parent_ids[0]]];
-    allFilters = this.groupAllFilters(filterParams, filterJSON);
+    activeTabJSON = filterJSON[parent_ids[0]];
+
     this.setState({
       filterJSON: filterJSON,
       activeTabJSON: activeTabJSON,
       filterParams: filterParams,
-      allFilters: allFilters
     }, this.filterData);
   }
 
@@ -307,94 +302,6 @@ export default class Filter extends React.Component {
     return data;
   }
 
-  groupAllFilters(filterParams, filterJSON) {
-    let allFilters = {},
-      tempJSON,
-      parent_ids;
-
-    if (!filterParams.length) {
-      return allFilters;
-    }
-
-    filterParams.forEach((e) => {
-      parent_ids = e.parent_ids;
-      for ( let i = 0; i < parent_ids.length; i++) {
-        if (i === 0) {
-          tempJSON = filterJSON[parent_ids[i]]
-        } else {
-          if (i > 0 && i < parent_ids.length - 1) {
-            tempJSON = tempJSON.filters[parent_ids[i]];
-            allFilters[tempJSON.name] = allFilters[tempJSON.name] || [];
-            allFilters[tempJSON.name].push(e);
-            // tempJSON.is_active = false;
-          }
-        }
-      }
-    });
-
-    return allFilters;
-  }
-
-  showAllFilters() {
-    if (!this.state.filterParams.length) {
-      return;
-    }
-
-    this.setState({
-      showAllFilters: true
-    });
-  }
-
-  hideAllFilters() {
-    this.setState({
-      showAllFilters: false
-    });
-  }
-
-  removeFilter(e) {
-    var itemDOM = e.target.closest('.protograph-filters-all-filters-group-item'),
-      itemID = itemDOM.getAttribute('data-item_id'),
-      itemKey = itemDOM.getAttribute('data-item_key'),
-      filterParams = this.state.filterParams.filter((x) => {
-        return x.id !== itemID;
-      }),
-      item = this.state.filterParams.filter((x) => {
-        return x.id === itemID;
-      })[0],
-      allFilters = this.state.allFilters,
-      parent_ids = item.parent_ids,
-      filterJSON = this.state.filterJSON,
-      tempJSON = filterJSON[parent_ids[0]],
-      showAllFilters = this.state.showAllFilters,
-      activeTabJSON;
-
-    allFilters[itemKey] = allFilters[itemKey].filter((x) => {
-      return x.id !== itemID;
-    });
-
-    if (!allFilters[itemKey].length) {
-      delete allFilters[itemKey]
-    }
-
-    if (!Object.keys(allFilters).length) {
-      showAllFilters = false;
-    }
-
-    for (let i = 1; i < parent_ids.length; i++) {
-      tempJSON.filters[parent_ids[i]].is_active = undefined;
-      tempJSON = tempJSON.filters[parent_ids[i]];
-    }
-
-    activeTabJSON = [filterJSON[parent_ids[0]]];
-    this.setState({
-      showAllFilters: showAllFilters,
-      allFilters: allFilters,
-      filterJSON: filterJSON,
-      activeTabJSON: activeTabJSON,
-      filterParams: filterParams
-    }, this.filterData);
-  }
-
   getStyleString() {
     return `
       .protograph-house-color {
@@ -407,7 +314,7 @@ export default class Filter extends React.Component {
         background-color: ${this.props.configurationJSON.colors.house_color};
       }
       .protograph-filters-tab.protograph-filters-tab-active {
-        border-bottom: ${this.props.configurationJSON.colors.house_color};
+        border-bottom: 2px solid ${this.props.configurationJSON.colors.house_color};
       }
       .protograph-filters-header, .protograph-filters-all-filters-group-item-name, .protograph-filters-all-filters-group-item-cross, .protograph-filters-all-filters-group-item-number {
         color: ${this.props.configurationJSON.colors.filter_summary_text_color};
@@ -418,172 +325,135 @@ export default class Filter extends React.Component {
     `
   }
 
-  generateListOfAllFilters() {
-    let allFilters = this.state.allFilters,
-      allFilterHeadings = Object.keys(allFilters);
-
-    var transition_css = [];
-    if(this.state.showAllFilters) {
-      transition_css.push('protograph-filters-open');
+  getOnClickCallback(e) {
+    if (this.itemHasMoreFilters(e)) {
+      return this.toggleFilter;
+    } else {
+      return e.is_active ? undefined : this.registerFilter;
     }
+  }
 
+  getName(e) {
+    if (!e.renderName) {
+      return e.name;
+    } else {
+      if (e.renderName && e.renderName.constructor === Function) {
+        return e.renderName(e);
+      } else if (e.renderName && e.renderName.constructor === String) {
+        return e.renderName;
+      }
+    }
+  }
+
+  itemHasMoreFilters(e) {
+    return e.filters && e.filters.length > 0;
+  }
+
+  hasTabs() {
+    return this.state.filterJSON.length > 1;
+  }
+
+  renderFilterItems(filters, subItems) {
     return (
-      <div className={`protograph-filters-all-filters ${transition_css.join(' ')}`}>
+      <div className={`${!subItems ? 'protograph-filter-items-container' : 'protograph-filter-sub-items-container'}`} >
         {
-          allFilterHeadings.map((e, i) => {
+          (this.props.hintText && !subItems) &&
+          <div className="protograph-filter-hint-text">{this.props.hintText}</div>
+        }
+        {
+          filters.map((e, i) => {
+
+            if (e.is_hidden) {
+              return <div key={i} />;
+            }
+
+            let onClickCallback = this.getOnClickCallback(e);
+            let name = this.getName(e);
+
             return (
-              <div key={i} className="protograph-filters-all-filters-group">
-                <div className="protograph-filters-all-filters-group-heading">
-                  {e}
+              <div key={i} className="protograph-filter-item-detail">
+                <div
+                  key={i}
+                  className={`protograph-filter-item ${(e.is_active && !this.itemHasMoreFilters(e)) ? 'protograph-active-item' : ''}`}
+                  onClick={onClickCallback}
+                  data-item_parent_ids={e.parent_ids.join(',')}
+                >
+                  <div className="protograph-filter-item-name" >
+                    {name}
+                  </div>
+                  {
+                    this.itemHasMoreFilters(e) ?
+                      <div className="protograph-filter-chevron-icon">
+                        <i className="chevron down icon"></i>
+                      </div>
+                      :
+                      <div className="protograph-filter-item-arrow" > {e.count} </div>
+                  }
+                  {
+                    e.is_active &&
+                    <div
+                      className="protograph-filters-remove-filter"
+                      onClick={((e) => { this.unRegisterFilter(e); })}
+                    >
+                      Remove
+                      </div>
+                  }
                 </div>
                 {
-                  allFilters[e].map((f, j) => {
-                    let name;
-                    if (!f.renderName) {
-                      name = f.name;
-                    } else {
-                      if (f.renderName && f.renderName.constructor === Function) {
-                        name = f.renderName(f);
-                      } else if (f.renderName && f.renderName.constructor === String) {
-                        name = f.renderName;
-                      }
-                    }
-
-                    return (
-                      <div key={j} className="protograph-filters-all-filters-group-item" data-item_id={f.id} data-item_key={e}>
-                        <div className="protograph-filters-all-filters-group-item-name">
-                          {name}
-                        </div>
-                        <div className="protograph-filters-all-filters-group-item-cross" onClick={((e) => { this.removeFilter(e);})}>
-                          ×
-                        </div>
-                        <div className="protograph-filters-all-filters-group-item-number">
-                          {f.count}
-                        </div>
-                      </div>
-                    )
-                  })
+                  this.itemHasMoreFilters(e) &&
+                  <div className="protograph-filter-body">
+                    {this.renderFilterItems(e.filters, true)}
+                  </div>
                 }
               </div>
             )
           })
         }
       </div>
-    );
-  }
-
-  generateList() {
-    var transition_css = [];
-    if (this.state.moveIn) {
-      transition_css.push('protograph-filters-move-in');
-    }
-    if (this.state.moveOut) {
-      transition_css.push('protograph-filters-move-out');
-    }
-    return (
-      <div className={`protograph-filter-items-container`} >
-        <div className={`protograph-filter-items-inner-container  ${transition_css.length > 0 ? transition_css.join(' ') : ''}`}>
-          {
-            this.state.currentViewLevel >= 1 &&
-              <div
-                className="protograph-filter-item protograph-filters-dulled"
-                onClick={((e) => {this.moveOut(e);})}
-              >
-                <div className="protograph-filter-item-arrow protograph-filters-left-align  protograph-filters-dulled"> &lt; </div>
-                <div className="protograph-filter-item-name" >
-                  {this.state.itemsJSON.name}
-                </div>
-              </div>
-          }
-          {
-            this.state.itemsJSON.filters.map((e, i) => {
-              if (e.is_hidden) {
-                return <div key={i} />;
-              }
-
-              let onClickCallback,
-                name;
-              if(e.filters && e.filters.length > 0) {
-                onClickCallback = this.moveIn;
-              } else {
-                onClickCallback = e.is_active ? this.unRegisterFilter : this.registerFilter;
-              }
-
-              if (!e.renderName) {
-                name = e.name;
-              } else {
-                if (e.renderName && e.renderName.constructor === Function) {
-                  name = e.renderName(e);
-                } else if (e.renderName && e.renderName.constructor === String) {
-                  name = e.renderName;
-                }
-              }
-
-              return (
-                <div
-                  key={i}
-                  className={`protograph-filter-item ${e.is_active ? 'protograph-active-item' : ''}`}
-                  onClick={((e) => {onClickCallback(e)})}
-                  data-item_id={i}
-                >
-                  <div className="protograph-filter-item-name" >
-                    { name }
-                  </div>
-                  {
-                    (e.filters && e.filters.length > 0) ?
-                      <div className="protograph-filter-item-arrow" > &gt; </div>
-                    :
-                      <div className="protograph-filter-item-arrow" > {e.count} </div>
-                  }
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
     )
   }
 
   render() {
-    let filterToggleCallback = !this.state.showAllFilters ? this.showAllFilters :  this.hideAllFilters;
     let styles = this.getStyleString();
     return (
       <div>
-        <style dangerouslySetInnerHTML={{__html: styles}} />
+        <style dangerouslySetInnerHTML={{ __html: styles }} />
         <div className="protograph-filters-container">
           <div className="protograph-filters-header">
             <span className="protograph-filters-active-count">{this.state.filterParams.length}</span>
-            <span  className="protograph-filters-selected-filter-toggle"
-              onClick={((e) => { filterToggleCallback(e); })}>
-                {this.props.configurationJSON.selected_heading}
-                <div className={`protograph-filters-caret ${!this.state.showAllFilters ? 'protograph-filters-180-caret' : ''}`}> &and; </div>
+            <span
+              className="protograph-filters-selected-filter-toggle"
+            >
+              {this.props.configurationJSON.selected_heading}
             </span>
-            <span  className="protograph-filters-reset-filter" onClick={((e) => {this.handleReset(e);})}>{this.props.configurationJSON.reset_filter_text}</span>
+            <span
+              className="protograph-filters-reset-filter"
+              onClick={((e) => { this.handleReset(e); })}
+            >
+              {this.props.configurationJSON.reset_filter_text}
+            </span>
           </div>
-          {
-            this.generateListOfAllFilters()
+          {this.state.filterJSON.length > 1 &&
+            <div className="protograph-filters-tabs-container">
+              {
+                this.state.filterJSON.map((e, i) => {
+                  return (
+                    <div
+                      key={i}
+                      id={`protograph_filter_tab_${i}`}
+                      data-tab_id={i}
+                      className={`protograph-filters-tab ${e.is_active ? 'protograph-filters-tab-active' : ''}`}
+                      onClick={((e) => { this.handleTabClick(e) })}
+                    >
+                      {e.name}
+                    </div>
+                  )
+                })
+              }
+            </div>
           }
-          { this.state.filterJSON.length > 1 &&
-              <div className="protograph-filters-tabs-container">
-                {
-                  this.state.filterJSON.map((e,i)=> {
-                    return(
-                      <div
-                        key={i}
-                        id={`protograph_filter_tab_${i}`}
-                        data-tab_id={i}
-                        className={`protograph-filters-tab ${e.is_active ? 'protograph-filters-tab-active' : ''}`}
-                        onClick={((e) => { this.handleTabClick(e) })}
-                      >
-                        {e.name}
-                      </div>
-                    )
-                  })
-                }
-              </div>
-          }
-          { this.state.filterJSON.length >= 1 &&
-              this.generateList()
+          {this.state.filterJSON.length >= 1 &&
+            this.renderFilterItems(this.state.activeTabJSON.filters)
           }
         </div>
       </div>

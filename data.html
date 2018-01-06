@@ -2,57 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>#जल-जागरण</title>
-    <link href="https://fonts.googleapis.com/css?family=Sarala" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./jaljagran-style.min.css">
-    <link rel="stylesheet" type="text/css" href="./jaljagran-data.min.css">
-    <link rel="stylesheet" type="text/css" href="./jaljagran-lib.min.css">
+    <title>#जलजागरण</title>
+    <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./proto-app-lib.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/new/grid.css">
+    <link rel="stylesheet" type="text/css" href="src/css/new/navbar.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/new/filter.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/new/data.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
 </head>
 <body>
-    <div class="proto-container data-page">
-        <div class="proto-col col-2 left-col proto-sidebar protograph-app-navbar">
-            <div id="protograph_app_close_menu" class="protograph-app-menu-mobile-cross"></div>
-            <div class="protograph-app-navbar-logo-container">
-                <a href="index.html">
-                    <div class="project-name">#जल-जागरण</div>
-                    <div class="company-logo"><img src="./img/jj-logo.png" width="90%"></div>
-                </a>
+    <div class="proto-grid-container data-page">
+        <div class="proto-col col-16 navbar">
+            <div class="branding">#<strong>जलजागरण</strong></div>
+            <div class="nav-links">
+                <div class="single-link active-page stories"><a href="./index.html">Stories</a></div>
+                <div class="single-link data"><a href="./data.html">Data</a></div>
+                <div class="single-link insights"><a href="#">Insights</a></div>
+                <div class="single-link about"><a href="#">About</a></div>
             </div>
-            <div class="sidebar-menu">
-                <a href='./index.html'><div class="sidebar-menu-option">कवरेज</div></a>
-                <a href='./data.html'><div class="sidebar-menu-option active-option">डेटा</div></a>
-            </div>
-            <div class="sidebar-footer">
-                <div class="proto-branding">
-                    <div class="social-share">
-                        <div class="facebook-icon">
-                            <a href="http://www.facebook.com/sharer/sharer.php?u=https://cdn.protograph.pykih.com/jal-jagran-2/index.html" target="_blank"
-                                class="share-btn facebook">
-                                <img src="./img/facebook-icon.png" height="15px">
-                            </a>
-                        </div>
-                        <div class="twitter-icon">
-                            <a href="http://twitter.com/share?url=https://cdn.protograph.pykih.com/jal-jagran-2/index.html" target="_blank" class="share-btn twitter">
-                                <img src="./img/twitter-icon.png" height="15px">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="powered-by-text">Powered by</div>
-                    <img class="protograph-branding" src="./img/proto-icon.png" width="50%">
+            <div class="social right-float-div">
+                <div class="single-link facebook">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u=https://cdn.protograph.pykih.com/jaljagran-4/index.html" target="_blank"><img src="img/fb-white.png"></a>
+                </div>
+                <div class="single-link twitter">
+                    <a href="http://twitter.com/share?url=https://cdn.protograph.pykih.com/jaljagran-4/index.html" target="_blank"><img src="img/tw-white.png"></a>
+                </div>
+                <div class="single-link instagram">
+                    <a href="#"><img src="img/in-white.png"></a>
                 </div>
             </div>
         </div>
-        <div class="mobile-header">
-            <span id="dropdownMenuButton">
-                <img class="protograph-menu-icon" src="./img/new-menu-icon.png" width="30px">
-            </span>
-            <span class="protograph-app-navbar-page-title">डेटा</span>
-            <img class="protograph-menu-logo" src="./img/jj-logo.png">
-        </div>
-        <div class="proto-col col-2"></div>
-        <div class="proto-col col-14 rigth-col parent-col">
-            <div class="proto-col col-14 cover-image">
+        <div class="proto-col col-16 stick-to-top">
+            <div class="proto-col col-16 cover-image">
                 <div class="page-title">
                     डेटा
                 </div>
@@ -65,8 +49,9 @@
         <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon">×</div>
     </div>
-    <script type="text/javascript" src='./jaljagran-lib.min.js'></script>
+
+    <script type="text/javascript" src='./proto-app-lib.min.js'></script>
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
-    <script type="text/javascript" src='./jaljagran-data.min.js'></script>
+    <script type="text/javascript" src='./proto-app-grid-page.min.js'></script>
 </body>
 </html>

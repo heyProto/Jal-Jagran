@@ -4,7 +4,7 @@ import Halogen from 'halogen';
 import List from '../js/List';
 import Map from '../js/Map';
 import Utils from '../js/Utils';
-import {timeFormat} from 'd3-time-format';
+import { timeFormat } from 'd3-time-format';
 import Filter from "./filter.js";
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const {dataURL, topoURL} = this.props;
+    const { dataURL, topoURL } = this.props;
     axios.all([axios.get(dataURL), axios.get(topoURL)])
       .then(axios.spread((card, topo) => {
 
@@ -33,13 +33,13 @@ class App extends React.Component {
           filters,
           filterJSON;
 
-        data = card.data.filter((e) => districts_not_in_map.indexOf(e.district) === -1 )
+        data = card.data.filter((e) => districts_not_in_map.indexOf(e.district) === -1)
 
         data = data.map((e) => {
-            all_data_keys.forEach((f) => {
-              e[f] = e[f] || "उपलब्ध नहीं"
-            });
-            return e;
+          all_data_keys.forEach((f) => {
+            e[f] = e[f] || "उपलब्ध नहीं"
+          });
+          return e;
         });
 
         filters = this.state.filters.map((filter) => {
@@ -63,11 +63,11 @@ class App extends React.Component {
           topoJSON: topo.data,
           filterJSON: filterJSON
         });
-    }));
+      }));
     let dimension = this.getScreenSize();
 
-    if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky({topSpacing:0});
+    if (this.props.mode === 'laptop') {
+      $('.filter-col').sticky();
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -89,8 +89,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky({topSpacing:0});
+    if (this.props.mode === 'laptop') {
+      $('.filter-col').sticky(); //{topSpacing:0}
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -100,29 +100,39 @@ class App extends React.Component {
     //   $(this).tab('show')
     // });
 
-    $(".tabs-area .single-tab").on("click", function(e){
+    $(".tabs-area .single-tab").on("click", function (e) {
       $(".single-tab").removeClass("active-tab");
       $(this).addClass("active-tab");
       $(".tabs.active-area").removeClass("active-area");
-      $(".tabs"+this.dataset.href).addClass("active-area");
+      $(".tabs" + this.dataset.href).addClass("active-area");
     });
 
   }
 
-  renderStars(d) {
+  // renderRating(d) {
+  //   let ratings = ['खराब', 'औसत से कम', 'औसत', 'औसत से ऊपर', 'अच्छा'],
+  //     i;
+  //   if (d.value === "उपलब्ध नहीं") {
+  //     return d.name;
+  //   }
+
+  //   return ratings[d.value - 1];
+  // }
+
+  renderRating(d) {
     let stars = [],
       i;
     if (d.value === "उपलब्ध नहीं") {
-      return d.name;
+      return "उपलब्ध नहीं";
     }
     for (i = 0; i < 5; i++) {
       if (i < d.value) {
-        stars.push(<i key={i} className="star icon"></i>);
+        stars.push(<i key={i} className="star icon protograph-star-small protograph-active-star"></i>);
       } else {
-        stars.push(<i key={i} className="empty star icon"></i>);
+        stars.push(<i key={i} className="star icon protograph-star-small protograph-inactive-star"></i>);
       }
     }
-    return stars.map((e,i) => {
+    return stars.map((e, i) => {
       return (
         e
       )
@@ -135,7 +145,7 @@ class App extends React.Component {
       if (obj.hasOwnProperty(prop)) {
         arr.push({
           'name': `रेटिंग - ${prop}`,
-          'renderName': this.renderStars,
+          'renderName': this.renderRating,
           'value': prop,
           'count': obj[prop].length
         });
@@ -144,7 +154,7 @@ class App extends React.Component {
     arr.sort(function (a, b) {
       let key1 = a.value,
         key2 = b.value;
-      if (key1 < key2) {
+      if (key1 > key2) {
         return -1;
       } else if (key1 == key2) {
         return 0;
@@ -201,8 +211,8 @@ class App extends React.Component {
         WebkitJustifyContent: 'center',
         justifyContent: 'center'
       };
-      return(
-       <div style={{
+      return (
+        <div style={{
           boxSizing: 'border-box',
           display: '-webkit-flex',
           display: 'flex',
@@ -214,7 +224,7 @@ class App extends React.Component {
           flexWrap: 'wrap',
           clear: 'both'
         }}>
-          <div style={style}><Halogen.RiseLoader color={color}/></div>
+          <div style={style}><Halogen.RiseLoader color={color} /></div>
         </div>
       )
     } else {
@@ -226,16 +236,21 @@ class App extends React.Component {
               configurationJSON={this.props.filterConfigurationJSON}
               dataJSON={this.state.filteredDataJSON}
               filterJSON={this.state.filterJSON}
-              onChange={(e) => {this.onChange(e);}}
+              onChange={(e) => { this.onChange(e); }}
+              hintText="नोट: 5 स्टार का मतलब सबसे अच्छा, 1 स्टार सबेसे बुरा। हर ज़िले की स्टार रेटिंग्स उत्तर प्रदेश के बाक़ी जिलों की तुलना में हैं।"
             />
           </div>
           <div className="proto-col col-10 protograph-app-map-and-list">
-              <div className="tabs-area">
-              <div className="single-tab active-tab" id='map-tab' data-href='#map-area' >नक्शा</div>
-              <div className="single-tab" id='list-tab' data-href='#list-area'>सूची</div>
-              </div>
-              <div className="tabs map-area active-area" id='map-area'><Map dataJSON={this.state.filteredDataJSON} topoJSON={this.state.topoJSON} chartOptions={this.props.chartOptions} mode={this.props.mode} /></div>
-              <div className="tabs list-area" id='list-area'><List dataJSON={this.state.filteredDataJSON} mode={this.props.mode} /></div>
+            <div className="tabs-area">
+              <div className="single-tab active-tab" id='list-tab' data-href='#list-area'>सूची</div>
+              <div className="single-tab" id='map-tab' data-href='#map-area' >नक्शा</div>
+            </div>
+            <div className="tabs map-area" id='map-area'>
+              <Map dataJSON={this.state.filteredDataJSON} topoJSON={this.state.topoJSON} chartOptions={this.props.chartOptions} mode={this.props.mode} />
+            </div>
+            <div className="tabs list-area active-area" id='list-area'>
+              <List dataJSON={this.state.filteredDataJSON} mode={this.props.mode} />
+            </div>
           </div>
         </div>
       )
@@ -252,7 +267,7 @@ class App extends React.Component {
       e = d.documentElement,
       g = d.getElementsByTagName('body')[0],
       width = w.innerWidth || e.clientWidth || g.clientWidth,
-      height = w.innerHeight|| e.clientHeight|| g.clientHeight;
+      height = w.innerHeight || e.clientHeight || g.clientHeight;
 
     return {
       width: width,
@@ -262,4 +277,3 @@ class App extends React.Component {
 }
 
 export default App;
-
