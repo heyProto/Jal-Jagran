@@ -240,10 +240,14 @@ body {
     padding-left: 0px; }
 
   .col-7 {
-    width: 100%; }
+    width: 300px; }
 
   .col-16 {
     width: 100%; }
+
+  .col-7 {
+    margin-left: 50%;
+    transform: translate(-50%, 0); }
 
   .col-4 {
     margin-left: 50%;
@@ -257,6 +261,11 @@ body {
   .col-2 {
     width: 300px;
     margin-left: 50%;
-    transform: translate(-50%, 0); } }
+    transform: translate(-50%, 0); } 
+
+  div.col-2> div:nth-of-type(even) {
+      margin-right: 0px;
+  }
+}
 
 /*# sourceMappingURL=grid.css.map */
