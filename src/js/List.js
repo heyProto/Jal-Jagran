@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../js/Modal';
-import Utils from '../js/Utils';
+import Modal from './Modal.js';
+import Utils from './utility.js';
 
 class ListCards extends React.Component {
   constructor () {
@@ -25,10 +25,10 @@ class ListCards extends React.Component {
     }
   }
 
-  handleClick(e, card){
-    let location = card.district.toLowerCase().split(' ').join('-');;
-    window.location = './districts/'+location+'.html';
-  }
+  // handleClick(e, card){
+  //   let location = card.district.toLowerCase().split(' ').join('-');;
+  //   window.location = './districts/'+location+'.html';
+  // }
 
   loadMoreCard() {
     let size = this.props.dataJSON.length;
@@ -48,7 +48,11 @@ class ListCards extends React.Component {
     } else {
       let cards = this.props.dataJSON.map((card, i) => {
         return(
-          <div key={i} className="protograph-card" onClick={(e) => this.handleClick(e, card)}>
+          <div
+            key={i}
+            className="protograph-card"
+            // onClick={(e) => this.handleClick(e, card)}
+          >
             {card.image ? <img className="card-image" src={card.image} width='100%'/> : <img className="card-image" src={card.screen_shot_url} width='100%'/>}
             <div className="protograph-gradient">
               <div className="data-card-content">
@@ -61,6 +65,7 @@ class ListCards extends React.Component {
       return (
         <div id="cards-list" className="protograph-card-area">
           {cards}
+          <div className="clearfix"></div>
           {this.state.no_of_cards < this.props.dataJSON.length ? <button id="show-more-cards" onClick={(e) => this.loadMoreCard()}>और दिखाओ</button> : null}
         </div>
       )

@@ -87,7 +87,7 @@ var x = new ProtoGraph.Card.toMaps()
   x.init({
   selector: document.querySelector('#card-list-div'),
   dataURL: 'https://dkqrqc7q64awx.cloudfront.net/b0cf35e9943e8e913cdf57d1/index.json',
-  topoURL: 'https://s3.ap-south-1.amazonaws.com/cdn.protograph/jal-jagran/uttar_pradesh-topo.json',
+  topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
   chartOptions: {
     chartTitle: 'Mob Justice in India',
     height: 500,
@@ -101,29 +101,29 @@ var x = new ProtoGraph.Card.toMaps()
       filter_summary_text_color: '#ffffff',
       filter_heading_text_color: '#ffffff'
     },
-    selected_heading: 'चयनित फिल्टर',
+    selected_heading: 'फिल्टर',
     reset_filter_text: 'रीसेट'
   },
   filters: [
     {
       propName: 'land_score',
-      alias: 'भूमि उपयोग के लिए रेटिंग'
+      alias: 'भूमि उपयोग'
     },
     {
       propName: 'forest_score',
-      alias: 'वन कवर के लिए रेटिंग'
+      alias: 'वन कवर'
     },
     {
       propName: 'population_score',
-      alias: 'जनसंख्या के लिए रेटिंग'
+      alias: 'जनसंख्या'
     },
     {
       propName: 'rainfall_deficit_score',
-      alias: 'वर्षा में घाटे के लिए रेटिंग'
+      alias: 'वर्षा में घाटे'
     },
     {
       propName: 'decadal_decrease_score',
-      alias: 'भूजल स्तर में दशमांश की कमी के लिए रेटिंग'
+      alias: 'भूजल स्तर में दशमांश की कमी'
     }
   ]
 })

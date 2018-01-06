@@ -173,6 +173,16 @@
   width: 100%;
   z-index: 10; }
 
+  .page-title {
+  font-size: 42px;
+  font-weight: bold;
+  font-family: 'Sarala', sans-serif;
+  color: white;
+  margin-bottom: 10px;
+  bottom: 0px;
+  position: absolute;
+  margin-left: 10px; }
+
 /* data.css */
 
 .geo-borders {

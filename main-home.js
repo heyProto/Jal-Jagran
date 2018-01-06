@@ -1,1 +1,1 @@
-import home from './src/js/new/cover.js';
+import home from './src/js/cover.js';

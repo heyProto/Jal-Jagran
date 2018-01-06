@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {voronoi as d3Voronoi} from 'd3-voronoi';
 // import Modal from '../js/Modal';
-import Util from '../js/Utils';
+import Util from './utility.js';
 
 class Voronoi extends React.Component {
   constructor(props) {
@@ -14,13 +14,13 @@ class Voronoi extends React.Component {
 
   handleMouseOver(e, card, name) {
     this.props.circleHover = true;
-    if (!this.props.circleClicked) { 
+    if (!this.props.circleClicked) {
       Util.highlightCircle(name, card)
     }
   }
 
   handleOnClick(e, card, name) {
-    let props = this.props; 
+    let props = this.props;
     $('#proto-modal').modal('show');
     $('#proto-modal').on('hidden.bs.modal', function(){
       let element = document.querySelector("#proto-embed-card iframe");
@@ -30,7 +30,7 @@ class Voronoi extends React.Component {
       let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'laptop')
     } else {
       let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'mobile', true)
-    } 
+    }
     $('.modal-close').click(function(){
       $("#proto-modal").modal('hide');
     });
@@ -54,7 +54,7 @@ class Voronoi extends React.Component {
       fill: 'none',
       pointerEvents: 'all'
     }
-   
+
     let voronoiPaths = cleanVoronoiCells.map((d, i) => {
       let name = `${d.data.view_cast_id}-${d.data.area}`
       return(
@@ -67,7 +67,7 @@ class Voronoi extends React.Component {
           >
         </path>
       )
-    }) 
+    })
 
     return(
       <g className="voronoiWrapper">{voronoiPaths}</g>
@@ -77,7 +77,7 @@ class Voronoi extends React.Component {
 
 Array.prototype.clean = function(deleteValue) {
   for (var i = 0; i < this.length; i++) {
-    if (this[i] == deleteValue) {         
+    if (this[i] == deleteValue) {
       this.splice(i, 1);
       i--;
     }

@@ -21,7 +21,7 @@ export default class Filter extends React.Component {
       filteredData: [],
       dataJSON: this.props.dataJSON,
       filterJSON: filterJSON,
-      activeTabJSON: this.props.filterJSON.filter((e, i) => { return e.is_active === true; })[0]
+      activeTabJSON: this.props.filterJSON.filter((e,i) => {return e.is_active === true;})[0]
     };
 
     this.state = stateVars;
@@ -35,7 +35,7 @@ export default class Filter extends React.Component {
     return items.map((e, i) => {
       e.id = this.uuidv4();
       e.parent_ids = [...previous_ids, i];
-      if (e.filters && e.filters.length > 0) {
+      if(e.filters && e.filters.length > 0) {
         e.filters = this.setIDs(e.parent_ids, e.filters)
       }
       return e;
@@ -105,11 +105,11 @@ export default class Filter extends React.Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setCSS();
   }
 
-  setCSS() {
+  setCSS () {
     let filterItemsContainer = document.querySelector('.protograph-filter-items-container'),
       filterHeader = document.querySelector('.protograph-filters-header'),
       filterTabs = document.querySelector('.protograph-filters-tabs-container'),
@@ -127,7 +127,7 @@ export default class Filter extends React.Component {
   }
 
   uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
@@ -145,7 +145,7 @@ export default class Filter extends React.Component {
 
     filterParams.forEach((e) => {
       parent_ids = e.parent_ids;
-      for (let i = 0; i < parent_ids.length; i++) {
+      for ( let i = 0; i < parent_ids.length; i++) {
         if (i === 0) {
           tempJSON = filterJSON[parent_ids[i]]
         } else {
@@ -166,7 +166,7 @@ export default class Filter extends React.Component {
   resetFilterItems() {
     let active_filters = document.querySelectorAll('.protograph-filter-item-detail.protograph-show-more-filters');
 
-    for (let i = 0; i < active_filters.length; i++) {
+    for (let i = 0; i < active_filters.length; i++ ) {
       let filter = active_filters[i],
         chevron = filter.querySelector('i.chevron');
 
@@ -177,7 +177,7 @@ export default class Filter extends React.Component {
   }
 
   //Reset the currentViewLevel
-  handleTabClick(e) {
+  handleTabClick (e) {
     var tabID = +e.target.closest('.protograph-filters-tab').getAttribute('data-tab_id'),
       activeTab = document.querySelector('.protograph-filters-tab.protograph-filters-tab-active'),
       activeTabId = activeTab.getAttribute('data-tab_id'),
@@ -187,7 +187,7 @@ export default class Filter extends React.Component {
     filterJSON[activeTabId].is_active = false;
     filterJSON[tabID].is_active = true;
 
-    activeTabJSON = this.props.filterJSON.filter((e, i) => { return e.is_active === true; })[0];
+    activeTabJSON = this.props.filterJSON.filter((e,i) => {return e.is_active === true;})[0];
 
     this.setState({
       activeTab: tabID,
@@ -224,7 +224,7 @@ export default class Filter extends React.Component {
   registerFilter(e) {
     //Set filterParams
     //Update the filterJSON: Mark the filters as active.
-    var parent_ids = e.target.closest('.protograph-filter-item').getAttribute('data-item_parent_ids').split(',').map((e) => +e),
+    var parent_ids = e.target.closest('.protograph-filter-item').getAttribute('data-item_parent_ids').split(',').map((e) => +e ),
       item = this.getItemJSON(parent_ids),
       filterJSON = this.state.filterJSON,
       tempJSON = filterJSON[parent_ids[0]],
@@ -256,7 +256,7 @@ export default class Filter extends React.Component {
       filterParams = this.state.filterParams,
       activeTabJSON;
 
-    filterParams = filterParams.filter((e, i) => {
+    filterParams = filterParams.filter((e, i ) => {
       return e.id !== item.id;
     });
 
@@ -355,10 +355,10 @@ export default class Filter extends React.Component {
 
   renderFilterItems(filters, subItems) {
     return (
-      <div className={`${!subItems ? 'protograph-filter-items-container' : 'protograph-filter-sub-items-container'}`} >
+      <div className={`${!subItems ? 'protograph-filter-items-container' : 'protograph-filter-sub-items-container' }`} >
         {
           (this.props.hintText && !subItems) &&
-          <div className="protograph-filter-hint-text">{this.props.hintText}</div>
+            <div className="protograph-filter-hint-text">{this.props.hintText}</div>
         }
         {
           filters.map((e, i) => {
@@ -391,19 +391,19 @@ export default class Filter extends React.Component {
                   }
                   {
                     e.is_active &&
-                    <div
-                      className="protograph-filters-remove-filter"
-                      onClick={((e) => { this.unRegisterFilter(e); })}
-                    >
-                      Remove
+                      <div
+                        className="protograph-filters-remove-filter"
+                        onClick={((e) => { this.unRegisterFilter(e); })}
+                      >
+                        Remove
                       </div>
                   }
                 </div>
                 {
                   this.itemHasMoreFilters(e) &&
-                  <div className="protograph-filter-body">
-                    {this.renderFilterItems(e.filters, true)}
-                  </div>
+                    <div className="protograph-filter-body">
+                      {this.renderFilterItems(e.filters, true)}
+                    </div>
                 }
               </div>
             )
@@ -417,42 +417,42 @@ export default class Filter extends React.Component {
     let styles = this.getStyleString();
     return (
       <div>
-        <style dangerouslySetInnerHTML={{ __html: styles }} />
+        <style dangerouslySetInnerHTML={{__html: styles}} />
         <div className="protograph-filters-container">
           <div className="protograph-filters-header">
             <span className="protograph-filters-active-count">{this.state.filterParams.length}</span>
             <span
               className="protograph-filters-selected-filter-toggle"
-            >
-              {this.props.configurationJSON.selected_heading}
+              >
+                {this.props.configurationJSON.selected_heading}
             </span>
             <span
               className="protograph-filters-reset-filter"
-              onClick={((e) => { this.handleReset(e); })}
+              onClick={((e) => {this.handleReset(e);})}
             >
               {this.props.configurationJSON.reset_filter_text}
             </span>
           </div>
-          {this.state.filterJSON.length > 1 &&
-            <div className="protograph-filters-tabs-container">
-              {
-                this.state.filterJSON.map((e, i) => {
-                  return (
-                    <div
-                      key={i}
-                      id={`protograph_filter_tab_${i}`}
-                      data-tab_id={i}
-                      className={`protograph-filters-tab ${e.is_active ? 'protograph-filters-tab-active' : ''}`}
-                      onClick={((e) => { this.handleTabClick(e) })}
-                    >
-                      {e.name}
-                    </div>
-                  )
-                })
-              }
-            </div>
+          { this.state.filterJSON.length > 1 &&
+              <div className="protograph-filters-tabs-container">
+                {
+                  this.state.filterJSON.map((e,i)=> {
+                    return(
+                      <div
+                        key={i}
+                        id={`protograph_filter_tab_${i}`}
+                        data-tab_id={i}
+                        className={`protograph-filters-tab ${e.is_active ? 'protograph-filters-tab-active' : ''}`}
+                        onClick={((e) => { this.handleTabClick(e) })}
+                      >
+                        {e.name}
+                      </div>
+                    )
+                  })
+                }
+              </div>
           }
-          {this.state.filterJSON.length >= 1 &&
+          { this.state.filterJSON.length >= 1 &&
             this.renderFilterItems(this.state.activeTabJSON.filters)
           }
         </div>

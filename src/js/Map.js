@@ -86,16 +86,17 @@ class MapsCard extends React.Component {
     })
   }
 
-  handleMouseClick(e,d){
-    if(!this.props.modal){
-      let location = d.properties.NAME_1.toLowerCase().split(' ').join('-');
-      window.location = './districts/'+location+'.html';
-    }
-    // else{
-    //   let district = document.querySelector('#protograph_tooltip').innerHTML;
-    //   this.handleOnClick(e,this.props.dataJSON[this.state.districts.indexOf(district)%this.props.dataJSON.length])
-    // }
-  }
+  // handleMouseClick(e,d){
+  //   if(!this.props.modal){
+  //     let location = d.properties.NAME_1.toLowerCase().split(' ').join('-');
+  //     window.location = './districts/'+location+'.html';
+  //   }
+  //   // else{
+  //   //   let district = document.querySelector('#protograph_tooltip').innerHTML;
+  //   //   this.handleOnClick(e,this.props.dataJSON[this.state.districts.indexOf(district)%this.props.dataJSON.length])
+  //   // }
+  // }
+
   componentWillReceiveProps(nextProps) {
     let districts_in_data = nextProps.dataJSON.map((e,i) => e.district),
       hidden_districts = this.arrayDifference(districts_in_data, this.all_districts);
@@ -148,7 +149,7 @@ class MapsCard extends React.Component {
           key={i}
           className={`geo region-outline ${is_hidden ? 'protogrpah-map-dulled-out' : ''}`}
           d={path(d)}
-          onClick={!is_hidden && ((e)=> this.handleMouseClick(e,d))}
+          // onClick={!is_hidden && ((e)=> this.handleMouseClick(e,d))}
           onMouseOut={!is_hidden && ((e) => this.handleMouseOut(e, d))}
           onMouseMove={!is_hidden && ((e) => this.handleMouseMove(e, d))}></path>
       )
