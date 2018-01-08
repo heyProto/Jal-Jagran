@@ -47,10 +47,11 @@ class ListCards extends React.Component {
       return(<h2>दिखाने के लिए कोई कार्ड नहीं</h2>)
     } else {
       let cards = this.props.dataJSON.map((card, i) => {
+        let class_name = ((i+1)%6 == 0) ? "protograph-card div-without-margin-right" : "protograph-card";
         return(
           <div
             key={i}
-            className="protograph-card"
+            className={class_name}
             // onClick={(e) => this.handleClick(e, card)}
           >
             {card.image ? <img className="card-image" src={card.image} width='100%'/> : <img className="card-image" src={card.screen_shot_url} width='100%'/>}

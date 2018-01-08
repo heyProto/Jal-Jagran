@@ -178,10 +178,10 @@
   font-weight: bold;
   font-family: 'Sarala', sans-serif;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   bottom: 0px;
   position: absolute;
-  margin-left: 10px; }
+  margin-left: 20px; }
 
 /* data.css */
 
@@ -208,19 +208,20 @@
   overflow-y: scroll;
 }
 .protograph-card{
-  width: 137px;
-  height: 137px;
+  width: 140px;
+  height: 140px;
+  cursor: pointer;
   display: none;
   text-align: left;
   background: whitesmoke;
-  margin-right: 7px;
-  margin-left: 7px;
-  margin-bottom: 25px;
+  margin-right: 20px;
+  margin-left: 0px;
+  margin-bottom: 40px;
   position: relative;
   /* cursor: pointer; */
   /*box-shadow: 0 20px 20px rgba(0,0,0,0.08);*/
   /*box-shadow: 0 2px 3px rgba(0,0,0,0.1);*/
-  border: 1px solid rgb(241, 241, 241);
+  /*border: 1px solid rgb(241, 241, 241);*/
   transition: all 250ms cubic-bezier(.02, .01, .47, 1);
 }
 .protograph-card img{
@@ -232,11 +233,10 @@
   background: whitesmoke;
 }
 .data-card-content .data-card-title{
-  font-size: 16px;
+  font-size: 14px;
   color: #333;
-  font-weight: bold;
-  line-height: 1.3em;
-  font-family: arial;
+  font-weight: normal;
+  font-family: cabin;
   margin-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -248,9 +248,10 @@
 .data-card-content{
   position: absolute;
   display: inline-block;
-  bottom: 0px;
+  bottom: -40px;
   /*width: 88%;*/
-  padding:15px;
+  /*padding:15px;*/
+  left: 0px;
   padding-bottom: 5px;
 }
 .protograph-gradient{
@@ -330,6 +331,7 @@
 }
 .protograph-app-map-and-list {
   float: right;
+  margin-right: 0px;
 }
 .protograph-app-star {
   height: 16px;
@@ -347,6 +349,10 @@
 }
 .protograph-inactive-star {
   color: #e3e3e3;
+}
+
+.div-without-margin-right{
+  margin-right: 0px;
 }
 
 @media only screen and (max-width: 450px ) {

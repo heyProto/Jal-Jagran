@@ -1,5 +1,5 @@
 .protograph-filters-container {
-  width: 100%;
+  width: 298px;
   height: 612px;
   position: relative;
   border-right: 1px solid #efefef;
@@ -74,9 +74,12 @@
 }
 .protograph-filter-item-arrow {
   display: table-cell;
-  padding: 10px;
+  padding: 10px 17px;
   width: 10%;
-  text-align: right;
+  text-align: left;
+  font-family: cabin;
+  font-size: 14px;
+  font-style: italic;
 }
 .protograph-filter-chevron-icon {
   display: table-cell;
@@ -96,7 +99,7 @@
   transition: max-height 350ms ease-out;
 }
 .protograph-filter-body {
-  padding-left: 30px;
+  padding-left: 15px;
 }
 .protograph-filters-remove-filter {
   color: black !important;

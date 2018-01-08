@@ -231,7 +231,7 @@ class App extends React.Component {
       $('.social-share-icons').css("display", "block")
       return (
         <div className="banner-area">
-          <div className="proto-col col-4 filter-col parent-col protograph-filter-area">
+          <div className="proto-col col-4 protograph-filter-area">
             <Filter
               configurationJSON={this.props.filterConfigurationJSON}
               dataJSON={this.state.filteredDataJSON}
@@ -240,7 +240,7 @@ class App extends React.Component {
               hintText="नोट: 5 स्टार का मतलब सबसे अच्छा, 1 स्टार सबेसे बुरा। हर ज़िले की स्टार रेटिंग्स उत्तर प्रदेश के बाक़ी जिलों की तुलना में हैं।"
             />
           </div>
-          <div className="proto-col col-10 protograph-app-map-and-list">
+          <div className="proto-col col-12 protograph-app-map-and-list">
               <div className="tabs-area">
                 <div className="single-tab active-tab" id='list-tab' data-href='#list-area'>सूची</div>
                 <div className="single-tab" id='map-tab' data-href='#map-area' >नक्शा</div>
