@@ -231,7 +231,7 @@ class App extends React.Component {
       $('.social-share-icons').css("display", "block")
       return (
         <div className="banner-area">
-          <div className="proto-col col-4 protograph-filter-area">
+          <div className="proto-col col-4 filter-col protograph-filter-area">
             <Filter
               configurationJSON={this.props.filterConfigurationJSON}
               dataJSON={this.state.filteredDataJSON}
