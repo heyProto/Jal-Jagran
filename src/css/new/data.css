@@ -355,6 +355,16 @@
   margin-right: 0px;
 }
 
+.protograph-good-heat-color {
+  fill: #7ABAE8;
+  fill-opacity: 1;
+}
+.protograph-bad-heat-color {
+  fill: #0082CD;
+  fill-opacity: 1;
+}
+
+
 @media only screen and (max-width: 450px ) {
   body {
     background: white;

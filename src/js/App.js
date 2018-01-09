@@ -24,9 +24,11 @@ class App extends React.Component {
 
   componentDidMount() {
     const {dataURL, topoURL} = this.props;
-    axios.all([axios.get(dataURL), axios.get(topoURL)])
-      .then(axios.spread((card, topo) => {
-
+    axios.all([
+      axios.get(dataURL),
+      axios.get(topoURL)
+    ])
+    .then(axios.spread((card, topo) => {
         let all_data_keys = ["decadal_decrease_score", "rainfall_deficit_score", "land_score", "forest_score", "population_score"],
           districts_not_in_map = ["Amethi", "Hapur", "Sambhal", "Shamli"],
           data,
@@ -146,7 +148,7 @@ class App extends React.Component {
         arr.push({
           'name': `रेटिंग - ${prop}`,
           'renderName': this.renderRating,
-          'value': prop,
+          'value': +prop,
           'count': obj[prop].length
         });
       }
@@ -232,6 +234,7 @@ class App extends React.Component {
       return (
         <div className="banner-area">
           <div className="proto-col col-4 filter-col protograph-filter-area">
+            {console.log(this.state.filterJSON, ":::::::::::::::")}
             <Filter
               configurationJSON={this.props.filterConfigurationJSON}
               dataJSON={this.state.filteredDataJSON}
@@ -246,8 +249,12 @@ class App extends React.Component {
                 <div className="single-tab" id='map-tab' data-href='#map-area' >नक्शा</div>
               </div>
               <div className="tabs map-area" id='map-area'>
-                <p>Map comes here.</p>
-                {/* <Map dataJSON={this.state.filteredDataJSON} topoJSON={this.state.topoJSON} chartOptions={this.props.chartOptions} mode={this.props.mode} /> */}
+                <Map
+                  dataJSON={this.state.filteredDataJSON}
+                  topoJSON={this.state.topoJSON}
+                  chartOptions={this.props.chartOptions}
+                  mode={this.props.mode}
+                />
               </div>
               <div className="tabs list-area active-area" id='list-area'>
                 <List dataJSON={this.state.filteredDataJSON} mode={this.props.mode} />

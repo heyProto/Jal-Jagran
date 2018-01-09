@@ -86,7 +86,7 @@ $(document).ready((e) => {
 var x = new ProtoGraph.Card.toMaps()
   x.init({
   selector: document.querySelector('#card-list-div'),
-  dataURL: 'https://dkqrqc7q64awx.cloudfront.net/b0cf35e9943e8e913cdf57d1/index.json',
+  dataURL: 'https://dnt71st2q6cqr.cloudfront.net/6446fe45c8d72d4346b9a9ee/index.json',
   topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
   chartOptions: {
     chartTitle: 'Mob Justice in India',
@@ -106,24 +106,20 @@ var x = new ProtoGraph.Card.toMaps()
   },
   filters: [
     {
-      propName: 'land_score',
-      alias: 'भूमि उपयोग'
-    },
-    {
-      propName: 'forest_score',
-      alias: 'वन कवर'
-    },
-    {
-      propName: 'population_score',
-      alias: 'जनसंख्या'
+      propName: 'concretisation_score',
+      alias: 'कोंक्रेटआईज़ेशन'
     },
     {
       propName: 'rainfall_deficit_score',
-      alias: 'वर्षा में घाटे'
+      alias: 'वार्षिक वर्षा'
     },
     {
-      propName: 'decadal_decrease_score',
-      alias: 'भूजल स्तर में दशमांश की कमी'
+      propName: 'forest_cover_score',
+      alias: 'वन आवरण'
+    },
+    {
+      propName: 'water_exploitation_score',
+      alias: 'ज़मीन की पानी सोख लेनी की क्षमता'
     }
   ]
 })
