@@ -363,6 +363,9 @@
   fill: #0082CD;
   fill-opacity: 1;
 }
+.protograph-grid-card {
+  cursor: pointer;
+}
 
 
 @media only screen and (max-width: 450px ) {

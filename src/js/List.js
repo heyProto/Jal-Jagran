@@ -12,10 +12,17 @@ class ListCards extends React.Component {
   }
 
   componentDidMount(prevProps, prevState) {
-    let cards = $("#cards-list .protograph-card").slice(0, this.state.no_of_cards)
+    let cards = $("#cards-list .protograph-card").slice(0, this.state.no_of_cards);
     for (let i=0; i<cards.length; i++) {
       cards[i].style.display = "inline-block"
     }
+
+    $('.protograph-grid-card').each((i, element) => {
+      let iframe_url = element.getAttribute('data-iframe_url');
+      setTimeout(function () {
+        new ProtoEmbed.initFrame(element, iframe_url, "grid");
+      }, 0);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -47,20 +54,17 @@ class ListCards extends React.Component {
       return(<h2>दिखाने के लिए कोई कार्ड नहीं</h2>)
     } else {
       let cards = this.props.dataJSON.map((card, i) => {
-        let class_name = ((i+1)%6 == 0) ? "protograph-card div-without-margin-right" : "protograph-card";
+        let class_name = ((i+1)%5 == 0) ? "protograph-card div-without-margin-right" : "protograph-card";
         return(
           <div
             key={i}
-            className={class_name}
+            id={`protograph-grid-card-${card.view_cast_id}`}
+            data-viewcast_id={card.view_cast_id}
+            className={`protograph-grid-card ${class_name}`}
+            data-iframe_url={card.iframe_url}
+            // className={class_name}
             // onClick={(e) => this.handleClick(e, card)}
-          >
-            {card.image ? <img className="card-image" src={card.image} width='100%'/> : <img className="card-image" src={card.screen_shot_url} width='100%'/>}
-            <div className="protograph-gradient">
-              <div className="data-card-content">
-                <div className="data-card-title">{this.districtMapping[card.district]}</div>
-              </div>
-            </div>
-          </div>
+          />
         )
       })
       return (
