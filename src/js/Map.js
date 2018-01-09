@@ -152,7 +152,7 @@ class MapsCard extends React.Component {
 
     let outlines = country.features.map((d,i) => {
       let score = this.state.waterScore[this.districtMapping[d.properties.NAME_1]],
-        heat_color = score === 'कठिन' ? 'protograph-good-heat-color' : 'protograph-bad-heat-color';
+        heat_color = score === 'कठिन' ? 'protograph-bad-heat-color' : 'protograph-good-heat-color';
 
       // let is_hidden = this.state.dataJSON.data.indexOf(d.properties.NAME_1) !== -1;
       return(
