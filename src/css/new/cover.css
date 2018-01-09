@@ -33,6 +33,12 @@
     font-weight: bold;
 }
 
+.jagran-nav{
+    width: 1260px;
+    position: absolute;
+    top: 0px;
+}
+
 @media only screen and (max-width: 500px) {
     .proto-mobile-grid-navigation {
         display: block;

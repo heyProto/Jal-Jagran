@@ -10,6 +10,8 @@
 	font-size: 12px;
 	text-transform: uppercase;
 	z-index: 999;
+	position: absolute;
+    top: 0px;
 }
 
 .branding{
@@ -52,7 +54,7 @@
 }
 
 .stick-to-top{
-	margin-top: -70px;
+	margin-top: 0px;
 }
 
 .fixed-cover-block{
