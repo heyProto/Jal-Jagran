@@ -196,7 +196,7 @@
   fill: #fdf8d8;
 }
 .region-outline{
-  /* cursor: pointer; */
+  cursor: pointer;
   stroke: none;
   fill-opacity: 0;
 }
@@ -211,7 +211,7 @@
   width: 140px;
   height: 140px;
   cursor: pointer;
-  display: none;
+  display: inline-block;
   text-align: left;
   background: whitesmoke;
   margin-right: 20px;

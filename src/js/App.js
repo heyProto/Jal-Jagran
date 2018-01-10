@@ -25,7 +25,6 @@ class App extends React.Component {
     this.ListReference = undefined;
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.modalBody = this.modalBody.bind(this);
   }
 
   componentDidMount() {
@@ -139,7 +138,7 @@ class App extends React.Component {
         arr.push({
           'name': `रेटिंग - ${prop}`,
           'renderName': this.renderRating,
-          'value': +prop,
+          'value': !isNaN(+prop) ? +prop : prop,
           'count': obj[prop].length
         });
       }
@@ -181,10 +180,13 @@ class App extends React.Component {
   }
 
   showModal(e) {
-    let iframeURL = e.target.closest('.protograph-grid-card').getAttribute('data-iframe_url');
+    let district = e.target.closest('.protograph-trigger-modal').getAttribute('data-district_code'),
+      data = this.state.dataJSON.filter((k, i) => {
+        return k.district_code === district;
+      })[0];
 
     this.setState({
-      iframeURL: iframeURL,
+      iframeURL: data.iframe_url,
       showModal: true
     })
   }
@@ -194,13 +196,6 @@ class App extends React.Component {
       iframeURL: undefined,
       showModal: false
     })
-  }
-
-  modalBody() {
-    if (!this.state.card) {
-      return <div />;
-    }
-    return <div></div>;
   }
 
   renderLaptop() {
@@ -266,6 +261,7 @@ class App extends React.Component {
                   dataJSON={this.state.filteredDataJSON}
                   topoJSON={this.state.topoJSON}
                   chartOptions={this.props.chartOptions}
+                  showModal={this.showModal}
                   mode={this.props.mode}
                 />
               </div>
@@ -274,15 +270,11 @@ class App extends React.Component {
                   dataJSON={this.state.filteredDataJSON}
                   mode={this.props.mode}
                   showModal={this.showModal}
-                  ref={
-                    ((value) => {this.ListReference = value})
-                  }
                 />
               </div>
               <Modal
                 showModal={this.state.showModal}
                 closeModal={this.closeModal}
-                modalBody={this.modalBody}
                 mode={this.state.mode}
                 iframeURL={this.state.iframeURL}
               />
