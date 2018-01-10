@@ -204,8 +204,8 @@
   width: 100%;
   text-align: center;
   margin-top: 20px;
-  height: 100vh;
-  overflow-y: scroll;
+  /* height: 100vh; */
+  overflow-y: auto;
 }
 .protograph-card{
   width: 140px;
