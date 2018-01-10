@@ -58,7 +58,9 @@ class ListCards extends React.Component {
             className={`protograph-grid-card ${class_name}`}
             data-iframe_url={card.iframe_url}
             onClick={this.props.showModal}
-          />
+          >
+            <div className="protograph-grid-card-interaction-overlay" />
+          </div>
         )
       })
       return (

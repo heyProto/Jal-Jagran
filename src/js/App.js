@@ -181,7 +181,7 @@ class App extends React.Component {
   }
 
   showModal(e) {
-    let iframeURL = e.target.getAttribute('data-iframe_url');
+    let iframeURL = e.target.closest('.protograph-grid-card').getAttribute('data-iframe_url');
 
     this.setState({
       iframeURL: iframeURL,

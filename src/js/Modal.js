@@ -35,7 +35,10 @@ class Modal extends React.Component {
           describedby: "full_description"
         }}
       >
-        <div className="protograph-close-modal" onClick={this.props.closeModal}>
+        <div
+          className="protograph-close-modal"
+          onClick={this.props.closeModal}
+        >
           <div className="protograph-close-text">x</div>
         </div>
         <div id="protograph_modal_card"></div>

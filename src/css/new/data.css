@@ -365,6 +365,18 @@
 }
 .protograph-grid-card {
   cursor: pointer;
+  position: relative;
+}
+.protograph-grid-card-interaction-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.protograph-grid-card:hover .protograph-grid-card-interaction-overlay  {
+  display: block;
 }
 .protograph-modal-overlay {
   background: rgba(0,0,0,0.75);
@@ -372,6 +384,7 @@
   top: 0px;
   height: 100%;
   width: 100%;
+  z-index: 1000;
 }
 .protograph-modal {
   position: absolute;
@@ -380,6 +393,9 @@
   transform: translate(-50%, -50%);
   background: #ffffff;
   min-height: 10px;
+}
+.protograph-modal:focus {
+  outline: none;
 }
 .protograph-close-modal {
   position: absolute;
