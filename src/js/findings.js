@@ -32,7 +32,7 @@ $(document).ready(function(){
         });        
     });
 });
-getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data){
+getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
     if (err != null) {
         alert('Something went wrong: ' + err);
     } else {
@@ -40,7 +40,7 @@ getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', 
         data.map((d,i) => {
             let createDiv = document.createElement('div');
             createDiv.id = 'ProtoCard-originals'+i;
-            createDiv.className= 'ProtoCard-originals';
+            // createDiv.className= 'ProtoCard-originals';
             originals_container.appendChild(createDiv);
             let createMarginDiv = document.createElement('div');
             createMarginDiv.style.marginBottom = "20px";
