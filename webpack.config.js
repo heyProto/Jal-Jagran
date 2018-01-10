@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 const card = require('./webpack.config.data.js');
 const home = require('./webpack.config.home.js');
+const findings = require('./webpack.config.findings.js');
 const district = require('./webpack.config.district.js');
 
 // Generic css
@@ -12,5 +13,5 @@ const options = {
 minifier.minify(input, options);
 
 module.exports = [
-  card, home, district
+  card, home, district, findings
 ];

@@ -29,14 +29,14 @@ $(document).ready(function(){
             } else {
                 left.removeClass('active-value');
             }
-        });        
+        });
     });
 });
 getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
     if (err != null) {
         alert('Something went wrong: ' + err);
     } else {
-        originals_container = document.getElementById("related_container");
+        let originals_container = document.getElementById("related_container");
         data.map((d,i) => {
             let createDiv = document.createElement('div');
             createDiv.id = 'ProtoCard-originals'+i;
