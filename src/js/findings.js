@@ -46,7 +46,7 @@ getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', 
             createMarginDiv.style.marginBottom = "20px";
             originals_container.appendChild(createMarginDiv);
             setTimeout(function(){
-                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col2");
+                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col4");
             },0)
         })
     }
