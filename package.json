@@ -11,7 +11,7 @@
     "halogen": "^0.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-native-modal": "^4.1.1",
+    "react-modal": "^3.1.10",
     "topojson-client": "^3.0.0",
     "victory": "^0.21.5"
   },

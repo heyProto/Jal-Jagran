@@ -366,7 +366,40 @@
 .protograph-grid-card {
   cursor: pointer;
 }
-
+.protograph-modal-overlay {
+  background: rgba(0,0,0,0.75);
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+}
+.protograph-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  min-height: 10px;
+}
+.protograph-close-modal {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  height: 30px;
+  width: 30px;
+  background: blue;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.protograph-close-text {
+  font-size: 15px;
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
 
 @media only screen and (max-width: 450px ) {
   body {

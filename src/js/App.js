@@ -6,6 +6,7 @@ import Map from './Map.js';
 import Utils from './utility.js';
 import {timeFormat} from 'd3-time-format';
 import Filter from "./filter.js";
+import Modal from "./Modal.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,10 +17,15 @@ class App extends React.Component {
       category: null,
       filterJSON: [],
       filteredDataJSON: undefined,
-      filters: this.props.filters
+      filters: this.props.filters,
+      showModal: false,
+      card: undefined,
+      mode: window.innerWidth <= 500 ? 'col4' : 'col7'
     }
-    // this.handleCircleClicked = this.handleCircleClicked.bind(this);
-    // this.handleSelectDateRange = this.handleSelectDateRange.bind(this);
+    this.ListReference = undefined;
+    this.showModal = this.showModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.modalBody = this.modalBody.bind(this);
   }
 
   componentDidMount() {
@@ -97,11 +103,6 @@ class App extends React.Component {
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
 
-    // $('#myTab a').on('click', function (e) {
-    //   e.preventDefault()
-    //   $(this).tab('show')
-    // });
-
     $(".tabs-area .single-tab").on("click", function(e){
       $(".single-tab").removeClass("active-tab");
       $(this).addClass("active-tab");
@@ -110,16 +111,6 @@ class App extends React.Component {
     });
 
   }
-
-  // renderRating(d) {
-  //   let ratings = ['खराब', 'औसत से कम', 'औसत', 'औसत से ऊपर', 'अच्छा'],
-  //     i;
-  //   if (d.value === "उपलब्ध नहीं") {
-  //     return d.name;
-  //   }
-
-  //   return ratings[d.value - 1];
-  // }
 
   renderRating(d) {
     let stars = [],
@@ -189,6 +180,29 @@ class App extends React.Component {
     });
   }
 
+  showModal(e) {
+    let iframeURL = e.target.getAttribute('data-iframe_url');
+
+    this.setState({
+      iframeURL: iframeURL,
+      showModal: true
+    })
+  }
+
+  closeModal() {
+    this.setState({
+      iframeURL: undefined,
+      showModal: false
+    })
+  }
+
+  modalBody() {
+    if (!this.state.card) {
+      return <div />;
+    }
+    return <div></div>;
+  }
+
   renderLaptop() {
     if (this.state.dataJSON === undefined) {
       let color = '#007cd7';
@@ -234,7 +248,6 @@ class App extends React.Component {
       return (
         <div className="banner-area">
           <div className="proto-col col-4 filter-col protograph-filter-area">
-            {console.log(this.state.filterJSON, ":::::::::::::::")}
             <Filter
               configurationJSON={this.props.filterConfigurationJSON}
               dataJSON={this.state.filteredDataJSON}
@@ -257,8 +270,22 @@ class App extends React.Component {
                 />
               </div>
               <div className="tabs list-area active-area" id='list-area'>
-                <List dataJSON={this.state.filteredDataJSON} mode={this.props.mode} />
+                <List
+                  dataJSON={this.state.filteredDataJSON}
+                  mode={this.props.mode}
+                  showModal={this.showModal}
+                  ref={
+                    ((value) => {this.ListReference = value})
+                  }
+                />
               </div>
+              <Modal
+                showModal={this.state.showModal}
+                closeModal={this.closeModal}
+                modalBody={this.modalBody}
+                mode={this.state.mode}
+                iframeURL={this.state.iframeURL}
+              />
           </div>
         </div>
       )
