@@ -77,10 +77,6 @@
 	margin-left: -1px;
 }
 
-.summary{
-	margin-bottom: 20px;
-}
-
 .article-share-icons{
 	background: #e71414;
 	width: 300px;
@@ -112,6 +108,7 @@
 	border-bottom: 1px solid #efefef;
 	display: inline-block;
 	margin-bottom: 12px;
+	margin-top: 20px;
 }
 
 .single-tab-value{
