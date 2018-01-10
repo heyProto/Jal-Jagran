@@ -1,19 +1,20 @@
 const webpack = require('webpack');
 const minifier = require('minifier');
-const input = ['./src/css/new/data.css', './src/css/new/filter.css']
+
+// CSS bundle
+const input = './src/css/new/findings.css';
 const options = {
-  output: "proto-app-grid-page.min.css"
-}
+  output: "proto-app-findings-page.min.css"
+};
 minifier.minify(input, options);
 
 module.exports = {
   entry: {
-    app: './main.js'
+    app: './main-findings.js'
   },
   output: {
     path: __dirname,
-    publicPath: '/',
-    filename: 'proto-app-grid-page.min.js',
+    filename: 'proto-app-findings-page.min.js',
   },
   plugins: [
     new webpack.DefinePlugin({

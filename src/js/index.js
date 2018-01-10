@@ -55,7 +55,3 @@ function getScreenSize() {
         height: height
     };
 }
-// document.getElementById('cont-button').onclick = function(e){
-//     document.getElementById('cont-button').style.display = 'none';
-//     document.getElementById('article').className='article-area';
-// }
