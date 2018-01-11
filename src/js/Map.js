@@ -76,6 +76,24 @@ class MapsCard extends React.Component {
     }, this.componentWillMount);
   }
 
+  renderLegends() {
+    return (
+      <div className="protograph-map-legends-container">
+        <div className="protograph-map-legends-heading">ज़मीन से पानी निकलाना</div>
+        <div className="protograph-map-legends">
+          <div className="protograph-map-legend">
+            <div className="protograph-map-legend-color legend-good-color"></div>
+            <div className="protograph-map-legend-text">आसान</div>
+          </div>
+          <div className="protograph-map-legend">
+            <div className="protograph-map-legend-color legend-bad-color"></div>
+            <div className="protograph-map-legend-text">कठिन</div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   componentWillMount() {
     let padding = this.props.mode === 'mobile' ? 20 : 0,
       offsetWidth = this.props.mode === 'mobile' ? 300 : 550 - padding ,
@@ -147,7 +165,11 @@ class MapsCard extends React.Component {
     }
     const {projection, regions, outlines, country, path, offsetWidth, actualHeight} = this.state
     return(
-      <div id="map_and_tooltip_container" style={{width:'100%',height:'100%',position:'relative', display: 'inline-block', 'textAlign': 'center'}}>
+      <div
+        id="map_and_tooltip_container"
+        className="protograph-map-container"
+      >
+        { this.renderLegends() }
         <svg id='map_svg' viewBox={`0, 0, ${offsetWidth}, ${actualHeight}`} width={offsetWidth} height={actualHeight+60}>
           <g id="regions-grp" className="regions">{regions}</g>
           <path className='geo-borders' d={path(country)}></path>
