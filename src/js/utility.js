@@ -23,7 +23,6 @@ function highlightCircle(name, data) {
 
 function formatDate(date) {
     let parseTime = timeFormat("%B '%Y");
-    // console.log(parseTime(new Date(date)), "inside parse function")
     return parseTime(new Date(date));
 }
 

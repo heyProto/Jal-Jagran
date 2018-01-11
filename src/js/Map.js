@@ -134,7 +134,6 @@ class MapsCard extends React.Component {
         heat_color = score === 'कठिन' ? 'protograph-bad-heat-color' : 'protograph-good-heat-color',
         is_hidden = this.state.hideDistricts.indexOf(d.properties.NAME_1) !== -1;
 
-      console.log(this.props.dataJSON, this.state.hideDistricts.length, is_hidden, "////????");
       return(
         <path
           key={i}
