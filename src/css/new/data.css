@@ -184,7 +184,6 @@
   margin-left: 20px; }
 
 /* data.css */
-
 .geo-borders {
   fill: none;
   stroke: #afadad;
@@ -192,13 +191,31 @@
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.geo-region {
-  fill: #fdf8d8;
-}
 .region-outline{
   cursor: pointer;
-  stroke: none;
+  stroke: #555;
+  stroke-width: 1px;
   fill-opacity: 0;
+}
+.protograph-good-heat-color {
+  fill: #43a2ca;
+  fill-opacity: 1;
+}
+.protograph-bad-heat-color {
+  fill: #a8ddb5;
+  fill-opacity: 1;
+}
+.region-outline:hover {
+  stroke: black;
+  stroke-width: 2px;
+  z-index: 1;
+}
+.protogrpah-map-dulled-out {
+  cursor: initial;
+  fill: white !important;
+  fill-opacity: unset !important;
+  stroke: black;
+  stroke-width: 1px !important;
 }
 .protograph-card-area{
   width: 100%;
@@ -324,11 +341,6 @@
   overflow: hidden;
   position: relative;
 }
-.protogrpah-map-dulled-out {
-  cursor: initial;
-  fill: white !important;
-  fill-opacity: unset !important;
-}
 .protograph-app-map-and-list {
   float: right;
   margin-right: 0px;
@@ -350,18 +362,8 @@
 .protograph-inactive-star {
   color: #e3e3e3;
 }
-
 .div-without-margin-right{
   margin-right: 0px;
-}
-
-.protograph-good-heat-color {
-  fill: #7ABAE8;
-  fill-opacity: 1;
-}
-.protograph-bad-heat-color {
-  fill: #0082CD;
-  fill-opacity: 1;
 }
 .protograph-grid-card {
   cursor: pointer;

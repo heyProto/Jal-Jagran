@@ -13,9 +13,9 @@ class MapsCard extends React.Component {
 
     this.all_districts = ["Agra","Aligarh","Allahabad","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahar","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kushinagar","Lakhimpur Kheri","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharth Nagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
 
-    let districts_water_score = {};
-        // districts_in_data = this.props.dataJSON.map((e, i) => e.district),
-        // hidden_districts = this.arrayDifference(districts_in_data, this.all_districts);
+    let districts_water_score = {},
+        districts_in_data = this.props.dataJSON.map((e, i) => e.district_code),
+        hidden_districts = this.arrayDifference(districts_in_data, this.all_districts);
 
     this.props.dataJSON.forEach((e,i) => {
       districts_water_score[e.district] = e.water_score;
@@ -33,44 +33,19 @@ class MapsCard extends React.Component {
       y:'100px',
       showTooltip:false,
       waterScore: districts_water_score,
-      // hideDistricts: hidden_districts,
+      hideDistricts: hidden_districts,
       districts: this.all_districts
     }
   }
 
-  // arrayDifference(newArr, oldArr) {
-  //   return oldArr.filter((e, i) => {
-  //     return !newArr.find((f, j) => { return f === e})
-  //   })
-  // }
-
-  // handleOnClick(e, card) {
-  //   let props = this.props;
-  //   $('.ui.modal').modal({
-  //     onShow: function() {
-  //       $("#proto-modal").css("height", 0)
-  //     },
-  //     onHide: function(){
-  //       if (props.mode === 'laptop') {
-  //         $("#proto-modal").css("height", "100%")
-  //       }
-  //     },
-  //     onHidden: function(e) {
-  //       let element = document.querySelector("#proto-embed-card iframe");
-  //       element.parentNode.removeChild(element);
-  //     }
-  //   }).modal('attach events', '.close').modal('show')
-  //   if (this.props.mode === 'laptop'){
-  //     let pro = new ProtoEmbed.initFrame('proto-embed-card', card.iframe_url, "laptop")
-  //   } else {
-  //     let pro = new ProtoEmbed.initFrame('proto-embed-card', card.iframe_url, "mobile")
-  //   }
-  // }
+  arrayDifference(newArr, oldArr) {
+    return oldArr.filter((e, i) => {
+      return !newArr.find((f, j) => { return f === e})
+    })
+  }
 
   handleMouseMove (e,d) {
-    e.target.style.stroke = "#ffffff";
-    // e.target.style.fill='#007cd7';
-    // e.target.style.fillOpacity='unset';
+    e.target.classList.add('region-outline-hover');
     let rect = e.target.getBoundingClientRect();
     let mx=e.pageX;
     let my=e.pageY;
@@ -85,8 +60,6 @@ class MapsCard extends React.Component {
   }
 
   handleMouseOut (e,d){
-    e.target.style.stroke = "none";
-    // e.target.style.fillOpacity='0';
     this.setState({
       showTooltip:false,
       x: 0,
@@ -94,26 +67,14 @@ class MapsCard extends React.Component {
     })
   }
 
-  // handleMouseClick(e,d){
-  //   if(!this.props.modal){
-  //     let location = d.properties.NAME_1.toLowerCase().split(' ').join('-');
-  //     window.location = './districts/'+location+'.html';
-  //   }
-  //   // else{
-  //   //   let district = document.querySelector('#protograph_tooltip').innerHTML;
-  //   //   this.handleOnClick(e,this.props.dataJSON[this.state.districts.indexOf(district)%this.props.dataJSON.length])
-  //   // }
-  // }
+  componentWillReceiveProps(nextProps) {
+    let districts_in_data = nextProps.dataJSON.map((e,i) => e.district_code),
+      hidden_districts = this.arrayDifference(districts_in_data, this.all_districts);
 
-  // componentWillReceiveProps(nextProps) {
-  //   let districts_in_data = nextProps.dataJSON.map((e,i) => e.district),
-  //     hidden_districts = this.arrayDifference(districts_in_data, this.all_districts);
-
-
-  //   this.setState({
-  //     hideDistricts: hidden_districts
-  //   }, this.componentWillMount);
-  // }
+    this.setState({
+      hideDistricts: hidden_districts
+    }, this.componentWillMount);
+  }
 
   componentWillMount() {
     let padding = this.props.mode === 'mobile' ? 20 : 0,
@@ -152,18 +113,19 @@ class MapsCard extends React.Component {
 
     let outlines = country.features.map((d,i) => {
       let score = this.state.waterScore[this.districtMapping[d.properties.NAME_1]],
-        heat_color = score === 'कठिन' ? 'protograph-bad-heat-color' : 'protograph-good-heat-color';
+        heat_color = score === 'कठिन' ? 'protograph-bad-heat-color' : 'protograph-good-heat-color',
+        is_hidden = this.state.hideDistricts.indexOf(d.properties.NAME_1) !== -1;
 
-      // let is_hidden = this.state.dataJSON.data.indexOf(d.properties.NAME_1) !== -1;
+      console.log(this.props.dataJSON, this.state.hideDistricts.length, is_hidden, "////????");
       return(
         <path
           key={i}
-          className={`geo region-outline ${heat_color} protograph-trigger-modal`}
+          className={`geo region-outline ${heat_color} protograph-trigger-modal ${is_hidden ? 'protogrpah-map-dulled-out' : ''}`}
           d={path(d)}
           data-district_code={d.properties.NAME_1}
-          onClick={this.props.showModal}
-          onMouseOut={((e) => this.handleMouseOut(e, d))}
-          onMouseMove={((e) => this.handleMouseMove(e, d))}
+          onClick={!is_hidden && this.props.showModal}
+          onMouseOut={!is_hidden && ((e) => this.handleMouseOut(e, d))}
+          onMouseMove={!is_hidden && ((e) => this.handleMouseMove(e, d))}
         />
       )
     })

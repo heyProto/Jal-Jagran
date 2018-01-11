@@ -74,7 +74,7 @@ class App extends React.Component {
     let dimension = this.getScreenSize();
 
     if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky();
+      $('.filter-col').sticky({ getWidthFrom: '.col-4'});
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -97,7 +97,7 @@ class App extends React.Component {
 
   componentDidUpdate() {
     if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky(); //{topSpacing:0}
+      $('.filter-col').sticky({getWidthFrom: '.col-4'});
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
