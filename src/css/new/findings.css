@@ -127,13 +127,13 @@ ul.scrollspy-child-ul {
 }
 
 .single-index-value.active-value{
-	border-left: 2px solid #e71414;
-	color: #e71414;
+	border-left: 2px solid #007cd7;
+	color: #007cd7;
 	margin-left: -1px;
 }
 
 .article-share-icons{
-	background: #e71414;
+	background: #007cd7;
 	width: 300px;
 	display: inline-block;
 	text-align: center;
@@ -183,8 +183,8 @@ ul.scrollspy-child-ul {
 }
 
 .single-tab-value.active-value{
-	border-bottom: 2px solid #e71414;
+	border-bottom: 2px solid #007cd7;
 	margin-bottom: -1px;
-	color: #e71414;
+	color: #007cd7;
 }
 
