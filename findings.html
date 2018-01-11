@@ -61,22 +61,12 @@
                     <div class="single-tab-value active-value">OVERVIEW</div>
                     <div class="single-tab-value">DISCUSSION</div>
                 </div>
-                <nav class="explainers-sticky-segment scrollspy-navbar" id="myNavbar">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#section1" class="single-index-value">सभी मापदंड पर सबसे ख़राब मूल्यांकित ज़िले</a>
-                        </li>
-                        <li>
-                            <a href="#section2" class="single-index-value">कान्क्रटाइज़ेशन और वन आवरण मापदंड पर सबसे ख़राब मूल्यांकित ज़िले।</a>
-                        </li>
-                        <li>
-                            <a href="#section3" class="single-index-value">आबादी और कान्क्रटाइज़ेशन के मापदंड पर सबसे ख़राब ज़िले</a>
-                        </li>
-                        <li>
-                            <a href="#section4" class="single-index-value">दीर्घावधि वर्षा घाटे वाले ज़िले</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="index-list">
+                        <a href="#section1" class="single-index-value">सभी मापदंड पर सबसे ख़राब मूल्यांकित ज़िले</a>
+                        <a href="#section2" class="single-index-value">कान्क्रटाइज़ेशन और वन आवरण मापदंड पर सबसे ख़राब मूल्यांकित ज़िले।</a>
+                        <a href="#section3" class="single-index-value">आबादी और कान्क्रटाइज़ेशन के मापदंड पर सबसे ख़राब ज़िले</a>
+                        <a href="#section4" class="single-index-value">दीर्घावधि वर्षा घाटे वाले ज़िले</a>
+                </div>
             </div>
         </div>
         <div class="proto-col col-7">
@@ -140,36 +130,6 @@
     <script type="text/javascript" src='./proto-app-lib.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#myNavbar li p').remove();
-            if(!($('#myNavbar .single-index-value.active-value').hasClass('scrollspy-parent-li'))) {
-                $('#myNavbar .single-index-value').addClass('scrollspy-aboutpage-li');
-            }
-            $('.single-index-value').on('click', function() {
-                var hash = $(this).closest('a').get(0).hash;
-                setTimeout(function () {
-                    $(window).scrollTop($(hash).offset().top - 70);
-                }, 10);
-            });
-            if (window.innerWidth >= 450) {
-                $('body').scrollspy({
-                    target: '#myNavbar',
-                    offset: 70
-                });
-            }
-        });
-        if (window.innerWidth >= 450) {
-            $(window).scroll(function () {
-                var active_ancors = $('#myNavbar li a.active-value'),
-                active_ancors_length = active_ancors.length;
-                if (!active_ancors_length) {
-                    $('#myNavbar li a:first').addClass('active-value');
-                }
-            });
-        }
-    </script>
     <!-- <script type="text/javascript" src='./proto-app-lib.min.js'></script> -->
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
     <script type="text/javascript" src='./proto-app-findings-page.min.js'></script>
