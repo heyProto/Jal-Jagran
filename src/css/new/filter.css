@@ -129,6 +129,7 @@
 @media only screen and (max-width: 450px) {
   .protograph-filters-container {
     height: 100vh;
+    width: 100%;
   }
   .protograph-filters-open {
     top: 50px;

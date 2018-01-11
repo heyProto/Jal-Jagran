@@ -109,6 +109,16 @@ class App extends React.Component {
       $(".tabs"+this.dataset.href).addClass("active-area");
     });
 
+    if (this.state.mode === 'col4') {
+      $('.hamburger-icon').on('click', (e) => {
+        $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
+      });
+
+      $('.close-icon').on('click', (e) => {
+        $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
+      })
+    }
+
   }
 
   renderRating(d) {

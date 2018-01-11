@@ -6,6 +6,7 @@ class Modal extends React.Component {
   constructor () {
     super();
     this.afterOpen = this.afterOpen.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   afterOpen() {
@@ -14,6 +15,11 @@ class Modal extends React.Component {
         new ProtoEmbed.initFrame(document.getElementById('protograph_modal_card'), this.props.iframeURL, this.props.mode);
       }, 0);
     }
+    document.body.style['overflow-y'] = 'hidden';
+  }
+
+  handleRequestClose() {
+    document.body.style['overflow-y'] = 'auto';
   }
 
   render() {
@@ -37,7 +43,10 @@ class Modal extends React.Component {
       >
         <div
           className="protograph-close-modal"
-          onClick={this.props.closeModal}
+          onClick={((e) => {
+            this.handleRequestClose(e);
+            this.props.closeModal(e);
+          })}
         >
           <div className="protograph-close-text">x</div>
         </div>
