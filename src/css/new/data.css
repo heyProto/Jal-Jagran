@@ -194,28 +194,29 @@
 .region-outline{
   cursor: pointer;
   stroke: #555;
-  stroke-width: 1px;
+  stroke-width: 0.3px;
   fill-opacity: 0;
+  z-index: -1;
 }
 .protograph-good-heat-color {
-  fill: #43a2ca;
+  fill: #fffcdb;
   fill-opacity: 1;
 }
 .protograph-bad-heat-color {
-  fill: #a8ddb5;
+  fill: #81c2ff;
   fill-opacity: 1;
 }
 .region-outline:hover {
   stroke: black;
-  stroke-width: 2px;
-  z-index: 1;
+  stroke-width: 1px;
+  z-index: 100;
 }
 .protogrpah-map-dulled-out {
   cursor: initial;
   fill: white !important;
   fill-opacity: unset !important;
-  stroke: black;
-  stroke-width: 1px !important;
+  stroke: #555;
+  stroke-width: 0.3px !important;
 }
 .protograph-map-container {
   /* width: 100%; */
@@ -235,7 +236,7 @@
 }
 .protograph-map-legend-color {
   height: 20px;
-  width: 20px;
+  width: 25px;
   display: table-cell;
 }
 .protograph-map-legend-text {
@@ -246,10 +247,10 @@
   margin: 5px 0px;
 }
 .legend-good-color {
-  background: #43a2ca;
+  background: #fffcdb;
 }
 .legend-bad-color {
-  background: #a8ddb5;
+  background: #81c2ff;
 }
 
 .protograph-card-area{
