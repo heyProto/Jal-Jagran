@@ -149,28 +149,6 @@
     <script src="./lib/js/jquery.min.js"></script>
     <script src="./lib/js/jquery.sticky.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function(){
-            $("#sticker").sticky({topSpacing:20});
-            $("#related_container").sticky({topSpacing:420});
-            $(window).bind('scroll', function() {
-                $('.section').each(function() {
-                    var post = $(this);
-                    var position = post.position().top - $(window).scrollTop() + 450;
-                    var text = post.html();
-                    var left = $( ".single-index-value:contains('"+text+"')" );
-                    var next = post.next();
-                    var height = -(next.height()/2);
-                    // console.log(position, height, post.attr('id'));
-                    if (position <= 350 && position >=height) {
-                        left.addClass('active-value');
-                    } else {
-                        left.removeClass('active-value');
-                    }
-                });
-            });
-        });
-    </script>
     <script type="text/javascript" src='./proto-app-lib.min.js'></script>
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
     <script type="text/javascript" src='./proto-app-findings-page.min.js'></script>
