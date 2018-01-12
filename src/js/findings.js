@@ -22,6 +22,7 @@ $(document).ready(function(){
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
+            $('.single-index-value').css({"pointer-events":"all","cursor":"pointer"});
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70
@@ -33,6 +34,7 @@ $(document).ready(function(){
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
+            $('.single-index-value').css({"pointer-events":"all","cursor":"pointer"});
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70

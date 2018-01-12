@@ -318,7 +318,9 @@ ul.scrollspy-child-ul {
 
 .single-index-value{
 	padding: 10px 12px;
-	width:100%;
+  width:100%;
+  pointer-events: none;
+  cursor: default;
 	display:inline-block;
 	border-left: 2px solid white;
 	color: rgba(51,51,51,0.75);
