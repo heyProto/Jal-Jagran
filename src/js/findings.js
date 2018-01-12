@@ -14,16 +14,33 @@ function getJSON(url, callback) {
     xhr.send();
 }
 $(document).ready(function(){
-    $("#sticker").sticky(); //({topSpacing:20});
-    $('.related-articles-link').sticky({topSpacing: 20});
-    $('#cont-button').on('click', (e) => {
-        $('#cont-button').css('display', 'none');
-        document.getElementById('article').className = 'article-area';
-        $('body').scrollspy({
-            target: '#myNavbar',
-            offset: 70
-        });
-    })
+    var mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
+
+    if (mode === 'laptop') {
+        $("#sticker").sticky(); //({topSpacing:20});
+        $('.related-articles-link').sticky({topSpacing: 20});
+        $('#cont-button').on('click', (e) => {
+            $('#cont-button').css('display', 'none');
+            document.getElementById('article').className = 'article-area';
+            $('body').scrollspy({
+                target: '#myNavbar',
+                offset: 70
+            });
+        })
+    }
+
+    if (mode == 'mobile' ) {
+        $('#cont-button').on('click', (e) => {
+            $('#cont-button').css('display', 'none');
+            document.getElementById('article').className = 'article-area';
+            $('body').scrollspy({
+                target: '#myNavbar',
+                offset: 70
+            });
+        })
+    }
+
+
 
 });
 getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
