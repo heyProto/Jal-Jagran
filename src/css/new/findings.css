@@ -319,7 +319,9 @@ ul.scrollspy-child-ul {
 
 .single-index-value{
 	padding: 10px 12px;
-	width:100%;
+  width:100%;
+  pointer-events: none;
+  cursor: default;
 	display:inline-block;
 	border-left: 2px solid white;
 	color: rgba(51,51,51,0.75);
@@ -386,10 +388,91 @@ ul.scrollspy-child-ul {
 	font-weight: bold;
 	padding-bottom: 10px;
 }
-
 .single-tab-value.active-value{
 	border-bottom: 2px solid #007cd7;
 	margin-bottom: -1px;
 	color: #007cd7;
 }
-
+.page-title {
+  font-size: 42px;
+  font-weight: bold;
+  font-family: 'Sarala', sans-serif;
+  color: white;
+  margin-bottom: 20px;
+  bottom: 0px;
+  position: absolute;
+  margin-left: 20px;
+}
+.protograph-app-filter-icon {
+  display: none;
+  background: white;
+  position: fixed;
+  bottom: 20px;
+  padding: 15px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px 0px;
+}
+.activate-click {
+  pointer-events: all;
+  cursor: pointer;
+}
+.column-title{
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #333;
+  font-family: cabin;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+@media only screen and (max-width: 500px) {
+  .br-space {
+    display: none;
+  }
+  .protograph-app-filter-icon {
+    display: block;
+  }
+  .protograph-app-filter-close-button {
+    display: none;
+    z-index: 1000;
+  }
+  .navigation-links {
+    position: fixed;
+    top: 1000px;
+    height: 100vh;
+    z-index: 1000;
+    width: 100% !important;
+    background: white;
+  }
+  .navigation-links-slide-up {
+    top: 0px;
+    transition: top 500ms ease-out;
+  }
+  .protograph-app-filter-icon-slide-down {
+    bottom: -30px;
+    transition: bottom 500ms ease-out;
+  }
+  .protograph-app-filter-icon-slide-up {
+    bottom: 20px;
+    transition: bottom 500ms ease-out;
+  }
+  .protograph-app-filter-close-button {
+    display: none;
+  }
+  .article-share-icons {
+    width: 100%;
+  }
+  .index-title-tabs {
+    width: 100%;
+  }
+  .single-tab-value {
+    width: 50%;
+  }
+  .scroll_navigation {
+    margin-left: 20px;
+  }
+}
