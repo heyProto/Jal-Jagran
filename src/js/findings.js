@@ -14,22 +14,31 @@ function getJSON(url, callback) {
     xhr.send();
 }
 $(document).ready(function(){
-    $("#sticker").sticky({topSpacing:20});
-    $(window).bind('scroll', function() {
-        $('.section').each(function() {
-            var post = $(this);
-            var position = post.position().top - $(window).scrollTop() + 450;
-            var text = post.html();
-            var left = $( ".single-index-value:contains('"+text+"')" );
-            var next = post.next();
-            var height = -(next.height()/2);
-            if (position <= 350 && position >=height) {
-                left.addClass('active-value');
-            } else {
-                left.removeClass('active-value');
-            }
-        });
-    });
+    $("#sticker").sticky(); //({topSpacing:20});
+    $('body').scrollspy({ target: '#myNavbar' })
+    // $('body').scrollspy({
+    //     spy: "scroll",
+    //     target: '#myNavbar',
+    //     offset: 70
+    // });
+    $(window).on("activate.bs.scrollspy",(e) => {
+        console.log(e, ";;;;;;;;;;;-----")
+    })
+    // $(window).bind('scroll', function() {
+    //     $('.section').each(function() {
+    //         var post = $(this);
+    //         var position = post.position().top - $(window).scrollTop() + 450;
+    //         var text = post.html();
+    //         var left = $( ".single-index-value:contains('"+text+"')" );
+    //         var next = post.next();
+    //         var height = -(next.height()/2);
+    //         if (position <= 350 && position >=height) {
+    //             left.addClass('active-value');
+    //         } else {
+    //             left.removeClass('active-value');
+    //         }
+    //     });
+    // });
 });
 getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
     if (err != null) {
