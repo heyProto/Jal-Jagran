@@ -15,7 +15,7 @@ function getJSON(url, callback) {
 }
 $(document).ready(function(){
     $("#sticker").sticky(); //({topSpacing:20});
-    $('.related-articles-link').sticky();
+    $('.related-articles-link').sticky({topSpacing: 20});
     $('#cont-button').on('click', (e) => {
         $('#cont-button').css('display', 'none');
         document.getElementById('article').className = 'article-area';
