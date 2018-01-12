@@ -441,7 +441,7 @@ ul.scrollspy-child-ul {
   .navigation-links {
     position: fixed;
     top: 1000px;
-    height: 100%;
+    height: 100vh;
     z-index: 1000;
     padding: 10%;
     width: 100% !important;

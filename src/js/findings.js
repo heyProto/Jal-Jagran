@@ -68,8 +68,6 @@ $(document).ready(function(){
         }));
     }
 
-
-
 });
 getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
     if (err != null) {
