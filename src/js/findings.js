@@ -14,16 +14,59 @@ function getJSON(url, callback) {
     xhr.send();
 }
 $(document).ready(function(){
-    $("#sticker").sticky(); //({topSpacing:20});
-    $('.related-articles-link').sticky({topSpacing: 20});
-    $('#cont-button').on('click', (e) => {
-        $('#cont-button').css('display', 'none');
-        document.getElementById('article').className = 'article-area';
-        $('body').scrollspy({
-            target: '#myNavbar',
-            offset: 70
+    var mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
+
+    if (mode === 'laptop') {
+        $("#sticker").sticky({topSpacing: 0});
+        $('.related-articles-link').sticky({topSpacing: 20});
+        $('#cont-button').on('click', (e) => {
+            $('#cont-button').css('display', 'none');
+            document.getElementById('article').className = 'article-area';
+            $('.single-index-value').addClass('activate-click');
+            $('body').scrollspy({
+                target: '#myNavbar',
+                offset: 70
+            });
+        })
+    }
+
+    if (mode == 'mobile' ) {
+        $('#cont-button').on('click', (e) => {
+            $('#cont-button').css('display', 'none');
+            document.getElementById('article').className = 'article-area';
+            $('.single-index-value').addClass('activate-click');
+            $('body').scrollspy({
+                target: '#myNavbar',
+                offset: 70
+            });
+        })
+
+        $('.hamburger-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
         });
-    })
+
+        $('.close-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
+        })
+
+        $('#protograph_filter_icon').on('click', ((e) => {
+            $('.navigation-links').css('display', 'block');
+            setTimeout((e) => {
+                $('.navigation-links').addClass('navigation-links-slide-up');
+            }, 0);
+            $('#protograph_filter_icon').css('display', 'none');
+            $('#protograph_filter_close_icon').css('display', 'block');
+        }));
+
+        $('#protograph_filter_close_icon').on('click', ((e) => {
+            $('.navigation-links').removeClass('navigation-links-slide-up');
+            setTimeout((e) => {
+                $('.navigation-links').css('display', 'none');
+            }, 500);
+            $('#protograph_filter_icon').css('display', 'block');
+            $('#protograph_filter_close_icon').css('display', 'none');
+        }));
+    }
 
 });
 getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
