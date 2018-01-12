@@ -443,7 +443,6 @@ ul.scrollspy-child-ul {
     top: 1000px;
     height: 100vh;
     z-index: 1000;
-    padding: 10%;
     width: 100% !important;
     background: white;
   }
@@ -461,5 +460,17 @@ ul.scrollspy-child-ul {
   }
   .protograph-app-filter-close-button {
     display: none;
+  }
+  .article-share-icons {
+    width: 100%;
+  }
+  .index-title-tabs {
+    width: 100%;
+  }
+  .single-tab-value {
+    width: 50%;
+  }
+  .scroll_navigation {
+    margin-left: 20px;
   }
 }
