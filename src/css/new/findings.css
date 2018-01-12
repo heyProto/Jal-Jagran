@@ -314,6 +314,7 @@ ul.scrollspy-child-ul {
 
 .index-list{
 	border-left: 1px solid #efefef;
+	margin-top: 0px;
 }
 
 .single-index-value{
@@ -359,6 +360,7 @@ ul.scrollspy-child-ul {
 	display: inline-block;
 	width: 300px;
     box-sizing: border-box;
+    font-family: "cabin";
 }
 .summary{
 	/*height:50px;*/

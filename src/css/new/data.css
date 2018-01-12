@@ -139,7 +139,7 @@
   font-family: cabin;
   border-bottom: 3px solid white;
   display: inline-block;
-  padding: 0px 25px 8px;
+  padding: 12px 25px 12px;
   cursor: pointer; }
 
 .active-tab {
@@ -255,7 +255,7 @@
 
 .protograph-card-area{
   width: 100%;
-  text-align: center;
+  /*text-align: center;*/
   margin-top: 20px;
   /* height: 100vh; */
   overflow-y: auto;
@@ -337,6 +337,9 @@
   color: #333;
   padding: 11px;
   margin-right: auto;
+  transform: translate(-50%, 0);
+  margin-left: 50%;
+  margin-bottom: 50px;
 }
 #show-more-cards:focus {
   outline: 0;
