@@ -100,6 +100,7 @@ body{
 	font-size: 10px;
 	color: #777;
 	line-height: 17px;
+	margin-top: 5px;
 }
 
 .parameter-name{
@@ -113,4 +114,30 @@ body{
 .parameter-value{
 	display: inline-block;
 	float: right;
+}
+
+.proto-modal-mobile{
+	height: auto !important;
+}
+
+.proto-modal-mobile .modal-image{
+	height: 80px;
+	width: 80px;
+}
+
+.proto-modal-mobile .modal-title{
+	font-size: 24px;
+}
+
+.proto-modal-mobile .content-left{
+	margin-right: 0px;
+	width: 276px;
+	margin-bottom: 20px;
+}
+
+.proto-modal-mobile .modal-footer{
+	position: relative;
+	padding: 0px;
+	padding-top: 12px;
+	margin-top: 12px;
 }
