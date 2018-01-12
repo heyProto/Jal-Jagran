@@ -17,11 +17,12 @@ $(document).ready(function(){
     var mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
 
     if (mode === 'laptop') {
-        $("#sticker").sticky(); //({topSpacing:20});
+        $("#sticker").sticky({topSpacing: 0});
         $('.related-articles-link').sticky({topSpacing: 20});
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
+            $('.single-index-value').addClass('activate-click');
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70
@@ -33,6 +34,7 @@ $(document).ready(function(){
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
+            $('.single-index-value').addClass('activate-click');
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70
