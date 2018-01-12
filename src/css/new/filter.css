@@ -6,6 +6,7 @@
   border-left: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
   /* overflow: hidden; */
+  font-family: "cabin";
 }
 .protograph-filters-header {
   height: 52px;
@@ -66,6 +67,8 @@
   display: table-cell;
   width: 90%;
   padding: 10px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.75);
 }
 .protograph-filters-left-align {
   text-align: left;
@@ -87,6 +90,8 @@
   padding: 10px;
   width: 10%;
   text-align: right;
+  font-size: 14px;
+  color: rgba(0,0,0,0.75);
 }
 /* .protograph-filter-item-detail.protograph-show-more-filters {
   height: auto;

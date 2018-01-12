@@ -68,6 +68,15 @@
     margin-bottom: 20px;
 }
 
+.fixed-cover-block-small{
+    height: 250px;
+}
+
+.fixed-cover-block-small .page-title p{
+	font-size: 14px;
+	line-height: 19px;
+}
+
 @media only screen and (max-width: 500px){
 	.navbar{
 		display: none;
