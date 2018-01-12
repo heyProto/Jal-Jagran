@@ -38,6 +38,32 @@ $(document).ready(function(){
                 offset: 70
             });
         })
+
+        $('.hamburger-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
+        });
+
+        $('.close-icon').on('click', (e) => {
+            $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
+        })
+
+        $('#protograph_filter_icon').on('click', ((e) => {
+            $('.navigation-links').css('display', 'block');
+            setTimeout((e) => {
+                $('.navigation-links').addClass('navigation-links-slide-up');
+            }, 0);
+            $('#protograph_filter_icon').css('display', 'none');
+            $('#protograph_filter_close_icon').css('display', 'block');
+        }));
+
+        $('#protograph_filter_close_icon').on('click', ((e) => {
+            $('.navigation-links').removeClass('navigation-links-slide-up');
+            setTimeout((e) => {
+                $('.navigation-links').css('display', 'none');
+            }, 500);
+            $('#protograph_filter_icon').css('display', 'block');
+            $('#protograph_filter_close_icon').css('display', 'none');
+        }));
     }
 
 
