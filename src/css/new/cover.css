@@ -52,8 +52,12 @@
         margin-bottom: 20px;
     }
 
+    .column-title{
+        display: none;
+    }
+
     .proto-mobile-grid-navigatio-tab {
-        padding: 17px 15px;
+        padding: 17px 12px;
         font-size: 12px;
         display: inline-block;
         font-family: "cabin";
