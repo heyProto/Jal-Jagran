@@ -1,10 +1,7 @@
-
 body{
 	position:relative;
 }
-body {
-  position: relative;
-}
+
 .answer{
   padding: 0px;
   margin-bottom: 35px !important;
@@ -101,6 +98,11 @@ body {
   color: #333;
   border-radius: 0px;
   border-color: red;
+}
+
+ul{
+	list-style: none;
+	padding-left: 0px;
 }
 ul.scrollspy-child-ul {
   list-style: none;
@@ -315,16 +317,19 @@ ul.scrollspy-child-ul {
 	padding: 10px 12px;
 	width:100%;
 	display:inline-block;
-	border-left: 1px solid white;
+	border-left: 2px solid white;
 	color: rgba(51,51,51,0.75);
 	font-family: cabin;
 	font-size: 14px;
+	box-sizing: border-box;
+	text-decoration: none;
+	/*margin-left: -1px;*/
 }
 
-.single-index-value.active-value{
+.single-index-value.active{
 	border-left: 2px solid #007cd7;
 	color: #007cd7;
-	margin-left: -1px;
+	margin-left: 0px;
 }
 
 .article-share-icons{
@@ -353,7 +358,7 @@ ul.scrollspy-child-ul {
     box-sizing: border-box;
 }
 .summary{
-	height:50px;
+	/*height:50px;*/
 }
 .index-title-tabs{
 	width: 300px;
