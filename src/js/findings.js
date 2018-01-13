@@ -4,8 +4,8 @@ $(document).ready(function(){
     var mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
 
     if (mode === 'laptop') {
-        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 254});
-        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 254});
+        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 320});
+        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 320});
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';

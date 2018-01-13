@@ -160,7 +160,7 @@ ul.scrollspy-child-ul {
 }
 .ProtoCard-more-articles {
   flex: 0 0 auto;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 .more-articles-container {
   display: flex;
