@@ -63,8 +63,8 @@
         font-family: "cabin";
     }
     .proto-mobile-grid-navigatio-tab.proto-active-tab {
-        color: #007cd7;
-        border-bottom: 2px solid #007cd7;
+        color: #e03832;
+        border-bottom: 2px solid #e03832;
     }
     .proto-tab-content {
         display: none;
