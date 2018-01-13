@@ -16,12 +16,12 @@ $(document).ready(function(){
             });
         })
 
-        Util.getJSON('https://cdn.protograph.pykih.com/12683b42d4b866989ea7601f/index.json', function (err, data) {
+        Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
             if (err != null) {
                 alert('Something went wrong: ' + err);
             } else {
                 let originals_container = document.getElementById("more_articles_container");
-                data.map((d, i) => {
+                for (let i = 0; i < 4; i++) {
                     let createDiv = document.createElement('div');
                     createDiv.id = 'ProtoCard-more-articles' + i;
                     createDiv.className = 'ProtoCard-more-articles';
@@ -32,7 +32,7 @@ $(document).ready(function(){
                     setTimeout(function () {
                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
                     }, 0)
-                })
+                }
             }
         });
     }
