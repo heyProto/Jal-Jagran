@@ -364,7 +364,7 @@ ul.scrollspy-child-ul {
 }
 
 .single-share-icon{
-	width: 149px;
+	width: 150px;
 	text-align: center;
 	float: left;
 	display: inline-block;
@@ -373,7 +373,7 @@ ul.scrollspy-child-ul {
 }
 
 .single-share-icon:first-child{
-  border-right: 1px solid #ffffffab;
+  /*border-right: 1px solid #ffffffab;*/
 }
 
 .summary-text{
