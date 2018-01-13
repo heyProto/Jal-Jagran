@@ -2,9 +2,9 @@
   width: 298px;
   height: 612px;
   position: relative;
-  border-right: 1px solid #efefef;
-  border-left: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
+  /*border-right: 1px solid #efefef;*/
+  /*border-left: 1px solid #efefef;*/
+  /*border-bottom: 1px solid #efefef;*/
   /* overflow: hidden; */
   font-family: "cabin";
 }
@@ -59,16 +59,27 @@
   display: table;
   width: 100%;
   border-collapse: collapse;
+  border-left: 1px solid white;
 }
 .protograph-filter-item:hover {
   cursor: pointer;
+  border-left: 2px solid #007cd7;
+  color: #007cd7;
 }
+.protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-item {
+  border-left: 2px solid #007cd7;
+}
+.protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item, .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item-name {
+  border-left: 0px;
+}
+
 .protograph-filter-item-name {
   display: table-cell;
   width: 90%;
   padding: 10px;
   font-size: 14px;
   color: rgba(0,0,0,0.75);
+  border-left: 1px solid #efefef;
 }
 .protograph-filters-left-align {
   text-align: left;
@@ -76,6 +87,11 @@
 .protograph-filters-dulled {
   opacity: 0.5;
 }
+
+.protograph-show-more-filters .protograph-filter-body{
+  border-left: 1px solid #efefef;
+}
+
 .protograph-filter-item-arrow {
   display: table-cell;
   padding: 10px 17px;
@@ -127,9 +143,8 @@
   display: table-cell;
   font-size: 12px;
   line-height: 18px;
-  color: #5d5d5d;
-  padding: 10px;
-  padding-bottom: 0px;
+  color: #adadad;
+  padding: 15px 0px;
 }
 
 @media only screen and (max-width: 450px) {
