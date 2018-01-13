@@ -229,6 +229,9 @@
   text-align: left;
   position: absolute;
   right: 0px;
+  font-family: cabin;
+  font-size: 14px;
+  color: rgba(0,0,0,0.75);
 }
 .protograph-map-legends {
   display: table;
