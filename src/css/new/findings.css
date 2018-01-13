@@ -167,6 +167,9 @@ ul.scrollspy-child-ul {
   flex-wrap: nowrap;
   overflow-x: auto;
 }
+.more-articles-link-div {
+  margin-bottom: 100px;
+}
 
 @media only screen and (max-width: 1200px) {
   .proto-container{
@@ -209,6 +212,9 @@ ul.scrollspy-child-ul {
   .mobbed-footer-space {
     width: 100%;
     height: 100px;
+  }
+  .more-articles-link-div {
+    display: none;
   }
 }
 .article-para{
