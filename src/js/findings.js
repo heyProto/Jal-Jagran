@@ -1,24 +1,11 @@
+import Util from './utility.js'
 
-function getJSON(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function () {
-        var status = xhr.status;
-        if (status == 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status);
-        }
-    };
-    xhr.send();
-}
 $(document).ready(function(){
     var mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
 
     if (mode === 'laptop') {
-        $("#sticker").sticky({topSpacing: 0});
-        $('.related-articles-link').sticky({topSpacing: 20});
+        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 254});
+        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 254});
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
@@ -78,25 +65,46 @@ $(document).ready(function(){
         }));
     }
 
-});
-getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
-    if (err != null) {
-        alert('Something went wrong: ' + err);
-    } else {
-        let originals_container = document.getElementById("related_container");
-        data.map((d,i) => {
-            let createDiv = document.createElement('div');
-            createDiv.id = 'ProtoCard-originals'+i;
-            // createDiv.className= 'ProtoCard-originals';
-            originals_container.appendChild(createDiv);
-            let createMarginDiv = document.createElement('div');
-            createMarginDiv.style.marginBottom = "20px";
-            originals_container.appendChild(createMarginDiv);
-            setTimeout(function(){
-                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col4");
-            },0)
-        })
-    }
+    Util.getJSON('https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json', function (err, data){
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            let originals_container = document.getElementById("related_container");
+            data.map((d,i) => {
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-originals'+i;
+                // createDiv.className= 'ProtoCard-originals';
+                originals_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                createMarginDiv.style.marginBottom = "20px";
+                originals_container.appendChild(createMarginDiv);
+                setTimeout(function(){
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col4");
+                },0)
+            })
+        }
+    });
+
+    Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            let originals_container = document.getElementById("more_articles_container");
+            data.map((d, i) => {
+                let createDiv = document.createElement('div');
+                createDiv.id = 'ProtoCard-more-articles' + i;
+                createDiv.className = 'ProtoCard-more-articles';
+                originals_container.appendChild(createDiv);
+                let createMarginDiv = document.createElement('div');
+                // createMarginDiv.style.marginBottom = "20px";
+                // originals_container.appendChild(createMarginDiv);
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
+                }, 0)
+            })
+        }
+    });
+
 });
 // if(document.getElementById('cont-button')){
 //     document.getElementById('cont-button').onclick = function(e){
