@@ -95,7 +95,7 @@ var x = new ProtoGraph.Card.toMaps()
   },
   filterConfigurationJSON: {
     colors: {
-      house_color: '#007cd7',
+      house_color: '#e03832',
       text_color: '#343434',
       active_text_color: '#007cd7',
       filter_summary_text_color: '#ffffff',
