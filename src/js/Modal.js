@@ -48,7 +48,7 @@ class Modal extends React.Component {
             this.props.closeModal(e);
           })}
         >
-          <div className="protograph-close-text">x</div>
+          <div className="protograph-close-text"><i className="remove icon"></i></div>
         </div>
         <div id="protograph_modal_card"></div>
       </ReactModal>

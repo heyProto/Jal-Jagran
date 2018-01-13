@@ -144,9 +144,15 @@
 	}
 
 	.close-icon {
-		font-size: 42px;
+		/* font-size: 42px; */
 		color: black;
 		margin-right: 20px;
+		margin-top: 20px;
+	}
+
+	.close-icon i.icon.remove:before {
+        font-size: 24px !important;
+        font-weight: 100 !important;
 	}
 
 	.mobile-navigations-screen .bottom-pull-div{
