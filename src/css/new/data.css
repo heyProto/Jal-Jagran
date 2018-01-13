@@ -519,4 +519,7 @@
   .protograph-map-legends-container {
     right: 10px;
   }
+  .protograph-card-area{
+    text-align: center;
+  }
 }
