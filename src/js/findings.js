@@ -39,6 +39,16 @@ $(document).ready(function(){
                 target: '#myNavbar',
                 offset: 70
             });
+            $('.single-index-value').on('click', (e) => {
+                setTimeout(function() {
+                    $('.navigation-links').removeClass('navigation-links-slide-up');
+                    setTimeout((e) => {
+                        $('.navigation-links').css('display', 'none');
+                    }, 500);
+                    $('#protograph_filter_icon').css('display', 'block');
+                    $('#protograph_filter_close_icon').css('display', 'none');
+                }, 250);
+            });
         })
 
         $('.hamburger-icon').on('click', (e) => {
