@@ -343,13 +343,13 @@ ul.scrollspy-child-ul {
 }
 
 .single-index-value.active{
-	border-left: 2px solid #007cd7;
-	color: #007cd7;
+	border-left: 2px solid #e03832;
+	color: #e03832;
 	margin-left: 0px;
 }
 
 .article-share-icons{
-	background: #007cd7;
+	background: #e03832;
 	width: 300px;
 	display: inline-block;
 	text-align: center;
@@ -399,9 +399,9 @@ ul.scrollspy-child-ul {
 	padding-bottom: 10px;
 }
 .single-tab-value.active-value{
-	border-bottom: 2px solid #007cd7;
+	border-bottom: 2px solid #e03832;
 	margin-bottom: -1px;
-	color: #007cd7;
+	color: #e03832;
 }
 .page-title {
   font-size: 42px;
