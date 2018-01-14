@@ -61,6 +61,9 @@
         font-size: 12px;
         display: inline-block;
         font-family: "cabin";
+        width: 75px;
+        box-sizing: border-box;
+        text-align: center;
     }
     .proto-mobile-grid-navigatio-tab.proto-active-tab {
         color: #e03832;
