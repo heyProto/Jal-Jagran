@@ -57,7 +57,7 @@ $(document).ready((e) => {
 var x = new ProtoGraph.Card.toMaps()
   x.init({
   selector: document.querySelector('#card-list-div'),
-  dataURL: 'https://dnt71st2q6cqr.cloudfront.net/6446fe45c8d72d4346b9a9ee/index.json',
+  dataURL: 'https://cdn.protograph.pykih.com/d0d8741cbfc3a95b5981dd4c/index.json',
   topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
   chartOptions: {
     chartTitle: 'Mob Justice in India',
