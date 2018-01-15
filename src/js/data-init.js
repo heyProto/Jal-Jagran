@@ -68,7 +68,7 @@ var x = new ProtoGraph.Card.toMaps()
     colors: {
       house_color: '#e03832',
       text_color: '#343434',
-      active_text_color: '#007cd7',
+      active_text_color: '#e03832',
       filter_summary_text_color: '#ffffff',
       filter_heading_text_color: '#ffffff'
     },

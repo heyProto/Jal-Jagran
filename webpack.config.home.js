@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 
 // CSS bundle
-const input = './src/css/new/cover.css';
+const input = './src/css/cover.css';
 const options = {
   output: "proto-app-cover-page.min.css"
 };

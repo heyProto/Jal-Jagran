@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 
 // CSS bundle
-const input = './src/css/new/findings.css';
+const input = './src/css/findings.css';
 const options = {
   output: "proto-app-findings-page.min.css"
 };
