@@ -467,10 +467,10 @@ ul.scrollspy-child-ul {
     z-index: 1000;
     width: 100% !important;
     background: white;
+    transition: top 500ms ease-out;
   }
   .navigation-links-slide-up {
     top: 0px;
-    transition: top 500ms ease-out;
   }
   .protograph-app-filter-icon-slide-down {
     bottom: -30px;
@@ -494,5 +494,8 @@ ul.scrollspy-child-ul {
   }
   .scroll_navigation {
     margin-left: 20px;
+  }
+  .block-events {
+    pointer-events: none;
   }
 }

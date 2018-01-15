@@ -531,4 +531,7 @@
   .protograph-card-area{
     text-align: center;
   }
+  .block-events {
+    pointer-events: none;
+  }
 }
