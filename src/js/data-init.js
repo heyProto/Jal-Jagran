@@ -89,8 +89,8 @@ var x = new ProtoGraph.Card.toMaps()
       alias: 'वन आवरण'
     },
     {
-      propName: 'water_exploitation_score',
-      alias: 'ज़मीन की पानी सोख लेनी की क्षमता'
+      propName: 'population_score',
+      alias: 'आबादी'
     }
   ]
 })
