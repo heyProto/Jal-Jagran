@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const minifier = require('minifier');
 
 // CSS bundle
-const input = './src/css/new/findings.css';
+const input = './src/css/findings.css';
 const options = {
-  output: "proto-app-findings-page.min.css"
+  output: "proto-app-findings.min.css"
 };
 minifier.minify(input, options);
 
@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: 'proto-app-findings-page.min.js',
+    filename: 'proto-app-findings.min.js',
   },
   plugins: [
     new webpack.DefinePlugin({

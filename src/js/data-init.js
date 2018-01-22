@@ -1,49 +1,14 @@
-function getScreenSize() {
-  let w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    width = w.innerWidth || e.clientWidth || g.clientWidth,
-    height = w.innerHeight|| e.clientHeight|| g.clientHeight;
-
-  return {
-    width: width,
-    height: height
-  };
-}
-function getJSON(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    var status = xhr.status;
-    if (status == 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status);
-    }
-  };
-  xhr.send();
-};
-function throttle(fn, wait) {
-  var time = Date.now();
-  return function() {
-    if ((time + wait - Date.now()) < 0) {
-      fn();
-      time = Date.now();
-    }
-  }
-}
-
-let dimension = getScreenSize(),
-  mode;
-if (dimension.width <= 500){
-  mode = 'mobile';
-} else {
-  mode = 'laptop';
-}
+import Util from './utility.js'
 
 $(document).ready((e) => {
+
+  let dimension = Util.getScreenSize(),
+    mode;
+  if (dimension.width <= 500){
+    mode = 'mobile';
+  } else {
+    mode = 'laptop';
+  }
 
   if (mode === 'laptop'){
     $('.filter-column').sticky({ topSpacing: 0 });
@@ -51,18 +16,24 @@ $(document).ready((e) => {
 
   if (mode === 'mobile'){
     $('#protograph_filter_icon').on('click', ((e) => {
+      $('.protograph-app-filter-icon').addClass('block-events');
       $('.protograph-filter-area').css('display', 'block');
       setTimeout((e) => {
         $('.protograph-filter-area').addClass('protograph-filter-area-slide-up');
       },0);
       $('#protograph_filter_icon').css('display', 'none');
       $('#protograph_filter_close_icon').css('display', 'block');
+      setTimeout((i) => {
+        $('.protograph-app-filter-icon').removeClass('block-events');
+      }, 500);
     }));
 
     $('#protograph_filter_close_icon').on('click', ((e) => {
+      $('.protograph-app-filter-icon').addClass('block-events');
       $('.protograph-filter-area').removeClass('protograph-filter-area-slide-up');
       setTimeout((e) => {
         $('.protograph-filter-area').css('display', 'none');
+        $('.protograph-app-filter-icon').removeClass('block-events');
       },500);
       $('#protograph_filter_icon').css('display', 'block');
       $('#protograph_filter_close_icon').css('display', 'none');
@@ -86,7 +57,7 @@ $(document).ready((e) => {
 var x = new ProtoGraph.Card.toMaps()
   x.init({
   selector: document.querySelector('#card-list-div'),
-  dataURL: 'https://dnt71st2q6cqr.cloudfront.net/6446fe45c8d72d4346b9a9ee/index.json',
+  dataURL: 'https://cdn.protograph.pykih.com/d0d8741cbfc3a95b5981dd4c/index.json',
   topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
   chartOptions: {
     chartTitle: 'Mob Justice in India',
@@ -97,7 +68,7 @@ var x = new ProtoGraph.Card.toMaps()
     colors: {
       house_color: '#e03832',
       text_color: '#343434',
-      active_text_color: '#007cd7',
+      active_text_color: '#e03832',
       filter_summary_text_color: '#ffffff',
       filter_heading_text_color: '#ffffff'
     },
@@ -118,8 +89,8 @@ var x = new ProtoGraph.Card.toMaps()
       alias: 'वन आवरण'
     },
     {
-      propName: 'water_exploitation_score',
-      alias: 'ज़मीन की पानी सोख लेनी की क्षमता'
+      propName: 'population_score',
+      alias: 'आबादी'
     }
   ]
 })
