@@ -90,7 +90,7 @@ var x = new ProtoGraph.Card.toMaps()
     },
     {
       propName: 'population_score',
-      alias: 'आबादी'
+      alias: 'जनसंख्या'
     }
   ]
 })
