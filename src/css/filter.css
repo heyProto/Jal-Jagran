@@ -63,11 +63,11 @@
 }
 .protograph-filter-item:hover {
   cursor: pointer;
-  border-left: 2px solid #ED1C24;
-  color: #ED1C24;
+  border-left: 2px solid #e03832;
+  color: #e03832;
 }
 .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-item {
-  border-left: 2px solid #ED1C24;
+  border-left: 2px solid #e03832;
 }
 .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item, .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item-name {
   border-left: 1px solid #fafafa;
@@ -90,7 +90,7 @@
 }
 
 .protograph-filter-item:hover .protograph-filter-item-name{
-  color: #ED1C24;
+  color: #e03832;
 }
 
 .protograph-filters-left-align {
@@ -167,7 +167,7 @@
   font-size: 12px;
   line-height: 18px;
   color: #adadad;
-  padding: 15px 0px;
+  padding: 15px 10px;
 }
 
 @media only screen and (max-width: 450px) {
