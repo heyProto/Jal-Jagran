@@ -308,7 +308,7 @@ export default class Filter extends React.Component {
         color: ${this.props.configurationJSON.colors.house_color};
       }
       .protograph-filter-item:hover, .protograph-active-item {
-        color: ${this.props.configurationJSON.colors.active_text_color};
+        color: ${this.props.configurationJSON.colors.active_text_color} !important;
       }
       .protograph-house-bg-color, .protograph-filters-header, .protograph-filters-all-filters {
         background-color: ${this.props.configurationJSON.colors.house_color};
