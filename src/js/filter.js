@@ -356,59 +356,61 @@ export default class Filter extends React.Component {
   renderFilterItems(filters, subItems) {
     return (
       <div className={`${!subItems ? 'protograph-filter-items-container' : 'protograph-filter-sub-items-container' }`} >
-        {
-          (this.props.hintText && !subItems) &&
-            <div className="protograph-filter-hint-text">{this.props.hintText}</div>
-        }
-        {
-          filters.map((e, i) => {
+        <div className= {`${!subItems ? 'protograph-filter-list-area' : '' }`}>
+          {
+            (this.props.hintText && !subItems) &&
+              <div className="protograph-filter-hint-text">{this.props.hintText}</div>
+          }
+          {
+            filters.map((e, i) => {
 
-            if (e.is_hidden) {
-              return <div key={i} />;
-            }
+              if (e.is_hidden) {
+                return <div key={i} />;
+              }
 
-            let onClickCallback = this.getOnClickCallback(e);
-            let name = this.getName(e);
+              let onClickCallback = this.getOnClickCallback(e);
+              let name = this.getName(e);
 
-            return (
-              <div key={i} className="protograph-filter-item-detail">
-                <div
-                  key={i}
-                  className={`protograph-filter-item ${(e.is_active && !this.itemHasMoreFilters(e)) ? 'protograph-active-item' : ''}`}
-                  onClick={onClickCallback}
-                  data-item_parent_ids={e.parent_ids.join(',')}
-                >
-                  <div className="protograph-filter-item-name" >
-                    {name}
+              return (
+                <div key={i} className="protograph-filter-item-detail">
+                  <div
+                    key={i}
+                    className={`protograph-filter-item ${(e.is_active && !this.itemHasMoreFilters(e)) ? 'protograph-active-item' : ''}`}
+                    onClick={onClickCallback}
+                    data-item_parent_ids={e.parent_ids.join(',')}
+                  >
+                    <div className="protograph-filter-item-name" >
+                      {name}
+                    </div>
+                    {
+                      this.itemHasMoreFilters(e) ?
+                        <div className="protograph-filter-chevron-icon">
+                          <i className="chevron down icon"></i>
+                        </div>
+                        :
+                        <div className="protograph-filter-item-arrow" > {e.count} </div>
+                    }
+                    {
+                      e.is_active &&
+                        <div
+                          className="protograph-filters-remove-filter"
+                          onClick={((e) => { this.unRegisterFilter(e); })}
+                        >
+                          Remove
+                        </div>
+                    }
                   </div>
                   {
-                    this.itemHasMoreFilters(e) ?
-                      <div className="protograph-filter-chevron-icon">
-                        <i className="chevron down icon"></i>
-                      </div>
-                      :
-                      <div className="protograph-filter-item-arrow" > {e.count} </div>
-                  }
-                  {
-                    e.is_active &&
-                      <div
-                        className="protograph-filters-remove-filter"
-                        onClick={((e) => { this.unRegisterFilter(e); })}
-                      >
-                        Remove
+                    this.itemHasMoreFilters(e) &&
+                      <div className="protograph-filter-body">
+                        {this.renderFilterItems(e.filters, true)}
                       </div>
                   }
                 </div>
-                {
-                  this.itemHasMoreFilters(e) &&
-                    <div className="protograph-filter-body">
-                      {this.renderFilterItems(e.filters, true)}
-                    </div>
-                }
-              </div>
-            )
-          })
-        }
+              )
+            })
+          }
+        </div>
       </div>
     )
   }
