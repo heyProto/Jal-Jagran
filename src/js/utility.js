@@ -1,6 +1,20 @@
 import { scaleOrdinal as d3ScaleOrdinal } from 'd3-scale';
 import { timeFormat } from 'd3-time-format';
 
+window.ProtoGraph = window.ProtoGraph || {};
+window.ProtoGraph.fetchPageObject = function (successCallback, errorCallback) {
+    getJSON(window.page_object_url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching page object", err);
+            if (errorCallback)
+                errorCallback();
+        } else {
+            if (successCallback)
+                successCallback(err,data);
+        }
+    });
+}
+
 function setColorScale(value, colorDomain, colorRange) {
     let colorScale = d3ScaleOrdinal()
         .domain(colorDomain)
@@ -95,6 +109,21 @@ function throttle(fn, wait) {
     }
 }
 
+function appendFavicon() {
+    let favicon = ProtoGraph.pageObject.site_attributes.favicon_url,
+        meta_tags = ProtoGraph.pageObject.site_attributes.meta_tags,
+        meta_description = ProtoGraph.pageObject.site_attributes.meta_description;
+
+    if (favicon)
+        $('head').append(`<link rel="icon" type="image/png" href="${favicon}">`);
+
+    if (meta_tags)
+        $('head').append(`<link rel="icon" type="image/png" href="${meta_tags}">`);
+
+    if (meta_description)
+        $('head').append(`<meta name="Description" content="${meta_description}">`);
+}
+
 module.exports = {
     getJSON: getJSON,
     empty: empty,
@@ -103,5 +132,6 @@ module.exports = {
     setColorScale: setColorScale,
     highlightCircle: highlightCircle,
     formatDate: formatDate,
-    throttle: throttle
+    throttle: throttle,
+    appendFavicon: appendFavicon
 }
