@@ -135,7 +135,7 @@ body{
 .pnav-options.single-pnav-option {
 	position: fixed;
     max-height: 0px;
-    top: 70px;
+    top: 140px;
     height: 0;
     overflow: hidden;
     -webkit-transition: max-height 500ms ease-out;
