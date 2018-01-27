@@ -11,7 +11,7 @@ function initPage() {
         streams = ProtoGraph.streams;
 
     if (mode === 'laptop') {
-        Util.getJSON(streams['7c'], function (err, data) {
+        Util.getJSON(streams['7c'].url, function (err, data) {
             if (err != null) {
                 console.error("Error fetching originals stream", err);
             } else {
@@ -37,7 +37,7 @@ function initPage() {
             }
         });
 
-        Util.getJSON(streams['3c'], function (err, data) {
+        Util.getJSON(streams['3c'].url, function (err, data) {
             if (err != null) {
                 console.error("Error fetching feeds stream", err);
             } else {
@@ -95,7 +95,7 @@ function initPage() {
             $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
         })
 
-        Util.getJSON(streams['7c'], function (err, data) {
+        Util.getJSON(streams['7c'].url, function (err, data) {
             if (err != null) {
                 console.error("Error fetching originals stream", err);
             } else {
@@ -115,7 +115,7 @@ function initPage() {
             }
         });
 
-        Util.getJSON(streams['3c'], function (err, data) {
+        Util.getJSON(streams['3c'].url, function (err, data) {
             if (err != null) {
                 console.error("Error fetching feeds stream", err);
             } else {
@@ -139,7 +139,7 @@ function initPage() {
     }
     // $(".banner-div a:empty").parent("p").css("display", "none");
 
-    Util.getJSON(streams['16c_Hero'], function (err, data) {
+    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
         if (err != null) {
             console.error("Error fetching cover stream", err);
         } else {
@@ -160,7 +160,7 @@ function initPage() {
         }
     });
 
-    Util.getJSON(streams['4c'], function (err, data) {
+    Util.getJSON(streams['4c'].url, function (err, data) {
         if (err != null) {
             console.error("Error fetching digests stream", err);
         } else {
@@ -185,7 +185,7 @@ function initPage() {
     });
 
 
-    Util.getJSON(streams['2c'], function (err, data) {
+    Util.getJSON(streams['2c'].url, function (err, data) {
         if (err != null) {
             console.error("Error fetching opinions stream", err);
         } else {
@@ -212,16 +212,5 @@ function initPage() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
     ProtoGraph.renderNavbar();
-
-    // window.ProtoGraph.fetchNavbarObjects().then((data) => {
-    //     console.log("DATA", data);
-    // }).catch((reject) => {
-    //     console.error("Error fetching data : ", reject);
-    // })
-
-    // ProtoGraph.fetchData(function(err, data) {
-    //     ProtoGraph.pageObject = data;
-    //     Util.appendFavicon();
-    //     initPage();
-    // });
+    initPage();
 });

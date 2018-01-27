@@ -14,8 +14,8 @@ ProtoGraph.renderNavbar = function () {
 
 function fetchNavbarObjects () {
     return Promise.all([
-        getJSON(ProtoGraph.vertical_header_json_url),
-        getJSON(ProtoGraph.homepage_header_json_url)
+        getJSONPromise(ProtoGraph.vertical_header_json_url),
+        getJSONPromise(ProtoGraph.homepage_header_json_url)
     ]);
 }
 
@@ -112,8 +112,22 @@ function groupBy(data, column) {
 }
 
 function empty() { return null; }
-
 function getJSON(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status == 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status);
+        }
+    };
+    xhr.send();
+};
+
+function getJSONPromise(url) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
