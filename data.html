@@ -17,7 +17,32 @@
 </head>
 <body>
     <div class="proto-grid-container data-page">
-        <div class="proto-col col-16 navbar">
+
+        <div class="proto-col col-16 proto-verticals-navbar">
+            <div class="proto-vertical-name" id="homepage_nav">
+                <!-- <a href="#"> -->
+                #जलजागरण &nbsp;
+                <i class="chevron down icon"></i>
+                <!-- </a> -->
+            </div>
+            <div class="page-navigation-options" id="vertical_nav">
+                <!-- <div class="page-nav-single-option">STORIES</div>
+                <div class="page-nav-single-option">DATA</div>
+                <div class="page-nav-single-option">INSIGHTS</div>
+                <div class="page-nav-single-option">ABOUT</div> -->
+            </div>
+            <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
+            <div class="social right-float-div">
+                <div class="single-link facebook">
+                    <a href="https://www.facebook.com/dainikjagran/" target="_blank"><img src="img/fb-white.png"></a>
+                </div>
+                <div class="single-link twitter">
+                    <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="proto-col col-16 navbar">
             <a href="./index.html"><div class="branding">#<strong>जलजागरण</strong></div></a>
             <div class="nav-links">
                 <div class="single-link stories"><a href="./index.html">ख़बरें</a></div>
@@ -32,13 +57,10 @@
                 <div class="single-link twitter">
                     <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
                 </div>
-                <!-- <div class="single-link instagram">
-                    <a href="#"><img src="img/in-white.png"></a>
-                </div> -->
             </div>
-        </div>
+        </div> -->
 
-        <div class="mobile-navigation">
+        <!-- <div class="mobile-navigation">
             <div class="mobile-navbar">
                 <a href="./index.html"><div class="branding">#<strong>जलजागरण</strong></div></a>
                 <div class="right-float-div">
@@ -63,14 +85,11 @@
                     <div class="single-link twitter">
                         <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-black.png"></a>
                     </div>
-                    <!-- <div class="single-link instagram">
-                        <a href="#" ><img src="img/in-black.png"></a>
-                    </div> -->
+
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- <div class="jagran-nav"><img src="img/jagran-nav.png" width="1260px"></div> -->
         <div class="proto-col col-16">
             <div class="fixed-cover-block fixed-cover-block-small">
                 <div class="page-title bottom-pull-div">
@@ -84,6 +103,12 @@
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
     </div>
 
+    <script>
+        window.ProtoGraph = window.ProtoGraph || {}
+        ProtoGraph.streams = { "16c_Hero": { "id": 268, "title": "4_Section_16c_Hero", "datacast_identifier": "1001b30cab020bdf8b9319bc", "url": "https://dnt71st2q6cqr.cloudfront.net/1001b30cab020bdf8b9319bc/index.json", "name_of_stream": "Hero" }, "7c": { "id": 269, "title": "4_Section_7c", "datacast_identifier": "8cb9de4561df86a4f182db32", "url": "https://dnt71st2q6cqr.cloudfront.net/8cb9de4561df86a4f182db32/index.json", "name_of_stream": "Sample" }, "4c": { "id": 270, "title": "4_Section_4c", "datacast_identifier": "ff397f7b43fb0643d0ce6d42", "url": "https://dnt71st2q6cqr.cloudfront.net/ff397f7b43fb0643d0ce6d42/index.json", "name_of_stream": "Digests" }, "3c": { "id": 271, "title": "4_Section_3c", "datacast_identifier": "2d3fe24cd17b741ab2cb7e3f", "url": "https://dnt71st2q6cqr.cloudfront.net/2d3fe24cd17b741ab2cb7e3f/index.json", "name_of_stream": "Feed" }, "2c": { "id": 272, "title": "4_Section_2c", "datacast_identifier": "d663dfc728a093eefb5cff02", "url": "https://dnt71st2q6cqr.cloudfront.net/d663dfc728a093eefb5cff02/index.json", "name_of_stream": "Opinions" } }
+        ProtoGraph.vertical_header_json_url = "https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/9d9788d7f128f5b1e4903c5c/vertical_header_json.json"
+        ProtoGraph.homepage_header_json_url = "https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/9d9788d7f128f5b1e4903c5c/homepage_header_json.json"
+    </script>
     <script type="text/javascript" src='./proto-app-lib.min.js'></script>
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
     <script type="text/javascript" src='./proto-app-grid.min.js'></script>

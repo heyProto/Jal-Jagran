@@ -165,3 +165,22 @@ body{
 .page-navigation-options a:hover, .homepage-nav-item a:hover {
 	opacity: 1;
 }
+
+.fixed-cover-block{
+    background: rgba(51,51,51,0.75);
+    color: white;
+    height: 430px;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.fixed-cover-block-small{
+    height: 250px;
+}
+
+.fixed-cover-block-small .page-title p{
+	font-size: 14px;
+	line-height: 19px;
+}

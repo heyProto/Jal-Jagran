@@ -2,8 +2,10 @@ import Util from './utility.js'
 
 $(document).ready((e) => {
 
+  ProtoGraph.renderNavbar();
   let dimension = Util.getScreenSize(),
     mode;
+
   if (dimension.width <= 500){
     mode = 'mobile';
   } else {
@@ -52,46 +54,45 @@ $(document).ready((e) => {
     });
   }
 
+  var x = new ProtoGraph.Card.toMaps()
+    x.init({
+    selector: document.querySelector('#card-list-div'),
+    dataURL: 'https://cdn.protograph.pykih.com/d0d8741cbfc3a95b5981dd4c/index.json',
+    topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
+    chartOptions: {
+      chartTitle: 'Mob Justice in India',
+      height: 500,
+      defaultCircleColor: '#F02E2E'
+    },
+    filterConfigurationJSON: {
+      colors: {
+        house_color: '#e03832',
+        text_color: '#343434',
+        active_text_color: '#e03832',
+        filter_summary_text_color: '#ffffff',
+        filter_heading_text_color: '#ffffff'
+      },
+      selected_heading: 'फिल्टर',
+      reset_filter_text: 'रीसेट'
+    },
+    filters: [
+      {
+        propName: 'concretisation_score',
+        alias: 'कोंक्रेटआईज़ेशन'
+      },
+      {
+        propName: 'rainfall_deficit_score',
+        alias: 'वार्षिक वर्षा'
+      },
+      {
+        propName: 'forest_cover_score',
+        alias: 'वन आवरण'
+      },
+      {
+        propName: 'population_score',
+        alias: 'जनसंख्या'
+      }
+    ]
+  })
+  x.renderLaptop();
 });
-
-var x = new ProtoGraph.Card.toMaps()
-  x.init({
-  selector: document.querySelector('#card-list-div'),
-  dataURL: 'https://cdn.protograph.pykih.com/d0d8741cbfc3a95b5981dd4c/index.json',
-  topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
-  chartOptions: {
-    chartTitle: 'Mob Justice in India',
-    height: 500,
-    defaultCircleColor: '#F02E2E'
-  },
-  filterConfigurationJSON: {
-    colors: {
-      house_color: '#e03832',
-      text_color: '#343434',
-      active_text_color: '#e03832',
-      filter_summary_text_color: '#ffffff',
-      filter_heading_text_color: '#ffffff'
-    },
-    selected_heading: 'फिल्टर',
-    reset_filter_text: 'रीसेट'
-  },
-  filters: [
-    {
-      propName: 'concretisation_score',
-      alias: 'कोंक्रेटआईज़ेशन'
-    },
-    {
-      propName: 'rainfall_deficit_score',
-      alias: 'वार्षिक वर्षा'
-    },
-    {
-      propName: 'forest_cover_score',
-      alias: 'वन आवरण'
-    },
-    {
-      propName: 'population_score',
-      alias: 'जनसंख्या'
-    }
-  ]
-})
-x.renderLaptop();

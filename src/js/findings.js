@@ -1,6 +1,8 @@
 import Util from './utility.js'
 
 $(document).ready(function(){
+    ProtoGraph.renderNavbar();
+
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     let related_url = (window.location.pathname == '/findings.html') ? "https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json" : "https://cdn.protograph.pykih.com/242b7f96da484c648b4991da/index.json";
 
