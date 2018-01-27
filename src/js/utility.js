@@ -2,17 +2,60 @@ import { scaleOrdinal as d3ScaleOrdinal } from 'd3-scale';
 import { timeFormat } from 'd3-time-format';
 
 window.ProtoGraph = window.ProtoGraph || {};
-window.ProtoGraph.fetchPageObject = function (successCallback, errorCallback) {
-    getJSON(window.page_object_url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching page object", err);
-            if (errorCallback)
-                errorCallback();
-        } else {
-            if (successCallback)
-                successCallback(err,data);
-        }
-    });
+
+ProtoGraph.renderNavbar = function () {
+    fetchNavbarObjects().then((data) => {
+        processAndRenderVerticalNavbar(data[0]);
+        processAndRenderHomepageNavbar(data[1]);
+    }).catch((reject) => {
+        console.error("Error fetching data : ", reject);
+    })
+}
+
+function fetchNavbarObjects () {
+    return Promise.all([
+        getJSON(ProtoGraph.vertical_header_json_url),
+        getJSON(ProtoGraph.homepage_header_json_url)
+    ]);
+}
+
+function processAndRenderVerticalNavbar(data) {
+    if (data.length > 0) {
+        let HTML = "";
+        data.forEach((e, i) => {
+            HTML += `<div class="page-nav-single-option">
+                <a href="${e.url}" target=${e.new_window ? "_blank" : "_self" }>${e.name}</a>
+            </div>`
+        });
+        $('#vertical_nav').append(HTML);
+    }
+}
+
+function processAndRenderHomepageNavbar(data) {
+    if (data.length > 0) {
+        $('#homepage_nav_list').css({
+            "width": $('#homepage_nav').width() + 50,
+            "left": $('.proto-verticals-navbar').offset().left,
+        });
+        $('#homepage_nav').css('cursor', 'pointer');
+
+        $('#homepage_nav').on('click', (e) => {
+            let list = $('#homepage_nav_list');
+            if (list.hasClass('open-navbar')) {
+                $('#homepage_nav_list').removeClass('open-navbar');
+            } else {
+                $('#homepage_nav_list').addClass('open-navbar');
+            }
+        });
+
+        let HTML = "";
+        data.forEach((e, i) => {
+            HTML += `<div class="homepage-nav-item">
+                <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+            </div>`
+        });
+        $('#homepage_nav_list').append(HTML);
+    }
 }
 
 function setColorScale(value, colorDomain, colorRange) {
@@ -71,18 +114,21 @@ function groupBy(data, column) {
 function empty() { return null; }
 
 function getJSON(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function () {
-        var status = xhr.status;
-        if (status == 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status);
-        }
-    };
-    xhr.send();
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            var status = xhr.status;
+            if (status == 200) {
+                resolve(xhr.response);
+            } else {
+                reject(xhr.statusText)
+            }
+        };
+        xhr.onerror = () => reject(xhr.statusText);
+        xhr.send();
+    });
 }
 
 function getScreenSize() {

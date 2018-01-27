@@ -5,11 +5,11 @@
     <title>#जलजागरण</title>
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./proto-app-lib.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="src/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="src/css/grid.css">
     <link rel="stylesheet" type="text/css" href="src/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="src/css/cover.css"> -->
-    <link rel="stylesheet" type="text/css" href="./proto-app-style.min.css">
-    <link rel="stylesheet" type="text/css" href="./proto-app-cover.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/cover.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./proto-app-style.min.css">
+    <link rel="stylesheet" type="text/css" href="./proto-app-cover.min.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
@@ -19,7 +19,32 @@
 </head>
 <body>
     <div class="proto-grid-container">
-        <div class="proto-col col-16 navbar">
+
+        <div class="proto-col col-16 proto-verticals-navbar">
+            <div class="proto-vertical-name" id="homepage_nav">
+                <!-- <a href="#"> -->
+                    #GENDERAND &nbsp;
+                    <i class="chevron down icon"></i>
+                <!-- </a> -->
+            </div>
+            <div class="page-navigation-options" id="vertical_nav">
+                <!-- <div class="page-nav-single-option">STORIES</div>
+                <div class="page-nav-single-option">DATA</div>
+                <div class="page-nav-single-option">INSIGHTS</div>
+                <div class="page-nav-single-option">ABOUT</div> -->
+            </div>
+            <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
+            <div class="social right-float-div">
+                <div class="single-link facebook">
+                    <a href="https://www.facebook.com/dainikjagran/" target="_blank"><img src="img/fb-white.png"></a>
+                </div>
+                <div class="single-link twitter">
+                    <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="proto-col col-16 navbar">
             <a href="./index.html"><div class="branding">#<strong>जलजागरण</strong></div></a>
             <div class="nav-links">
                 <div class="single-link active-page stories"><a href="#">ख़बरें</a></div>
@@ -34,13 +59,10 @@
                 <div class="single-link twitter">
                     <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
                 </div>
-                <!-- <div class="single-link instagram">
-                    <a href="#" ><img src="img/in-white.png"></a>
-                </div> -->
             </div>
-        </div>
+        </div> -->
 
-        <div class="mobile-navigation">
+        <!-- <div class="mobile-navigation">
             <div class="mobile-navbar">
                 <div class="branding">#<strong>जलजागरण</strong></div>
                 <div class="right-float-div">
@@ -65,12 +87,9 @@
                     <div class="single-link twitter">
                         <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-black.png"></a>
                     </div>
-                    <!-- <div class="single-link instagram">
-                        <a href="#" ><img src="img/in-black.png"></a>
-                    </div> -->
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="jagran-nav"><img src="img/jagran-nav.png" width="100%"></div> -->
 
@@ -110,6 +129,12 @@
             <!-- </div> -->
         </div>
     </div>
+    <script>
+        window.ProtoGraph = window.ProtoGraph || {}
+        ProtoGraph.streams = { "16c_Hero": { "id": 268, "title": "4_Section_16c_Hero", "datacast_identifier": "1001b30cab020bdf8b9319bc", "url": "https://dnt71st2q6cqr.cloudfront.net/1001b30cab020bdf8b9319bc/index.json", "name_of_stream": "Hero" }, "7c": { "id": 269, "title": "4_Section_7c", "datacast_identifier": "8cb9de4561df86a4f182db32", "url": "https://dnt71st2q6cqr.cloudfront.net/8cb9de4561df86a4f182db32/index.json", "name_of_stream": "Sample" }, "4c": { "id": 270, "title": "4_Section_4c", "datacast_identifier": "ff397f7b43fb0643d0ce6d42", "url": "https://dnt71st2q6cqr.cloudfront.net/ff397f7b43fb0643d0ce6d42/index.json", "name_of_stream": "Digests" }, "3c": { "id": 271, "title": "4_Section_3c", "datacast_identifier": "2d3fe24cd17b741ab2cb7e3f", "url": "https://dnt71st2q6cqr.cloudfront.net/2d3fe24cd17b741ab2cb7e3f/index.json", "name_of_stream": "Feed" }, "2c": { "id": 272, "title": "4_Section_2c", "datacast_identifier": "d663dfc728a093eefb5cff02", "url": "https://dnt71st2q6cqr.cloudfront.net/d663dfc728a093eefb5cff02/index.json", "name_of_stream": "Opinions" } }
+        ProtoGraph.vertical_header_json_url = "https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/9d9788d7f128f5b1e4903c5c/vertical_header_json.json"
+        ProtoGraph.homepage_header_json_url = "https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/9d9788d7f128f5b1e4903c5c/homepage_header_json.json"
+    </script>
     <script src="./proto-app-lib.min.js"></script>
     <script src="./proto-app-cover.min.js"></script>
 </body>

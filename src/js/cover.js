@@ -8,12 +8,7 @@ function initPage() {
         feeds_container,
         digests_container,
         opinions_container,
-        streams = {};
-
-    ProtoGraph.pageObject.streams.forEach((e,i) => {
-        let column = e.title.split('_Section_')[1];
-        streams[column] = e.url;
-    });
+        streams = ProtoGraph.streams;
 
     if (mode === 'laptop') {
         Util.getJSON(streams['7c'], function (err, data) {
@@ -216,9 +211,17 @@ function initPage() {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    ProtoGraph.fetchPageObject(function(err, data) {
-        ProtoGraph.pageObject = data;
-        Util.appendFavicon();
-        initPage();
-    });
+    ProtoGraph.renderNavbar();
+
+    // window.ProtoGraph.fetchNavbarObjects().then((data) => {
+    //     console.log("DATA", data);
+    // }).catch((reject) => {
+    //     console.error("Error fetching data : ", reject);
+    // })
+
+    // ProtoGraph.fetchData(function(err, data) {
+    //     ProtoGraph.pageObject = data;
+    //     Util.appendFavicon();
+    //     initPage();
+    // });
 });
