@@ -7,6 +7,7 @@ ProtoGraph.renderNavbar = function () {
     fetchNavbarObjects().then((data) => {
         processAndRenderVerticalNavbar(data[0]);
         processAndRenderHomepageNavbar(data[1]);
+        processAndRenderAccountHeader(data[2])
     }).catch((reject) => {
         console.error("Error fetching data : ", reject);
     })
@@ -15,7 +16,8 @@ ProtoGraph.renderNavbar = function () {
 function fetchNavbarObjects () {
     return Promise.all([
         getJSONPromise(ProtoGraph.vertical_header_json_url),
-        getJSONPromise(ProtoGraph.homepage_header_json_url)
+        getJSONPromise(ProtoGraph.homepage_header_json_url),
+        getJSONPromise(ProtoGraph.account_header_json_url)
     ]);
 }
 
@@ -55,6 +57,15 @@ function processAndRenderHomepageNavbar(data) {
             </div>`
         });
         $('#homepage_nav_list').append(HTML);
+    }
+}
+
+function processAndRenderAccountHeader(data) {
+    if (data) {
+        $('#account_header').css('background', data.header_background_color);
+        let logo_div = $('#account_header .client-logo');
+        logo_div.addClass(`position-${data.header_logo_position}`);
+        logo_div.append(`<a href="${data.header_jump_to_link}"><img src="${data.header_logo_url}" /></a>`);
     }
 }
 
@@ -169,21 +180,6 @@ function throttle(fn, wait) {
     }
 }
 
-function appendFavicon() {
-    let favicon = ProtoGraph.pageObject.site_attributes.favicon_url,
-        meta_tags = ProtoGraph.pageObject.site_attributes.meta_tags,
-        meta_description = ProtoGraph.pageObject.site_attributes.meta_description;
-
-    if (favicon)
-        $('head').append(`<link rel="icon" type="image/png" href="${favicon}">`);
-
-    if (meta_tags)
-        $('head').append(`<link rel="icon" type="image/png" href="${meta_tags}">`);
-
-    if (meta_description)
-        $('head').append(`<meta name="Description" content="${meta_description}">`);
-}
-
 module.exports = {
     getJSON: getJSON,
     empty: empty,
@@ -192,6 +188,5 @@ module.exports = {
     setColorScale: setColorScale,
     highlightCircle: highlightCircle,
     formatDate: formatDate,
-    throttle: throttle,
-    appendFavicon: appendFavicon
+    throttle: throttle
 }
