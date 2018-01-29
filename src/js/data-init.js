@@ -4,7 +4,8 @@ $(document).ready((e) => {
 
   ProtoGraph.renderNavbar();
   let dimension = Util.getScreenSize(),
-    mode;
+    mode,
+    streams = ProtoGraph.streams;
 
   if (dimension.width <= 500){
     mode = 'mobile';
@@ -57,7 +58,7 @@ $(document).ready((e) => {
   var x = new ProtoGraph.Card.toMaps()
     x.init({
     selector: document.querySelector('#card-list-div'),
-    dataURL: 'https://cdn.protograph.pykih.com/d0d8741cbfc3a95b5981dd4c/index.json',
+    dataURL: stream["Grid"],
     topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
     chartOptions: {
       chartTitle: 'Mob Justice in India',
@@ -66,7 +67,7 @@ $(document).ready((e) => {
     },
     filterConfigurationJSON: {
       colors: {
-        house_color: '#e03832',
+        house_color: ProtoGraph.site['house_colour'],
         text_color: '#343434',
         active_text_color: '#e03832',
         filter_summary_text_color: '#ffffff',

@@ -25,13 +25,13 @@
     <body>
         <div class="proto-grid-container">
 
-            <div class="client-brand-cover small-cover" id="account_header">
+            <div class="client-brand-cover small-cover" id="site_header">
                 <div class="client-logo"></div>
             </div>
             <div class="proto-col col-16 proto-verticals-navbar">
                 <div class="proto-vertical-name" id="homepage_nav">
-                    #JALJAGRAN &nbsp;
-                    <i class="chevron down icon"></i>
+                    <%- ref_category_object['name_html'] %>
+                    <i class="chevron down icon proto-hide"></i>
                 </div>
                 <div class="page-navigation-options" id="vertical_nav"></div>
                 <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
@@ -127,10 +127,12 @@
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
+            ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
-            ProtoGraph.account_header_json_url = "<%- account_header_json_url %>";
+            ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
+        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js"></script>
         <script src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js"></script>
         <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js"></script>
     </body>

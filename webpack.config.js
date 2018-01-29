@@ -3,6 +3,7 @@ const minifier = require('minifier');
 const card = require('./webpack.config.data.js');
 const home = require('./webpack.config.home.js');
 const findings = require('./webpack.config.findings.js');
+const init = require('./webpack.config.init.js');
 
 let input, options;
 
@@ -13,5 +14,5 @@ options = {
 minifier.minify(input, options);
 
 module.exports = [
-  card, home, findings
+  card, home, findings, init
 ];
