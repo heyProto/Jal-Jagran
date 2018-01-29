@@ -383,6 +383,8 @@ ul.scrollspy-child-ul {
 	width: 300px;
     box-sizing: border-box;
     font-family: "cabin";
+    font-size: 14px;
+    color: #333;
 }
 .summary{
 	/*height:50px;*/
