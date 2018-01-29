@@ -68,6 +68,7 @@
     display: inline-block;
     position: relative;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .fixed-cover-block-small{
@@ -77,6 +78,11 @@
 .fixed-cover-block-small .page-title p{
 	font-size: 14px;
 	line-height: 19px;
+}
+
+
+.title-with-black-fade{
+	background: black;
 }
 
 @media only screen and (max-width: 500px){
