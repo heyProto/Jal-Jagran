@@ -321,7 +321,7 @@ ul.scrollspy-child-ul {
 }
 
 .read-more-button{
-	margin-bottom: 50px;
+	margin-bottom: 80px;
 }
 
 .article-area .fade-area{
@@ -458,9 +458,18 @@ ul.scrollspy-child-ul {
   .protograph-app-filter-icon {
     display: block;
   }
+
+  .article-page .protograph-app-filter-icon{
+    display: none !important;
+  }
+
   .protograph-app-filter-close-button {
     display: none;
     z-index: 1000;
+  }
+
+  .protograph-app-filter-close-button i.icon, .protograph-app-filter-close-button i.icons{
+    font-size: 1.2em;
   }
   .navigation-links {
     position: fixed;
@@ -499,5 +508,11 @@ ul.scrollspy-child-ul {
   }
   .block-events {
     pointer-events: none;
+  }
+  .summary-text{
+    width: 100%;
+  }
+  .single-share-icon:first-child{
+    width: 50%;
   }
 }
