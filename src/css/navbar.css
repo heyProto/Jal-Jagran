@@ -48,12 +48,18 @@ body{
 
 .proto-verticals-navbar{
 	height: 70px;
-	background: linear-gradient(#333333, #464646);
 	width: 1260px;
 	color: white;
 	padding: 0px 20px;
 	box-sizing: border-box;
 	position: relative;
+	background: linear-gradient(to bottom, #333333, rgba(51, 51, 51, 0));
+	z-index: 999;
+	position: absolute;
+    top: 70px;
+}
+.client-brand-cover .client-logo a img {
+	height: 40px;
 }
 
 .home-page-layout{
@@ -140,7 +146,7 @@ body{
     -webkit-transition: max-height 500ms ease-out;
     -moz-transition: max-height 500ms ease-out;
     transition: max-height 500ms ease-out;
-	background: linear-gradient(#333333, #464646);
+	background: linear-gradient(to bottom, #333333, rgba(51, 51, 51, 0));
 	left: 0px;
 	z-index: 1;
 }
