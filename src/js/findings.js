@@ -3,13 +3,11 @@ import Util from './utility.js'
 $(document).ready(function(){
     ProtoGraph.renderNavbar();
 
-    let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
-    let related_url = (window.location.pathname == '/findings.html') ? "https://cdn.protograph.pykih.com/bfa1e8a3a73ae6485af3e87a/index.json" : "https://cdn.protograph.pykih.com/242b7f96da484c648b4991da/index.json";
+    let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop',
+        streams = ProtoGraph.streams;
 
     document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
     document.getElementById('twitter-share-link').href = 'http://twitter.com/share?url=' + window.location.href;
-
-
 
     if (mode === 'laptop') {
         $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400});
@@ -24,27 +22,27 @@ $(document).ready(function(){
             });
         })
 
-        Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
-            if (err != null) {
-                alert('Something went wrong: ' + err);
-            } else {
-                let originals_container = document.getElementById("more_articles_container");
-                if(data.length > 0){
-                    for (let i = 0; i < 4; i++) {
-                        let createDiv = document.createElement('div');
-                        createDiv.id = 'ProtoCard-more-articles' + i;
-                        createDiv.className = 'ProtoCard-more-articles';
-                        originals_container.appendChild(createDiv);
-                        let createMarginDiv = document.createElement('div');
-                        setTimeout(function () {
-                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
-                        }, 0)
-                    }
-                } else {
-                    $(originals_container).siblings(".column-title").hide();
-                }
-            }
-        });
+        // Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
+        //     if (err != null) {
+        //         alert('Something went wrong: ' + err);
+        //     } else {
+        //         let originals_container = document.getElementById("more_articles_container");
+        //         if(data.length > 0){
+        //             for (let i = 0; i < 4; i++) {
+        //                 let createDiv = document.createElement('div');
+        //                 createDiv.id = 'ProtoCard-more-articles' + i;
+        //                 createDiv.className = 'ProtoCard-more-articles';
+        //                 originals_container.appendChild(createDiv);
+        //                 let createMarginDiv = document.createElement('div');
+        //                 setTimeout(function () {
+        //                     new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
+        //                 }, 0)
+        //             }
+        //         } else {
+        //             $(originals_container).siblings(".column-title").hide();
+        //         }
+        //     }
+        // });
     }
 
     if (mode == 'mobile' ) {
@@ -101,9 +99,9 @@ $(document).ready(function(){
         }));
     }
 
-    Util.getJSON(related_url, function (err, data){
+    Util.getJSON(streams['Related'].url, function (err, data){
         if (err != null) {
-            alert('Something went wrong: ' + err);
+            console.error("Error fetching Relative stream", err);
         } else {
             let originals_container = document.getElementById("related_container");
             if(data.length > 0){
@@ -121,6 +119,28 @@ $(document).ready(function(){
                 })
             } else {
                 $(originals_container).siblings(".column-title").hide();
+            }
+        }
+    });
+
+    Util.getJSON(streams['Narrative'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching Narrative stream", err);
+        } else {
+            let article_container = document.getElementById("article");
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-article' + i;
+                    // createDiv.className= 'ProtoCard-originals';
+                    article_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    article_container.appendChild(createMarginDiv);
+                    setTimeout(function () {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7");
+                    }, 0)
+                })
             }
         }
     });
