@@ -54,11 +54,11 @@ body{
 
 .explainers-sticky-segment-question:hover{
   border: 0px;
-  border-left: 3px solid pink;
+  border-left: 3px solid#e03832;
 }
 
 .band_color {
-  border-left: 3px solid pink;
+  border-left: 3px solid#e03832;
 }
 
 .explainers-sticky-segment-question a{
@@ -349,13 +349,13 @@ ul.scrollspy-child-ul {
 }
 
 .single-index-value.active{
-	border-left: 2px solid pink;
-	color: pink;
+	border-left: 2px solid#e03832;
+	color:#e03832;
 	margin-left: 0px;
 }
 
 .article-share-icons{
-	background: pink;
+	background:#e03832;
 	width: 300px;
 	display: inline-block;
 	text-align: center;
@@ -411,9 +411,9 @@ ul.scrollspy-child-ul {
 	padding-bottom: 10px;
 }
 .single-tab-value.active-value{
-	border-bottom: 2px solid pink;
+	border-bottom: 2px solid#e03832;
 	margin-bottom: -1px;
-	color: pink;
+	color:#e03832;
 }
 .page-title {
   font-size: 42px;
