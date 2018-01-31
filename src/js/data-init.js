@@ -63,7 +63,7 @@ $(document).ready((e) => {
     chartOptions: {
       chartTitle: 'Mob Justice in India',
       height: 500,
-      defaultCircleColor: 'pink'
+      defaultCircleColor: '#e03832'
     },
     filterConfigurationJSON: {
       colors: {
