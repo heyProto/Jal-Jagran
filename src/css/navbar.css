@@ -144,22 +144,36 @@ body{
 	float: right;
 }
 
+.chevron.down.icon{
+	font-size: 12px;
+    margin-left: 10px;
+    height: 15px;
+    line-height: 17px;
+    vertical-align: middle;
+}
+
 .pnav-options.single-pnav-option {
 	position: fixed;
     max-height: 0px;
     top: 140px;
     height: 0;
+    border-radius: 4px;
     overflow: hidden;
     -webkit-transition: max-height 500ms ease-out;
     -moz-transition: max-height 500ms ease-out;
     transition: max-height 500ms ease-out;
-	background: linear-gradient(to bottom, #333333, rgba(51, 51, 51, 0));
+	background: rgba(51, 51, 51, 0.5);
 	left: 0px;
 	z-index: 1;
 }
 .pnav-options.single-pnav-option.open-navbar {
 	max-height: 1000px;
     height: auto;
+}
+
+
+.pnav-options.single-pnav-option.open-navbar .proto-vertical-name{
+	line-height: 50px;
 }
 .homepage-nav-item {
 	padding: 15px 0px;
