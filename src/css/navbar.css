@@ -310,4 +310,7 @@ body{
 		border: 0px;
 		opacity: 1;
 	}
+	.pnav-options.single-pnav-option {
+		min-width: 165px;
+	}
 }
