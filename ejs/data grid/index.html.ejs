@@ -20,6 +20,27 @@
         <% if (page.meta_description) { %>
             <meta name="description" content="<%= page.meta_description %>" />
         <% } %>
+        <style>
+            .proto-card .by-time-line .time-ago{
+                color: <%- site.house_color %>; 
+            }
+            .why-col, .filter-title, .protograph-close-modal, .protograph-app-active-tab {
+                background: <%- site.house_color %>;
+            }
+            .active-tab {
+                color: <%- site.house_color %>;
+                border-color: <%- site.house_color %>; }
+            .protograph-filter-item:hover .protograph-filter-item-name{
+                color: <%- site.house_color %>;
+            }
+            .protograph-filter-item:hover {
+                border-left: 2px solid <%- site.house_color %>;
+                color: <%- site.house_color %>;
+            }
+            .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-item {
+                border-left: 2px solid <%- site.house_color %>;
+            }
+        </style>
     </head>
 
     <body>
