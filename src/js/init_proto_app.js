@@ -1,10 +1,11 @@
 window.ProtoGraph = window.ProtoGraph || {};
 
 ProtoGraph.renderNavbar = function () {
+    let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     fetchNavbarObjects().then((data) => {
-        processAndRenderVerticalNavbar(data[0]);
-        processAndRenderHomepageNavbar(data[1]);
-        processAndRenderSiteHeader(data[2])
+        processAndRenderVerticalNavbar(data[0], mode);
+        processAndRenderHomepageNavbar(data[1], mode);
+        processAndRenderSiteHeader(data[2]);
     }).catch((reject) => {
         console.error("Error fetching data : ", reject);
     })
@@ -18,37 +19,66 @@ function fetchNavbarObjects() {
     ]);
 }
 
-function processAndRenderVerticalNavbar(data) {
+function processAndRenderVerticalNavbar(data, mode) {
     if (data.length > 0) {
         let HTML = "";
-        data.forEach((e, i) => {
-            HTML += `<div class="page-nav-single-option">
-                <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
-            </div>`
-        });
-        $('#vertical_nav').append(HTML);
+        switch (mode) {
+            case 'laptop':
+                data.forEach((e, i) => {
+                    HTML += `<div class="page-nav-single-option">
+                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+                    </div>`
+                });
+                $('#vertical_nav').append(HTML);
+                break;
+            case 'mobile':
+                data.forEach((e, i) => {
+                    HTML += `<div class="single-link"><a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a></div>`;
+                });
+                $('.mobile-navigations-screen .nav-links').append(HTML);
+                break;
+        }
     }
 }
 
-function processAndRenderHomepageNavbar(data) {
+function processAndRenderHomepageNavbar(data, mode) {
     let filtered_data = data.filter((e, i) => {
         return e.name !== ProtoGraph.ref_category_object.name
-    });
+    }),
+    home_navbar,
+    home_navbar_list,
+    width,
+    left;
+
+    switch (mode) {
+        case 'laptop':
+            home_navbar = '#homepage_nav';
+            home_navbar_list = '#homepage_nav_list';
+            width = $('#homepage_nav').width() + 50;
+            left = $('.proto-verticals-navbar').offset().left;
+            break;
+        case 'mobile':
+            home_navbar = '.branding';
+            home_navbar_list = '#mobile_homepage_nav_list';
+            width = $('.branding').width() + 50;
+            left = 0;
+            break;
+    }
 
     if (filtered_data.length > 0) {
         $('.proto-hide').removeClass('proto-hide');
-        $('#homepage_nav_list').css({
-            "width": $('#homepage_nav').width() + 50,
-            "left": $('.proto-verticals-navbar').offset().left,
+        $(home_navbar_list).css({
+            "width": width,
+            "left": left,
         });
-        $('#homepage_nav').css('cursor', 'pointer');
+        $(home_navbar).css('cursor', 'pointer');
 
-        $('#homepage_nav').on('click', (e) => {
-            let list = $('#homepage_nav_list');
+        $(home_navbar).on('click', (e) => {
+            let list = $(home_navbar_list);
             if (list.hasClass('open-navbar')) {
-                $('#homepage_nav_list').removeClass('open-navbar');
+                $(home_navbar_list).removeClass('open-navbar');
             } else {
-                $('#homepage_nav_list').addClass('open-navbar');
+                $(home_navbar_list).addClass('open-navbar');
             }
         });
 
@@ -58,7 +88,7 @@ function processAndRenderHomepageNavbar(data) {
                 <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name_html}</a>
             </div>`
         });
-        $('#homepage_nav_list').append(HTML);
+        $(home_navbar_list).append(HTML);
     }
 }
 
