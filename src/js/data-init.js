@@ -68,10 +68,9 @@ $(document).ready((e) => {
     filterConfigurationJSON: {
       colors: {
         house_color: ProtoGraph.site['house_colour'],
-        text_color: '#343434',
-        active_text_color: '#e03832',
-        filter_summary_text_color: '#ffffff',
-        filter_heading_text_color: '#ffffff'
+        text_color: '#333',
+        active_text_color: ProtoGraph.site['house_colour'],
+        filter_summary_text_color: ProtoGraph.site['reverse_font_colour']
       },
       selected_heading: 'फिल्टर',
       reset_filter_text: 'रीसेट'
