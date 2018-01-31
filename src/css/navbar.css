@@ -214,8 +214,21 @@ body{
 	display: none !important;
 }
 
+.branding{
+	float: left;
+	font-family: 'Bitter', serif;
+	/* font-weight: bold; */
+	font-size: 20px;
+	margin-right: 25px;
+	color: white !important;
+}
+
+.mobile-navigation{
+	display: none;
+}
+
 @media only screen and (max-width: 500px){
-	.navbar{
+	.navbar, .proto-verticals-navbar {
 		display: none;
 	}
 
@@ -310,5 +323,8 @@ body{
 		width: auto;
 		border: 0px;
 		opacity: 1;
+	}
+	.pnav-options.single-pnav-option {
+		min-width: 165px;
 	}
 }
