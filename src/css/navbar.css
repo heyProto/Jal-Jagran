@@ -70,12 +70,13 @@ body{
 
 .proto-vertical-name{
 	font-family: "bitter";
-	font-size: 18px;
+	font-size: 20px;
 	letter-spacing: 0.5px;
 	display: inline-block;
 	float: left;
 	line-height: 70px;
 	margin-right: 30px;
+	font-weight: bold;
 }
 .proto-vertical-name a {
 	text-decoration: none;
@@ -102,6 +103,8 @@ body{
 	padding: 0px 15px;
 	display: inline-block;
 	float: left;
+	font-size: 14px;
+	opacity: 0.5;
 }
 
 .single-link{
@@ -117,6 +120,10 @@ body{
 }
 
 .social .single-link{
+	opacity: 0.5;
+}
+
+.social .single-link:hover{
 	opacity: 1;
 }
 
