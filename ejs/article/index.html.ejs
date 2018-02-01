@@ -48,7 +48,7 @@
             </div>
             <div class="proto-col col-16 proto-verticals-navbar">
                 <div class="proto-vertical-name" id="homepage_nav">
-                    <%- ref_category_object['name_html'] %>
+                    <h1 class="navbar-project-title"><%- ref_category_object['name_html'] %></h1>
                     <i class="chevron down icon proto-hide"></i>
                 </div>
                 <div class="page-navigation-options" id="vertical_nav"></div>
@@ -65,7 +65,7 @@
             <div class="mobile-navigation">
                 <div class="mobile-navbar">
                     <div class="branding">
-                        <%- ref_category_object['name_html'] %>
+                        <h1 class="navbar-project-title"><%- ref_category_object['name_html'] %></h1>
                         <i class="chevron down icon proto-hide"></i>
                     </div>
                     <div class="right-float-div">
@@ -92,9 +92,7 @@
 
             <div class="proto-col col-16">
                 <div class="fixed-cover-block fixed-cover-block-small">
-                    <div class="page-title bottom-pull-div">
-                        <%= page.headline %>
-                    </div>
+                    <h1 class="page-title bottom-pull-div"><%= page.headline %></h1>
                 </div>
             </div>
             <div class="proto-col col-4 navigation-links">

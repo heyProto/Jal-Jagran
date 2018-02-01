@@ -108,6 +108,13 @@ body{
 	text-transform: uppercase;
 }
 
+h1.navbar-project-title{
+	display: inline-block;
+    margin: 0px;
+    font-weight: normal;
+    font-size: inherit;
+}
+
 .single-link{
 	float: left;
 	padding: 7px 15px;
