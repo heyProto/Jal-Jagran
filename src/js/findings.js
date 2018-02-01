@@ -1,5 +1,24 @@
 import Util from './utility.js'
 
+function checkHeight() {
+    let iframes = $('.article-area-small iframe'),
+        height = 0;
+
+    iframes.each((i, e) => {
+        height += $(e).height()
+    });
+
+    if (height < 700) {
+        $('#cont-button').css('display', 'none');
+        document.getElementById('article').className = 'article-area';
+        $('.single-index-value').addClass('activate-click');
+        $('body').scrollspy({
+            target: '#myNavbar',
+            offset: 70
+        });
+    }
+}
+
 $(document).ready(function(){
     ProtoGraph.renderNavbar();
 
@@ -138,7 +157,11 @@ $(document).ready(function(){
                     createMarginDiv.style.marginBottom = "20px";
                     article_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7");
+                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7"),
+                        iframe = sandbox_iframe.sandbox.el;
+                        iframe.onload = function () {
+                            checkHeight();
+                        }
                     }, 0)
                 })
             }
