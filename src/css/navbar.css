@@ -105,6 +105,7 @@ body{
 	float: left;
 	font-size: 14px;
 	opacity: 0.5;
+	text-transform: uppercase;
 }
 
 .single-link{
