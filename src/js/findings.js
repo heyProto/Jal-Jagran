@@ -22,27 +22,27 @@ $(document).ready(function(){
             });
         })
 
-        // Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
-        //     if (err != null) {
-        //         alert('Something went wrong: ' + err);
-        //     } else {
-        //         let originals_container = document.getElementById("more_articles_container");
-        //         if(data.length > 0){
-        //             for (let i = 0; i < 4; i++) {
-        //                 let createDiv = document.createElement('div');
-        //                 createDiv.id = 'ProtoCard-more-articles' + i;
-        //                 createDiv.className = 'ProtoCard-more-articles';
-        //                 originals_container.appendChild(createDiv);
-        //                 let createMarginDiv = document.createElement('div');
-        //                 setTimeout(function () {
-        //                     new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
-        //                 }, 0)
-        //             }
-        //         } else {
-        //             $(originals_container).siblings(".column-title").hide();
-        //         }
-        //     }
-        // });
+        Util.getJSON(streams["7c"].url, function (err, data) {
+            if (err != null) {
+                console.error("Error fetching more in series stream", err);
+            } else {
+                let originals_container = document.getElementById("more_articles_container");
+                if(data.length > 0){
+                    for (let i = 0; i < 4; i++) {
+                        let createDiv = document.createElement('div');
+                        createDiv.id = 'ProtoCard-more-articles' + i;
+                        createDiv.className = 'ProtoCard-more-articles';
+                        originals_container.appendChild(createDiv);
+                        let createMarginDiv = document.createElement('div');
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
+                        }, 0)
+                    }
+                } else {
+                    $(originals_container).siblings(".column-title").hide();
+                }
+            }
+        });
     }
 
     if (mode == 'mobile' ) {
