@@ -37,7 +37,7 @@
   color: #787878;
   font-size: 12px;
   line-height: 17px;
-  color: #e03832; }
+  color:#e03832; }
 
 .proto-card .card-img {
   padding-left: 0px; }
@@ -109,7 +109,7 @@
 
 .why-col {
   border-color: #333;
-  background: #e03832;
+  background:#e03832;
   color: white;
   padding: 5px 10px; }
 
@@ -120,7 +120,7 @@
   padding: 0px 10px; } */
 
 .filter-title {
-  background: #e03832;
+  background:#e03832;
   color: white;
   padding: 20px 10px 10px 10px;
   position: relative;
@@ -143,8 +143,8 @@
   cursor: pointer; }
 
 .active-tab {
-  color: #e03832;
-  border-color: #e03832; }
+  color:#e03832;
+  border-color:#e03832; }
 
 .tabs {
   display: none; }
@@ -162,7 +162,7 @@
   background: #dadada; }
 
 .protograph-app-active-tab {
-  background: #e03832; }
+  background:#e03832; }
 
 .protograph-app-tabs-container {
   display: none;
@@ -448,7 +448,7 @@
   right: -20px;
   height: 30px;
   width: 30px;
-  background: #e03832;
+  background:#e03832;
   color: white;
   text-align: center;
   border-radius: 50%;

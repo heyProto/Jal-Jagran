@@ -154,9 +154,10 @@ body{
 }
 
 .pnav-options.single-pnav-option {
-	position: fixed;
+	position: absolute;
     max-height: 0px;
-    top: 140px;
+	top: 70px;
+	left: 0px;
     height: 0;
     border-radius: 4px;
     overflow: hidden;

@@ -319,9 +319,6 @@ export default class Filter extends React.Component {
       .protograph-filters-header, .protograph-filters-all-filters-group-item-name, .protograph-filters-all-filters-group-item-cross, .protograph-filters-all-filters-group-item-number {
         color: ${this.props.configurationJSON.colors.filter_summary_text_color};
       }
-      .protograph-filters-all-filters-group-heading {
-        color: ${this.props.configurationJSON.colors.filter_heading_text_color};
-      }
     `
   }
 

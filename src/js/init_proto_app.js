@@ -55,13 +55,13 @@ function processAndRenderHomepageNavbar(data, mode) {
             home_navbar = '#homepage_nav';
             home_navbar_list = '#homepage_nav_list';
             width = $('#homepage_nav').width() + 50;
-            left = $('.proto-verticals-navbar').offset().left;
+            // left = $('.proto-verticals-navbar').offset().left;
             break;
         case 'mobile':
             home_navbar = '.branding';
             home_navbar_list = '#mobile_homepage_nav_list';
             width = $('.branding').width() + 50;
-            left = 0;
+            // left = 0;
             break;
     }
 
@@ -69,7 +69,7 @@ function processAndRenderHomepageNavbar(data, mode) {
         $('.proto-hide').removeClass('proto-hide');
         $(home_navbar_list).css({
             "width": width,
-            "left": left,
+            "left": 0
         });
         $(home_navbar).css('cursor', 'pointer');
 
