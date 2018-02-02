@@ -1,23 +1,25 @@
 import Util from './utility.js'
 
-function checkHeight() {
-    let iframes = $('.article-area-small iframe'),
-        height = 0;
+// function checkHeight() {
+//     if (ProtoGraph.total_narrative_iframes_loaded === ProtoGraph.total_narrative_iframes) {
+//         let iframes = $('.article-area-small iframe'),
+//             height = 0;
 
-    iframes.each((i, e) => {
-        height += $(e).height()
-    });
+//         iframes.each((i, e) => {
+//             height += $(e).height()
+//         });
 
-    if (height < 700) {
-        $('#cont-button').css('display', 'none');
-        document.getElementById('article').className = 'article-area';
-        $('.single-index-value').addClass('activate-click');
-        $('body').scrollspy({
-            target: '#myNavbar',
-            offset: 70
-        });
-    }
-}
+//         if (height < 700) {
+//             $('#cont-button').css('display', 'none');
+//             document.getElementById('article').className = 'article-area';
+//             $('.single-index-value').addClass('activate-click');
+//             $('body').scrollspy({
+//                 target: '#myNavbar',
+//                 offset: 70
+//             });
+//         }
+//     }
+// }
 
 $(document).ready(function(){
     ProtoGraph.renderNavbar();
@@ -147,6 +149,8 @@ $(document).ready(function(){
             console.error("Error fetching Narrative stream", err);
         } else {
             let article_container = document.getElementById("article");
+            ProtoGraph.total_narrative_iframes = data.length;
+            ProtoGraph.total_narrative_iframes_loaded = 0;
             if (data.length > 0) {
                 data.map((d, i) => {
                     let createDiv = document.createElement('div');
@@ -159,9 +163,10 @@ $(document).ready(function(){
                     setTimeout(function () {
                         var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7"),
                         iframe = sandbox_iframe.sandbox.el;
-                        iframe.onload = function () {
-                            checkHeight();
-                        }
+                        // iframe.onload = function () {
+                        //     ProtoGraph.total_narrative_iframes_loaded += 1;
+                        //     checkHeight();
+                        // }
                     }, 0)
                 })
             }
