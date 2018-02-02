@@ -21,7 +21,7 @@
 
 /*========= font-family: cabin ==========*/
 .page-navigation-options a, .single-link, .mobile-navigation, .article-para, .article-h2, .single-index-value, .summary-text, .single-tab-value, .column-title, .single-tab, .protograph-map-legends-container, .default-button, .data-card-content .data-card-title, .column-title, .proto-mobile-grid-navigatio-tab, .protograph-filter-item-arrow, .protograph-filter-items-container, .protograph-filters-container, .list-group-item, .proto-card .card-title{
-	font-family: "cabin" !important; 
+	font-family: "cabin" !important;
 }
 
 /*============ font-weight: bold ============*/
@@ -70,7 +70,7 @@
   font-size: 30px;
   color: rgba(0, 0, 0, 0.3);
 }
-.list-items{;
+.list-items{
   color:#4a4a4a;
 }
 .scrollspy-parent-li {

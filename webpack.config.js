@@ -13,6 +13,12 @@ options = {
 }
 minifier.minify(input, options);
 
+input = ['./src/css/fonts.css'];
+options = {
+  output: "proto-app-fonts.min.css"
+}
+minifier.minify(input, options);
+
 module.exports = [
   card, home, findings, init
 ];
