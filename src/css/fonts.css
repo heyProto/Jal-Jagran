@@ -1,7 +1,3 @@
-.language-hindi .page-nav-single-option a{
-	font-size: 12px;
-}
-
 /*========= font-color: white; =========*/
 .proto-verticals-navbar, .proto-vertical-name a, .page-navigation-options a, .fixed-cover-block, .branding, .page-title, .single-share-icon, .proto-card .feature-story-layout .feature-title, .why-col, .filter-title, .page-title, .protograph-close-modal, .single-link a{
 	color: white !important;
@@ -16,8 +12,6 @@
 .proto-vertical-name, .branding, .proto-card .card-text, .list-items{
 	font-family: "bitter";
 }
-
-/*========= font-family: bitter (for hindi)==========*/
 
 /*========= font-family: cabin ==========*/
 .page-navigation-options a, .single-link, .mobile-navigation, .article-para, .article-h2, .single-index-value, .summary-text, .single-tab-value, .column-title, .single-tab, .protograph-map-legends-container, .default-button, .data-card-content .data-card-title, .column-title, .proto-mobile-grid-navigatio-tab, .protograph-filter-item-arrow, .protograph-filter-items-container, .protograph-filters-container, .list-group-item, .proto-card .card-title{
@@ -40,9 +34,13 @@
 	font-size: 12px !important;
 }
 
-/*============ font-size: 14px ============*/
+/*============ font-size: 14px hindi - 12px english ============*/
+.language-hindi .page-nav-single-option a, .language-hindi .single-link, .language-hindi .fixed-cover-block-small .page-title p, .language-hindi .list-items, .language-hindi #contributors h4, .language-hindi .single-index-value, .language-hindi .summary-text, .language-hindi .single-tab-value, .language-hindi .column-title, .language-hindi .proto-card .card-text, .language-hindi .protograph-map-legends-container, .language-hindi .data-card-content .data-card-title, .language-hindi .protograph-filters-reset-filter, .language-hindi .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item, .language-hindi .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item-name, .language-hindi .protograph-filter-item-name, .language-hindi .protograph-filter-item-arrow, .language-hindi .protograph-filter-chevron-icon {
+  font-size: 14px !important;
+}
+
 .page-nav-single-option a, .single-link, .fixed-cover-block-small .page-title p, .list-items, #contributors h4, .single-index-value, .summary-text, .single-tab-value, .column-title, .proto-card .card-text, .protograph-map-legends-container, .data-card-content .data-card-title, .protograph-filters-reset-filter, .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item, .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item-name, .protograph-filter-item-name, .protograph-filter-item-arrow, .protograph-filter-chevron-icon{
-	font-size: 14px !important;
+	font-size: 12px !important;
 }
 
 /*============ font-size: 16px ============*/
