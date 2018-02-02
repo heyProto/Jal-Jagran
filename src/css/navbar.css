@@ -75,7 +75,7 @@ body{
 	display: inline-block;
 	float: left;
 	line-height: 70px;
-	margin-right: 30px;
+	margin-right: 25px;
 	font-weight: bold;
 }
 .proto-vertical-name a {
@@ -93,7 +93,6 @@ body{
 	opacity: 0.4;
 	font-family: "cabin";
 	font-size: 12px;
-	letter-spacing: 1px;
 	font-weight: 100;
 	line-height: 70px;
 	text-decoration: none;
@@ -128,7 +127,7 @@ h1.navbar-project-title{
 }
 
 .social .single-link{
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 .social .single-link:hover{

@@ -418,7 +418,7 @@ ul.scrollspy-child-ul {
 .page-title {
   font-size: 42px;
   font-weight: bold;
-  font-family: 'Sarala', sans-serif;
+  /*font-family: 'Sarala', sans-serif;*/
   color: white;
   margin-bottom: 20px;
   bottom: 0px;
