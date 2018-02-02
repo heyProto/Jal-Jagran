@@ -1,5 +1,24 @@
 import Util from './utility.js'
 
+function checkHeight() {
+    let iframes = $('.article-area-small iframe'),
+        height = 0;
+
+    iframes.each((i, e) => {
+        height += $(e).height()
+    });
+
+    if (height < 700) {
+        $('#cont-button').css('display', 'none');
+        document.getElementById('article').className = 'article-area';
+        $('.single-index-value').addClass('activate-click');
+        $('body').scrollspy({
+            target: '#myNavbar',
+            offset: 70
+        });
+    }
+}
+
 $(document).ready(function(){
     ProtoGraph.renderNavbar();
 
@@ -22,27 +41,27 @@ $(document).ready(function(){
             });
         })
 
-        // Util.getJSON('https://cdn.protograph.pykih.com/35277f605995aa5fac54a21c/index.json', function (err, data) {
-        //     if (err != null) {
-        //         alert('Something went wrong: ' + err);
-        //     } else {
-        //         let originals_container = document.getElementById("more_articles_container");
-        //         if(data.length > 0){
-        //             for (let i = 0; i < 4; i++) {
-        //                 let createDiv = document.createElement('div');
-        //                 createDiv.id = 'ProtoCard-more-articles' + i;
-        //                 createDiv.className = 'ProtoCard-more-articles';
-        //                 originals_container.appendChild(createDiv);
-        //                 let createMarginDiv = document.createElement('div');
-        //                 setTimeout(function () {
-        //                     new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
-        //                 }, 0)
-        //             }
-        //         } else {
-        //             $(originals_container).siblings(".column-title").hide();
-        //         }
-        //     }
-        // });
+        Util.getJSON(streams["7c"].url, function (err, data) {
+            if (err != null) {
+                console.error("Error fetching more in series stream", err);
+            } else {
+                let originals_container = document.getElementById("more_articles_container");
+                if(data.length > 0){
+                    for (let i = 0; i < 4; i++) {
+                        let createDiv = document.createElement('div');
+                        createDiv.id = 'ProtoCard-more-articles' + i;
+                        createDiv.className = 'ProtoCard-more-articles';
+                        originals_container.appendChild(createDiv);
+                        let createMarginDiv = document.createElement('div');
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
+                        }, 0)
+                    }
+                } else {
+                    $(originals_container).siblings(".column-title").hide();
+                }
+            }
+        });
     }
 
     if (mode == 'mobile' ) {
@@ -138,7 +157,11 @@ $(document).ready(function(){
                     createMarginDiv.style.marginBottom = "20px";
                     article_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7");
+                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7"),
+                        iframe = sandbox_iframe.sandbox.el;
+                        iframe.onload = function () {
+                            checkHeight();
+                        }
                     }, 0)
                 })
             }

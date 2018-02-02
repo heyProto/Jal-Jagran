@@ -40,7 +40,10 @@
         </style>
     </head>
 
-    <body>
+    <% let language = site.primary_language.toLowerCase(); %>
+    <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
+
+    <body class="<%= body_class %>">
         <div class="proto-grid-container data-page">
 
             <div class="client-brand-cover small-cover" id="site_header">
@@ -122,6 +125,12 @@
                 <div class="related-articles-link">
                     <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
                     <div id="related_container"></div>
+                </div>
+            </div>
+            <div class="proto-col col-16 more-articles-link-div">
+                <div class="more-articles-link">
+                    <div class="column-title"><%= streams_mapping['7c'].name_of_stream %></div>
+                    <div id="more_articles_container" class="more-articles-container"></div>
                 </div>
             </div>
         </div>
