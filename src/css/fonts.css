@@ -55,10 +55,10 @@
 
 /*=========== navbar.css=========*/
 .proto-vertical-name{
-	letter-spacing: 0.5px;
+	/*letter-spacing: 0.5px;*/
 }
 .page-navigation-options a{
-	letter-spacing: 1px;
+	/*letter-spacing: 1px;*/
 }
 /*==========findings.css===========*/
 .answer > h3{
