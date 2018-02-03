@@ -128,12 +128,14 @@
                     <div id="related_container"></div>
                 </div>
             </div>
-            <div class="proto-col col-16 more-articles-link-div">
-                <div class="more-articles-link">
-                    <div class="column-title"><%= streams_mapping['7c'].name_of_stream %></div>
-                    <div id="more_articles_container" class="more-articles-container"></div>
+            <% if (streams_mapping['7c']) { %>
+                <div class="proto-col col-16 more-articles-link-div">
+                    <div class="more-articles-link">
+                        <div class="column-title"><%= streams_mapping['7c'].name_of_stream %></div>
+                        <div id="more_articles_container" class="more-articles-container"></div>
+                    </div>
                 </div>
-            </div>
+            <% } %>
         </div>
         <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
@@ -151,6 +153,17 @@
         <script src="https://cdn.protograph.pykih.com/lib/bootstrap.min.js"></script>
         <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.js"></script>
+        <% if (site.ga_code) { %>
+            <!-- Global Site Tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '<%= site.ga_code %>');
+            </script>
+        <% } %>
     </body>
 
 </html>

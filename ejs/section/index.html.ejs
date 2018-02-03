@@ -124,6 +124,16 @@
         <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js"></script>
         <script src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js"></script>
         <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js"></script>
-    </body>
+        <% if (site.ga_code) { %>
+            <!-- Global Site Tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
+                gtag('config', '<%= site.ga_code %>');
+            </script>
+        <% } %>
+    </body>
 </html>
