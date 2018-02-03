@@ -22,8 +22,6 @@ import Util from './utility.js'
 // }
 
 $(document).ready(function(){
-    ProtoGraph.renderNavbar();
-
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop',
         streams = ProtoGraph.streams;
 

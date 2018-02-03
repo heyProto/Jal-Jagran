@@ -211,6 +211,5 @@ function initPage() {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    ProtoGraph.renderNavbar();
     initPage();
 });

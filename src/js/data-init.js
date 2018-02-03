@@ -2,7 +2,6 @@ import Util from './utility.js'
 
 $(document).ready((e) => {
 
-  ProtoGraph.renderNavbar();
   let dimension = Util.getScreenSize(),
     mode,
     streams = ProtoGraph.streams;

@@ -19,6 +19,39 @@ function fetchNavbarObjects() {
     ]);
 }
 
+function throttle(fn, wait) {
+    var time = Date.now();
+    return function () {
+        if ((time + wait - Date.now()) < 0) {
+            fn();
+            time = Date.now();
+        }
+    }
+}
+
+ProtoGraph.initBackToTop = function() {
+    $(window).scroll((e) => {
+        if ($(e.target).scrollTop() > 100) {
+            // downscroll code
+            $('.proto-app-scroll-to-top').addClass('proto-app-show');
+        } else {
+            // upscroll code
+            $('.proto-app-scroll-to-top').removeClass('proto-app-show');
+        }
+    })
+    // $(window).scroll(throttle(function (event) {
+    //     // var st = $('.protograph-app-main-container').scrollTop(),
+    //     //     isActive = $('.protograph-app-swipe-left').hasClass('protograph-app-slide-down');
+    // }, 100));
+
+    $('.proto-app-scroll-to-top').on('click', (e) => {
+        $('.proto-app-scroll-to-top').removeClass('proto-app-show');
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+    });
+}
+
 function processAndRenderVerticalNavbar(data, mode) {
     if (data.length > 0) {
         let HTML = "";
@@ -124,3 +157,7 @@ function getJSONPromise(url) {
         xhr.send();
     });
 }
+document.addEventListener("DOMContentLoaded", function (event) {
+    ProtoGraph.renderNavbar();
+    ProtoGraph.initBackToTop();
+});
