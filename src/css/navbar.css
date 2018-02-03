@@ -71,7 +71,7 @@ body{
 .proto-vertical-name{
 	font-family: "bitter";
 	font-size: 20px;
-	letter-spacing: 0.5px;
+	letter-spacing: 0px;
 	display: inline-block;
 	float: left;
 	line-height: 70px;

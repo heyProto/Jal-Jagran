@@ -45,6 +45,9 @@ function processAndRenderHomepageNavbar(data, mode) {
     let filtered_data = data.filter((e, i) => {
         return e.name !== ProtoGraph.ref_category_object.name
     }),
+    homepage_object = data.filter((e, i) => {
+        return e.name === ProtoGraph.ref_category_object.name
+    })[0],
     home_navbar,
     home_navbar_list,
     width,
@@ -89,6 +92,9 @@ function processAndRenderHomepageNavbar(data, mode) {
             </div>`
         });
         $(home_navbar_list).append(HTML);
+    } else {
+        let nav_title = $('#homepage_nav').html();
+        $('#homepage_nav').html(`<a href="${homepage_object.url}" target=${homepage_object.new_window ? "_blank" : "_self"}>${nav_title}</a>`);
     }
 }
 
