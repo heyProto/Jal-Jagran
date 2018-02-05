@@ -121,13 +121,13 @@ function processAndRenderHomepageNavbar(data, mode) {
         let HTML = "";
         filtered_data.forEach((e, i) => {
             HTML += `<div class="proto-vertical-name home-header-nav">
-                <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name_html}</a>
+                <a href="${e.url}" >${e.name_html}</a>
             </div>`
         });
         $(home_navbar_list).append(HTML);
     } else if (homepage_object) {
         let nav_title = $('#homepage_nav').html();
-        $('#homepage_nav').html(`<a href="${homepage_object.url}" target=${homepage_object.new_window ? "_blank" : "_self"}>${nav_title}</a>`);
+        $('#homepage_nav').html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
     }
 }
 
@@ -136,7 +136,7 @@ function processAndRenderSiteHeader(data) {
         $('#site_header').css('background', data.header_background_color);
         let logo_div = $('#site_header .client-logo');
         logo_div.addClass(`position-${data.header_logo_position}`);
-        logo_div.append(`<a href="${data.header_jump_to_link}"><img src="${data.header_logo_url}" /></a>`);
+        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank"><img src="${data.header_logo_url}" /></a>`);
     }
 }
 
