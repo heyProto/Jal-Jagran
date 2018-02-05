@@ -61,12 +61,20 @@
                 <div class="page-navigation-options" id="vertical_nav"></div>
                 <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
                 <div class="social right-float-div">
-                    <div class="single-link facebook">
-                        <a href="<%= site['facebook_url'] ? site['facebook_url'] : '#' %>" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></a>
-                    </div>
-                    <div class="single-link twitter">
-                        <a href="<%= site['twitter_url'] ? site['facebook_url'] : '#' %>" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></a>
-                    </div>
+                    <% if (site.facebook_url) { %>
+                        <div class="single-link facebook">
+                            <a href="<%= site['facebook_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png">
+                            </a>
+                        </div>
+                    <% } %>
+                    <% if (site.twitter_url) { %>
+                        <div class="single-link twitter">
+                            <a href="<%= site['twitter_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png">
+                            </a>
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <div class="mobile-navigation">
@@ -87,12 +95,20 @@
                     </div>
                     <div class="nav-links"></div>
                     <div class="social bottom-pull-div">
-                        <div class="single-link facebook">
-                            <a href="<%= site['facebook_url'] ? site['facebook_url'] : '#' %>" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></a>
-                        </div>
-                        <div class="single-link twitter">
-                            <a href="<%= site['twitter_url'] ? site['facebook_url'] : '#' %>" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></a>
-                        </div>
+                        <% if (site.facebook_url) { %>
+                            <div class="single-link facebook">
+                                <a href="<%= site['facebook_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png">
+                                </a>
+                            </div>
+                        <% } %>
+                        <% if (site.twitter_url) { %>
+                            <div class="single-link twitter">
+                                <a href="<%= site['twitter_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png">
+                                </a>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
