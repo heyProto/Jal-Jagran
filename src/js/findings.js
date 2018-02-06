@@ -47,7 +47,9 @@ $(document).ready(function(){
                 } else {
                     let originals_container = document.getElementById("more_articles_container");
                     if(data.length > 0){
-                        for (let i = 0; i < 4; i++) {
+                        let len;
+                        data.length <= 4 ? len = data.length : len = 4;
+                        for (let i = 0; i < len; i++) {
                             let createDiv = document.createElement('div');
                             createDiv.id = 'ProtoCard-more-articles' + i;
                             createDiv.className = 'ProtoCard-more-articles';
@@ -168,6 +170,8 @@ $(document).ready(function(){
                         // }
                     }, 0)
                 })
+            } else {
+                $('#cont-button').css('display', 'none');
             }
         }
     });
