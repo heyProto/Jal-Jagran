@@ -126,8 +126,8 @@ function processAndRenderHomepageNavbar(data, mode) {
         });
         $(home_navbar_list).append(HTML);
     } else if (homepage_object) {
-        let nav_title = $('#homepage_nav').html();
-        $('#homepage_nav').html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
+        let nav_title = $(home_navbar).html();
+        $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
     }
 }
 
