@@ -3,6 +3,11 @@
 	color: white !important;
 }
 
+.branding a{
+  color: white !important;
+  text-decoration: none;
+}
+
 /*========= font-color: #333333; (black) =========*/
 .explainers-sticky-segment-question a, .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover, .article-para strong, .article-h2, .default-button, .summary-text, .column-title, .proto-card .card-title, .data-card-content .data-card-title, #show-more-cards, .qa-highlight-color, .protograph-filters-remove-filter{
 	font-color: #333333 !important;
