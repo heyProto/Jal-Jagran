@@ -53,6 +53,15 @@
 	font-size: 20px !important;
 }
 
+
+
+.mobile-navigations-screen .single-share-icon, .mobile-navigations-screen .single-link a{
+  color: #333333 !important;
+  font-size: 16px !important; 
+}
+
+
+
 /*=========== navbar.css=========*/
 .proto-vertical-name{
 	/*letter-spacing: 0.5px;*/
