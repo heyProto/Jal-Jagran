@@ -94,4 +94,9 @@
     .div-without-margin-right{
         margin-right: 0px;
     }
+
+    .ProtoCard-cover{
+        min-height: 250px;
+        padding: 10px;
+    }
 }
