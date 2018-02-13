@@ -236,6 +236,16 @@ h1.navbar-project-title{
 }
 
 @media only screen and (max-width: 500px){
+	
+	.client-brand-cover{
+		width: 100%;
+	}
+
+	.client-brand-cover .client-logo a img{
+		max-width: 300px;
+		max-height: 40px;
+	}
+
 	.navbar, .proto-verticals-navbar {
 		display: none;
 	}
