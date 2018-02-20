@@ -23,6 +23,7 @@ import Util from './utility.js'
 
 $(document).ready(function(){
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop',
+        render_mode = window.innerWidth <= 500 ? 'col4' : 'col7',
         streams = ProtoGraph.streams;
 
     document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
@@ -65,37 +66,6 @@ $(document).ready(function(){
                 }
             });
         }
-
-        Util.getJSON(streams['Narrative'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching Narrative stream", err);
-            } else {
-                let article_container = document.getElementById("article");
-                ProtoGraph.total_narrative_iframes = data.length;
-                ProtoGraph.total_narrative_iframes_loaded = 0;
-                if (data.length > 0) {
-                    data.map((d, i) => {
-                        let createDiv = document.createElement('div');
-                        createDiv.id = 'ProtoCard-article' + i;
-                        // createDiv.className= 'ProtoCard-originals';
-                        article_container.appendChild(createDiv);
-                        let createMarginDiv = document.createElement('div');
-                        createMarginDiv.style.marginBottom = "20px";
-                        article_container.appendChild(createMarginDiv);
-                        setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col7"),
-                            iframe = sandbox_iframe.sandbox.el;
-                            // iframe.onload = function () {
-                            //     ProtoGraph.total_narrative_iframes_loaded += 1;
-                            //     checkHeight();
-                            // }
-                        }, 0)
-                    })
-                } else {
-                    $('#cont-button').css('display', 'none');
-                }
-            }
-        });
     }
 
     if (mode == 'mobile' ) {
@@ -150,36 +120,6 @@ $(document).ready(function(){
             $('#protograph_filter_icon').css('display', 'block');
             $('#protograph_filter_close_icon').css('display', 'none');
         }));
-        Util.getJSON(streams['Narrative'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching Narrative stream", err);
-            } else {
-                let article_container = document.getElementById("article");
-                ProtoGraph.total_narrative_iframes = data.length;
-                ProtoGraph.total_narrative_iframes_loaded = 0;
-                if (data.length > 0) {
-                    data.map((d, i) => {
-                        let createDiv = document.createElement('div');
-                        createDiv.id = 'ProtoCard-article' + i;
-                        // createDiv.className= 'ProtoCard-originals';
-                        article_container.appendChild(createDiv);
-                        let createMarginDiv = document.createElement('div');
-                        createMarginDiv.style.marginBottom = "20px";
-                        article_container.appendChild(createMarginDiv);
-                        setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, "col4"),
-                            iframe = sandbox_iframe.sandbox.el;
-                            // iframe.onload = function () {
-                            //     ProtoGraph.total_narrative_iframes_loaded += 1;
-                            //     checkHeight();
-                            // }
-                        }, 0)
-                    })
-                } else {
-                    $('#cont-button').css('display', 'none');
-                }
-            }
-        });
     }
 
     Util.getJSON(streams['Related'].url, function (err, data){
@@ -202,6 +142,37 @@ $(document).ready(function(){
                 })
             } else {
                 $(originals_container).siblings(".column-title").hide();
+            }
+        }
+    });
+
+    Util.getJSON(streams['Narrative'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching Narrative stream", err);
+        } else {
+            let article_container = document.getElementById("article");
+            ProtoGraph.total_narrative_iframes = data.length;
+            ProtoGraph.total_narrative_iframes_loaded = 0;
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    let createDiv = document.createElement('div');
+                    createDiv.id = 'ProtoCard-article' + i;
+                    // createDiv.className= 'ProtoCard-originals';
+                    article_container.appendChild(createDiv);
+                    let createMarginDiv = document.createElement('div');
+                    createMarginDiv.style.marginBottom = "20px";
+                    article_container.appendChild(createMarginDiv);
+                    setTimeout(function () {
+                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, render_mode),
+                            iframe = sandbox_iframe.sandbox.el;
+                        // iframe.onload = function () {
+                        //     ProtoGraph.total_narrative_iframes_loaded += 1;
+                        //     checkHeight();
+                        // }
+                    }, 0)
+                })
+            } else {
+                $('#cont-button').css('display', 'none');
             }
         }
     });
