@@ -110,11 +110,7 @@
                 </div>
             </div>
 
-            <div class="proto-col col-16">
-                <div class="fixed-cover-block fixed-cover-block-small">
-                    <h1 class="page-title bottom-pull-div"><%= page.headline %></h1>
-                </div>
-            </div>
+            <div class="proto-col col-16" id="col_16_cover_container"></div>
             <div class="proto-col col-4 navigation-links">
                 <div class="summary">
                     <div class="article-share-icons">
@@ -161,7 +157,8 @@
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
-             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
+            ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
+            ProtoGraph.page = <%- JSON.stringify(page) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";

@@ -3,14 +3,10 @@ import Util from './utility.js'
 $(document).ready((e) => {
 
   let dimension = Util.getScreenSize(),
-    mode,
-    streams = ProtoGraph.streams;
-
-  if (dimension.width <= 500){
-    mode = 'mobile';
-  } else {
-    mode = 'laptop';
-  }
+    mode = window.innerWidth <= 500 ? 'mobile' : 'laptop',
+    render_mode = window.innerWidth <= 500 ? 'col4' : 'col7',
+    streams = ProtoGraph.streams,
+    page = ProtoGraph.page;
 
   if (mode === 'laptop'){
     $('.filter-column').sticky({ topSpacing: 0 });
@@ -52,6 +48,57 @@ $(document).ready((e) => {
       $('body').css('overflow', 'initial');
       $('.container.proto-container').css('overflow', 'initial');
     });
+  }
+
+  if (streams['16c_Hero']) {
+    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
+      if (err != null) {
+        console.error("Error fetching 16c stream", err);
+      } else {
+        let cover_container = document.getElementById("col_16_cover_container");
+        if (data.length > 0) {
+          data.map((d, i) => {
+            let div = document.createElement('div'),
+              marginDiv = document.createElement('div');
+
+            div.id = `ProtoCard_16c_cover_${i}`;
+            cover_container.appendChild(div);
+
+            marginDiv.style.marginBottom = "20px";
+            cover_container.appendChild(marginDiv);
+            setTimeout(function () {
+              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, 'col16');
+            }, 0)
+          })
+        } else {
+          $('#col_16_cover_container').append(`
+            <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+              <h1 class="page-title bottom-pull-div">
+                  ${page.headline}
+              </h1>
+            </div>
+          `);
+          if (page.cover_image_url || page.cover_image_url_7_column) {
+            setTimeout((e) => {
+              $('#proto_col_16_cover_blank').css('background-image', `url(${page.cover_image_url || page.cover_image_url_7_column})`)
+            });
+          }
+        }
+      }
+    });
+  } else {
+    $('#col_16_cover_container').append(`
+      <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+        <h1 class="page-title bottom-pull-div">
+            ${page.headline}
+        </h1>
+      </div>
+    `);
+    if (page.cover_image_url || page.cover_image_url_7_column) {
+      setTimeout((e) => {
+        $('#proto_col_16_cover_blank').css('background-image', `url(${page.cover_image_url || page.cover_image_url_7_column})`)
+      });
+    }
   }
 
   var x = new ProtoGraph.Card.toMaps()
