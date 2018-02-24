@@ -1,28 +1,21 @@
 import Util from './utility.js'
 
-$(document).ready((e) => {
-
+ProtoGraph.initPage = function initPage() {
   let dimension = Util.getScreenSize(),
-    mode,
+    mode = dimension.width <= 500 ? 'mobile' : 'laptop',
     streams = ProtoGraph.streams;
 
-  if (dimension.width <= 500){
-    mode = 'mobile';
-  } else {
-    mode = 'laptop';
-  }
-
-  if (mode === 'laptop'){
+  if (mode === 'laptop') {
     $('.filter-column').sticky({ topSpacing: 0 });
   }
 
-  if (mode === 'mobile'){
+  if (mode === 'mobile') {
     $('#protograph_filter_icon').on('click', ((e) => {
       $('.protograph-app-filter-icon').addClass('block-events');
       $('.protograph-filter-area').css('display', 'block');
       setTimeout((e) => {
         $('.protograph-filter-area').addClass('protograph-filter-area-slide-up');
-      },0);
+      }, 0);
       $('#protograph_filter_icon').css('display', 'none');
       $('#protograph_filter_close_icon').css('display', 'block');
       setTimeout((i) => {
@@ -36,7 +29,7 @@ $(document).ready((e) => {
       setTimeout((e) => {
         $('.protograph-filter-area').css('display', 'none');
         $('.protograph-app-filter-icon').removeClass('block-events');
-      },500);
+      }, 500);
       $('#protograph_filter_icon').css('display', 'block');
       $('#protograph_filter_close_icon').css('display', 'none');
     }));
@@ -55,7 +48,7 @@ $(document).ready((e) => {
   }
 
   var x = new ProtoGraph.Card.toMaps()
-    x.init({
+  x.init({
     selector: document.querySelector('#card-list-div'),
     dataURL: streams["Grid"].url,
     topoURL: 'https://cdn.protograph.pykih.com/jaljagran-3/uttar_pradesh-topo.json',
@@ -94,4 +87,4 @@ $(document).ready((e) => {
     ]
   })
   x.renderLaptop();
-});
+}

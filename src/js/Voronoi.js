@@ -27,9 +27,13 @@ class Voronoi extends React.Component {
       element.parentNode.removeChild(element);
     })
     if (this.props.mode === 'laptop') {
-      let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'laptop')
+      let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'laptop', {
+        headerJSON: ProtoGraph.headerJSON
+      })
     } else {
-      let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'mobile', true)
+      let pro = new ProtoEmbed.initFrame(document.getElementById("proto-embed-card"), card.iframe_url, 'mobile', {
+        headerJSON: ProtoGraph.headerJSON
+      })
     }
     $('.modal-close').click(function(){
       $("#proto-modal").modal('hide');

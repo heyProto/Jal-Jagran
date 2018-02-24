@@ -1,37 +1,18 @@
 import Util from './utility.js'
 
-// function checkHeight() {
-//     if (ProtoGraph.total_narrative_iframes_loaded === ProtoGraph.total_narrative_iframes) {
-//         let iframes = $('.article-area-small iframe'),
-//             height = 0;
-
-//         iframes.each((i, e) => {
-//             height += $(e).height()
-//         });
-
-//         if (height < 700) {
-//             $('#cont-button').css('display', 'none');
-//             document.getElementById('article').className = 'article-area';
-//             $('.single-index-value').addClass('activate-click');
-//             $('body').scrollspy({
-//                 target: '#myNavbar',
-//                 offset: 70
-//             });
-//         }
-//     }
-// }
-
-$(document).ready(function(){
-    let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop',
+ProtoGraph.initPage = function initPage() {
+    let dimension = Util.getScreenSize(),
+        mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
         render_mode = window.innerWidth <= 500 ? 'col4' : 'col7',
-        streams = ProtoGraph.streams;
+        streams = ProtoGraph.streams,
+        headerJSON = ProtoGraph.headerJSON;
 
     document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
     document.getElementById('twitter-share-link').href = 'http://twitter.com/share?url=' + window.location.href;
 
     if (mode === 'laptop') {
-        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400});
-        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 400});
+        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400 });
+        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 400 });
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
@@ -47,7 +28,7 @@ $(document).ready(function(){
                     console.error("Error fetching more in series stream", err);
                 } else {
                     let originals_container = document.getElementById("more_articles_container");
-                    if(data.length > 0){
+                    if (data.length > 0) {
                         let len;
                         data.length <= 4 ? len = data.length : len = 4;
                         for (let i = 0; i < len; i++) {
@@ -57,7 +38,9 @@ $(document).ready(function(){
                             originals_container.appendChild(createDiv);
                             let createMarginDiv = document.createElement('div');
                             setTimeout(function () {
-                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4");
+                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4", {
+                                    headerJSON: headerJSON
+                                });
                             }, 0)
                         }
                     } else {
@@ -68,7 +51,7 @@ $(document).ready(function(){
         }
     }
 
-    if (mode == 'mobile' ) {
+    if (mode == 'mobile') {
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
@@ -78,7 +61,7 @@ $(document).ready(function(){
                 offset: 70
             });
             $('.single-index-value').on('click', (e) => {
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.navigation-links').removeClass('navigation-links-slide-up');
                     setTimeout((e) => {
                         $('.navigation-links').css('display', 'none');
@@ -122,23 +105,25 @@ $(document).ready(function(){
         }));
     }
 
-    Util.getJSON(streams['Related'].url, function (err, data){
+    Util.getJSON(streams['Related'].url, function (err, data) {
         if (err != null) {
             console.error("Error fetching Relative stream", err);
         } else {
             let originals_container = document.getElementById("related_container");
-            if(data.length > 0){
-                data.map((d,i) => {
+            if (data.length > 0) {
+                data.map((d, i) => {
                     let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-originals'+i;
+                    createDiv.id = 'ProtoCard-originals' + i;
                     // createDiv.className= 'ProtoCard-originals';
                     originals_container.appendChild(createDiv);
                     let createMarginDiv = document.createElement('div');
                     createMarginDiv.style.marginBottom = "20px";
                     originals_container.appendChild(createMarginDiv);
-                    setTimeout(function(){
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals"+i), data[i].iframe_url, "col4");
-                    },0)
+                    setTimeout(function () {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col4", {
+                            headerJSON: headerJSON
+                        });
+                    }, 0)
                 })
             } else {
                 $(originals_container).siblings(".column-title").hide();
@@ -163,12 +148,9 @@ $(document).ready(function(){
                     createMarginDiv.style.marginBottom = "20px";
                     article_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, render_mode),
-                            iframe = sandbox_iframe.sandbox.el;
-                        // iframe.onload = function () {
-                        //     ProtoGraph.total_narrative_iframes_loaded += 1;
-                        //     checkHeight();
-                        // }
+                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, render_mode, {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             } else {
@@ -176,7 +158,4 @@ $(document).ready(function(){
             }
         }
     });
-
-
-
-});
+}

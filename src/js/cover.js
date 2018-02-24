@@ -1,6 +1,6 @@
 import Util from './utility.js'
 
-function initPage() {
+ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
         originals_container,
@@ -8,6 +8,7 @@ function initPage() {
         feeds_container,
         digests_container,
         opinions_container,
+        headerJSON = ProtoGraph.headerJSON,
         streams = ProtoGraph.streams;
 
     if (mode === 'laptop') {
@@ -27,7 +28,9 @@ function initPage() {
                         createMarginDiv.style.marginBottom = "20px";
                         originals_container.appendChild(createMarginDiv);
                         setTimeout(function () {
-                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col7");
+                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col7", {
+                                headerJSON: headerJSON
+                            });
                         }, 0)
                     })
                 } else {
@@ -52,7 +55,9 @@ function initPage() {
                         createMarginDiv.style.marginBottom = "20px";
                         feeds_container.appendChild(createMarginDiv);
                         setTimeout(function () {
-                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col3");
+                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col3", {
+                                headerJSON: headerJSON
+                            });
                         }, 0)
                     })
                 } else {
@@ -76,7 +81,9 @@ function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     cover_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col16");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col16", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             }
@@ -130,7 +137,9 @@ function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     originals_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col4");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col4", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             }
@@ -150,7 +159,9 @@ function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     feeds_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col4");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col4", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             }
@@ -168,7 +179,9 @@ function initPage() {
                     createDiv.className = 'ProtoCard-cover';
                     cover_container.appendChild(createDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col4");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col4", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             }
@@ -193,7 +206,9 @@ function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     digests_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests" + i), data[i].iframe_url, "col4");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests" + i), data[i].iframe_url, "col4", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             } else {
@@ -218,7 +233,9 @@ function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     opinions_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions" + i), data[i].iframe_url, "col2");
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions" + i), data[i].iframe_url, "col2", {
+                            headerJSON: headerJSON
+                        });
                     }, 0)
                 })
             } else {
@@ -228,6 +245,6 @@ function initPage() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
-    initPage();
-});
+// document.addEventListener("DOMContentLoaded", function (event) {
+//     initPage();
+// });
