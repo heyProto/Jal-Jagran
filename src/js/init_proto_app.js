@@ -6,6 +6,8 @@ ProtoGraph.renderNavbar = function () {
         processAndRenderVerticalNavbar(data[0], mode);
         processAndRenderHomepageNavbar(data[1], mode);
         processAndRenderSiteHeader(data[2]);
+        ProtoGraph.headerJSON = data[2];
+        ProtoGraph.initPage();
     }).catch((reject) => {
         console.error("Error fetching data : ", reject);
     })
