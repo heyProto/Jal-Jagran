@@ -5,6 +5,7 @@ ProtoGraph.initPage = function initPage() {
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
         render_mode = window.innerWidth <= 500 ? 'col4' : 'col7',
         streams = ProtoGraph.streams,
+        page = ProtoGraph.page,
         headerJSON = ProtoGraph.headerJSON;
 
     document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
