@@ -3,7 +3,9 @@ import Util from './utility.js'
 ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
-        render_mode = window.innerWidth <= 500 ? 'col4' : 'col7',
+        render_mode = (dimension.width <= 500) ? 'col4' : 'col7',
+        cover_height = (dimension.width <= 500) ? '250px' : '430px',
+        background_size = (dimension.width <= 500) ? 'cover' : '100%',
         streams = ProtoGraph.streams,
         page = ProtoGraph.page,
         headerJSON = ProtoGraph.headerJSON;
@@ -165,8 +167,11 @@ ProtoGraph.initPage = function initPage() {
             if (err != null) {
                 console.error("Error fetching 16c stream", err);
             } else {
-                let cover_container = document.getElementById("col_16_cover_container");
+                let cover_container = document.getElementById("col_16_cover_container"),
+                    mode_for_cover = (mode === 'mobile') ? "col4" : "col16";
+
                 if (data.length > 0) {
+                    data = [data[0]];
                     data.map((d, i) => {
                         let div = document.createElement('div'),
                             marginDiv = document.createElement('div');
@@ -177,7 +182,7 @@ ProtoGraph.initPage = function initPage() {
                         marginDiv.style.marginBottom = "20px";
                         cover_container.appendChild(marginDiv);
                         setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, 'col16');
+                            var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, mode_for_cover);
                         }, 0)
                     })
                 } else {
@@ -192,9 +197,9 @@ ProtoGraph.initPage = function initPage() {
                         setTimeout((e) => {
                             $('#proto_col_16_cover_blank').css({
                                 'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
-                                'height': "430px",
-                                'background-size': "100%",
-                                'background-repeat': "no-repeat",
+                                'height': cover_height,
+                                'background-size': background_size,
+                                'background-repeat': "no-repeat"
                             });
                         });
                     }
@@ -211,7 +216,12 @@ ProtoGraph.initPage = function initPage() {
         `);
         if (page.cover_image_url || page.cover_image_url_7_column) {
             setTimeout((e) => {
-                $('#proto_col_16_cover_blank').css('background-image', `url(${page.cover_image_url || page.cover_image_url_7_column})`)
+                $('#proto_col_16_cover_blank').css({
+                    'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
+                    'height': cover_height,
+                    'background-size': background_size,
+                    'background-repeat': "no-repeat"
+                })
             });
         }
     }

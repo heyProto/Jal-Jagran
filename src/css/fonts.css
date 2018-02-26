@@ -62,7 +62,7 @@
 
 .mobile-navigations-screen .single-share-icon, .mobile-navigations-screen .single-link a{
   color: #333333 !important;
-  font-size: 16px !important; 
+  font-size: 16px !important;
 }
 
 
@@ -188,4 +188,10 @@
 .protograph-filter-hint-text {
   line-height: 18px;
   color: #adadad;
+}
+
+@media only screen and (max-width: 500px){
+  .page-title {
+    font-size: 32px;
+  }
 }
