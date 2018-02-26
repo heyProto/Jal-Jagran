@@ -49,7 +49,7 @@ ProtoGraph.initPage = function initPage() {
     });
   }
 
-  if (streams['16c_Hero']) {
+  if (page && streams['16c_Hero']) {
     Util.getJSON(streams['16c_Hero'].url, function (err, data) {
       if (err != null) {
         console.error("Error fetching 16c stream", err);

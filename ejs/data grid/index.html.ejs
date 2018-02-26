@@ -114,9 +114,7 @@
             </div>
 
             <div class="proto-col col-16">
-                <div class="fixed-cover-block fixed-cover-block-small">
-                    <h1 class="page-title bottom-pull-div"><%= page.headline %></h1>
-                </div>
+                <div id="col_16_cover_container"></div>
                 <div class="clearfix"></div>
                 <div id="card-list-div"></div>
             </div>
@@ -130,6 +128,7 @@
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
             ProtoGraph.site = <%- JSON.stringify(site) %>;
+            ProtoGraph.page = <%- JSON.stringify(page) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
