@@ -66,6 +66,7 @@ ProtoGraph.initPage = function initPage() {
               marginDiv = document.createElement('div');
 
             div.id = `ProtoCard_16c_cover_${i}`;
+            div.className = "ProtoCard-cover";
             cover_container.appendChild(div);
 
             marginDiv.style.marginBottom = "20px";

@@ -534,4 +534,11 @@
   .block-events {
     pointer-events: none;
   }
+  .ProtoCard-cover {
+      min-height: 250px;
+      padding: 10px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+  }
 }
