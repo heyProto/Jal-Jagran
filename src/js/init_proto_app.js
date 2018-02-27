@@ -86,19 +86,26 @@ function processAndRenderHomepageNavbar(data, mode) {
     home_navbar,
     home_navbar_list,
     width,
+    top,
+    border_radius,
     left;
 
     switch (mode) {
         case 'laptop':
             home_navbar = '#homepage_nav';
             home_navbar_list = '#homepage_nav_list';
-            width = $('#homepage_nav').width() + 50;
+            // width = $('#homepage_nav').width() + 50;
+            width = "250px"
+            border_radius = "4px";
             // left = $('.proto-verticals-navbar').offset().left;
             break;
         case 'mobile':
             home_navbar = '.branding';
             home_navbar_list = '#mobile_homepage_nav_list';
-            width = $('.branding').width() + 50;
+            // width = $('.branding').width() + 50;
+            width = "100%";
+            top = "140px";
+            border_radius = "0px";
             // left = 0;
             break;
     }
@@ -107,10 +114,11 @@ function processAndRenderHomepageNavbar(data, mode) {
         $('.proto-hide').removeClass('proto-hide');
         $(home_navbar_list).css({
             "width": width,
+            "top": top,
+            "border-radius": border_radius,
             "left": 0
         });
         $(home_navbar).css('cursor', 'pointer');
-
         $(home_navbar).on('click', (e) => {
             let list = $(home_navbar_list);
             if (list.hasClass('open-navbar')) {

@@ -234,6 +234,13 @@ h1.navbar-project-title{
 .mobile-navigation{
 	display: none;
 }
+.proto-vertical-name.home-header-nav {
+	width: 100%;
+}
+.proto-vertical-name.home-header-nav a {
+	display: inline-block;
+	width: 100%;
+}
 
 @media only screen and (max-width: 500px){
 
@@ -343,5 +350,13 @@ h1.navbar-project-title{
 	}
 	.pnav-options.single-pnav-option {
 		min-width: 165px;
+	}
+	.proto-vertical-name.home-header-nav {
+		width: 100%;
+		background: #656565;
+	}
+	.proto-vertical-name.home-header-nav a {
+		display: inline-block;
+		width: 100%;
 	}
 }
