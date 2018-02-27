@@ -3,6 +3,8 @@ import Util from './utility.js'
 ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
+        render_mode = (dimension.width <= 500) ? 'col4' : 'col7',
+        mode_for_cover = (mode === 'mobile') ? "col4" : "col16",
         originals_container,
         cover_container,
         feeds_container,
@@ -11,86 +13,8 @@ ProtoGraph.initPage = function initPage() {
         headerJSON = ProtoGraph.headerJSON,
         streams = ProtoGraph.streams;
 
-    if (mode === 'laptop') {
-        Util.getJSON(streams['7c'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching originals stream", err);
-            } else {
-                originals_container = document.getElementById("originals_container");
-
-                if (data.length > 0) {
-                    data.map((d, i) => {
-                        let createDiv = document.createElement('div');
-                        createDiv.id = 'ProtoCard-originals' + i;
-                        createDiv.className = 'ProtoCard-originals';
-                        originals_container.appendChild(createDiv);
-                        let createMarginDiv = document.createElement('div');
-                        createMarginDiv.style.marginBottom = "20px";
-                        originals_container.appendChild(createMarginDiv);
-                        setTimeout(function () {
-                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col7", {
-                                headerJSON: headerJSON
-                            });
-                        }, 0)
-                    })
-                } else {
-                    $(originals_container).siblings(".column-title").hide();
-                }
-
-            }
-        });
-
-        Util.getJSON(streams['3c'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching feeds stream", err);
-            } else {
-                feeds_container = document.getElementById("feeds_container");
-                if (data.length > 0) {
-                    data.map((d, i) => {
-                        let createDiv = document.createElement('div');
-                        createDiv.id = 'ProtoCard-feeds' + i;
-                        createDiv.className = 'ProtoCard-feeds';
-                        feeds_container.appendChild(createDiv);
-                        let createMarginDiv = document.createElement('div');
-                        createMarginDiv.style.marginBottom = "20px";
-                        feeds_container.appendChild(createMarginDiv);
-                        setTimeout(function () {
-                            new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col3", {
-                                headerJSON: headerJSON
-                            });
-                        }, 0)
-                    })
-                } else {
-                    $(feeds_container).siblings(".column-title").hide();
-                }
-            }
-        });
-
-        Util.getJSON(streams['16c_Hero'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching cover stream", err);
-            } else {
-                cover_container = document.getElementById("cover_container");
-
-                data.map((d, i) => {
-                    let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-cover' + i;
-                    createDiv.className = 'ProtoCard-cover';
-                    cover_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
-                    createMarginDiv.style.marginBottom = "20px";
-                    cover_container.appendChild(createMarginDiv);
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col16", {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
-                })
-            }
-        });
-
-
-    }
+    // if (mode === 'laptop') {
+    // }
 
     if (mode === 'mobile') {
         //Set Tab counts and container counts.
@@ -122,74 +46,92 @@ ProtoGraph.initPage = function initPage() {
         $('.close-icon').on('click', (e) => {
             $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
         })
+    }
 
-        Util.getJSON(streams['7c'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching originals stream", err);
-            } else {
-                originals_container = document.getElementById("originals_container");
+    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching cover stream", err);
+        } else {
+            cover_container = document.getElementById("cover_container");
+            if (data.length > 0) {
+                data = [data[0]];
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-originals' + i;
-                    createDiv.className = 'ProtoCard-originals';
-                    originals_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
-                    createMarginDiv.style.marginBottom = "20px";
-                    originals_container.appendChild(createMarginDiv);
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col4", {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
-                })
-            }
-        });
+                    let createDiv = document.createElement('div'),
+                        createMarginDiv = document.createElement('div');
 
-        Util.getJSON(streams['3c'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching feeds stream", err);
-            } else {
-                feeds_container = document.getElementById("feeds_container");
-                data.map((d, i) => {
-                    let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-feeds' + i;
-                    createDiv.className = 'ProtoCard-feeds';
-                    feeds_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
-                    createMarginDiv.style.marginBottom = "20px";
-                    feeds_container.appendChild(createMarginDiv);
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, "col4", {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
-                })
-            }
-        });
-
-        Util.getJSON(streams['16c_Hero'].url, function (err, data) {
-            if (err != null) {
-                console.error("Error fetching cover stream", err);
-            } else {
-                cover_container = document.getElementById("cover_container");
-
-                data.map((d, i) => {
-                    let createDiv = document.createElement('div');
                     createDiv.id = 'ProtoCard-cover' + i;
                     createDiv.className = 'ProtoCard-cover';
                     cover_container.appendChild(createDiv);
+
+                    createMarginDiv.style.marginBottom = "20px";
+                    cover_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, "col4", {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, mode_for_cover, {
                             headerJSON: headerJSON
                         });
                     }, 0)
                 })
             }
-        });
+        }
+    });
 
+    Util.getJSON(streams['7c'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching originals stream", err);
+        } else {
+            originals_container = document.getElementById("originals_container");
 
-    }
-    // $(".banner-div a:empty").parent("p").css("display", "none");
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    let createDiv = document.createElement('div'),
+                        createMarginDiv = document.createElement('div');
+
+                    createDiv.id = 'ProtoCard-originals' + i;
+                    createDiv.className = 'ProtoCard-originals';
+                    originals_container.appendChild(createDiv);
+
+                    createMarginDiv.style.marginBottom = "20px";
+                    originals_container.appendChild(createMarginDiv);
+                    setTimeout(function () {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, render_mode, {
+                            headerJSON: headerJSON
+                        });
+                    }, 0)
+                })
+            } else {
+                $(originals_container).siblings(".column-title").hide();
+            }
+
+        }
+    });
+
+    Util.getJSON(streams['3c'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching feeds stream", err);
+        } else {
+            feeds_container = document.getElementById("feeds_container");
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    let createDiv = document.createElement('div'),
+                        createMarginDiv = document.createElement('div');
+
+                    createDiv.id = 'ProtoCard-feeds' + i;
+                    createDiv.className = 'ProtoCard-feeds';
+                    feeds_container.appendChild(createDiv);
+
+                    createMarginDiv.style.marginBottom = "20px";
+                    feeds_container.appendChild(createMarginDiv);
+                    setTimeout(function () {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, render_mode, {
+                            headerJSON: headerJSON
+                        });
+                    }, 0)
+                })
+            } else {
+                $(feeds_container).siblings(".column-title").hide();
+            }
+        }
+    });
 
     Util.getJSON(streams['4c'].url, function (err, data) {
         if (err != null) {
@@ -198,11 +140,13 @@ ProtoGraph.initPage = function initPage() {
             digests_container = document.getElementById("digests_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div');
+                    let createDiv = document.createElement('div'),
+                        createMarginDiv = document.createElement('div');
+
                     createDiv.id = 'ProtoCard-digests' + i;
                     createDiv.className = 'ProtoCard-digests';
                     digests_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
+
                     createMarginDiv.style.marginBottom = "20px";
                     digests_container.appendChild(createMarginDiv);
                     setTimeout(function () {
@@ -217,7 +161,6 @@ ProtoGraph.initPage = function initPage() {
         }
     });
 
-
     Util.getJSON(streams['2c'].url, function (err, data) {
         if (err != null) {
             console.error("Error fetching opinions stream", err);
@@ -225,11 +168,13 @@ ProtoGraph.initPage = function initPage() {
             opinions_container = document.getElementById("opinions_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div');
+                    let createDiv = document.createElement('div'),
+                        createMarginDiv = document.createElement('div');
+
                     createDiv.id = 'ProtoCard-opinions' + i;
                     createDiv.className = (mode == "mobile" && (i + 1) % 2 == 0) ? 'ProtoCard-opinions div-without-margin-right' : 'ProtoCard-opinions';
                     opinions_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
+
                     createMarginDiv.style.marginBottom = "20px";
                     opinions_container.appendChild(createMarginDiv);
                     setTimeout(function () {
@@ -244,7 +189,3 @@ ProtoGraph.initPage = function initPage() {
         }
     });
 }
-
-// document.addEventListener("DOMContentLoaded", function (event) {
-//     initPage();
-// });
