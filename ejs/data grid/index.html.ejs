@@ -124,11 +124,15 @@
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
         </div>
+        <% let page_object = {}; %>
+        <% ["headline", "cover_image_url", "cover_image_url_7_column"].forEach(function(e){ %>
+            <% page_object[e] = page[e]; %>
+        <% }); %>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
             ProtoGraph.site = <%- JSON.stringify(site) %>;
-            ProtoGraph.page = <%- JSON.stringify(page) %>;
+            ProtoGraph.page = <%- JSON.stringify(page_object) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
