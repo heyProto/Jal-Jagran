@@ -5,6 +5,7 @@ ProtoGraph.initPage = function initPage() {
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
         render_mode = (dimension.width <= 500) ? 'col4' : 'col7',
         mode_for_cover = (mode === 'mobile') ? "col4" : "col16",
+        render_mode_for_feed = (mode === 'mobile') ? "col4" : "col3",
         originals_container,
         cover_container,
         feeds_container,
@@ -122,7 +123,7 @@ ProtoGraph.initPage = function initPage() {
                     createMarginDiv.style.marginBottom = "20px";
                     feeds_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, render_mode, {
+                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, render_mode_for_feed, {
                             headerJSON: headerJSON
                         });
                     }, 0)
