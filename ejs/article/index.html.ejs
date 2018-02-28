@@ -124,7 +124,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="page-index" id="sticker"></div>
+                <div class="page-index" id="sticker">
+                    <% if (navigation_json && navigation_json.length) { %>
+                        <div class="index-title-tabs">
+                            <div class="single-tab-value active-value">OVERVIEW</div>
+                        </div>
+                        <nav class="scroll_navigation" id="myNavbar">
+                            <ul class="nav index-list">
+                                <% navigation_json.forEach(function(item, i) { %>
+                                    <li class="nav-item">
+                                        <a href="#<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                            <%= item['section'] %>
+                                        </a>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </nav>
+                    <% } %>
+                </div>
             </div>
             <div class="proto-col col-7">
                 <div class="article-area-small" id="article">
