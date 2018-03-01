@@ -8,7 +8,12 @@ ProtoGraph.initPage = function initPage() {
         background_size = (dimension.width <= 500) ? 'cover' : '100%',
         streams = ProtoGraph.streams,
         page = ProtoGraph.page,
-        headerJSON = ProtoGraph.headerJSON;
+        headerJSON = ProtoGraph.headerJSON,
+        navigation_items = $("#myNavbar ul li");
+
+    if (!navigation_items.length) {
+        $("#sticker").css('display', "none");
+    }
 
     document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
     document.getElementById('twitter-share-link').href = 'http://twitter.com/share?url=' + window.location.href;
