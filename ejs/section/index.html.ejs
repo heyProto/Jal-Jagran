@@ -101,7 +101,14 @@
 
             <div class="proto-col col-16 stick-to-top">
                 <div class="col-16-story-card">
-                    <div id='cover_container'></div>
+                    <div id='cover_container'>
+                        <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
+                            <div id="<%= e[0]%>">
+                                <%- e[1] %>
+                            </div>
+                            <div style='margin-bottom: 20px'></div>
+                        <% }) %>
+                    </div>
                 </div>
             </div>
             <div class="proto-col col-16 proto-nav-sticky">
@@ -114,19 +121,47 @@
             </div>
             <div class="proto-col col-7 proto-tab-content proto-tab-active-content">
                 <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
-                <div id="originals_container"></div>
+                <div id="originals_container">
+                    <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% }) %>
+                </div>
             </div>
             <div class="proto-col col-4 proto-tab-content">
                 <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
-                <div id="digests_container"></div>
+                <div id="digests_container">
+                    <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% }) %>
+                </div>
             </div>
             <div class="proto-col col-2 proto-tab-content">
                 <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
-                <div id='opinions_container'></div>
+                <div id='opinions_container'>
+                    <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% }) %>
+                </div>
             </div>
             <div class="proto-col col-3 proto-tab-content">
                 <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
-                <div id='feeds_container'></div>
+                <div id='feeds_container'>
+                    <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% }) %>
+                </div>
             </div>
         </div>
         <div class="proto-app-scroll-to-top" title="Scroll to top">

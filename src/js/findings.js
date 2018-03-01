@@ -143,15 +143,8 @@ ProtoGraph.initPage = function initPage() {
             ProtoGraph.total_narrative_iframes_loaded = 0;
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-article' + i;
-                    // createDiv.className= 'ProtoCard-originals';
-                    article_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
-                    createMarginDiv.style.marginBottom = "20px";
-                    article_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById("ProtoCard-article" + i), data[i].iframe_url, render_mode, {
+                        var sandbox_iframe = new ProtoEmbed.initFrame($("#article #" + d.view_cast_id)[0], data[i].iframe_url, render_mode, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -173,17 +166,8 @@ ProtoGraph.initPage = function initPage() {
                 if (data.length > 0) {
                     data = [data[0]];
                     data.map((d, i) => {
-                        let div = document.createElement('div'),
-                            marginDiv = document.createElement('div');
-
-                        div.id = `ProtoCard_16c_cover_${i}`;
-                        div.className = "ProtoCard-cover";
-                        cover_container.appendChild(div);
-
-                        marginDiv.style.marginBottom = "20px";
-                        cover_container.appendChild(marginDiv);
                         setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, mode_for_cover);
+                            var sandbox_iframe = new ProtoEmbed.initFrame($("#col_16_cover_container #" + d.view_cast_id)[0], data[i].iframe_url, mode_for_cover);
                         }, 0)
                     })
                 } else {

@@ -53,21 +53,11 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching cover stream", err);
         } else {
-            cover_container = document.getElementById("cover_container");
             if (data.length > 0) {
                 data = [data[0]];
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div'),
-                        createMarginDiv = document.createElement('div');
-
-                    createDiv.id = 'ProtoCard-cover' + i;
-                    createDiv.className = 'ProtoCard-cover';
-                    cover_container.appendChild(createDiv);
-
-                    createMarginDiv.style.marginBottom = "20px";
-                    cover_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-cover" + i), data[i].iframe_url, mode_for_cover, {
+                        new ProtoEmbed.initFrame($("#cover_container #"+d.view_cast_id)[0], data[i].iframe_url, mode_for_cover, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -80,21 +70,10 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching originals stream", err);
         } else {
-            originals_container = document.getElementById("originals_container");
-
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div'),
-                        createMarginDiv = document.createElement('div');
-
-                    createDiv.id = 'ProtoCard-originals' + i;
-                    createDiv.className = 'ProtoCard-originals';
-                    originals_container.appendChild(createDiv);
-
-                    createMarginDiv.style.marginBottom = "20px";
-                    originals_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, render_mode, {
+                        new ProtoEmbed.initFrame($("#originals_container #"+d.view_cast_id)[0], data[i].iframe_url, render_mode, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -110,20 +89,10 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching feeds stream", err);
         } else {
-            feeds_container = document.getElementById("feeds_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div'),
-                        createMarginDiv = document.createElement('div');
-
-                    createDiv.id = 'ProtoCard-feeds' + i;
-                    createDiv.className = 'ProtoCard-feeds';
-                    feeds_container.appendChild(createDiv);
-
-                    createMarginDiv.style.marginBottom = "20px";
-                    feeds_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-feeds" + i), data[i].iframe_url, render_mode_for_feed, {
+                        new ProtoEmbed.initFrame($("#feeds_container #"+d.view_cast_id)[0], data[i].iframe_url, render_mode_for_feed, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -138,20 +107,10 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching digests stream", err);
         } else {
-            digests_container = document.getElementById("digests_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div'),
-                        createMarginDiv = document.createElement('div');
-
-                    createDiv.id = 'ProtoCard-digests' + i;
-                    createDiv.className = 'ProtoCard-digests';
-                    digests_container.appendChild(createDiv);
-
-                    createMarginDiv.style.marginBottom = "20px";
-                    digests_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-digests" + i), data[i].iframe_url, "col4", {
+                        new ProtoEmbed.initFrame($("#digests_container #"+d.view_cast_id)[0], data[i].iframe_url, "col4", {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -166,20 +125,10 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching opinions stream", err);
         } else {
-            opinions_container = document.getElementById("opinions_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div'),
-                        createMarginDiv = document.createElement('div');
-
-                    createDiv.id = 'ProtoCard-opinions' + i;
-                    createDiv.className = (mode == "mobile" && (i + 1) % 2 == 0) ? 'ProtoCard-opinions div-without-margin-right' : 'ProtoCard-opinions';
-                    opinions_container.appendChild(createDiv);
-
-                    createMarginDiv.style.marginBottom = "20px";
-                    opinions_container.appendChild(createMarginDiv);
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-opinions" + i), data[i].iframe_url, "col2", {
+                        new ProtoEmbed.initFrame($("#opinions_container #"+d.view_cast_id)[0], data[i].iframe_url, "col2", {
                             headerJSON: headerJSON
                         });
                     }, 0)

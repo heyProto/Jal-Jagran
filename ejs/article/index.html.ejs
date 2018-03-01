@@ -110,7 +110,14 @@
                 </div>
             </div>
 
-            <div class="proto-col col-16" id="col_16_cover_container"></div>
+            <div class="proto-col col-16" id="col_16_cover_container">
+                <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
+                    <div id="<%= e[0]%>">
+                        <%- e[1] %>
+                    </div>
+                    <div style='margin-bottom: 20px'></div>
+                <% }) %>
+            </div>
             <div class="proto-col col-4 navigation-links">
                 <div class="summary">
                     <div class="article-share-icons">
@@ -148,6 +155,12 @@
             <div class="proto-col col-7">
                 <div class="article-area-small" id="article">
                     <div class="fade-area"></div>
+                    <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% }) %>
                 </div>
                 <div class="default-button read-more-button" id="cont-button">
                     Continue Reading
