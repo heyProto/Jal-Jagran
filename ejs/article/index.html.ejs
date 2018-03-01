@@ -132,11 +132,13 @@
                         <nav class="scroll_navigation" id="myNavbar">
                             <ul class="nav index-list">
                                 <% navigation_json.forEach(function(item, i) { %>
-                                    <li class="nav-item">
-                                        <a href="#<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
-                                            <%= item['section'] %>
-                                        </a>
-                                    </li>
+                                    <% if (item['section'].length) { %>
+                                        <li class="nav-item">
+                                            <a href="#<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                                <%= item['section'] %>
+                                            </a>
+                                        </li>
+                                    <% } %>
                                 <% }); %>
                             </ul>
                         </nav>
