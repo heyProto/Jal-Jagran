@@ -149,7 +149,7 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     setTimeout(function () {
-                        var sandbox_iframe = new ProtoEmbed.initFrame($("#article #" + d.view_cast_id)[0], data[i].iframe_url, render_mode, {
+                        var sandbox_iframe = new ProtoEmbed.initFrame($("#article #article-" + d.view_cast_id)[0], data[i].iframe_url, render_mode, {
                             headerJSON: headerJSON
                         });
                     }, 0)

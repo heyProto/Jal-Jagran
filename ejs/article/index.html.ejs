@@ -141,7 +141,7 @@
                                 <% navigation_json.forEach(function(item, i) { %>
                                     <% if (item['section'].length) { %>
                                         <li class="nav-item">
-                                            <a href="#<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                            <a href="#article-<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
                                                 <%= item['section'] %>
                                             </a>
                                         </li>
@@ -156,7 +156,7 @@
                 <div class="article-area-small" id="article">
                     <div class="fade-area"></div>
                     <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
-                        <div id="<%= e[0]%>">
+                        <div id="article-<%= e[0]%>">
                             <%- e[1] %>
                         </div>
                         <div style='margin-bottom: 20px'></div>
