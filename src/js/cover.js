@@ -57,7 +57,7 @@ ProtoGraph.initPage = function initPage() {
                 data = [data[0]];
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#cover_container #"+d.view_cast_id)[0], data[i].iframe_url, mode_for_cover, {
+                        new ProtoEmbed.initFrame($("#cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -73,7 +73,7 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#originals_container #"+d.view_cast_id)[0], data[i].iframe_url, render_mode, {
+                        new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -92,7 +92,7 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#feeds_container #"+d.view_cast_id)[0], data[i].iframe_url, render_mode_for_feed, {
+                        new ProtoEmbed.initFrame($("#feeds_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode_for_feed, {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -110,7 +110,7 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#digests_container #"+d.view_cast_id)[0], data[i].iframe_url, "col4", {
+                        new ProtoEmbed.initFrame($("#digests_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -128,7 +128,7 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#opinions_container #"+d.view_cast_id)[0], data[i].iframe_url, "col2", {
+                        new ProtoEmbed.initFrame($("#opinions_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col2", {
                             headerJSON: headerJSON
                         });
                     }, 0)

@@ -46,7 +46,7 @@ ProtoGraph.initPage = function initPage() {
                             originals_container.appendChild(createDiv);
                             let createMarginDiv = document.createElement('div');
                             setTimeout(function () {
-                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), data[i].iframe_url, "col4", {
+                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
                                     headerJSON: headerJSON
                                 });
                             }, 0)
@@ -172,7 +172,7 @@ ProtoGraph.initPage = function initPage() {
                     data = [data[0]];
                     data.map((d, i) => {
                         setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame($("#col_16_cover_container #" + d.view_cast_id)[0], data[i].iframe_url, mode_for_cover);
+                            var sandbox_iframe = new ProtoEmbed.initFrame($("#col_16_cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover);
                         }, 0)
                     })
                 } else {
