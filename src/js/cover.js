@@ -12,10 +12,21 @@ ProtoGraph.initPage = function initPage() {
         digests_container,
         opinions_container,
         headerJSON = ProtoGraph.headerJSON,
-        streams = ProtoGraph.streams;
+        streams = ProtoGraph.streams,
+        sticky_sidebar_options;
 
-    // if (mode === 'laptop') {
-    // }
+    if (mode === 'laptop') {
+        sticky_sidebar_options = {
+            containerSelector: '#cover',
+            innerWrapperSelector: '.sidebar__inner',
+            resizeSensor: true,
+            bottomSpacing: 0
+        };
+        $('#originals_container').stickySidebar(sticky_sidebar_options);
+        $('#digests_container').stickySidebar(sticky_sidebar_options);
+        $('#feeds_container').stickySidebar(sticky_sidebar_options);
+        $('#opinions_container').stickySidebar(sticky_sidebar_options);
+    }
 
     if (mode === 'mobile') {
         //Set Tab counts and container counts.
