@@ -112,4 +112,7 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .ProtoCard-opinions:nth-child(4n + 3) {
+        margin-right: 0px;
+    }
 }
