@@ -140,9 +140,9 @@
                 <div class="proto-col col-7 proto-tab-content proto-tab-active-content">
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="sidebar">
-                         <div class="sidebar__inner">
+                         <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e) { %>
-                                <div id="<%= e[0]%>">
+                                <div id="<%= e[0]%>" class="ProtoCard-originals">
                                     <%- e[1] %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -153,9 +153,9 @@
                 <div class="proto-col col-4 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
                     <div id="digests_container" class="sidebar">
-                        <div class="sidebar__inner">
+                        <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e) { %>
-                                <div id="<%= e[0]%>">
+                                <div id="<%= e[0]%>" class="ProtoCard-digests">
                                     <%- e[1] %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -166,9 +166,9 @@
                 <div class="proto-col col-2 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
                     <div id='opinions_container' class="sidebar">
-                        <div class="sidebar__inner">
+                        <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e) { %>
-                                <div id="<%= e[0]%>">
+                                <div id="<%= e[0]%>" class="ProtoCard-opinions">
                                     <%- e[1] %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -179,9 +179,9 @@
                 <div class="proto-col col-3 proto-tab-content no-right-margin">
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
                     <div id='feeds_container' class="sidebar">
-                        <div class="sidebar__inner">
+                        <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e) { %>
-                                <div id="<%= e[0]%>">
+                                <div id="<%= e[0]%>" class="ProtoCard-feeds">
                                     <%- e[1] %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -203,6 +203,7 @@
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js"></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-sticky-sidebar.min.js"></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js"></script>
         <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js"></script>
         <% if (site.ga_code) { %>

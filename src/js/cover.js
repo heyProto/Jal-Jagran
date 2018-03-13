@@ -17,15 +17,13 @@ ProtoGraph.initPage = function initPage() {
 
     if (mode === 'laptop') {
         sticky_sidebar_options = {
-            containerSelector: '#cover',
-            innerWrapperSelector: '.sidebar__inner',
-            resizeSensor: true,
-            bottomSpacing: 0
+            containerSelector: "#cover",
+            additionalMarginTop: 20
         };
-        $('#originals_container').stickySidebar(sticky_sidebar_options);
-        $('#digests_container').stickySidebar(sticky_sidebar_options);
-        $('#feeds_container').stickySidebar(sticky_sidebar_options);
-        $('#opinions_container').stickySidebar(sticky_sidebar_options);
+        $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
+        $('#digests_container').theiaStickySidebar(sticky_sidebar_options);
+        $('#feeds_container').theiaStickySidebar(sticky_sidebar_options);
+        $('#opinions_container').theiaStickySidebar(sticky_sidebar_options);
     }
 
     if (mode === 'mobile') {
