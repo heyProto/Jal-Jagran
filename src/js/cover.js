@@ -66,7 +66,7 @@ ProtoGraph.initPage = function initPage() {
                 data = [data[0]];
                 data.map((d, i) => {
                     setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover, {
+                        new ProtoEmbed.initFrame($("#cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
                             headerJSON: headerJSON
                         });
                     }, 0)
@@ -81,34 +81,23 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
+                    $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                    $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
                 })
             } else {
                 $(originals_container).siblings(".column-title").hide();
             }
 
-        }
-    });
-
-    Util.getJSON(streams['3c'].url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching feeds stream", err);
-        } else {
-            if (data.length > 0) {
-                data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#feeds_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode_for_feed, {
+            inView('.ProtoCard-originals')
+                .on('enter', (e) => {
+                    var $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
                             headerJSON: headerJSON
                         });
-                    }, 0)
-                })
-            } else {
-                $(feeds_container).siblings(".column-title").hide();
-            }
+                    }
+                });
+
         }
     });
 
@@ -118,15 +107,22 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#digests_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
+                    $("#digests_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                    $("#digests_container #" + d.view_cast_id).attr('mode', "col4");
                 })
             } else {
                 $(digests_container).siblings(".column-title").hide();
             }
+
+            inView('.ProtoCard-digests')
+                .on('enter', (e) => {
+                    var $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
         }
     });
 
@@ -136,15 +132,46 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#opinions_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col2", {
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
+                    $("#opinions_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                    $("#opinions_container #" + d.view_cast_id).attr('mode', "col2");
                 })
             } else {
                 $(opinions_container).siblings(".column-title").hide();
             }
+            inView('.ProtoCard-opinions')
+                .on('enter', (e) => {
+                    var $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+    });
+
+    Util.getJSON(streams['3c'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching feeds stream", err);
+        } else {
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    $("#feeds_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                    $("#feeds_container #" + d.view_cast_id).attr('mode', render_mode_for_feed);
+                })
+            } else {
+                $(feeds_container).siblings(".column-title").hide();
+            }
+
+            inView('.ProtoCard-feeds')
+                .on('enter', (e) => {
+                    var $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
         }
     });
 }
