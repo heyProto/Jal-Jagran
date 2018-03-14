@@ -9,7 +9,8 @@ ProtoGraph.initPage = function initPage() {
         streams = ProtoGraph.streams,
         page = ProtoGraph.page,
         headerJSON = ProtoGraph.headerJSON,
-        navigation_items = $("#myNavbar ul li");
+        navigation_items = $("#myNavbar ul li"),
+        is_lazy_loading_activated = ProtoGraph.site.is_lazy_loading_activated;
 
     if (!navigation_items.length) {
         $("#sticker").css('display', "none");
@@ -41,12 +42,12 @@ ProtoGraph.initPage = function initPage() {
                         data.length <= 4 ? len = data.length : len = 4;
                         for (let i = 0; i < len; i++) {
                             let createDiv = document.createElement('div');
-                            createDiv.id = 'ProtoCard-more-articles' + i;
+                            createDiv.id = 'ProtoCard_more_articles' + i;
                             createDiv.className = 'ProtoCard-more-articles';
                             originals_container.appendChild(createDiv);
                             let createMarginDiv = document.createElement('div');
                             setTimeout(function () {
-                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard-more-articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
                                     headerJSON: headerJSON
                                 });
                             }, 0)
@@ -115,45 +116,66 @@ ProtoGraph.initPage = function initPage() {
 
     Util.getJSON(streams['Related'].url, function (err, data) {
         if (err != null) {
-            console.error("Error fetching Relative stream", err);
+            console.error("Error fetching relative stream", err);
         } else {
-            let originals_container = document.getElementById("related_container");
             if (data.length > 0) {
                 data.map((d, i) => {
-                    let createDiv = document.createElement('div');
-                    createDiv.id = 'ProtoCard-originals' + i;
-                    // createDiv.className= 'ProtoCard-originals';
-                    originals_container.appendChild(createDiv);
-                    let createMarginDiv = document.createElement('div');
-                    createMarginDiv.style.marginBottom = "20px";
-                    originals_container.appendChild(createMarginDiv);
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame(document.getElementById("ProtoCard-originals" + i), data[i].iframe_url, "col4", {
-                            headerJSON: headerJSON
+                    if (is_lazy_loading_activated) {
+                        $("#related_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#related_container #" + d.view_cast_id).attr('mode', "col4");
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#related_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-related-articles')
+                        .on('enter', (e) => {
+                            let $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
                         });
-                    }, 0)
-                })
+                }
             } else {
-                $(originals_container).siblings(".column-title").hide();
+                $("#related_container").siblings(".column-title").hide();
             }
         }
     });
 
     Util.getJSON(streams['Narrative'].url, function (err, data) {
         if (err != null) {
-            console.error("Error fetching Narrative stream", err);
+            console.error("Error fetching narrative stream", err);
         } else {
-            let article_container = document.getElementById("article");
-            ProtoGraph.total_narrative_iframes = data.length;
-            ProtoGraph.total_narrative_iframes_loaded = 0;
             if (data.length > 0) {
                 data.map((d, i) => {
-                    setTimeout(function () {
-                        var sandbox_iframe = new ProtoEmbed.initFrame($("#article #article-" + d.view_cast_id)[0], data[i].iframe_url, render_mode, {
-                            headerJSON: headerJSON
+                    if (is_lazy_loading_activated) {
+                        $("#article #article_" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#article #article_" + d.view_cast_id).attr('mode', render_mode);
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#article #article_" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-articles')
+                        .on('enter', (e) => {
+                            let $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
                         });
-                    }, 0)
-                })
+                }
             } else {
                 $('#cont-button').css('display', 'none');
             }

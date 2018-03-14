@@ -10,7 +10,6 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-fonts.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
         <% if (site.favicon_url) { %>
             <link rel="icon" type="image/png" href="<%= site['favicon_url'] %>" />
         <% } %>
@@ -173,7 +172,7 @@
                 <div class="article-area-small" id="article">
                     <div class="fade-area"></div>
                     <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
-                        <div id="article-<%= e[0]%>">
+                        <div id="article_<%= e[0]%>" class="ProtoCard-articles">
                             <%- e[1] %>
                         </div>
                         <div style='margin-bottom: 20px'></div>
@@ -186,7 +185,13 @@
             <div class="proto-col col-4 col-1-offset">
                 <div class="related-articles-link">
                     <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
-                    <div id="related_container"></div>
+                    <div id="related_container">
+                        <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
+                            <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
+                                <%- e[1] %>
+                            </div>
+                        <% }) %>
+                    </div>
                 </div>
             </div>
             <% if (streams_mapping['7c']) { %>
@@ -212,16 +217,18 @@
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.page = <%- JSON.stringify(page_object) %>;
+            ProtoGraph.site = <%- JSON.stringify(site) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
-        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js"></script>
-        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js"></script>
-        <script src="https://cdn.protograph.pykih.com/lib/tether.min.js"></script>
-        <script src="https://cdn.protograph.pykih.com/lib/bootstrap.min.js"></script>
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
-        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.js"></script>
+        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
+        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js" defer></script>
+        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js" defer></script>
+        <script src="https://cdn.protograph.pykih.com/lib/tether.min.js" defer></script>
+        <script src="https://cdn.protograph.pykih.com/lib/bootstrap.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-in-view.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.js" defer></script>
         <% if (site.ga_code) { %>
             <!-- Global Site Tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>

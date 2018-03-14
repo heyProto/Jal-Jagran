@@ -13,7 +13,8 @@ ProtoGraph.initPage = function initPage() {
         opinions_container,
         headerJSON = ProtoGraph.headerJSON,
         streams = ProtoGraph.streams,
-        sticky_sidebar_options;
+        sticky_sidebar_options,
+        is_lazy_loading_activated = ProtoGraph.site.is_lazy_loading_activated;
 
     if (mode === 'laptop') {
         sticky_sidebar_options = {
@@ -79,25 +80,37 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching originals stream", err);
         } else {
-            if (data.length > 0) {
-                data.map((d, i) => {
-                    $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                    $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
-                })
+            if (err != null) {
+                console.error("Error fetching originals stream", err);
             } else {
-                $(originals_container).siblings(".column-title").hide();
-            }
-
-            inView('.ProtoCard-originals')
-                .on('enter', (e) => {
-                    var $e = $(e);
-                    if (!$e.find('iframe').length) {
-                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                            headerJSON: headerJSON
-                        });
+                if (data.length > 0) {
+                    data.map((d, i) => {
+                        if (is_lazy_loading_activated) {
+                            $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                            $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
+                        } else {
+                            setTimeout(function () {
+                                new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+                                    headerJSON: headerJSON
+                                });
+                            }, 0)
+                        }
+                    });
+                    if (is_lazy_loading_activated) {
+                        inView('.ProtoCard-originals')
+                            .on('enter', (e) => {
+                                let $e = $(e);
+                                if (!$e.find('iframe').length) {
+                                    new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                        headerJSON: headerJSON
+                                    });
+                                }
+                            });
                     }
-                });
-
+                } else {
+                    $(originals_container).siblings(".column-title").hide();
+                }
+            }
         }
     });
 
@@ -107,22 +120,31 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    $("#digests_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                    $("#digests_container #" + d.view_cast_id).attr('mode', "col4");
-                })
+                    if (is_lazy_loading_activated) {
+                        $("#digests_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#digests_container #" + d.view_cast_id).attr('mode', "col4");
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#digests_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-digests')
+                        .on('enter', (e) => {
+                            var $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
+                        });
+                }
             } else {
                 $(digests_container).siblings(".column-title").hide();
             }
-
-            inView('.ProtoCard-digests')
-                .on('enter', (e) => {
-                    var $e = $(e);
-                    if (!$e.find('iframe').length) {
-                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                            headerJSON: headerJSON
-                        });
-                    }
-                });
         }
     });
 
@@ -132,21 +154,31 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    $("#opinions_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                    $("#opinions_container #" + d.view_cast_id).attr('mode', "col2");
-                })
+                    if (is_lazy_loading_activated) {
+                        $("#opinions_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#opinions_container #" + d.view_cast_id).attr('mode', "col2");
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#opinions_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col2", {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-opinions')
+                        .on('enter', (e) => {
+                            var $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
+                        });
+                }
             } else {
                 $(opinions_container).siblings(".column-title").hide();
             }
-            inView('.ProtoCard-opinions')
-                .on('enter', (e) => {
-                    var $e = $(e);
-                    if (!$e.find('iframe').length) {
-                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                            headerJSON: headerJSON
-                        });
-                    }
-                });
         }
     });
 
@@ -156,22 +188,31 @@ ProtoGraph.initPage = function initPage() {
         } else {
             if (data.length > 0) {
                 data.map((d, i) => {
-                    $("#feeds_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                    $("#feeds_container #" + d.view_cast_id).attr('mode', render_mode_for_feed);
-                })
+                    if (is_lazy_loading_activated) {
+                        $("#feeds_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#feeds_container #" + d.view_cast_id).attr('mode', render_mode_for_feed);
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#feeds_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode_for_feed, {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-feeds')
+                        .on('enter', (e) => {
+                            var $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
+                        });
+                }
             } else {
                 $(feeds_container).siblings(".column-title").hide();
             }
-
-            inView('.ProtoCard-feeds')
-                .on('enter', (e) => {
-                    var $e = $(e);
-                    if (!$e.find('iframe').length) {
-                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                            headerJSON: headerJSON
-                        });
-                    }
-                });
         }
     });
 }
