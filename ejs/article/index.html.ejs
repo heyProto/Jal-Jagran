@@ -88,6 +88,13 @@
                             </a>
                         </div>
                     <% } %>
+                    <% if (more_in_the_series) {%>
+                        <div class="single-link">
+                            <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                            </a>
+                        </div>
+                    <% }%>
                 </div>
             </div>
             <div class="mobile-navigation">
@@ -194,11 +201,42 @@
                     </div>
                 </div>
             </div>
-            <% if (streams_mapping['7c']) { %>
+            <% if (more_in_the_series) { %>
                 <div class="proto-col col-16 more-articles-link-div">
                     <div class="more-articles-link">
-                        <div class="column-title"><%= streams_mapping['7c'].name_of_stream %></div>
+                        <div class="column-title">
+                            <%= more_in_the_series.name_of_stream %>
+                            <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                            </a>
+                        </div>
                         <div id="more_articles_container" class="more-articles-container"></div>
+                    </div>
+                </div>
+            <% } %>
+            <% if (more_in_the_intersection) { %>
+                <div class="proto-col col-16 more-articles-link-div">
+                    <div class="more-articles-link">
+                        <div class="column-title">
+                            <%= more_in_the_intersection.name_of_stream %>
+                            <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                            </a>
+                        </div>
+                        <div id="more_intersections_container" class="more-articles-container"></div>
+                    </div>
+                </div>
+            <% } %>
+            <% if (more_in_the_sub_intersection) { %>
+                <div class="proto-col col-16 more-articles-link-div">
+                    <div class="more-articles-link">
+                        <div class="column-title">
+                            <%= more_in_the_sub_intersection.name_of_stream %>
+                            <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                            </a>
+                        </div>
+                        <div id="more_sub_intersections_container" class="more-articles-container"></div>
                     </div>
                 </div>
             <% } %>
@@ -218,9 +256,12 @@
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.page = <%- JSON.stringify(page_object) %>;
             ProtoGraph.site = <%- JSON.stringify(site) %>;
+            ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
-            ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
+            ProtoGraph.more_in_the_series = <%- JSON.stringify(more_in_the_series) %>;
+            ProtoGraph.more_in_the_intersection = <%- JSON.stringify(more_in_the_intersection || {}) %>;
+            ProtoGraph.more_in_the_sub_intersection = <%- JSON.stringify(more_in_the_sub_intersection || {}) %>;
         </script>
         <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
         <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js" defer></script>

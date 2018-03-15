@@ -91,6 +91,13 @@
                             </a>
                         </div>
                     <% } %>
+                    <% if (more_in_the_series) {%>
+                        <div class="single-link">
+                            <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                            </a>
+                        </div>
+                    <% }%>
                 </div>
             </div>
             <div class="mobile-navigation">

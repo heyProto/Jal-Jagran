@@ -10,7 +10,10 @@ ProtoGraph.initPage = function initPage() {
         page = ProtoGraph.page,
         headerJSON = ProtoGraph.headerJSON,
         navigation_items = $("#myNavbar ul li"),
-        is_lazy_loading_activated = ProtoGraph.site.is_lazy_loading_activated;
+        is_lazy_loading_activated = ProtoGraph.site.is_lazy_loading_activated,
+        more_in_the_series = ProtoGraph.more_in_the_series,
+        more_in_the_intersection = ProtoGraph.more_in_the_intersection,
+        more_in_the_sub_intersection = ProtoGraph.more_in_the_sub_intersection;
 
     if (!navigation_items.length) {
         $("#sticker").css('display', "none");
@@ -31,8 +34,8 @@ ProtoGraph.initPage = function initPage() {
                 offset: 70
             });
         })
-        if (streams["7c"]) {
-            Util.getJSON(streams["7c"].url, function (err, data) {
+        if (Object.keys(more_in_the_series).length) {
+            Util.getJSON(more_in_the_series.url, function (err, data) {
                 if (err != null) {
                     console.error("Error fetching more in series stream", err);
                 } else {
@@ -48,6 +51,60 @@ ProtoGraph.initPage = function initPage() {
                             let createMarginDiv = document.createElement('div');
                             setTimeout(function () {
                                 new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                                    headerJSON: headerJSON
+                                });
+                            }, 0)
+                        }
+                    } else {
+                        $(originals_container).siblings(".column-title").hide();
+                    }
+                }
+            });
+        }
+        if (Object.keys(more_in_the_intersection).length) {
+            Util.getJSON(more_in_the_intersection.url, function (err, data) {
+                if (err != null) {
+                    console.error("Error fetching more in series stream", err);
+                } else {
+                    let originals_container = document.getElementById("more_intersections_container");
+                    if (data.length > 0) {
+                        let len;
+                        data.length <= 4 ? len = data.length : len = 4;
+                        for (let i = 0; i < len; i++) {
+                            let createDiv = document.createElement('div');
+                            createDiv.id = 'ProtoCard_more_intersections' + i;
+                            createDiv.className = 'ProtoCard-more-articles';
+                            originals_container.appendChild(createDiv);
+                            let createMarginDiv = document.createElement('div');
+                            setTimeout(function () {
+                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                                    headerJSON: headerJSON
+                                });
+                            }, 0)
+                        }
+                    } else {
+                        $(originals_container).siblings(".column-title").hide();
+                    }
+                }
+            });
+        }
+        if (Object.keys(more_in_the_sub_intersection).length) {
+            Util.getJSON(more_in_the_sub_intersection.url, function (err, data) {
+                if (err != null) {
+                    console.error("Error fetching more in series stream", err);
+                } else {
+                    let originals_container = document.getElementById("more_sub_intersections_container");
+                    if (data.length > 0) {
+                        let len;
+                        data.length <= 4 ? len = data.length : len = 4;
+                        for (let i = 0; i < len; i++) {
+                            let createDiv = document.createElement('div');
+                            createDiv.id = 'ProtoCard_more_sub_intersections' + i;
+                            createDiv.className = 'ProtoCard-more-articles';
+                            originals_container.appendChild(createDiv);
+                            let createMarginDiv = document.createElement('div');
+                            setTimeout(function () {
+                                new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_sub_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
                                     headerJSON: headerJSON
                                 });
                             }, 0)
