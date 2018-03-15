@@ -11,7 +11,6 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-fonts.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
         <% if (site.favicon_url) { %>
             <link rel="icon" type="image/png" href="<%= site['favicon_url'] %>" />
         <% } %>
@@ -155,10 +154,11 @@
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
-        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js"></script>
-        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js"></script>
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js"></script>
-        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-grid.min.js"></script>
+        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
+        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js" defer></script>
+        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js" defer></script>
+        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-grid.min.js" defer></script>
         <% if (site.ga_code) { %>
             <!-- Global Site Tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>
