@@ -11,7 +11,6 @@
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js"></script>
         <% if (site.favicon_url) { %>
             <link rel="icon" type="image/png" href="<%= site['favicon_url'] %>" />
         <% } %>
@@ -196,16 +195,19 @@
         </div>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
+            ProtoGraph.site = <%- JSON.stringify(site) %>
             ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js"></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-sticky-sidebar.min.js"></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js"></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js"></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-sticky-sidebar.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-in-view.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js" defer></script>
         <% if (site.ga_code) { %>
             <!-- Global Site Tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>

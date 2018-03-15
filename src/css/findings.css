@@ -171,8 +171,12 @@ ul.scrollspy-child-ul {
   margin-bottom: 100px;
 }
 
-.article-area-small iframe {
+#article iframe {
   display: block;
+}
+
+.proto-articles-container {
+  display: inline-block;
 }
 
 @media only screen and (max-width: 1200px) {
