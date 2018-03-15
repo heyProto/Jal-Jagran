@@ -121,11 +121,11 @@ ProtoGraph.initPage = function initPage() {
             if (data.length > 0) {
                 data.map((d, i) => {
                     if (is_lazy_loading_activated) {
-                        $("#related_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                        $("#related_container #" + d.view_cast_id).attr('mode', "col4");
+                        $("#related_container #ProtoCard_related_articles_" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#related_container #ProtoCard_related_articles_" + d.view_cast_id).attr('mode', "col4");
                     } else {
                         setTimeout(function () {
-                            new ProtoEmbed.initFrame($("#related_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+                            new ProtoEmbed.initFrame($("#related_container #ProtoCard_related_articles_" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
                                 headerJSON: headerJSON
                             });
                         }, 0)
