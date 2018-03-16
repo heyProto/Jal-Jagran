@@ -34,7 +34,7 @@ ProtoGraph.initPage = function initPage() {
                 offset: 70
             });
         })
-        if (Object.keys(more_in_the_series).length) {
+        if (more_in_the_series && Object.keys(more_in_the_series).length) {
             Util.getJSON(more_in_the_series.url, function (err, data) {
                 if (err != null) {
                     console.error("Error fetching more in series stream", err);
@@ -60,8 +60,10 @@ ProtoGraph.initPage = function initPage() {
                     }
                 }
             });
+        } else {
+            $("#more_articles_container").siblings(".column-title").hide();
         }
-        if (Object.keys(more_in_the_intersection).length) {
+        if (more_in_the_intersection && Object.keys(more_in_the_intersection).length) {
             Util.getJSON(more_in_the_intersection.url, function (err, data) {
                 if (err != null) {
                     console.error("Error fetching more in series stream", err);
@@ -87,8 +89,10 @@ ProtoGraph.initPage = function initPage() {
                     }
                 }
             });
+        } else {
+            $("#more_intersections_container").siblings(".column-title").hide();
         }
-        if (Object.keys(more_in_the_sub_intersection).length) {
+        if (more_in_the_sub_intersection && Object.keys(more_in_the_sub_intersection).length) {
             Util.getJSON(more_in_the_sub_intersection.url, function (err, data) {
                 if (err != null) {
                     console.error("Error fetching more in series stream", err);
@@ -114,6 +118,8 @@ ProtoGraph.initPage = function initPage() {
                     }
                 }
             });
+        } else {
+            $("#more_sub_intersections_container").siblings(".column-title").hide();
         }
     }
 
