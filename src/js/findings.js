@@ -13,7 +13,8 @@ ProtoGraph.initPage = function initPage() {
         is_lazy_loading_activated = ProtoGraph.site.is_lazy_loading_activated,
         more_in_the_series = ProtoGraph.more_in_the_series,
         more_in_the_intersection = ProtoGraph.more_in_the_intersection,
-        more_in_the_sub_intersection = ProtoGraph.more_in_the_sub_intersection;
+        more_in_the_sub_intersection = ProtoGraph.more_in_the_sub_intersection,
+        sticky_sidebar_options;
 
     if (!navigation_items.length) {
         $("#sticker").css('display', "none");
@@ -23,8 +24,15 @@ ProtoGraph.initPage = function initPage() {
     document.getElementById('twitter-share-link').href = 'http://twitter.com/share?url=' + window.location.href;
 
     if (mode === 'laptop') {
-        $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400 });
-        $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 400 });
+        sticky_sidebar_options = {
+            containerSelector: ".cover-page-overlay",
+            additionalMarginTop: 20,
+            additionalMarginBottom: 10
+        };
+        $('#sticker').theiaStickySidebar(sticky_sidebar_options);
+        $('.related-articles-link').theiaStickySidebar(sticky_sidebar_options);
+        // $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400 });
+        // $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 400 });
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';

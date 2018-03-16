@@ -141,66 +141,74 @@
                     <div style='margin-bottom: 20px'></div>
                 <% }) %>
             </div>
-            <div class="proto-col col-4 navigation-links">
-                <div class="summary">
-                    <div class="article-share-icons">
+
+            <div class="proto-col col-16 cover-page-overlay no-right-column">
+                <div class="proto-col col-4 navigation-links">
+                    <div class="summary">
                         <div class="article-share-icons">
-                            <a href="#" id='facebook-share-link' target="_blank">
-                                <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></div>
-                            </a>
-                            <a href="#" id='twitter-share-link' target="_blank">
-                                <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></div>
-                            </a>
+                            <div class="article-share-icons">
+                                <a href="#" id='facebook-share-link' target="_blank">
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></div>
+                                </a>
+                                <a href="#" id='twitter-share-link' target="_blank">
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></div>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <div class="page-index" id="sticker">
+                        <% if (navigation_json && navigation_json.length) { %>
+                            <div class="theiaStickySidebar">
+                                <div class="index-title-tabs">
+                                    <div class="single-tab-value active-value">OVERVIEW</div>
+                                </div>
+                                <nav class="scroll_navigation" id="myNavbar">
+                                    <ul class="nav index-list">
+                                        <% navigation_json.forEach(function(item, i) { %>
+                                            <% if (item['section'].length) { %>
+                                                <li class="nav-item">
+                                                    <a href="#article_<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                                        <%= item['section'] %>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                        <% }); %>
+                                    </ul>
+                                </nav>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
-                <div class="page-index" id="sticker">
-                    <% if (navigation_json && navigation_json.length) { %>
-                        <div class="index-title-tabs">
-                            <div class="single-tab-value active-value">OVERVIEW</div>
-                        </div>
-                        <nav class="scroll_navigation" id="myNavbar">
-                            <ul class="nav index-list">
-                                <% navigation_json.forEach(function(item, i) { %>
-                                    <% if (item['section'].length) { %>
-                                        <li class="nav-item">
-                                            <a href="#article-<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
-                                                <%= item['section'] %>
-                                            </a>
-                                        </li>
-                                    <% } %>
-                                <% }); %>
-                            </ul>
-                        </nav>
-                    <% } %>
-                </div>
-            </div>
-            <div class="proto-col col-7 proto-articles-container">
-                <div class="article-area-small" id="article">
-                    <div class="fade-area"></div>
-                    <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
-                        <div id="article_<%= e[0]%>" class="ProtoCard-articles">
-                            <%- e[1] %>
-                        </div>
-                        <div style='margin-bottom: 20px'></div>
-                    <% }) %>
-                </div>
-                <div class="default-button read-more-button" id="cont-button">
-                    Continue Reading
-                </div>
-            </div>
-            <div class="proto-col col-4 col-1-offset">
-                <div class="related-articles-link">
-                    <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
-                    <div id="related_container">
-                        <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
-                            <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
+                <div class="proto-col col-7 proto-articles-container">
+                    <div class="article-area-small" id="article">
+                        <div class="fade-area"></div>
+                        <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
+                            <div id="article_<%= e[0]%>" class="ProtoCard-articles">
                                 <%- e[1] %>
                             </div>
+                            <div style='margin-bottom: 20px'></div>
                         <% }) %>
+                    </div>
+                    <div class="default-button read-more-button" id="cont-button">
+                        Continue Reading
+                    </div>
+                </div>
+                <div class="proto-col col-4 col-1-offset no-margin-right">
+                    <div class="related-articles-link">
+                        <div class="theiaStickySidebar">
+                            <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
+                            <div id="related_container">
+                                <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
+                                    <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
+                                        <%- e[1] %>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <% if (more_in_the_series) { %>
                 <div class="proto-col col-16 more-articles-link-div">
                     <div class="more-articles-link">
@@ -268,6 +276,7 @@
         <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js" defer></script>
         <script src="https://cdn.protograph.pykih.com/lib/tether.min.js" defer></script>
         <script src="https://cdn.protograph.pykih.com/lib/bootstrap.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-sticky-sidebar.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-in-view.min.js" defer></script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.js" defer></script>
         <% if (site.ga_code) { %>
