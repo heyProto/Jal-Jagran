@@ -91,7 +91,8 @@
                     <% if (more_in_the_series) {%>
                         <div class="single-link">
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="15px" width="15px">
+                                <!-- mojo add css here -->
                             </a>
                         </div>
                     <% }%>
@@ -129,6 +130,13 @@
                                 </a>
                             </div>
                         <% } %>
+                        <% if (more_in_the_series) {%>
+                            <div class="single-link">
+                                <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="15px" width="15px">
+                                </a>
+                            </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
@@ -207,7 +215,7 @@
                         <div class="column-title">
                             <%= more_in_the_series.name_of_stream %>
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="15px" width="15px">
                             </a>
                         </div>
                         <div id="more_articles_container" class="more-articles-container"></div>
@@ -220,7 +228,7 @@
                         <div class="column-title">
                             <%= more_in_the_intersection.name_of_stream %>
                             <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="15px" width="15px">
                             </a>
                         </div>
                         <div id="more_intersections_container" class="more-articles-container"></div>
@@ -233,7 +241,7 @@
                         <div class="column-title">
                             <%= more_in_the_sub_intersection.name_of_stream %>
                             <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="15px" width="15px">
                             </a>
                         </div>
                         <div id="more_sub_intersections_container" class="more-articles-container"></div>
