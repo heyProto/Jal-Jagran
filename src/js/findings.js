@@ -31,8 +31,6 @@ ProtoGraph.initPage = function initPage() {
         };
         $('#sticker').theiaStickySidebar(sticky_sidebar_options);
         $('.related-articles-link').theiaStickySidebar(sticky_sidebar_options);
-        // $("#sticker").sticky({ topSpacing: 0, bottomSpacing: 400 });
-        // $('.related-articles-link').sticky({ topSpacing: 20, bottomSpacing: 400 });
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';

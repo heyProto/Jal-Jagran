@@ -4,6 +4,7 @@
   "description": "",
   "dependencies": {
     "axios": "^0.16.1",
+    "concat-files": "^0.1.1",
     "d3-geo": "^1.6.4",
     "d3-scale": "^1.0.6",
     "d3-time-format": "^2.0.5",
@@ -38,6 +39,7 @@
     "start": "webpack-dev-server --public --host 0.0.0.0",
     "start_windows": "webpack-dev-server --public --host 0.0.0.0 && npm run build_windows",
     "build": "NODE_ENV=production webpack --config webpack.config.js --optimize-minimize",
+    "build:libs": "NODE_ENV=production node main-lib.js",
     "build:std": "npm run build:std_windows && npm run build:home_windows",
     "build_windows": "npm run build:std_windows && npm run build:home_windows",
     "build:home_windows": "set NODE_ENV=production && webpack --config webpack.config.home.js --optimize-minimize",
