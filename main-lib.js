@@ -1,24 +1,27 @@
+var minifier = require('minifier');
 
-
-var concat = require('concat-files');
-
-concat([
+input = [
     "./lib/js/jquery.min.js",
     "./lib/js/proto-app-in-view.min.js",
-    "./lib/js/proto-app-sticky-sidebar.min.js"
-], './proto-app-lib.min.js', function (err) {
-    if (err) throw err
-    console.log('Bundling: proto-app-lib.min.js');
-});
+    "./lib/js/ResizeSensor.js",
+    "./lib/js/theia-sticky-sidebar.js"
+];
+options = {
+    output: "./proto-app-lib.min.js"
+};
+minifier.minify(input, options);
+console.log('Built: proto-app-lib.min.js');
 
-concat([
+input = [
     "./lib/js/jquery.min.js",
     "./lib/js/proto-app-in-view.min.js",
-    "./lib/js/proto-app-sticky-sidebar.min.js",
+    "./lib/js/ResizeSensor.js",
+    "./lib/js/theia-sticky-sidebar.js",
     "./lib/js/tether.min.js",
     "./lib/js/bootstrap.min.js"
-], './proto-app-lib-article.min.js', function (err) {
-    if (err) throw err
-    console.log('Bundling: proto-app-lib-article.min.js');
-});
-
+];
+options = {
+    output: "./proto-app-lib-article.min.js"
+};
+minifier.minify(input, options);
+console.log('Built: proto-app-lib-article.min.js');

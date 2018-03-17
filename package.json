@@ -4,7 +4,6 @@
   "description": "",
   "dependencies": {
     "axios": "^0.16.1",
-    "concat-files": "^0.1.1",
     "d3-geo": "^1.6.4",
     "d3-scale": "^1.0.6",
     "d3-time-format": "^2.0.5",
