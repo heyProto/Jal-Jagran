@@ -115,4 +115,7 @@
     .ProtoCard-opinions:nth-child(4n + 3) {
         margin-right: 0px;
     }
+    .theiaStickySidebar {
+        z-index: 10;
+    }
 }

@@ -37,7 +37,13 @@ ProtoGraph.initPage = function initPage() {
                 $(tab_content).addClass('proto-tab-active-content');
             }
         });
-        $('.proto-mobile-grid-navigation').sticky({ zIndex: 10 });
+        $('.proto-col.col-16.proto-nav-sticky').theiaStickySidebar({
+            containerSelector: ".proto-grid-container",
+             sidebarBehavior: "stick-to-top",
+            additionalMarginTop: 0,
+            updateSidebarHeight: false,
+            disableOnResponsiveLayouts: false
+        });
         $('.proto-mobile-grid-navigation .proto-mobile-grid-navigatio-tab').on('click', (e) => {
             let tabIndex = +e.currentTarget.getAttribute('data-tab'),
                 $tab = $($('.proto-mobile-grid-navigatio-tab')[tabIndex]),
