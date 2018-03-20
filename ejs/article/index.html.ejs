@@ -61,6 +61,9 @@
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
 
     <body class="<%= body_class %>">
+        <% if (site.comscore_code) { %>
+            <%- site.comscore_code %>
+        <% } %>
         <div class="proto-grid-container data-page">
 
             <div class="client-brand-cover small-cover" id="site_header">
