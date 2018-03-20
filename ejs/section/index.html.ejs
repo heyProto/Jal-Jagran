@@ -83,7 +83,7 @@
                     <% if (more_in_the_series) {%>
                         <div class="single-link">
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
                             </a>
                         </div>
                     <% }%>
@@ -121,6 +121,13 @@
                                 </a>
                             </div>
                         <% } %>
+                        <% if (more_in_the_series) {%>
+                            <div class="single-link">
+                                <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                                </a>
+                            </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
@@ -138,11 +145,13 @@
                 </div>
             </div>
             <div class="proto-col col-16 proto-nav-sticky">
-                <div class="proto-mobile-grid-navigation">
-                    <div class="proto-mobile-grid-navigatio-tab proto-active-tab"><%= streams_mapping['7c']['name_of_stream'] %></div>
-                    <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['4c']['name_of_stream'] %></div>
-                    <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['2c']['name_of_stream'] %></div>
-                    <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['3c']['name_of_stream'] %></div>
+                <div class="theiaStickySidebar">
+                    <div class="proto-mobile-grid-navigation">
+                        <div class="proto-mobile-grid-navigatio-tab proto-active-tab"><%= streams_mapping['7c']['name_of_stream'] %></div>
+                        <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['4c']['name_of_stream'] %></div>
+                        <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['2c']['name_of_stream'] %></div>
+                        <div class="proto-mobile-grid-navigatio-tab"><%= streams_mapping['3c']['name_of_stream'] %></div>
+                    </div>
                 </div>
             </div>
             <div id="cover" class="proto-col col-16 cover-page-overlay no-right-column">
@@ -214,8 +223,6 @@
         </script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-sticky-sidebar.min.js" defer></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-in-view.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.js" defer></script>
         <% if (site.ga_code) { %>

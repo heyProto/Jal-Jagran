@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-style.min.css">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-fonts.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <% if (site.favicon_url) { %>
@@ -94,7 +94,8 @@
                     <% if (more_in_the_series) {%>
                         <div class="single-link">
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                                <!-- mojo add css here -->
                             </a>
                         </div>
                     <% }%>
@@ -132,6 +133,13 @@
                                 </a>
                             </div>
                         <% } %>
+                        <% if (more_in_the_series) {%>
+                            <div class="single-link">
+                                <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                                </a>
+                            </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
@@ -144,73 +152,81 @@
                     <div style='margin-bottom: 20px'></div>
                 <% }) %>
             </div>
-            <div class="proto-col col-4 navigation-links">
-                <div class="summary">
-                    <div class="article-share-icons">
+
+            <div class="proto-col col-16 cover-page-overlay no-right-column">
+                <div class="proto-col col-4 navigation-links">
+                    <div class="summary">
                         <div class="article-share-icons">
-                            <a href="#" id='facebook-share-link' target="_blank">
-                                <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></div>
-                            </a>
-                            <a href="#" id='twitter-share-link' target="_blank">
-                                <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></div>
-                            </a>
+                            <div class="article-share-icons">
+                                <a href="#" id='facebook-share-link' target="_blank">
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></div>
+                                </a>
+                                <a href="#" id='twitter-share-link' target="_blank">
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></div>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <div class="page-index" id="sticker">
+                        <% if (navigation_json && navigation_json.length) { %>
+                            <div class="theiaStickySidebar">
+                                <div class="index-title-tabs">
+                                    <div class="single-tab-value active-value">OVERVIEW</div>
+                                </div>
+                                <nav class="scroll_navigation" id="myNavbar">
+                                    <ul class="nav index-list">
+                                        <% navigation_json.forEach(function(item, i) { %>
+                                            <% if (item['section'].length) { %>
+                                                <li class="nav-item">
+                                                    <a href="#article_<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                                        <%= item['section'] %>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                        <% }); %>
+                                    </ul>
+                                </nav>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
-                <div class="page-index" id="sticker">
-                    <% if (navigation_json && navigation_json.length) { %>
-                        <div class="index-title-tabs">
-                            <div class="single-tab-value active-value">OVERVIEW</div>
-                        </div>
-                        <nav class="scroll_navigation" id="myNavbar">
-                            <ul class="nav index-list">
-                                <% navigation_json.forEach(function(item, i) { %>
-                                    <% if (item['section'].length) { %>
-                                        <li class="nav-item">
-                                            <a href="#article-<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
-                                                <%= item['section'] %>
-                                            </a>
-                                        </li>
-                                    <% } %>
-                                <% }); %>
-                            </ul>
-                        </nav>
-                    <% } %>
-                </div>
-            </div>
-            <div class="proto-col col-7 proto-articles-container">
-                <div class="article-area-small" id="article">
-                    <div class="fade-area"></div>
-                    <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
-                        <div id="article_<%= e[0]%>" class="ProtoCard-articles">
-                            <%- e[1] %>
-                        </div>
-                        <div style='margin-bottom: 20px'></div>
-                    <% }) %>
-                </div>
-                <div class="default-button read-more-button" id="cont-button">
-                    Continue Reading
-                </div>
-            </div>
-            <div class="proto-col col-4 col-1-offset">
-                <div class="related-articles-link">
-                    <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
-                    <div id="related_container">
-                        <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
-                            <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
+                <div class="proto-col col-7 proto-articles-container">
+                    <div class="article-area-small" id="article">
+                        <div class="fade-area"></div>
+                        <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
+                            <div id="article_<%= e[0]%>" class="ProtoCard-articles">
                                 <%- e[1] %>
                             </div>
+                            <div style='margin-bottom: 20px'></div>
                         <% }) %>
+                    </div>
+                    <div class="default-button read-more-button" id="cont-button">
+                        Continue Reading
+                    </div>
+                </div>
+                <div class="proto-col col-4 col-1-offset no-margin-right">
+                    <div class="related-articles-link">
+                        <div class="theiaStickySidebar">
+                            <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
+                            <div id="related_container">
+                                <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
+                                    <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
+                                        <%- e[1] %>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <% if (more_in_the_series) { %>
                 <div class="proto-col col-16 more-articles-link-div">
                     <div class="more-articles-link">
                         <div class="column-title">
                             <%= more_in_the_series.name_of_stream %>
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
                             </a>
                         </div>
                         <div id="more_articles_container" class="more-articles-container"></div>
@@ -223,7 +239,7 @@
                         <div class="column-title">
                             <%= more_in_the_intersection.name_of_stream %>
                             <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
                             </a>
                         </div>
                         <div id="more_intersections_container" class="more-articles-container"></div>
@@ -236,7 +252,7 @@
                         <div class="column-title">
                             <%= more_in_the_sub_intersection.name_of_stream %>
                             <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
                             </a>
                         </div>
                         <div id="more_sub_intersections_container" class="more-articles-container"></div>
@@ -266,13 +282,10 @@
             ProtoGraph.more_in_the_intersection = <%- JSON.stringify(more_in_the_intersection || {}) %>;
             ProtoGraph.more_in_the_sub_intersection = <%- JSON.stringify(more_in_the_sub_intersection || {}) %>;
         </script>
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
-        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js" defer></script>
-        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js" defer></script>
-        <script src="https://cdn.protograph.pykih.com/lib/tether.min.js" defer></script>
-        <script src="https://cdn.protograph.pykih.com/lib/bootstrap.min.js" defer></script>
-        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-in-view.min.js" defer></script>
-        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-findings.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib-article.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.js" defer></script>
         <% if (site.ga_code) { %>
             <!-- Global Site Tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<%= site.ga_code %>"></script>

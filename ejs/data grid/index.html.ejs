@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <title><%= page.headline %>| <%= site.seo_name %></title>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-style.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-grid.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-fonts.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <% if (site.favicon_url) { %>
@@ -97,7 +97,7 @@
                     <% if (more_in_the_series) {%>
                         <div class="single-link">
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss_symbol.png" height="15px" width="15px">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
                             </a>
                         </div>
                     <% }%>
@@ -135,6 +135,13 @@
                                 </a>
                             </div>
                         <% } %>
+                        <% if (more_in_the_series) {%>
+                            <div class="single-link">
+                                <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                                </a>
+                            </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
@@ -142,7 +149,7 @@
             <div class="proto-col col-16">
                 <div id="col_16_cover_container"></div>
                 <div class="clearfix"></div>
-                <div id="card-list-div"></div>
+                <div id="card-list-div" class="proto-app-main-data-container"></div>
             </div>
             <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
             <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
@@ -164,10 +171,9 @@
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
         </script>
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
-        <script type="text/javascript" src="https://cdn.protograph.pykih.com/lib/proto-app-lib.min.js" defer></script>
-        <script src="https://cdn.protograph.pykih.com/lib/proto-app-init.min.js" defer></script>
-        <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
+        <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-init.min.js" defer></script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-grid.min.js" defer></script>
         <% if (site.ga_code) { %>
             <!-- Global Site Tag (gtag.js) - Google Analytics -->

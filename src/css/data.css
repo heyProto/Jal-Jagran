@@ -466,6 +466,10 @@
   margin: 0em 6px 0em 0em !important;
 }
 
+.proto-app-main-data-container {
+  overflow: hidden;
+}
+
 @media only screen and (max-width: 450px ) {
   body {
     background: white;

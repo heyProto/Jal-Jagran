@@ -74,7 +74,12 @@ class App extends React.Component {
     let dimension = this.getScreenSize();
 
     if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky({ getWidthFrom: '.col-4'});
+      let sticky_sidebar_options = {
+        containerSelector: "#card-list-div",
+        additionalMarginTop: 20,
+        additionalMarginBottom: 10
+      };
+      $('.filter-col').theiaStickySidebar(sticky_sidebar_options);
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -97,7 +102,12 @@ class App extends React.Component {
 
   componentDidUpdate() {
     if(this.props.mode === 'laptop') {
-      $('.filter-col').sticky({getWidthFrom: '.col-4'});
+      let sticky_sidebar_options = {
+        containerSelector: "#card-list-div",
+        additionalMarginTop: 20,
+        additionalMarginBottom: 10
+      };
+      $('.filter-col').theiaStickySidebar(sticky_sidebar_options);
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }

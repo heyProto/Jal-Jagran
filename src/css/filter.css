@@ -51,6 +51,7 @@
   bottom: 0px;
   font-family: "cabin";
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .protograph-filter-items-container-with-tabs {
   top: 100px;

@@ -179,6 +179,17 @@ ul.scrollspy-child-ul {
   display: inline-block;
 }
 
+.cover-page-overlay {
+    overflow: hidden;
+}
+.no-margin-right {
+    margin-right: 0px;
+}
+
+.page-index {
+  clear: both;
+}
+
 @media only screen and (max-width: 1200px) {
   .proto-container{
     margin-top: 0px !important;

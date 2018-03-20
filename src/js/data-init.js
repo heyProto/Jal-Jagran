@@ -10,7 +10,12 @@ ProtoGraph.initPage = function initPage() {
     page = ProtoGraph.page;
 
   if (mode === 'laptop'){
-    $('.filter-column').sticky({ topSpacing: 0 });
+    let sticky_sidebar_options = {
+      containerSelector: "#card-list-div",
+      additionalMarginTop: 10,
+      additionalMarginBottom: 10
+    };
+    $('.filter-column').theiaStickySidebar(sticky_sidebar_options);
   }
 
   if (mode === 'mobile') {
