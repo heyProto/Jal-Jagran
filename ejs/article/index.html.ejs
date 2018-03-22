@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <% if (site.gtm_id) { %>
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer',"<%= site.gtm_id %>");</script>
+            <!-- End Google Tag Manager -->
+        <% } %>
         <meta charset="utf-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
@@ -55,6 +64,7 @@
                 color: <%- site.house_colour %>;
             }
         </style>
+        <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
     </head>
 
     <% let language = site.primary_language.toLowerCase(); %>
@@ -62,7 +72,9 @@
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
-            <%- site.comscore_code %>
+            <script>
+                var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+            </script>
         <% } %>
         <div class="proto-grid-container data-page">
 
