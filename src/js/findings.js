@@ -316,6 +316,7 @@ ProtoGraph.initPage = function initPage() {
                 } else {
                     $('#col_16_cover_container').append(`
                         <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+                            ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
                             <h1 class="page-title bottom-pull-div">
                                 ${page.headline}
                             </h1>
@@ -337,6 +338,7 @@ ProtoGraph.initPage = function initPage() {
     } else {
         $('#col_16_cover_container').append(`
             <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+                ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
                 <h1 class="page-title bottom-pull-div">
                     ${page.headline}
                 </h1>
