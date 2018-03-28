@@ -178,6 +178,9 @@
                                 </a>
                             </div>
                         </div>
+                        <% if (page.summary.length) { %>
+                            <div class="summary-text"><%= page.summary %></div>
+                        <% } %>
                     </div>
                     <div class="page-index" id="sticker">
                         <% if (navigation_json && navigation_json.length) { %>
