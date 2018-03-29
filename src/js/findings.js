@@ -34,13 +34,15 @@ ProtoGraph.initPage = function initPage() {
         $('.related-articles-link').theiaStickySidebar(sticky_sidebar_options);
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
+            $("#related_container .fade-area").css('display', 'none');
+            $("#related_container").removeClass('proto-hidden-article-content');
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70
             });
-        })
+        });
         if (more_in_the_series && Object.keys(more_in_the_series).length) {
             Util.getJSON(more_in_the_series.url, function (err, data) {
                 if (err != null) {

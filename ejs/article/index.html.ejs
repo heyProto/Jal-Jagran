@@ -223,7 +223,8 @@
                     <div class="related-articles-link">
                         <div class="theiaStickySidebar">
                             <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
-                            <div id="related_container">
+                            <div class="proto-hidden-article-content" id="related_container">
+                                <div class="fade-area"></div>
                                 <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
                                     <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
                                         <%- e[1] %>

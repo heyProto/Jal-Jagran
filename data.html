@@ -1,127 +1,183 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>#जलजागरण</title>
+    <title>आँकड़े | JagranNews</title>
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./proto-app-lib.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="src/css/grid.css">
-    <link rel="stylesheet" type="text/css" href="src/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="./src/css/filter.css">
-    <link rel="stylesheet" type="text/css" href="./src/css/data.css"> -->
     <link rel="stylesheet" type="text/css" href="./proto-app-style.min.css">
     <link rel="stylesheet" type="text/css" href="./proto-app-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="src/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="./proto-app-fonts.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <link rel="icon" type="image/png" href="https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/e4c4cb2201515439/2365.vnd.microsoft.icon"
+    />
+
+
+    <!-- Facebook Meta Tags -->
+    <meta property=​ "og:​type" content=​ "article">​
+    <meta property=​ "og:​url" content=​ "stories/data-11">​
+    <meta property=​ "og:​site_name" content=​ "JagranNews">​
+    <meta property=​ "og:​title" content=​
+        "आँकड़े                                                                                    ">​
+    <meta property=​ "og:​updated_time" content=​ "2018-03-21T18:44:22.000Z">​
+    <!-- Twitter Meta Tags -->
+    <meta name=​ "twitter:​card" content=​ "summary_large_image">​
+    <meta name=​ "twitter:​site" content=​ "JagranNews">​
+    <meta name=​ "twitter:​url" content=​ "stories/data-11">​
+    <meta name=​ "twitter:​title" content=​
+        "आँकड़े                                                                                    ">​
+
+
+    <meta property=​ "og:​image" content=​
+        "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/4779f06ff1581ab9/2643.jpeg">​
+    <meta name=​ "twitter:​image" content=​
+        "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/4779f06ff1581ab9/2643.jpeg">​
+
+    <style>
+        .proto-card .by-time-line .time-ago {
+            color: #e03832;
+        }
+
+        .why-col,
+        .filter-title,
+        .protograph-close-modal,
+        .protograph-app-active-tab {
+            background: #e03832;
+        }
+
+        .active-tab {
+            color: #e03832;
+            border-color: #e03832;
+        }
+
+        .protograph-filter-item:hover .protograph-filter-item-name {
+            color: #e03832;
+        }
+
+        .protograph-filter-item:hover {
+            border-left: 2px solid #e03832;
+            color: #e03832;
+        }
+
+        .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-item {
+            border-left: 2px solid #e03832;
+        }
+    </style>
 </head>
-<body>
+
+
+
+
+<body class="language-hindi">
     <div class="proto-grid-container data-page">
 
-        <div class="client-brand-cover small-cover" id="account_header">
+        <div class="client-brand-cover small-cover" id="site_header">
             <div class="client-logo"></div>
         </div>
         <div class="proto-col col-16 proto-verticals-navbar">
             <div class="proto-vertical-name" id="homepage_nav">
-                <!-- <a href="#"> -->
-                #जलजागरण &nbsp;
-                <i class="chevron down icon"></i>
-                <!-- </a> -->
+                <h1 class="navbar-project-title"><span style='font-weight:normal'>#</span>जलजागरण</h1>
+                <i class="chevron down icon proto-hide"></i>
             </div>
-            <div class="page-navigation-options" id="vertical_nav">
-                <!-- <div class="page-nav-single-option">STORIES</div>
-                <div class="page-nav-single-option">DATA</div>
-                <div class="page-nav-single-option">INSIGHTS</div>
-                <div class="page-nav-single-option">ABOUT</div> -->
-            </div>
+            <div class="page-navigation-options" id="vertical_nav"></div>
             <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
             <div class="social right-float-div">
+
                 <div class="single-link facebook">
-                    <a href="https://www.facebook.com/dainikjagran/" target="_blank"><img src="img/fb-white.png"></a>
+                    <a href="https://www.facebook.com/dainikjagran" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/fb-white.png">
+                            </a>
                 </div>
+
+
                 <div class="single-link twitter">
-                    <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
+                    <a href="https://twitter.com/JagranNews" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/tw-white.png">
+                            </a>
                 </div>
+
+
+                <div class="single-link">
+                    <a href="https://p.jagran.com/339d52dd65eb74feb096344a/index.xml" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                            </a>
+                </div>
+
             </div>
         </div>
-
-        <!-- <div class="proto-col col-16 navbar">
-            <a href="./index.html"><div class="branding">#<strong>जलजागरण</strong></div></a>
-            <div class="nav-links">
-                <div class="single-link stories"><a href="./index.html">ख़बरें</a></div>
-                <div class="single-link active-page data"><a href="./data.html">आँकड़े</a></div>
-                <div class="single-link insights"><a href="./findings.html">पड़ताल</a></div>
-                <div class="single-link about"><a href="./about.html">परिचय</a></div>
-            </div>
-            <div class="social right-float-div">
-                <div class="single-link facebook">
-                    <a href="https://www.facebook.com/dainikjagran/" target="_blank"><img src="img/fb-white.png"></a>
-                </div>
-                <div class="single-link twitter">
-                    <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-white.png"></a>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="mobile-navigation">
+        <div class="mobile-navigation">
             <div class="mobile-navbar">
-                <a href="./index.html"><div class="branding">#<strong>जलजागरण</strong></div></a>
-                <div class="right-float-div">
-                    <div class="hamburger-icon"><img src="img/hamburger-icon.png"></div>
+                <div class="branding">
+                    <h1 class="navbar-project-title"><span style='font-weight:normal'>#</span>जलजागरण</h1>
+                    <i class="chevron down icon proto-hide"></i>
                 </div>
+                <div class="right-float-div">
+                    <div class="hamburger-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/hamburger-icon.png"></div>
+                </div>
+                <div class="pnav-options single-pnav-option" id="mobile_homepage_nav_list"></div>
             </div>
 
             <div class="mobile-navigations-screen">
                 <div class="right-float-div">
                     <div class="close-icon"><i class="remove icon"></i></div>
                 </div>
-                <div class="nav-links">
-                    <div class="single-link stories"><a href="./index.html">ख़बरें</a></div>
-                    <div class="single-link data active-page"><a href="#">आँकड़े</a></div>
-                    <div class="single-link insights"><a href="./findings.html">पड़ताल</a></div>
-                    <div class="single-link about"><a href="./about.html">परिचय</a></div>
-                </div>
+                <div class="nav-links"></div>
                 <div class="social bottom-pull-div">
+
                     <div class="single-link facebook">
-                        <a href="https://www.facebook.com/dainikjagran/" target="_blank"><img src="img/fb-black.png"></a>
+                        <a href="https://www.facebook.com/dainikjagran" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/fb-black.png">
+                                </a>
                     </div>
+
+
                     <div class="single-link twitter">
-                        <a href="https://twitter.com/jagrannews/" target="_blank"><img src="img/tw-black.png"></a>
+                        <a href="https://twitter.com/JagranNews" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/tw-black.png">
+                                </a>
+                    </div>
+
+
+                    <div class="single-link">
+                        <a href="https://p.jagran.com/339d52dd65eb74feb096344a/index.xml" target="_blank">
+                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
+                                </a>
                     </div>
 
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="proto-col col-16">
-            <div id="col_16_cover_container">
-                <!-- <div class="fixed-cover-block fixed-cover-block-small">
-                    <h1 class="page-title bottom-pull-div">
-                        आँकड़े
-                    </h1>
-                </div> -->
-            </div>
+            <div id="col_16_cover_container"></div>
             <div class="clearfix"></div>
             <div id="card-list-div" class="proto-app-main-data-container"></div>
         </div>
         <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
     </div>
+    <div class="proto-app-scroll-to-top" title="Scroll to top">
+        <i class="angle up icon"></i>
+    </div>
 
     <script>
-       window.ProtoGraph = window.ProtoGraph || {};
-        ProtoGraph.streams = { "Grid": { "id": 651, "title": "11_Data_Grid", "datacast_identifier": "bfe798d00804fcffc93bcb92", "url": "https://d3blw9azk95e4q.cloudfront.net/bfe798d00804fcffc93bcb92/index.json", "name_of_stream": "11_Section_data" }, "16c_Hero": { "id": 1121, "title": "11_Data_16c_Hero", "datacast_identifier": "cbe335ac0baebac0dbe38cfe", "url": "https://d3blw9azk95e4q.cloudfront.net/cbe335ac0baebac0dbe38cfe/index.json", "name_of_stream": "Hero" } };
-        ProtoGraph.site = { "dis_qus_integration": "", "youtube_url": "https://www.youtube.com/channel/UCSKgOW8Pg_eZymYJyJc432g", "instagram_url": "", "twitter_url": "https://twitter.com/JagranNews", "facebook_url": "https://www.facebook.com/dainikjagran", "house_colour": "#e03832", "reverse_house_colour": "#ffffff", "font_colour": "#ffffff", "reverse_font_colour": "#ffffff", "logo_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/ddb9d3ad2f489656/2422.png", "favicon_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/e4c4cb2201515439/2365.vnd.microsoft.icon", "ga_code": "", "story_card_style": "Blur: Color", "primary_language": "Hindi", "seo_name": "JagranNews", "is_lazy_loading_activated": true };
-        ProtoGraph.page = { "headline": "आँकड़े                                                                                    ", "cover_image_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/416b1d13e1acad24/2439.jpeg", "cover_image_url_7_column": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/416b1d13e1acad24/2440.jpeg" };
+        window.ProtoGraph = window.ProtoGraph || {};
+        ProtoGraph.streams = { "Grid": { "id": 651, "title": "11_Data_Grid", "datacast_identifier": "bfe798d00804fcffc93bcb92", "url": "https://p.jagran.com/bfe798d00804fcffc93bcb92/index.json", "name_of_stream": "11_Section_data" }, "16c_Hero": { "id": 1121, "title": "11_Data_16c_Hero", "datacast_identifier": "cbe335ac0baebac0dbe38cfe", "url": "https://p.jagran.com/cbe335ac0baebac0dbe38cfe/index.json", "name_of_stream": "Hero" } };
+        ProtoGraph.site = { "dis_qus_integration": "", "youtube_url": "https://www.youtube.com/channel/UCSKgOW8Pg_eZymYJyJc432g", "instagram_url": "", "twitter_url": "https://twitter.com/JagranNews", "facebook_url": "https://www.facebook.com/dainikjagran", "house_colour": "#e03832", "reverse_house_colour": "#ffffff", "font_colour": "#ffffff", "reverse_font_colour": "#ffffff", "logo_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/699619bd6f4cbca1/2637.png", "favicon_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/e4c4cb2201515439/2365.vnd.microsoft.icon", "ga_code": "", "story_card_style": "Clear: Color", "primary_language": "Hindi", "seo_name": "JagranNews", "is_lazy_loading_activated": true};
+        ProtoGraph.page = { "headline": "आँकड़े                                                                                    ", "cover_image_url": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/4779f06ff1581ab9/2643.jpeg", "cover_image_url_7_column": "https://d8iy6v3lrjtwm.cloudfront.net/images/JagranNews/416b1d13e1acad24/2440.jpeg" };
         ProtoGraph.ref_category_object = { "name": "जलजागरण", "name_html": "<span style='font-weight:normal'>#</span>जलजागरण" };
-        ProtoGraph.vertical_header_json_url = "https://d3blw9azk95e4q.cloudfront.net/jaljagran/navigation.json";
-        ProtoGraph.homepage_header_json_url = "https://d3blw9azk95e4q.cloudfront.net/verticals.json";
-        ProtoGraph.site_header_json_url = "https://d3blw9azk95e4q.cloudfront.net/header.json";
+        ProtoGraph.vertical_header_json_url = "https://p.jagran.com/jaljagran/navigation.json";
+        ProtoGraph.homepage_header_json_url = "https://p.jagran.com/verticals.json";
+        ProtoGraph.site_header_json_url = "https://p.jagran.com/header.json";
     </script>
     <script src="https://cdn.protograph.pykih.com/lib/protoGraph.min.js" defer></script>
-    <script type="text/javascript" src='./proto-app-lib.min.js' defer></script>
-    <script src="./proto-app-sticky-sidebar.min.js" defer></script>
+    <script type="text/javascript" src="./proto-app-lib.min.js" defer></script>
     <script src="./proto-app-init.min.js" defer></script>
-    <script type="text/javascript" src='./proto-app-grid.min.js' defer></script>
+    <script type="text/javascript" src="./proto-app-grid.min.js" defer></script>
+
 </body>
+
 </html>
