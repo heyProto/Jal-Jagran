@@ -31,15 +31,19 @@
         <meta property="og:site_name" content="<%= site.seo_name %>" />
         <meta property="og:title" content="<%= page.headline %>" />
         <meta property="og:updated_time" content="<%= page.published_at %>" />
+        <% if (page.share_text_facebook) { %>
+            <meta property="og:description" content="<%= page.share_text_facebook %>" />
+        <% } %>
         <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="<%= site.seo_name %>" />
         <meta name="twitter:url" content="<%= page.html_key %>" />
         <meta name="twitter:title" content="<%= page.headline %>" />
+        <% if (page.share_text_twitter) { %>
+            <meta name="twitter:description" content="<%= page.share_text_twitter %>" />
+        <% } %>
         <% if (page.meta_description) { %>
             <meta name="description" content="<%= page.meta_description %>" />
-            <meta property="og:description" content="<%= page.meta_description %>" />
-            <meta name="twitter:description" content="<%= page.meta_description %>" />
         <% } %>
         <% if (page.cover_image_url) { %>
             <meta property="og:image" content="<%= page.cover_image_url %>" />
@@ -216,7 +220,7 @@
                         <% }) %>
                     </div>
                     <div class="default-button read-more-button" id="cont-button">
-                        Continue Reading
+                        Keep reading
                     </div>
                 </div>
                 <div class="proto-col col-4 col-1-offset no-margin-right">

@@ -1,5 +1,19 @@
 import Util from './utility.js'
 
+function initFBTWShareLinks() {
+    var url = window.location.href,
+        fb_share = $('meta[property="og:description"]').attr('content'),
+        tw_share = $('meta[name="twitter:description"]').attr('content'),
+        fb_share_url,
+        tw_share_url;
+
+    fb_share_url = `http://www.facebook.com/sharer/sharer.php?u=${url}${fb_share ? '&description=' + encodeURI(fb_share) : ''}`;
+    tw_share_url = `http://twitter.com/share?url=${url}${tw_share ? '&text=' + encodeURI(tw_share) : ''}`;
+
+    document.getElementById('facebook-share-link').href = fb_share_url;
+    document.getElementById('twitter-share-link').href = tw_share_url;
+}
+
 ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
@@ -19,8 +33,7 @@ ProtoGraph.initPage = function initPage() {
         $("#sticker").css('display', "none");
     }
 
-    document.getElementById('facebook-share-link').href = 'http://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
-    document.getElementById('twitter-share-link').href = 'http://twitter.com/share?url=' + window.location.href;
+    initFBTWShareLinks();
 
     if (mode === 'laptop') {
         // Note: Dont remove the updateSidebarHeight: false, fixes very weard errors. Also this is not there in documentation of library.
