@@ -27,24 +27,24 @@
             <meta name="keywords" content="<%= page.meta_keywords %>" />
         <% } %>
         <!-- Facebook Meta Tags -->
-        <meta property=​"og:​type" content=​"article">​
-        <meta property=​"og:​url" content=​"<%= page.html_key %>">​
-        <meta property=​"og:​site_name" content=​"<%= site.seo_name %>">​
-        <meta property=​"og:​title" content=​"<%= page.headline %>">​
-        <meta property=​"og:​updated_time" content=​"<%= page.published_at %>">​
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="<%= page.html_key %>">
+        <meta property="og:site_name" content="<%= site.seo_name %>">
+        <meta property="og:title" content="<%= page.headline %>">
+        <meta property="og:updated_time" content="<%= page.published_at %>">
         <!-- Twitter Meta Tags -->
-        <meta name=​"twitter:​card" content=​"summary_large_image">​
-        <meta name=​"twitter:​site" content=​"<%= site.seo_name %>">​
-        <meta name=​"twitter:​url" content=​"<%= page.html_key %>">​
-        <meta name=​"twitter:​title" content=​"<%= page.headline %>">​
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="<%= site.seo_name %>">
+        <meta name="twitter:url" content="<%= page.html_key %>">
+        <meta name="twitter:title" content="<%= page.headline %>">
         <% if (page.meta_description) { %>
             <meta name="description" content="<%= page.meta_description %>" />
-            <meta property=​"og:​description" content=​"<%= page.meta_description %>">​
-            <meta name=​"twitter:​description" content=​"<%= page.meta_description %>">​
+            <meta property="og:description" content="<%= page.meta_description %>">
+            <meta name="twitter:description" content="<%= page.meta_description %>">
         <% } %>
         <% if (page.cover_image_url) { %>
-            <meta property=​"og:​image" content=​"<%= page.cover_image_url %>">​
-            <meta name=​"twitter:​image" content=​"<%= page.cover_image_url %>">​
+            <meta property="og:image" content="<%= page.cover_image_url %>">
+            <meta name="twitter:image" content="<%= page.cover_image_url %>">
         <% } %>
         <style>
             .proto-card .by-time-line .time-ago{
