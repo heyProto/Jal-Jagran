@@ -7,7 +7,8 @@ ProtoGraph.initPage = function initPage() {
     cover_height = (dimension.width <= 500) ? '250px' : '430px',
     background_size = (dimension.width <= 500) ? 'cover' : '100%',
     streams = ProtoGraph.streams,
-    page = ProtoGraph.page;
+    page = ProtoGraph.page,
+    headerJSON = ProtoGraph.headerJSON;
 
   if (mode === 'laptop'){
     let sticky_sidebar_options = {
@@ -77,7 +78,9 @@ ProtoGraph.initPage = function initPage() {
             marginDiv.style.marginBottom = "20px";
             cover_container.appendChild(marginDiv);
             setTimeout(function () {
-              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, mode_for_cover);
+              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url, mode_for_cover, {
+                headerJSON: headerJSON
+              });
             }, 0)
           })
         } else {
