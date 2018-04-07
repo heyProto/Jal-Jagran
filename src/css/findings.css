@@ -543,3 +543,7 @@ ul.scrollspy-child-ul {
       margin-right: auto;
   }
 }
+
+.cover-page-overlay,#sticker {
+  outline: 1px solid;
+}
