@@ -26,7 +26,8 @@ function initScroll() {
         scrollTop,
         position,
         top;
-    sidebar.css('transform', 'translateY(0px)');
+
+    $('#sticker .nav-item').map((i,e) => $(e).attr('data-item', i));
 
     $(window).on('scroll', Util.throttle(function (event) {
         scrollTop = $(this).scrollTop();
