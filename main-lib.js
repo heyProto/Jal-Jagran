@@ -17,6 +17,7 @@ input = [
     "./lib/js/proto-app-in-view.min.js",
     "./lib/js/ResizeSensor.js",
     "./lib/js/theia-sticky-sidebar.js",
+    "./lib/js/jquery.element-visible.min.js",
     "./lib/js/tether.min.js",
     "./lib/js/bootstrap.min.js"
 ];

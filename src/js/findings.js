@@ -14,6 +14,67 @@ function initFBTWShareLinks() {
     document.getElementById('twitter-share-link').href = tw_share_url;
 }
 
+function initScroll() {
+    var container = $('.cover-page-overlay'),
+        sidebar = $('#sticker .theiaStickySidebar'),
+        sidebarTop = sidebar.offset().top,
+        sidebarWidth = sidebar.width(),
+        currentTop = 0,
+        lastScrollTop = 0,
+        currentItem = 0,
+        scrollDirection,
+        activeItem,
+        scrollTop,
+        position,
+        top;
+
+    $('#sticker .nav-item').map((i,e) => $(e).attr('data-item', i));
+
+    $(window).on('scroll', Util.throttle(function (event) {
+        scrollTop = $(this).scrollTop();
+
+        if (scrollTop > lastScrollTop) {
+            scrollDirection = "down"
+        } else {
+            scrollDirection = "up"
+        }
+
+        lastScrollTop = scrollTop;
+    }, 100));
+
+
+
+    $(window).on('activate.bs.scrollspy', function (e) {
+        var activeItem = $('.nav-link.active').parent(),
+            navScrollTop = $('#sticker nav').scrollTop(),
+            nextItem = activeItem.next(),
+            prevItem = activeItem.prev();
+
+        switch (scrollDirection) {
+            case "down":
+                if (nextItem.length && !nextItem.visible()) {
+                    if (currentItem !== +activeItem.attr('data-item')) {
+                        currentItem = +activeItem.attr('data-item');
+                        $('#sticker nav').scrollTop(navScrollTop + (activeItem.height() + nextItem.height()));
+                    }
+                }
+                break;
+            case "up":
+                if (prevItem.length && !prevItem.visible()) {
+                    if (currentItem !== +activeItem.attr('data-item')) {
+                        currentItem = +activeItem.attr('data-item');
+                        $('#sticker nav').scrollTop(navScrollTop - (activeItem.height() + nextItem.height()));
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        if (+activeItem.attr('data-item') === 0) $('#sticker nav').scrollTop(0);
+    });
+}
+
+
 ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
@@ -37,23 +98,32 @@ ProtoGraph.initPage = function initPage() {
 
     if (mode === 'laptop') {
         // Note: Dont remove the updateSidebarHeight: false, fixes very weard errors. Also this is not there in documentation of library.
-        let sticky_sidebar_options = {
-            containerSelector: ".cover-page-overlay",
-            sidebarBehavior: "stick-to-top",
-            additionalMarginBottom: 20,
-            updateSidebarHeight: false
-        };
-        $('#sticker').theiaStickySidebar(sticky_sidebar_options);
-        $('.related-articles-link').theiaStickySidebar(sticky_sidebar_options);
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
             $("#related_container .fade-area").css('display', 'none');
-            $("#related_container").removeClass('proto-hidden-article-content');
+
+            $("#sticker .fade-area").css('display', 'none');
+            $("#sticker").removeClass('proto-hidden-article-content');
+
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
             $('body').scrollspy({
                 target: '#myNavbar',
                 offset: 70
+            });
+            initScroll();
+            $('#sticker').theiaStickySidebar({
+                containerSelector: ".cover-page-overlay",
+                sidebarBehavior: "stick-to-top",
+                customScrollCalculations: true,
+                additionalMarginBottom: 20,
+                updateSidebarHeight: false
+            });
+            $('.related-articles-link').theiaStickySidebar({
+                containerSelector: ".cover-page-overlay",
+                sidebarBehavior: "stick-to-top",
+                additionalMarginBottom: 20,
+                updateSidebarHeight: false
             });
         });
         if (more_in_the_series && Object.keys(more_in_the_series).length) {

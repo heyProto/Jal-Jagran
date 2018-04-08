@@ -349,7 +349,8 @@ ul.scrollspy-child-ul {
 
 .index-list{
 	border-left: 1px solid #efefef;
-	margin-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .single-index-value{
@@ -471,6 +472,10 @@ ul.scrollspy-child-ul {
   margin-bottom: 12px;
   font-weight: bold;
 }
+#sticker nav {
+  max-height: 668px;
+  overflow: auto;
+}
 @media only screen and (max-width: 500px) {
   .br-space {
     display: none;
@@ -541,5 +546,8 @@ ul.scrollspy-child-ul {
       width: 300px;
       margin-left: auto;
       margin-right: auto;
+  }
+  #sticker nav {
+    max-height: none;
   }
 }
