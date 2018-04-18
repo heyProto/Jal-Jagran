@@ -105,6 +105,9 @@ ProtoGraph.initPage = function initPage() {
             $("#sticker .fade-area").css('display', 'none');
             $("#sticker").removeClass('proto-hidden-article-content');
 
+            $("#related_container .fade-area").css('display', 'none');
+            $("#related_container").removeClass('proto-hidden-article-content');
+
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
             $('body').scrollspy({
