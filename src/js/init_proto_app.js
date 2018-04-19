@@ -8,7 +8,7 @@ ProtoGraph.renderNavbar = function () {
         processAndRenderSiteHeader(data[2]);
         ProtoGraph.headerJSON = data[2];
         ProtoGraph.initPage();
-        if (ProtoGraph.initDataApp.constructor === Function) {
+        if (ProtoGraph.initDataApp && ProtoGraph.initDataApp.constructor === Function) {
             ProtoGraph.initDataApp();
         }
     }).catch((reject) => {

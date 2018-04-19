@@ -398,7 +398,7 @@ ProtoGraph.initPage = function initPage() {
                     data = [data[0]];
                     data.map((d, i) => {
                         setTimeout(function () {
-                            var sandbox_iframe = new ProtoEmbed.initFrame($("#col_16_cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover, {
+                            var sandbox_iframe = new ProtoEmbed.initFrame($("#col_16_cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}%26page_url=${location.href}`, mode_for_cover, {
                                 headerJSON: headerJSON
                             });
                         }, 0)
