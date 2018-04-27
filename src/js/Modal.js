@@ -12,7 +12,9 @@ class Modal extends React.Component {
   afterOpen() {
     if (this.props.iframeURL) {
       setTimeout((e) => {
-        new ProtoEmbed.initFrame(document.getElementById('protograph_modal_card'), this.props.iframeURL, this.props.mode);
+        new ProtoEmbed.initFrame(document.getElementById('protograph_modal_card'), this.props.iframeURL, this.props.mode, {
+          headerJSON: ProtoGraph.headerJSON
+        });
       }, 0);
     }
     document.body.style['overflow-y'] = 'hidden';
