@@ -63,7 +63,7 @@ function processAndRenderVerticalNavbar(data, mode) {
         switch (mode) {
             case 'laptop':
                 data.forEach((e, i) => {
-                    HTML += `<div class="page-nav-single-option">
+                    HTML += `<div class="proto-app-navbar-page-links">
                         <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
                     </div>`
                 });
@@ -75,6 +75,15 @@ function processAndRenderVerticalNavbar(data, mode) {
                 });
                 $('.mobile-navigations-screen .nav-links').append(HTML);
                 break;
+        }
+
+        var width = 0;
+        $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links').each((i, e) => {
+            width += e.getBoundingClientRect().width;
+        });
+        $('.proto-app-navbar-navigation-scroll').css('width', width);
+        if (width > 600) {
+            $('.proto-app-navbar-left-click-arrow,.proto-app-navbar-right-click-arrow').css('display', 'inline-block')
         }
     }
 }
