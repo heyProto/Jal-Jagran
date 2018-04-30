@@ -335,7 +335,8 @@ h1.navbar-project-title{
 	display: inline-block;
 	line-height: 50px;
 	padding-left: 30px;
-	box-sizing: content-box;
+	float: left;
+	box-sizing: border-box;
 }
 .proto-app-navbar-page-links a {
 	text-decoration: none;
@@ -352,6 +353,7 @@ h1.navbar-project-title{
 	position: relative;
 	overflow: hidden;
 	white-space: nowrap;
+	background: blue;
 }
 
 .proto-app-navbar-navigation-scroll{

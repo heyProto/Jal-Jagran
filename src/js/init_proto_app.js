@@ -110,33 +110,110 @@ function initNavbarInteraction() {
 }
 
 function initArrowEvents(events) {
-    let visible_items = [],
-        totalItems = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links').length;
+    var window_items = [],
+        items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        min = 0,
+        max = items.length - 1,
+        navBar = document.querySelector('.proto-app-navbar-page-navigation'),
+        navBarBBox = navBar.getBoundingClientRect();
 
-    $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links').each((i,e) => {
-        if ($(e).visible()) {
-            visible_items.push(i);
+    items.each((i, e) => {
+        $(e).attr('data-item', i);
+        let left = $(e).position().left,
+            width = e.getBoundingClientRect().width;
+
+        if ((left + width) <= navBarBBox.width) {
+            window_items.push(i);
         }
     });
 
-    $('.proto-app-navbar-right-click-arrow').on('click',(event) => {
-        let lastItem = visible_items[visible_items.length - 1];
-        // let links = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links');
+    $('#proto-navbar-prev').on('click', (e) => {
+        console.log(window_items, "START::PREV");
+        let firstElement = window_items[0],
+            lastElement = window_items[window_items.length - 1],
+            new_width = 0,
+            new_window_items = [],
+            next = $('#proto-navbar-next');
 
-        // for (let i = 0; i < links.length; i++) {
-        //     let link = links[i],
-        //         $link = $(link);
-        //     if (!$link.visible()) {
-        //         var left = $link.offset().left,
-        //             width = link.getBoundingClientRect().width;
+        if (firstElement !== min) {
+            if (next.css('display') !== 'inline-block') {
+                next.css('display', 'inline-block');
+            }
+            console.log(lastElement - 1, min, ":::::")
+            for (let i = lastElement - 1; i >= min; i--) {
+                let element = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${i}"]`),
+                    width = element[0].getBoundingClientRect().width;
 
-        //     }
+                console.log((new_width + width) <= 600, new_width, width, `Pushing ${i}`, "mmmmmmmmmmmmmmm");
+                if ((new_width + width) <= 600) {
+                    new_width += width;
+                    new_window_items.push(i);
+                } else {
+                    break;
+                }
+            }
+            window_items = new_window_items.sort();
+            console.log(window_items, "END::PREV");
+            $('.proto-app-navbar-overlay').css('overflow', 'scroll');
+            let prevElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${window_items[0]}"]`),
+                scrollLeft = $('.proto-app-navbar-overlay').scrollLeft(),
+                navBarList = $('.proto-app-navbar-navigation-scroll'),
+                newScrollLeft = scrollLeft - Math.abs(prevElement.position().left); // (Math.abs(prevElement[0].getBoundingClientRect().left));
+            // console.log(window_items[0], "??????????????????????")
+            // console.log(scrollLeft, prevElement.position().left, newScrollLeft, "<<<<<<<<<<<<<<<<")
+            $('.proto-app-navbar-overlay').scrollLeft(newScrollLeft);
+            $('.proto-app-navbar-overlay').css('overflow', 'hidden');
+
+            if (window_items[0] === min) {
+                $('#proto-navbar-prev').css('display', 'none');
+            }
+        }
+        // else {
+        //     console.log('sample.........')
+        //     $('#proto-navbar-prev').css('display', 'none');
         // }
-        // links.each((e, i) => {
-        //     let $e = $(e);
-        //     if ()
-        //     console.log()
-        // })
+    });
+
+    $('#proto-navbar-next').on('click', (e) => {
+        console.log(window_items, "START::NEXT");
+        let firstElement = window_items[0],
+            lastElement = window_items[window_items.length - 1],
+            new_width = 0,
+            new_window_items = [],
+            prev = $('#proto-navbar-prev');
+
+        if (lastElement !== max) {
+            if (prev.css('display') !== 'inline-block') {
+                prev.css('display', 'inline-block');
+            }
+            console.log(firstElement + 1, max, "kkkk")
+            for (let i = firstElement + 1; i <= max; i++) {
+                let element = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${i}"]`),
+                    width = element[0].getBoundingClientRect().width;
+
+                // console.log(navBarBBox.width, (new_width + width) <= navBarBBox.width, new_width, width, `Pushing ${i}`, "mmmmmmmmmmmmmmm" );
+                if ((new_width + width) <= navBarBBox.width) {
+                    new_width += width;
+                    console.log(new_width, `Pushing ${i}`)
+                    new_window_items.push(i);
+                } else {
+                    console.log(`Not Pushing ${i}`)
+                    console.log(new_window_items, "////")
+                    break;
+                }
+            }
+            window_items = new_window_items.sort();
+
+            console.log(window_items, "END::NEXT");
+            $('.proto-app-navbar-overlay').css('overflow', 'scroll');
+            let nextElem = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${window_items[0]}"]`),
+                scrollLeft = $('.proto-app-navbar-overlay').scrollLeft(),
+                newScrollLeft = scrollLeft + nextElem.position().left;
+            $('.proto-app-navbar-overlay').scrollLeft(newScrollLeft);
+            $('.proto-app-navbar-overlay').css('overflow', 'hidden');
+        } else {
+            $('#proto-navbar-next').css('display', 'none');
+        }
     });
 }
 
