@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./proto-app-lib.min.css">
     <link rel="stylesheet" type="text/css" href="./src/css/grid.css">
     <link rel="stylesheet" type="text/css" href="./src/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/new_navbar.css">
     <link rel="stylesheet" type="text/css" href="./src/css/common.css">
     <!-- <link rel="stylesheet" type="text/css" href="./proto-app-style.min.css"> -->
     <link rel="stylesheet" type="text/css" href="./proto-app-article.min.css">
@@ -72,78 +73,86 @@
     </div>
     <div class="proto-app-navbar-proto-container">
         <div class="proto-app-navbar">
-            <div class="proto-app-navbar-logo">
-                <img src="./img/proto-grey-logo.png">
+            <div class="proto-app-navbar-logo-holder">
+                <div class="proto-app-navbar-logo">
+                    <img src="./img/proto-grey-logo.png">
+                </div>
+                <h1 class="proto-app-navbar-project-name" id="homepage_nav">
+                    <span style='font-weight:normal'>#</span>जलजागरण
+                </h1>
+                <div class="proto-app-navbar-project-by">BY THE STAR</div>
+                <div class="proto-app-navbar-first-navigation">
+                    <a href="#">EXPLORE</a>
+                    <img src="./img/arrow-right.png">
+                </div>
             </div>
-            <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                <span style='font-weight:normal'>#</span>जलजागरण
-            </h1>
-            <div class="proto-app-navbar-project-by">BY THE STAR</div>
-            <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
-                <img src="./img/arrow-left.png">
-            </div>
-            <div class="proto-app-navbar-page-navigation">
-                <div class="proto-app-navbar-overlay">
-                    <div class="proto-app-navbar-navigation-scroll" id="vertical_nav1">
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">explore</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">about</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">methodology</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page1</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page2</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page4</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">methodology</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page5</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page6</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page7</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">methodology</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page8</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page9</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page10</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">methodology</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page11</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page12</a>
-                        </div>
-                        <div class="proto-app-navbar-page-links">
-                            <a href="#">page13</a>
+            <div class="proto-app-navbar-navigation-bar">
+                <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
+                    <img src="./img/arrow-left.png">
+                </div>
+                <div class="proto-app-navbar-page-navigation">
+                    <div class="proto-app-navbar-overlay">
+                        <div class="proto-app-navbar-navigation-scroll" id="vertical_nav">
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">explore</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">about</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">methodology</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page1</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page2</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page4</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">methodology</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page5</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page6</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page7</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">methodology</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page8</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page9</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page10</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">methodology</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page11</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page12</a>
+                            </div>
+                            <div class="proto-app-navbar-page-links">
+                                <a href="#">page13</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
-                <img src="./img/arrow-right.png">
+                <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
+                    <img src="./img/arrow-right.png">
+                </div>
             </div>
         </div>
     </div>
@@ -153,7 +162,7 @@
         <!-- <div class="client-brand-cover small-cover" id="site_header">
             <div class="client-logo"></div>
         </div> -->
-        <div class="proto-col col-16 proto-verticals-navbar">
+        <!-- <div class="proto-col col-16 proto-verticals-navbar">
             <div class="proto-vertical-name" id="homepage_nav">
                 <h1 class="navbar-project-title"><span style='font-weight:normal'>#</span>जलजागरण</h1>
                 <i class="chevron down icon proto-hide"></i>
@@ -179,7 +188,6 @@
                 <div class="single-link">
                     <a href="https://p.jagran.com/339d52dd65eb74feb096344a/index.xml" target="_blank">
                                 <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
-                                <!-- mojo add css here -->
                             </a>
                 </div>
 
@@ -226,7 +234,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="proto-col col-16" id="col_16_cover_container">
 
