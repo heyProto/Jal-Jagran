@@ -80,86 +80,46 @@
                 var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
             </script>
         <% } %>
+        <div class="proto-app-navbar-masthead" id="site_header">
+            <div class="proto-app-navbar-proto-container">
+                <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
+                <div class="proto-app-navbar-menu-icon">
+                    MENU
+                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png">
+                </div>
+            </div>
+        </div>
+        <div class="proto-app-navbar-proto-container">
+            <div class="proto-app-navbar">
+                <div class="proto-app-navbar-logo-holder">
+                    <div class="proto-app-navbar-logo">
+                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png">
+                    </div>
+                    <h1 class="proto-app-navbar-project-name" id="homepage_nav">
+                        <%- ref_category_object['name_html'] %>
+                    </h1>
+                    <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
+                    <div class="proto-app-navbar-first-navigation">
+                        <a href="#"></a>
+                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
+                    </div>
+                </div>
+                <div class="proto-app-navbar-navigation-bar">
+                    <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
+                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png">
+                    </div>
+                    <div class="proto-app-navbar-page-navigation">
+                        <div class="proto-app-navbar-overlay">
+                            <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+                        </div>
+                    </div>
+                    <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
+                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="proto-grid-container data-page">
-
-            <div class="client-brand-cover small-cover" id="site_header">
-                <div class="client-logo"></div>
-            </div>
-            <div class="proto-col col-16 proto-verticals-navbar">
-                <div class="proto-vertical-name" id="homepage_nav">
-                    <h1 class="navbar-project-title"><%- ref_category_object['name_html'] %></h1>
-                    <i class="chevron down icon proto-hide"></i>
-                </div>
-                <div class="page-navigation-options" id="vertical_nav"></div>
-                <div class="pnav-options single-pnav-option" id="homepage_nav_list"></div>
-                <div class="social right-float-div">
-                    <% if (site.facebook_url) { %>
-                        <div class="single-link facebook">
-                            <a href="<%= site['facebook_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/fb-white.png">
-                            </a>
-                        </div>
-                    <% } %>
-                    <% if (site.twitter_url) { %>
-                        <div class="single-link twitter">
-                            <a href="<%= site['twitter_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/tw-white.png">
-                            </a>
-                        </div>
-                    <% } %>
-                    <% if (more_in_the_series) {%>
-                        <div class="single-link">
-                            <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
-                                <!-- mojo add css here -->
-                            </a>
-                        </div>
-                    <% }%>
-                </div>
-            </div>
-            <div class="mobile-navigation">
-                <div class="mobile-navbar">
-                    <div class="branding">
-                        <h1 class="navbar-project-title"><%- ref_category_object['name_html'] %></h1>
-                        <i class="chevron down icon proto-hide"></i>
-                    </div>
-                    <div class="right-float-div">
-                        <div class="hamburger-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/hamburger-icon.png"></div>
-                    </div>
-                    <div class="pnav-options single-pnav-option" id="mobile_homepage_nav_list"></div>
-                </div>
-
-                <div class="mobile-navigations-screen">
-                    <div class="right-float-div">
-                        <div class="close-icon"><i class="remove icon"></i></div>
-                    </div>
-                    <div class="nav-links"></div>
-                    <div class="social bottom-pull-div">
-                        <% if (site.facebook_url) { %>
-                            <div class="single-link facebook">
-                                <a href="<%= site['facebook_url'] %>" target="_blank">
-                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/fb-black.png">
-                                </a>
-                            </div>
-                        <% } %>
-                        <% if (site.twitter_url) { %>
-                            <div class="single-link twitter">
-                                <a href="<%= site['twitter_url'] %>" target="_blank">
-                                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/tw-black.png">
-                                </a>
-                            </div>
-                        <% } %>
-                        <% if (more_in_the_series) {%>
-                            <div class="single-link">
-                                <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                    <img src="https://cdn.protograph.pykih.com/Assets/rss-white-icon.png" height="14px" width="14px">
-                                </a>
-                            </div>
-                        <% }%>
-                    </div>
-                </div>
-            </div>
-
             <div class="proto-col col-16" id="col_16_cover_container">
                 <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
                     <div id="<%= e[0]%>">

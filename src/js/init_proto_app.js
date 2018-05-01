@@ -4,7 +4,7 @@ ProtoGraph.renderNavbar = function () {
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     fetchNavbarObjects().then((data) => {
         processAndRenderVerticalNavbar(data[0], mode);
-        processAndRenderHomepageNavbar(data[1], mode);
+        // processAndRenderHomepageNavbar(data[1], mode);
         processAndRenderSiteHeader(data[2]);
         ProtoGraph.headerJSON = data[2];
         ProtoGraph.initPage();
@@ -215,77 +215,77 @@ function initArrowEvents(events) {
     });
 }
 
-function processAndRenderHomepageNavbar(data, mode) {
-    let filtered_data = data.filter((e, i) => {
-        return e.name !== ProtoGraph.ref_category_object.name
-    }),
-    homepage_object = data.filter((e, i) => {
-        return e.name === ProtoGraph.ref_category_object.name
-    })[0],
-    home_navbar,
-    home_navbar_list,
-    width,
-    top,
-    border_radius,
-    left;
+// function processAndRenderHomepageNavbar(data, mode) {
+//     let filtered_data = data.filter((e, i) => {
+//         return e.name !== ProtoGraph.ref_category_object.name
+//     }),
+//     homepage_object = data.filter((e, i) => {
+//         return e.name === ProtoGraph.ref_category_object.name
+//     })[0],
+//     home_navbar,
+//     home_navbar_list,
+//     width,
+//     top,
+//     border_radius,
+//     left;
 
-    switch (mode) {
-        case 'laptop':
-            home_navbar = '#homepage_nav';
-            home_navbar_list = '#homepage_nav_list';
-            // width = $('#homepage_nav').width() + 50;
-            width = "250px"
-            border_radius = "4px";
-            // left = $('.proto-verticals-navbar').offset().left;
-            break;
-        case 'mobile':
-            home_navbar = '.branding';
-            home_navbar_list = '#mobile_homepage_nav_list';
-            // width = $('.branding').width() + 50;
-            width = "100%";
-            top = "140px";
-            border_radius = "0px";
-            // left = 0;
-            break;
-    }
+//     switch (mode) {
+//         case 'laptop':
+//             home_navbar = '#homepage_nav';
+//             home_navbar_list = '#homepage_nav_list';
+//             // width = $('#homepage_nav').width() + 50;
+//             width = "250px"
+//             border_radius = "4px";
+//             // left = $('.proto-verticals-navbar').offset().left;
+//             break;
+//         case 'mobile':
+//             home_navbar = '.branding';
+//             home_navbar_list = '#mobile_homepage_nav_list';
+//             // width = $('.branding').width() + 50;
+//             width = "100%";
+//             top = "140px";
+//             border_radius = "0px";
+//             // left = 0;
+//             break;
+//     }
 
-    if (filtered_data.length > 0) {
-        $('.proto-hide').removeClass('proto-hide');
-        $(home_navbar_list).css({
-            "width": width,
-            "top": top,
-            "border-radius": border_radius,
-            "left": 0
-        });
-        $(home_navbar).css('cursor', 'pointer');
-        $(home_navbar).on('click', (e) => {
-            let list = $(home_navbar_list);
-            if (list.hasClass('open-navbar')) {
-                $(home_navbar_list).removeClass('open-navbar');
-            } else {
-                $(home_navbar_list).addClass('open-navbar');
-            }
-        });
+//     if (filtered_data.length > 0) {
+//         $('.proto-hide').removeClass('proto-hide');
+//         $(home_navbar_list).css({
+//             "width": width,
+//             "top": top,
+//             "border-radius": border_radius,
+//             "left": 0
+//         });
+//         $(home_navbar).css('cursor', 'pointer');
+//         $(home_navbar).on('click', (e) => {
+//             let list = $(home_navbar_list);
+//             if (list.hasClass('open-navbar')) {
+//                 $(home_navbar_list).removeClass('open-navbar');
+//             } else {
+//                 $(home_navbar_list).addClass('open-navbar');
+//             }
+//         });
 
-        let HTML = "";
-        filtered_data.forEach((e, i) => {
-            HTML += `<div class="proto-vertical-name home-header-nav">
-                <a href="${e.url}" >${e.name_html}</a>
-            </div>`
-        });
-        $(home_navbar_list).append(HTML);
-    } else if (homepage_object) {
-        let nav_title = $(home_navbar).html();
-        $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
-    }
-}
+//         let HTML = "";
+//         filtered_data.forEach((e, i) => {
+//             HTML += `<div class="proto-vertical-name home-header-nav">
+//                 <a href="${e.url}" >${e.name_html}</a>
+//             </div>`
+//         });
+//         $(home_navbar_list).append(HTML);
+//     } else if (homepage_object) {
+//         let nav_title = $(home_navbar).html();
+//         $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
+//     }
+// }
 
 function processAndRenderSiteHeader(data) {
     if (data) {
         $('#site_header').css('background', data.header_background_color);
-        let logo_div = $('#site_header .client-logo');
-        logo_div.addClass(`position-${data.header_logo_position}`);
-        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank"><img src="${data.header_logo_url}" /></a>`);
+        let logo_div = $('#site_header .proto-app-navbar-proto-container .proto-app-navbar-site-logo');
+        logo_div.addClass(`proto-app-navbar-position-${data.header_logo_position}`);
+        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank"><img src="${data.header_logo_url}" height="50px" /></a>`);
     }
 }
 

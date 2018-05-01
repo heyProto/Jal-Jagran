@@ -3,7 +3,7 @@
 	display: inline-block;
 	width: 100%;
 	height: 70px;
-	background: #233D7A;
+	/* background: #233D7A; */
 	box-sizing: border-box;
 	padding: 10px 15px;
 	position: relative;
@@ -158,6 +158,9 @@
 .proto-app-navbar-navigation-bar {
 	position: relative;
 	float: right;
+}
+.proto-app-navbar-menu-icon {
+	display: none;
 }
 @media only screen and (max-width: 400px){
     .proto-app-navbar-proto-container{
