@@ -1,0 +1,164 @@
+.proto-footer{
+	display: inline-block;
+	box-sizing: border-box;
+	width: 100%;
+	background: #233D7A;
+	position: relative;
+	height: 70px;
+	padding: 10px;
+}
+
+.proto-footer .proto-container{
+	width: 1260px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+.proto-footer .site-logo{
+	display: inline-block;
+	float: left;
+	padding-top: 10px;
+}
+
+.proto-footer .proto-links{
+	font-family: "cabin";
+	color: white;
+	font-size: 12px;
+	/*display: inline-block;*/
+	float: right;
+	line-height: 50px;
+	letter-spacing: 1px;
+	font-weight: 100;
+}
+
+.proto-footer .proto-links a{
+	text-decoration: none;
+	color: white;
+	opacity: 0.5;
+}
+
+.proto-footer .proto-links a:hover{
+	opacity: 1;
+}
+
+.proto-footer .proto-links span{
+	margin-left: 5px;
+	margin-right: 5px;
+	opacity: 0.5;
+}
+
+.proto-footer .page-links{
+	font-family: "cabin";
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-transform: capitalize;
+	display: inline-block;
+	line-height: 50px;
+	margin-left: 20px;
+	color: white;
+}
+
+.proto-footer .page-navigation{
+	display: inline-block;
+    width: 500px;
+    overflow-x: scroll;
+    text-align: left;
+    height: 50px;
+    position: relative;
+}
+
+.proto-footer .navigation-scroll{
+	width: 1550px;
+}
+
+.proto-footer .left-click-arrow{
+	display: inline-block;
+    position: absolute;
+    left: 0px;
+    z-index: 100;
+    padding-top: 16px;
+    height: 50px;
+    box-sizing: border-box;
+    width: 100px;
+	background: -webkit-linear-gradient(left,#233D7A,#233D7A00); /*Safari 5.1-6*/
+	background: -o-linear-gradient(left,#233D7A,#233D7A00); /*Opera 11.1-12*/
+	background: -moz-linear-gradient(left,#233D7A,#233D7A00); /*Fx 3.6-15*/
+	background: linear-gradient(to right, #233D7A, #233D7A00); /*Standard*/
+}
+
+.proto-footer .right-click-arrow{
+	display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 50px;
+    width: 100px;
+    padding-top: 16px;
+    background: red;
+    box-sizing: border-box;
+    text-align: right;
+    background: -webkit-linear-gradient(left,#233D7A00,#233D7A); /*Safari 5.1-6*/
+	background: -o-linear-gradient(left,#233D7A00,#233D7A); /*Opera 11.1-12*/
+	background: -moz-linear-gradient(left,#233D7A00,#233D7A); /*Fx 3.6-15*/
+	background: linear-gradient(to right, #233D7A00, #233D7A); /*Standard*/
+}
+
+.proto-footer .footer-navigation{
+	position: relative;
+	display: inline-block;
+	margin-left: 50px;
+}
+
+@media only screen and (max-width: 400px){
+	.proto-footer{
+		width: 100%;
+		height: 160px;
+	}
+
+	.proto-footer .proto-container{
+		width: 100%;
+	}
+
+	.proto-footer .site-logo{
+		width: 100%;
+		text-align: center;
+	}
+
+	.proto-footer .proto-links{
+		width: 100%;
+		text-align: center;
+	}
+	.footer-navigation{
+		width: 100%;
+		margin-left: 0px;
+	}
+
+	.proto-footer .footer-navigation{
+		margin-left: 0px;
+		width: 100%;
+		overflow: hidden;
+		height: 40px;
+		margin-top: 10px;
+	}
+
+	.proto-footer .page-navigation{
+		height: 40px;
+	}
+
+	.proto-footer .right-click-arrow{
+		height: 40px;
+	}
+
+	.proto-footer .left-click-arrow{
+		height: 40px;
+	}
+
+	.proto-footer .page-links{
+		text-transform: capitalize;
+	}
+
+	.proto-footer .proto-links{
+		line-height: 50px;
+	}
+}
