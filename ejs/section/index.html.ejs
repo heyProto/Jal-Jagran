@@ -54,13 +54,13 @@
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
         <% if (site.is_ad_enabled) { %>
-            <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+            <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
             <script>
                 var googletag = googletag || {};
                 googletag.cmd = googletag.cmd || [];
                 googletag.cmd.push(function() {
                     <% page.ad_integrations.forEach(function(e) { %>
-                        googletag.defineSlot( "<%= e.slot_text %>", ["<%= e.width %>", "<%= e.height %>"], "<%= e.div_id %>").addService(googletag.pubads());
+                        googletag.defineSlot( "<%= e.slot_text %>", [<%= e.width %>, <%= e.height %>], "<%= e.div_id %>").addService(googletag.pubads());
                     <% }) %>
                     googletag.pubads().collapseEmptyDivs();
                     googletag.enableServices();
@@ -195,9 +195,9 @@
                         <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e, i) { %>
                                 <% if (streams_mapping['2c'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['2c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['3c'].ads[i+1].height %>px; width:140px;">
+                                    <div id="<%= streams_mapping['2c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['2c'].ads[i+1].height %>px; width:140px;">
                                     <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[i+1].div_id %>"); });
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['2c'].ads[i+1].div_id %>"); });
                                     </script>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -237,6 +237,14 @@
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
         </div>
+
+        <div id='div-gpt-ad-1524052343390-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1524052343390-0'); });
+            </script>
+        </div>
+        </div>
+        <div style='margin-bottom: 20px'></div>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.site = <%- JSON.stringify(site) %>
