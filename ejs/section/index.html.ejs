@@ -84,36 +84,40 @@
                 <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
                 <div class="proto-app-navbar-menu-icon">
                     MENU
-                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png">
+                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" />
                 </div>
             </div>
         </div>
         <div class="proto-app-navbar-proto-container">
-            <div class="proto-app-navbar">
-                <div class="proto-app-navbar-logo-holder">
-                    <div class="proto-app-navbar-logo">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png">
-                    </div>
-                    <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                        <%- ref_category_object['name_html'] %>
-                    </h1>
-                    <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
-                    <div class="proto-app-navbar-first-navigation">
-                        <a href="#"></a>
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
-                    </div>
-                </div>
-                <div class="proto-app-navbar-navigation-bar">
-                    <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png">
-                    </div>
-                    <div class="proto-app-navbar-page-navigation">
-                        <div class="proto-app-navbar-overlay">
-                            <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+            <div id="proto_app_header">
+                <div class="proto-app-navbar">
+                    <div class="proto-app-navbar-logo-holder">
+                        <div class="proto-app-navbar-logo">
+                            <a href="https://pro.to/">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" />
+                            </a>
+                        </div>
+                        <h1 class="proto-app-navbar-project-name" id="homepage_nav">
+                            <%- ref_category_object['name_html'] %>
+                        </h1>
+                        <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
+                        <div class="proto-app-navbar-first-navigation">
+                            <a href="#"></a>
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
                         </div>
                     </div>
-                    <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
+                    <div class="proto-app-navbar-navigation-bar">
+                        <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" />
+                        </div>
+                        <div class="proto-app-navbar-page-navigation">
+                            <div class="proto-app-navbar-overlay">
+                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+                            </div>
+                        </div>
+                        <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
+                        </div>
                     </div>
                 </div>
             </div>
