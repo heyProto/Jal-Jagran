@@ -73,20 +73,20 @@ function processAndRenderVerticalNavbar(data, mode) {
         initNavbarInteraction(mode);
 
         if (mode === "mobile") {
-            first_navigation = $('.proto-app-navbar-first-navigation a');
-            first_navigation.attr('href', d.url);
-            first_navigation.attr('target', d.new_window ? "_blank" : "_self");
+            first_navigation = $('.proto-app-navbar-first-navigation span');
+            // first_navigation.attr('href', d.url);
+            // first_navigation.attr('target', d.new_window ? "_blank" : "_self");
             first_navigation.html(d.name);
 
             $('.proto-app-navbar-navigation-bar').css('opacity', 1);
             $('.proto-app-navbar-navigation-bar').css('display', 'none');
-            $('.proto-app-navbar-first-navigation img').on('click', function () {
+            $('.proto-app-navbar-first-navigation').on('click', function () {
                 $('.proto-app-navbar-navigation-bar').css('display', 'inline-block');
                 $('.proto-app-navbar-logo-holder').css('display', 'none');
 
-                if (next_arrow.css('display') !== 'none') {
-                    $('#proto-navbar-next').click();
-                }
+                // if (next_arrow.css('display') !== 'none') {
+                //     $('#proto-navbar-next').click();
+                // }
             });
         }
     }
@@ -119,7 +119,6 @@ function initNavbarInteraction(mode) {
     }
 
     initArrowEvents();
-    $('#proto_app_header').sticky({zIndex: 100});
 }
 
 function initArrowEvents(events) {
