@@ -4,7 +4,7 @@ ProtoGraph.renderNavbar = function () {
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     fetchNavbarObjects().then((data) => {
         processAndRenderVerticalNavbar(data[0], mode);
-        // processAndRenderHomepageNavbar(data[1], mode);
+        processAndRenderHomepageNavbar(data[1], mode);
         processAndRenderSiteHeader(data[2]);
         ProtoGraph.headerJSON = data[2];
         ProtoGraph.initPage();
@@ -106,18 +106,20 @@ function initNavbarInteraction(mode) {
     $('.proto-app-navbar-navigation-scroll').css('width', width);
     if (width > 600) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
-            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
+            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
+            navBar = $('.proto-app-navbar-page-navigation');
 
-        if (!firstElement.visible()) {
+        if (firstElement.offset().left !== navBar.offset().left) {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
-        if (!lastElement.visible()) {
+        if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
             arrows.push('.proto-app-navbar-right-click-arrow');
         }
         $(arrows.join(',')).css('display', 'inline-block');
     }
 
     initArrowEvents();
+    $('#proto_app_header').sticky({zIndex: 100});
 }
 
 function initArrowEvents(events) {
@@ -214,7 +216,17 @@ function initArrowEvents(events) {
         }
     });
 }
+function processAndRenderHomepageNavbar(data, mode) {
+    let homepage_object = data.filter((e, i) => {
+        return e.name === ProtoGraph.ref_category_object.name
+    })[0],
+    home_navbar = '#homepage_nav';
 
+    let nav_title = $(home_navbar).html();
+    $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
+}
+
+// Old Homepage Navbar
 // function processAndRenderHomepageNavbar(data, mode) {
 //     let filtered_data = data.filter((e, i) => {
 //         return e.name !== ProtoGraph.ref_category_object.name

@@ -69,6 +69,8 @@
 	font-size: 14px;
 	font-family: "cabin";
 	color: #4E4E4E;
+	background: white;
+	z-index: 100;
 }
 
 .proto-app-navbar-logo{
@@ -93,6 +95,10 @@
 	margin-top: 8px;
 	margin-bottom: 0px;
 	/* line-height: 50px; */
+}
+.proto-app-navbar-project-name a {
+	color: inherit;
+	text-decoration: none;
 }
 
 .proto-app-navbar-project-by{
@@ -247,5 +253,21 @@
 	}
 	.proto-app-navbar-logo-holder {
 		width: 100%;
+	}
+
+	.fade-effect{
+		position: absolute;
+		height: 50px;
+		width: 100px;
+		top: 0px;
+		right: 0px;
+		background: -webkit-linear-gradient(left,#ffffff00,#ffffff); /*Safari 5.1-6*/
+		background: -o-linear-gradient(left,#ffffff00,#ffffff); /*Opera 11.1-12*/
+		background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
+		background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
+	}
+
+	.proto-app-navbar-first-navigation img{
+		z-index: 100;
 	}
 }

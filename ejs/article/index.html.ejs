@@ -70,13 +70,13 @@
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
         <% if (site.is_ad_enabled) { %>
-            <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+            <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
             <script>
                 var googletag = googletag || {};
                 googletag.cmd = googletag.cmd || [];
                 googletag.cmd.push(function() {
                     <% page.ad_integrations.forEach(function(e) { %>
-                        googletag.defineSlot( "<%= e.slot_text %>", ["<%= e.width %>", "<%= e.height %>"], "<%= e.div_id %>").addService(googletag.pubads());
+                        googletag.defineSlot( "<%= e.slot_text %>", [<%= e.width %>, <%= e.height %>], "<%= e.div_id %>").addService(googletag.pubads());
                     <% }) %>
                     googletag.pubads().collapseEmptyDivs();
                     googletag.enableServices();
@@ -94,45 +94,51 @@
                 var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
             </script>
         <% } %>
+
         <div class="proto-app-navbar-masthead" id="site_header">
             <div class="proto-app-navbar-proto-container">
                 <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
                 <div class="proto-app-navbar-menu-icon">
                     MENU
-                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png">
+                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" />
                 </div>
             </div>
         </div>
         <div class="proto-app-navbar-proto-container">
-            <div class="proto-app-navbar">
-                <div class="proto-app-navbar-logo-holder">
-                    <div class="proto-app-navbar-logo">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png">
-                    </div>
-                    <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                        <%- ref_category_object['name_html'] %>
-                    </h1>
-                    <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
-                    <div class="proto-app-navbar-first-navigation">
-                        <a href="#"></a>
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
-                    </div>
-                </div>
-                <div class="proto-app-navbar-navigation-bar">
-                    <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png">
-                    </div>
-                    <div class="proto-app-navbar-page-navigation">
-                        <div class="proto-app-navbar-overlay">
-                            <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+            <div id="proto_app_header">
+                <div class="proto-app-navbar">
+                    <div class="proto-app-navbar-logo-holder">
+                        <div class="proto-app-navbar-logo">
+                            <a href="https://pro.to/">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" />
+                            </a>
+                        </div>
+                        <h1 class="proto-app-navbar-project-name" id="homepage_nav">
+                            <%- ref_category_object['name_html'] %>
+                        </h1>
+                        <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
+                        <div class="proto-app-navbar-first-navigation">
+                            <a href="#"></a>
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
                         </div>
                     </div>
-                    <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
-                        <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png">
+                    <div class="proto-app-navbar-navigation-bar">
+                        <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" />
+                        </div>
+                        <div class="proto-app-navbar-page-navigation">
+                            <div class="proto-app-navbar-overlay">
+                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+                            </div>
+                        </div>
+                        <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="proto-grid-container data-page">
             <div class="proto-col col-16" id="col_16_cover_container">
                 <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
@@ -187,7 +193,7 @@
                     <div class="article-area-small" id="article">
                         <div class="fade-area"></div>
                         <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e, i) { %>
-                            <% if (streams_mapping['Narrative'].ads[i+1]) { %>
+                            <% if (streams_mapping['Narrative'].ads && streams_mapping['Narrative'].ads[i+1]) { %>
                                 <div id="<%= streams_mapping['Narrative'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[i+1].height %>px; width:540px;">
                                 <script>
                                 googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[i+1].div_id %>"); });
@@ -212,7 +218,7 @@
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
                                 <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e, i) { %>
-                                    <% if (streams_mapping['Related'].ads[i+1]) { %>
+                                    <% if (streams_mapping['Related'].ads && streams_mapping['Related'].ads[i+1]) { %>
                                         <div id="<%= streams_mapping['Related'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Related'].ads[i+1].height %>px; width:540px;">
                                         <script>
                                         googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[i+1].div_id %>"); });
