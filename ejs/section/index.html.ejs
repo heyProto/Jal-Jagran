@@ -152,7 +152,7 @@
                     <div id="originals_container" class="sidebar">
                          <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['7c'].ads[i+1]) { %>
+                                <% if (streams_mapping['7c'].ads && streams_mapping['7c'].ads[i+1]) { %>
                                     <div id="<%= streams_mapping['7c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['7c'].ads[i+1].height %>px; width:540px;">
                                     <script>
                                     googletag.cmd.push(function() { googletag.display("<%= streams_mapping['7c'].ads[i+1].div_id %>"); });
@@ -173,7 +173,7 @@
                     <div id="digests_container" class="sidebar">
                         <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['4c'].ads[i+1]) { %>
+                                <% if (streams_mapping['4c'].ads &&streams_mapping['4c'].ads[i+1]) { %>
                                     <div id="<%= streams_mapping['4c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['4c'].ads[i+1].height %>px; width:300px;">
                                     <script>
                                     googletag.cmd.push(function() { googletag.display("<%= streams_mapping['4c'].ads[i+1].div_id %>"); });
@@ -194,7 +194,7 @@
                     <div id='opinions_container' class="sidebar">
                         <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['2c'].ads[i+1]) { %>
+                                <% if (streams_mapping['2c'].ads &&streams_mapping['2c'].ads[i+1]) { %>
                                     <div id="<%= streams_mapping['2c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['2c'].ads[i+1].height %>px; width:140px;">
                                     <script>
                                     googletag.cmd.push(function() { googletag.display("<%= streams_mapping['2c'].ads[i+1].div_id %>"); });
@@ -215,7 +215,7 @@
                     <div id='feeds_container' class="sidebar">
                         <div class="theiaStickySidebar">
                             <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['3c'].ads[i+1]) { %>
+                                <% if (streams_mapping['3c'].ads && streams_mapping['3c'].ads[i+1]) { %>
                                     <div id="<%= streams_mapping['3c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['3c'].ads[i+1].height %>px; width:220px;">
                                     <script>
                                     googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[i+1].div_id %>"); });
