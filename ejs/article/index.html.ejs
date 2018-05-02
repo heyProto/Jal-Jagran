@@ -187,7 +187,7 @@
                     <div class="article-area-small" id="article">
                         <div class="fade-area"></div>
                         <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e, i) { %>
-                            <% if (streams_mapping['Narrative'].ads[i+1]) { %>
+                            <% if (streams_mapping['Narrative'].ads && streams_mapping['Narrative'].ads[i+1]) { %>
                                 <div id="<%= streams_mapping['Narrative'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[i+1].height %>px; width:540px;">
                                 <script>
                                 googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[i+1].div_id %>"); });
@@ -212,7 +212,7 @@
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
                                 <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e, i) { %>
-                                    <% if (streams_mapping['Related'].ads[i+1]) { %>
+                                    <% if (streams_mapping['Related'].ads && streams_mapping['Related'].ads[i+1]) { %>
                                         <div id="<%= streams_mapping['Related'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Related'].ads[i+1].height %>px; width:540px;">
                                         <script>
                                         googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[i+1].div_id %>"); });
