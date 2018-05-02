@@ -112,7 +112,7 @@
 	line-height: 50px
 }
 
-.proto-app-navbar-page-links{
+.proto-app-navbar-page-links, .proto-app-navbar-first-navigation span{
 	font-family: "cabin";
 	font-size: 12px;
 	letter-spacing: 1px;
@@ -217,7 +217,8 @@
         width: 100%;
         box-sizing: border-box;
         float: left;
-        text-align: left;
+		text-align: left;
+		max-width: 100%;
     }
     .proto-app-navbar-left-click-arrow{
         left: 0px;
@@ -242,10 +243,6 @@
         float: right;
         line-height: 50px;
         font-size: 12px;
-    }
-    .proto-app-navbar-first-navigation a {
-        text-decoration: none;
-        color: inherit;
     }
     .proto-app-navbar-first-navigation img{
         margin-left: 10px;

@@ -89,6 +89,12 @@ function processAndRenderVerticalNavbar(data, mode) {
                 // }
             });
         }
+    } else {
+        if (mode === "mobile") {
+            $('.proto-app-navbar-first-navigation').css('display', 'none');
+            $('.proto-app-navbar-navigation-bar').css('opacity', 1);
+            $('.proto-app-navbar-navigation-bar').css('display', 'none');
+        }
     }
 }
 
@@ -96,7 +102,9 @@ function initNavbarInteraction(mode) {
     let width = 0,
         items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
         arrows = [],
-        items_count = items.length;
+        items_count = items.length,
+        navBar = $('.proto-app-navbar-page-navigation'),
+        navBarBBox = navBar[0].getBoundingClientRect();
 
     items.each((i, e) => {
         var $e = $(e);
@@ -104,14 +112,18 @@ function initNavbarInteraction(mode) {
         width += e.getBoundingClientRect().width;
     });
     $('.proto-app-navbar-navigation-scroll').css('width', width);
-    if (width > 600) {
+    if (width > navBarBBox.width) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
-            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
-            navBar = $('.proto-app-navbar-page-navigation');
+            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
+
+        console.log(navBar.offset(), "NAVBAR");
+        console.log(firstElement.offset(), "FIRST ELEMENT");
+        console.log(lastElement.offset(), "Last ELEMENT");
 
         if (firstElement.offset().left !== navBar.offset().left) {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
+        console.log(lastElement.offset().left > (navBar.offset().left + navBar.width()),navBar.width(), "condition")
         if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
             arrows.push('.proto-app-navbar-right-click-arrow');
         }
