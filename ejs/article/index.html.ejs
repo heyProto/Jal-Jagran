@@ -69,6 +69,20 @@
             }
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
+        <% if (site.is_ad_enabled) { %>
+            <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+            <script>
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function() {
+                    <% page.ad_integrations.forEach(function(e) { %>
+                        googletag.defineSlot( "<%= e.slot_text %>", ["<%= e.width %>", "<%= e.height %>"], "<%= e.div_id %>").addService(googletag.pubads());
+                    <% }) %>
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                });
+            </script>
+        <% } %>
     </head>
 
     <% let language = site.primary_language.toLowerCase(); %>
@@ -172,7 +186,15 @@
                 <div class="proto-col col-7 proto-articles-container">
                     <div class="article-area-small" id="article">
                         <div class="fade-area"></div>
-                        <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e) { %>
+                        <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e, i) { %>
+                            <% if (streams_mapping['Narrative'].ads[i+1]) { %>
+                                <div id="<%= streams_mapping['Narrative'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[i+1].height %>px; width:540px;">
+                                <script>
+                                googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[i+1].div_id %>"); });
+                                </script>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% } %>
                             <div id="article_<%= e[0]%>" class="ProtoCard-articles">
                                 <%- e[1] %>
                             </div>
@@ -189,11 +211,20 @@
                             <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
-                                <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e) { %>
+                                <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e, i) { %>
+                                    <% if (streams_mapping['Related'].ads[i+1]) { %>
+                                        <div id="<%= streams_mapping['Related'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Related'].ads[i+1].height %>px; width:540px;">
+                                        <script>
+                                        googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[i+1].div_id %>"); });
+                                        </script>
+                                        </div>
+                                        <div style='margin-bottom: 20px'></div>
+                                    <% } %>
                                     <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
                                         <%- e[1] %>
                                     </div>
                                 <% }) %>
+                                <div style='margin-bottom: 20px'></div>
                             </div>
                         </div>
                     </div>
