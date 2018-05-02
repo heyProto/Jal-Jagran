@@ -45,7 +45,6 @@
             <meta property="og:image" content="<%= page.cover_image_url %>">
             <meta name="twitter:image" content="<%= page.cover_image_url %>">
         <% } %>
-
         <style>
             .proto-mobile-grid-navigatio-tab.proto-active-tab {
                 color: <%- site.house_colour %>;
@@ -54,6 +53,20 @@
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
+        <% if (site.is_ad_enabled) { %>
+            <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+            <script>
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function() {
+                    <% page.ad_integrations.forEach(function(e) { %>
+                        googletag.defineSlot( "<%= e.slot_text %>", ["<%= e.width %>", "<%= e.height %>"], "<%= e.div_id %>").addService(googletag.pubads());
+                    <% }) %>
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                });
+            </script>
+        <% } %>
     </head>
 
     <% let language = site.primary_language.toLowerCase(); %>
@@ -112,7 +125,6 @@
                     </div>
                     <div class="pnav-options single-pnav-option" id="mobile_homepage_nav_list"></div>
                 </div>
-
                 <div class="mobile-navigations-screen">
                     <div class="right-float-div">
                         <div class="close-icon"><i class="remove icon"></i></div>
@@ -171,7 +183,15 @@
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="sidebar">
                          <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e) { %>
+                            <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e, i) { %>
+                                <% if (streams_mapping['7c'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['7c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['7c'].ads[i+1].height %>px; width:540px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['7c'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
                                 <div id="<%= e[0]%>" class="ProtoCard-originals">
                                     <%- e[1] %>
                                 </div>
@@ -184,7 +204,15 @@
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
                     <div id="digests_container" class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e) { %>
+                            <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e, i) { %>
+                                <% if (streams_mapping['4c'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['4c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['4c'].ads[i+1].height %>px; width:300px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['4c'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
                                 <div id="<%= e[0]%>" class="ProtoCard-digests">
                                     <%- e[1] %>
                                 </div>
@@ -197,7 +225,15 @@
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
                     <div id='opinions_container' class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e) { %>
+                            <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e, i) { %>
+                                <% if (streams_mapping['2c'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['2c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['3c'].ads[i+1].height %>px; width:140px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
                                 <div id="<%= e[0]%>" class="ProtoCard-opinions">
                                     <%- e[1] %>
                                 </div>
@@ -210,7 +246,16 @@
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
                     <div id='feeds_container' class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e) { %>
+                            <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e, i) { %>
+                                <% if (streams_mapping['3c'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['3c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['3c'].ads[i+1].height %>px; width:220px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+
                                 <div id="<%= e[0]%>" class="ProtoCard-feeds">
                                     <%- e[1] %>
                                 </div>
