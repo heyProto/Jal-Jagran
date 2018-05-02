@@ -4,7 +4,7 @@ ProtoGraph.renderNavbar = function () {
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     fetchNavbarObjects().then((data) => {
         processAndRenderVerticalNavbar(data[0], mode);
-        // processAndRenderHomepageNavbar(data[1], mode);
+        processAndRenderHomepageNavbar(data[1], mode);
         processAndRenderSiteHeader(data[2]);
         ProtoGraph.headerJSON = data[2];
         ProtoGraph.initPage();
@@ -73,21 +73,27 @@ function processAndRenderVerticalNavbar(data, mode) {
         initNavbarInteraction(mode);
 
         if (mode === "mobile") {
-            first_navigation = $('.proto-app-navbar-first-navigation a');
-            first_navigation.attr('href', d.url);
-            first_navigation.attr('target', d.new_window ? "_blank" : "_self");
+            first_navigation = $('.proto-app-navbar-first-navigation span');
+            // first_navigation.attr('href', d.url);
+            // first_navigation.attr('target', d.new_window ? "_blank" : "_self");
             first_navigation.html(d.name);
 
             $('.proto-app-navbar-navigation-bar').css('opacity', 1);
             $('.proto-app-navbar-navigation-bar').css('display', 'none');
-            $('.proto-app-navbar-first-navigation img').on('click', function () {
+            $('.proto-app-navbar-first-navigation').on('click', function () {
                 $('.proto-app-navbar-navigation-bar').css('display', 'inline-block');
                 $('.proto-app-navbar-logo-holder').css('display', 'none');
 
-                if (next_arrow.css('display') !== 'none') {
-                    $('#proto-navbar-next').click();
-                }
+                // if (next_arrow.css('display') !== 'none') {
+                //     $('#proto-navbar-next').click();
+                // }
             });
+        }
+    } else {
+        if (mode === "mobile") {
+            $('.proto-app-navbar-first-navigation').css('display', 'none');
+            $('.proto-app-navbar-navigation-bar').css('opacity', 1);
+            $('.proto-app-navbar-navigation-bar').css('display', 'none');
         }
     }
 }
@@ -96,7 +102,9 @@ function initNavbarInteraction(mode) {
     let width = 0,
         items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
         arrows = [],
-        items_count = items.length;
+        items_count = items.length,
+        navBar = $('.proto-app-navbar-page-navigation'),
+        navBarBBox = navBar[0].getBoundingClientRect();
 
     items.each((i, e) => {
         var $e = $(e);
@@ -104,14 +112,19 @@ function initNavbarInteraction(mode) {
         width += e.getBoundingClientRect().width;
     });
     $('.proto-app-navbar-navigation-scroll').css('width', width);
-    if (width > 600) {
+    if (width > navBarBBox.width) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
             lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
 
-        if (!firstElement.visible()) {
+        console.log(navBar.offset(), "NAVBAR");
+        console.log(firstElement.offset(), "FIRST ELEMENT");
+        console.log(lastElement.offset(), "Last ELEMENT");
+
+        if (firstElement.offset().left !== navBar.offset().left) {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
-        if (!lastElement.visible()) {
+        console.log(lastElement.offset().left > (navBar.offset().left + navBar.width()),navBar.width(), "condition")
+        if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
             arrows.push('.proto-app-navbar-right-click-arrow');
         }
         $(arrows.join(',')).css('display', 'inline-block');
@@ -214,7 +227,17 @@ function initArrowEvents(events) {
         }
     });
 }
+function processAndRenderHomepageNavbar(data, mode) {
+    let homepage_object = data.filter((e, i) => {
+        return e.name === ProtoGraph.ref_category_object.name
+    })[0],
+    home_navbar = '#homepage_nav';
 
+    let nav_title = $(home_navbar).html();
+    $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
+}
+
+// Old Homepage Navbar
 // function processAndRenderHomepageNavbar(data, mode) {
 //     let filtered_data = data.filter((e, i) => {
 //         return e.name !== ProtoGraph.ref_category_object.name
