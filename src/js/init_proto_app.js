@@ -69,7 +69,7 @@ function processAndRenderVerticalNavbar(data, mode) {
                         <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
                     </div>`
         });
-        $('#vertical_nav').append(HTML);
+        $('#vertical_nav').prepend(HTML);
         initNavbarInteraction(mode);
 
         if (mode === "mobile") {
