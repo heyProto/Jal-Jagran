@@ -83,7 +83,7 @@ function processAndRenderVerticalNavbar(data, mode) {
             $('.proto-app-navbar-first-navigation').on('click', function () {
                 $('.proto-app-navbar-navigation-bar').css('display', 'inline-block');
                 $('.proto-app-navbar-logo-holder').css('display', 'none');
-                $('.proto-app-social-share-icons').css('display', 'inline-block');
+
                 // if (next_arrow.css('display') !== 'none') {
                 //     $('#proto-navbar-next').click();
                 // }
@@ -116,7 +116,7 @@ function initNavbarInteraction(mode) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
             lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
 
-        if (firstElement.offset().left !== navBar.offset().left) {
+        if ((firstElement.offset().left !== navBar.offset().left) || mode === "mobile") {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
         if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
@@ -125,10 +125,10 @@ function initNavbarInteraction(mode) {
         $(arrows.join(',')).css('display', 'inline-block');
     }
 
-    initArrowEvents();
+    initArrowEvents(mode);
 }
 
-function initArrowEvents(events) {
+function initArrowEvents(mode) {
     var window_items = [],
         items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
         min = 0,
@@ -153,6 +153,12 @@ function initArrowEvents(events) {
     });
 
     $('#proto-navbar-prev').on('click', (e) => {
+        if (mode === "mobile" && stateOfNavbar.length === 1) {
+            $('.proto-app-navbar-navigation-bar').css('display', 'none');
+            $('.proto-app-navbar-logo-holder').css('display', 'inline-block');
+            return;
+        }
+
         let popedElement = stateOfNavbar.pop(),
             currentElement = stateOfNavbar[stateOfNavbar.length - 1],
             next = $('#proto-navbar-next');
@@ -169,7 +175,7 @@ function initArrowEvents(events) {
         }, 'fast');
         $('.proto-app-navbar-overlay').css('overflow', 'hidden');
 
-        if (stateOfNavbar.length === 1) {
+        if (stateOfNavbar.length === 1 && mode !== 'mobile') {
             $('#proto-navbar-prev').css('display', 'none');
         }
     });
