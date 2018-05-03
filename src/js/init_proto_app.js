@@ -83,7 +83,7 @@ function processAndRenderVerticalNavbar(data, mode) {
             $('.proto-app-navbar-first-navigation').on('click', function () {
                 $('.proto-app-navbar-navigation-bar').css('display', 'inline-block');
                 $('.proto-app-navbar-logo-holder').css('display', 'none');
-
+                $('.proto-app-social-share-icons').css('display', 'inline-block');
                 // if (next_arrow.css('display') !== 'none') {
                 //     $('#proto-navbar-next').click();
                 // }
@@ -116,14 +116,9 @@ function initNavbarInteraction(mode) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
             lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
 
-        console.log(navBar.offset(), "NAVBAR");
-        console.log(firstElement.offset(), "FIRST ELEMENT");
-        console.log(lastElement.offset(), "Last ELEMENT");
-
         if (firstElement.offset().left !== navBar.offset().left) {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
-        console.log(lastElement.offset().left > (navBar.offset().left + navBar.width()),navBar.width(), "condition")
         if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
             arrows.push('.proto-app-navbar-right-click-arrow');
         }
