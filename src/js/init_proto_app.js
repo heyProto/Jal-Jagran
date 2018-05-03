@@ -309,6 +309,9 @@ function processAndRenderSiteHeader(data) {
         let logo_div = $('#site_header .proto-app-navbar-proto-container .proto-app-navbar-site-logo');
         logo_div.addClass(`proto-app-navbar-position-${data.header_logo_position}`);
         logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank"><img src="${data.header_logo_url}" height="50px" /></a>`);
+        if (data.show_proto_logo) {
+            $('.proto-app-navbar-logo').css('display', 'inline-block');
+        }
     }
 }
 

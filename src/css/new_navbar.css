@@ -74,7 +74,8 @@
 }
 
 .proto-app-navbar-logo{
-	display: inline-block;
+	display: none;
+	/* display: inline-block; */
 	line-height: 45px;
 	vertical-align: -webkit-baseline-middle;
 	float: left;
@@ -279,7 +280,5 @@
 		background: -o-linear-gradient(left,#ffffff00,#ffffff); /*Opera 11.1-12*/
 		background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
 		background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
-	}
-		z-index: 100;
 	}
 }
