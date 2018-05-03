@@ -203,9 +203,11 @@
 	display: none;
 }
 .proto-app-social-share-icons {
-	background: black;
+	background: white;
 	float: right;
 	padding: 10px;
+	padding-left: 30px;
+	padding-right: 0px;
 }
 .proto-app-social-share-icons .social-link {
     float: left;
@@ -213,6 +215,10 @@
     opacity: 0.5;
     font-family: cabin;
     font-size: 14px;
+}
+
+.proto-app-navbar-page-links a img{
+	margin-top: 17px;
 }
 
 @media only screen and (max-width: 400px){
