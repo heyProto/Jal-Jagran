@@ -132,6 +132,7 @@ function processAndRenderVerticalNavbar(data, mode) {
             $('.proto-app-navbar-first-navigation').on('click', function () {
                 $('.proto-app-navbar-navigation-bar').css('display', 'inline-block');
                 $('.proto-app-navbar-logo-holder').css('display', 'none');
+                $('.proto-app-navbar-left-click-arrow').css('display', 'inline-block');
 
                 // if (next_arrow.css('display') !== 'none') {
                 //     $('#proto-navbar-next').click();
