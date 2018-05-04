@@ -116,7 +116,43 @@
                         </div>
                         <div class="proto-app-navbar-page-navigation">
                             <div class="proto-app-navbar-overlay">
-                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav">
+                                    <% if (site.facebook_url) { %>
+                                        <div class="proto-app-navbar-page-links">
+                                            <a href="<%= site['facebook_url'] %>" target="_blank">
+                                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/fb-colour-icon.png" height="15px;" />
+                                            </a>
+                                        </div>
+                                    <% } %>
+                                    <% if (site.twitter_url) { %>
+                                        <div class="proto-app-navbar-page-links">
+                                            <a href="<%= site['twitter_url'] %>" target="_blank">
+                                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/twitter-colour-icon.png" height="15px;" />
+                                            </a>
+                                        </div>
+                                    <% } %>
+                                    <% if (site.instagram_url) { %>
+                                        <div class="proto-app-navbar-page-links">
+                                            <a href="<%= site['instagram_url'] %>" target="_blank">
+                                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/insta-colour-icon.png" height="15px;" />
+                                            </a>
+                                        </div>
+                                    <% } %>
+                                    <% if (site.youtube_url) { %>
+                                        <div class="proto-app-navbar-page-links">
+                                            <a href="<%= site['youtube_url'] %>" target="_blank">
+                                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/youtube-colour-icon.png" height="15px;" />
+                                            </a>
+                                        </div>
+                                    <% } %>
+                                    <% if (more_in_the_series) { %>
+                                        <div class="proto-app-navbar-page-links">
+                                            <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
+                                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/rss-colour-icon.png" height="15px;" />
+                                            </a>
+                                        </div>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                         <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
