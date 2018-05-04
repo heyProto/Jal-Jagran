@@ -196,7 +196,6 @@ function initArrowEvents(mode) {
                 let element = document.querySelector(`.proto-app-navbar-page-links[data-item="${i}"]`),
                     width = element.getBoundingClientRect().width;
 
-
                 if ((new_width + width) <= navBarBBox.width) {
                     new_width += width;
                     new_window_items.push(i);
@@ -204,7 +203,7 @@ function initArrowEvents(mode) {
                     break;
                 }
             }
-            window_items = new_window_items.sort();
+            window_items = new_window_items.sort((a,b) => a - b);
 
 
             let nextElem = $(`.proto-app-navbar-page-links[data-item="${window_items[0]}"]`),

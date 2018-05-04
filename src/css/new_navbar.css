@@ -202,20 +202,6 @@
 .mobile-only{
 	display: none;
 }
-.proto-app-social-share-icons {
-	background: white;
-	float: right;
-	padding: 10px;
-	padding-left: 30px;
-	padding-right: 0px;
-}
-.proto-app-social-share-icons .social-link {
-    float: left;
-    padding: 7px 15px;
-    opacity: 0.5;
-    font-family: cabin;
-    font-size: 14px;
-}
 
 .proto-app-navbar-page-links a img{
 	margin-top: 17px;
@@ -225,11 +211,9 @@
     .desktop-only{
     	display: none;
     }
-
     .mobile-only{
     	display: block;
     }
-
     .proto-app-navbar-proto-container{
         width: 100%;
     }
@@ -287,7 +271,6 @@
 	.proto-app-navbar-logo-holder {
 		width: 100%;
 	}
-
 	.fade-effect{
 		position: absolute;
 		height: 50px;
@@ -299,7 +282,7 @@
 		background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
 		background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
 	}
-	.proto-app-social-share-icons {
-		display: none;
+	.proto-app-navbar-right-click-arrow, .proto-app-navbar-left-click-arrow {
+		width: 30px;
 	}
 }
