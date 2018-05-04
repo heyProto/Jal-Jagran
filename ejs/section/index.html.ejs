@@ -71,6 +71,7 @@
 
     <% let language = site.primary_language.toLowerCase(); %>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
+    <% let site_name = site.name ? `By ${site.name}` : ""; %>
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -101,7 +102,7 @@
                         <h1 class="proto-app-navbar-project-name" id="homepage_nav">
                             <%- ref_category_object['name_html'] %>
                         </h1>
-                        <div class="proto-app-navbar-project-by"><%- page.site_by ? page.site_by : "" %></div>
+                        <div class="proto-app-navbar-project-by"><%- site_name %></div>
                         <div class="proto-app-navbar-first-navigation">
                             <span></span>
                             <div class="fade-effect"></div>
@@ -239,14 +240,6 @@
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
         </div>
-
-        <div id='div-gpt-ad-1524052343390-0' style='height:250px; width:300px;'>
-            <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1524052343390-0'); });
-            </script>
-        </div>
-        </div>
-        <div style='margin-bottom: 20px'></div>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.site = <%- JSON.stringify(site) %>
