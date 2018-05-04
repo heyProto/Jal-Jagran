@@ -57,6 +57,45 @@ ProtoGraph.initBackToTop = function() {
     });
 }
 
+function getHost(url) {
+    let a = document.createElement('a');
+    a.href = url;
+    return a.hostname;
+}
+
+function getImagePath(image_name) {
+    return `https://cdn.protograph.pykih.com/Assets/proto-app/img/${image_name}`;
+}
+
+function identifySSURL(link) {
+    let social_share_domains = [
+        {
+            domain: "www.facebook.com",
+            image_name: "fb-colour-icon.png"
+        },
+        {
+            domain: "twitter.com",
+            image_name: "twitter-colour-icon.png"
+        },
+        {
+            domain: "www.youtube.com",
+            image_name: "youtube-colour-icon.png"
+        },
+        {
+            domain: "www.instagram.com",
+            image_name: "insta-colour-icon.png"
+        }
+    ],
+    url_domain = getHost(link.url);
+
+    for (let i = 0; i < social_share_domains.length; i++) {
+        if (url_domain === social_share_domains[i].domain) {
+            return social_share_domains[i];
+        }
+    }
+    return false;
+}
+
 function processAndRenderVerticalNavbar(data, mode) {
     if (data.length > 0) {
         let HTML = "",
@@ -65,11 +104,21 @@ function processAndRenderVerticalNavbar(data, mode) {
             next_arrow = $('#proto-navbar-next');
 
         data.forEach((e, i) => {
-            HTML += `<div class="proto-app-navbar-page-links">
-                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
-                    </div>`
+            let social_share = identifySSURL(e);
+
+            if (social_share) {
+                HTML += `<div class="proto-app-navbar-page-links">
+                    <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>
+                        <img src="${getImagePath(social_share['image_name'])}" />
+                    </a>
+                </div>`;
+            } else {
+                HTML += `<div class="proto-app-navbar-page-links">
+                    <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+                </div>`;
+            }
         });
-        $('#vertical_nav').prepend(HTML);
+        $('#vertical_nav').html(HTML);
         initNavbarInteraction(mode);
 
         if (mode === "mobile") {
@@ -227,6 +276,7 @@ function initArrowEvents(mode) {
         }
     });
 }
+
 function processAndRenderHomepageNavbar(data, mode) {
     let homepage_object = data.filter((e, i) => {
         return e.name === ProtoGraph.ref_category_object.name
@@ -234,6 +284,9 @@ function processAndRenderHomepageNavbar(data, mode) {
     home_navbar = '#homepage_nav';
 
     let nav_title = $(home_navbar).html();
+    if (mode !== 'mobile' && homepage_object['show_by_publisher_in_header']) {
+        $('.proto-app-navbar-project-by').css('display', 'inline-block');
+    }
     $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
 }
 
@@ -308,7 +361,7 @@ function processAndRenderSiteHeader(data) {
         $('#site_header').css('background', data.header_background_color);
         let logo_div = $('#site_header .proto-app-navbar-proto-container .proto-app-navbar-site-logo');
         logo_div.addClass(`proto-app-navbar-position-${data.header_logo_position}`);
-        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank"><img src="${data.header_logo_url}" height="50px" /></a>`);
+        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank" title="${data.header_tooltip ? data.header_tooltip : '' }" ><img src="${data.header_logo_url}" height="50px" /></a>`);
         if (data.show_proto_logo) {
             $('.proto-app-navbar-logo').css('display', 'inline-block');
         }
