@@ -1,3 +1,4 @@
+import {throttle } from './utility.js'
 window.ProtoGraph = window.ProtoGraph || {};
 
 ProtoGraph.renderNavbar = function () {
@@ -24,16 +25,6 @@ function fetchNavbarObjects() {
     ]);
 }
 
-function throttle(fn, wait) {
-    var time = Date.now();
-    return function () {
-        if ((time + wait - Date.now()) < 0) {
-            fn();
-            time = Date.now();
-        }
-    }
-}
-
 ProtoGraph.initBackToTop = function() {
     $(window).scroll((e) => {
         if ($(e.target).scrollTop() > 100) {
@@ -44,10 +35,6 @@ ProtoGraph.initBackToTop = function() {
             $('.proto-app-scroll-to-top').removeClass('proto-app-show');
         }
     })
-    // $(window).scroll(throttle(function (event) {
-    //     // var st = $('.protograph-app-main-container').scrollTop(),
-    //     //     isActive = $('.protograph-app-swipe-left').hasClass('protograph-app-slide-down');
-    // }, 100));
 
     $('.proto-app-scroll-to-top').on('click', (e) => {
         $('.proto-app-scroll-to-top').removeClass('proto-app-show');
@@ -176,6 +163,7 @@ function initNavbarInteraction(mode) {
     }
 
     initArrowEvents(mode);
+    initNavbarScrollEvents(mode);
 }
 
 function initArrowEvents(mode) {
@@ -276,6 +264,67 @@ function initArrowEvents(mode) {
             }
         }
     });
+}
+
+function initNavbarScrollEvents(mode) {
+
+    let navbar = $('#proto_app_header'),
+        navbarOutOfWindow = false,
+        lastScrollTop = 0,
+        didScroll,
+        scrollDirection,
+        staticNavbarTop = navbar.offset().top,
+        staticNavbarHeight = navbar.height();
+
+    $(window).scroll(throttle(function (event) {
+        let currentScrollTop = $(window).scrollTop(),
+            navbarIsFixed = navbar.hasClass('proto-app-fixed-navbar');
+
+        if (currentScrollTop > lastScrollTop) {
+            scrollDirection = 'down';
+        } else {
+            scrollDirection = 'up';
+        }
+
+        if (scrollDirection === "down") {
+            if (currentScrollTop >= (staticNavbarTop + staticNavbarHeight)) {
+                navbar.css('top', `-${staticNavbarTop}px`);
+                navbarOutOfWindow = true;
+            } else {
+                navbarOutOfWindow = false;
+            }
+        } else {
+            if (currentScrollTop >= staticNavbarTop) {
+                navbarOutOfWindow = true;
+            } else {
+                navbarOutOfWindow = false;
+            }
+        }
+
+        if (scrollDirection === 'up') {
+            if (navbarOutOfWindow) {
+                if (!navbarIsFixed) {
+                    navbar.addClass('proto-app-fixed-navbar');
+                    navbar.animate({
+                        'top': '0px',
+                    }, 250);
+                }
+            } else {
+                navbar.removeClass('proto-app-fixed-navbar');
+            }
+        }
+
+        if (scrollDirection === 'down' && navbarIsFixed) {
+            navbar.animate({
+                'top': `-${staticNavbarTop}px`
+            }, 150, () => {
+                navbar.removeClass('proto-app-fixed-navbar');
+            });
+
+        }
+
+        lastScrollTop = currentScrollTop;
+    },100));
 }
 
 function processAndRenderHomepageNavbar(data, mode) {
@@ -386,6 +435,7 @@ function getJSONPromise(url) {
         xhr.send();
     });
 }
+
 document.addEventListener("DOMContentLoaded", function (event) {
     ProtoGraph.renderNavbar();
     ProtoGraph.initBackToTop();

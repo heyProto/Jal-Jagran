@@ -21,10 +21,6 @@ ProtoGraph.initPage = function initPage() {
             containerSelector: "#cover",
             additionalMarginTop: 20
         };
-        $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
-        $('#digests_container').theiaStickySidebar(sticky_sidebar_options);
-        $('#feeds_container').theiaStickySidebar(sticky_sidebar_options);
-        $('#opinions_container').theiaStickySidebar(sticky_sidebar_options);
     }
 
     if (mode === 'mobile') {
@@ -86,36 +82,35 @@ ProtoGraph.initPage = function initPage() {
         if (err != null) {
             console.error("Error fetching originals stream", err);
         } else {
-            if (err != null) {
-                console.error("Error fetching originals stream", err);
-            } else {
-                if (data.length > 0) {
-                    data.map((d, i) => {
-                        if (is_lazy_loading_activated) {
-                            $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                            $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
-                        } else {
-                            setTimeout(function () {
-                                new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+            if (data.length > 0) {
+                data.map((d, i) => {
+                    if (is_lazy_loading_activated) {
+                        $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-originals')
+                        .on('enter', (e) => {
+                            let $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
                                     headerJSON: headerJSON
                                 });
-                            }, 0)
-                        }
-                    });
-                    if (is_lazy_loading_activated) {
-                        inView('.ProtoCard-originals')
-                            .on('enter', (e) => {
-                                let $e = $(e);
-                                if (!$e.find('iframe').length) {
-                                    new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                                        headerJSON: headerJSON
-                                    });
-                                }
-                            });
-                    }
-                } else {
-                    $(originals_container).siblings(".column-title").hide();
+                            }
+                        });
                 }
+                if (mode === 'laptop') {
+                    $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
+                }
+            } else {
+                $(originals_container).siblings(".column-title").hide();
             }
         }
     });
@@ -147,6 +142,9 @@ ProtoGraph.initPage = function initPage() {
                                 });
                             }
                         });
+                }
+                if (mode === 'laptop') {
+                    $('#digests_container').theiaStickySidebar(sticky_sidebar_options);
                 }
             } else {
                 $(digests_container).siblings(".column-title").hide();
@@ -182,6 +180,9 @@ ProtoGraph.initPage = function initPage() {
                             }
                         });
                 }
+                if (mode === 'laptop') {
+                    $('#opinions_container').theiaStickySidebar(sticky_sidebar_options);
+                }
             } else {
                 $(opinions_container).siblings(".column-title").hide();
             }
@@ -215,6 +216,9 @@ ProtoGraph.initPage = function initPage() {
                                 });
                             }
                         });
+                }
+                if (mode === 'laptop') {
+                    $('#feeds_container').theiaStickySidebar(sticky_sidebar_options);
                 }
             } else {
                 $(feeds_container).siblings(".column-title").hide();
