@@ -73,6 +73,7 @@
 	color: #4E4E4E;
 	background: white;
 	z-index: 100;
+	border-bottom: 1px solid #efefef;
 }
 
 .proto-app-navbar-logo{
@@ -208,8 +209,8 @@
 
 .proto-app-fixed-navbar {
 	position: fixed;
-	top: 0px;
-	transition: top 100ms ease-in;
+	/* top: 0px; */
+	/* transition: top 100ms ease-in; */
 	z-index: 100;
 }
 
