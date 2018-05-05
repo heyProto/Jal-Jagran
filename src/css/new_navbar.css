@@ -206,6 +206,13 @@
 	display: none;
 }
 
+.proto-app-fixed-navbar {
+	position: fixed;
+	top: 0px;
+	transition: top 100ms ease-in;
+	z-index: 100;
+}
+
 .proto-app-navbar-page-links a img{
 	margin-top: 17px;
 	height: 15px;
@@ -304,5 +311,8 @@
 	}
 	.proto-app-navbar-right-click-arrow, .proto-app-navbar-left-click-arrow {
 		width: 30px;
+	}
+	.proto-app-fixed-navbar {
+		width: 100%;
 	}
 }

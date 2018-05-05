@@ -176,6 +176,7 @@ function initNavbarInteraction(mode) {
     }
 
     initArrowEvents(mode);
+    initNavbarScrollEvents(mode);
 }
 
 function initArrowEvents(mode) {
@@ -275,6 +276,58 @@ function initArrowEvents(mode) {
                 $('#proto-navbar-next').css('display', 'none');
             }
         }
+    });
+}
+
+function initNavbarScrollEvents(mode) {
+
+    let navbar = $('#proto_app_header'),
+        navbarOutOfWindow = false,
+        lastScrollTop = 0,
+        didScroll,
+        scrollDirection,
+        staticNavbarTop = navbar.offset().top,
+        staticNavbarHeight = navbar.height();
+
+    $(window).scroll(function (event) {
+        let currentScrollTop = $(window).scrollTop(),
+            navbarIsFixed = navbar.hasClass('proto-app-fixed-navbar');
+
+        if (currentScrollTop > lastScrollTop) {
+            scrollDirection = 'down';
+        } else {
+            scrollDirection = 'up';
+        }
+
+        if (scrollDirection === "down") {
+            if (currentScrollTop >= (staticNavbarTop + staticNavbarHeight)) {
+                navbarOutOfWindow = true;
+            } else {
+                navbarOutOfWindow = false;
+            }
+        } else {
+            if (currentScrollTop >= staticNavbarTop) {
+                navbarOutOfWindow = true;
+            } else {
+                navbarOutOfWindow = false;
+            }
+        }
+
+        if (scrollDirection === 'up') {
+            if (navbarOutOfWindow) {
+                if (!navbarIsFixed) {
+                    navbar.addClass('proto-app-fixed-navbar');
+                }
+            } else {
+                navbar.removeClass('proto-app-fixed-navbar');
+            }
+        }
+
+        if (scrollDirection === 'down' && navbarIsFixed) {
+            navbar.removeClass('proto-app-fixed-navbar');
+        }
+
+        lastScrollTop = currentScrollTop;
     });
 }
 

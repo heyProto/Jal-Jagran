@@ -119,12 +119,14 @@ ProtoGraph.initPage = function initPage() {
                 containerSelector: ".cover-page-overlay",
                 sidebarBehavior: "stick-to-top",
                 customScrollCalculations: true,
+                additionalMarginTop: 60,
                 additionalMarginBottom: 20,
                 updateSidebarHeight: false
             });
             $('.related-articles-link').theiaStickySidebar({
                 containerSelector: ".cover-page-overlay",
                 sidebarBehavior: "stick-to-top",
+                additionalMarginTop: 60,
                 additionalMarginBottom: 20,
                 updateSidebarHeight: false
             });
