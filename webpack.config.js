@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const minifier = require('minifier');
-const card = require('./webpack.config.data.js');
+const data = require('./webpack.config.data.js');
+const data_init = require('./webpack.config.data-init.js');
 const home = require('./webpack.config.home.js');
 const article = require('./webpack.config.article.js');
 const init = require('./webpack.config.init.js');
@@ -20,5 +21,5 @@ options = {
 minifier.minify(input, options);
 
 module.exports = [
-  card, home, article, init
+  data, data_init, home, article, init
 ];
