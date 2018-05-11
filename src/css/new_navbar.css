@@ -78,12 +78,15 @@
 
 .proto-app-navbar-logo{
 	display: none;
-	/* display: inline-block; */
-	line-height: 45px;
 	vertical-align: -webkit-baseline-middle;
-	float: left;
-	margin-top: 8px;
-	margin-right: 10px;
+    float: right;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 0px;
+    padding-left: 20px;
+    border-left: 1px solid #efefef;
 }
 
 .proto-app-navbar-logo a{
@@ -273,6 +276,7 @@
 
     .proto-app-navbar-logo{
     	margin-right: 5px;
+    	display: none !important;
     }
 
     .proto-app-navbar-navigation-bar{
