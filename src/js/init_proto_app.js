@@ -151,12 +151,13 @@ function initNavbarInteraction(mode) {
     $('.proto-app-navbar-navigation-scroll').css('width', width);
     if (width > navBarBBox.width) {
         var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
-            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`);
+            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
+            lastElementBBox = lastElement[0].getBoundingClientRect();
 
         if ((firstElement.offset().left !== navBar.offset().left) || mode === "mobile") {
             arrows.push('.proto-app-navbar-left-click-arrow');
         }
-        if (lastElement.offset().left > (navBar.offset().left + navBar.width())) {
+        if ((lastElement.offset().left + lastElementBBox.width) > (navBar.offset().left + navBar.width())) {
             arrows.push('.proto-app-navbar-right-click-arrow');
         }
         $(arrows.join(',')).css('display', 'inline-block');
