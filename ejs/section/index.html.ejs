@@ -236,6 +236,17 @@
                     </div>
                 </div>
             </div>
+            <div class="proto-col col-16">
+                <div class="col-16-story-card-credits">
+                    <div id='credits_container'>
+                        <% major_stream_blockquotes[streams_mapping['credits'].title].forEach(function(e) { %>
+                            <div id="<%= e[0]%>">
+                                <%- e[1] %>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
