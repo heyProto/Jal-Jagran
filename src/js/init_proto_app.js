@@ -86,27 +86,35 @@ function identifySSURL(link) {
 function processAndRenderVerticalNavbar(data, mode) {
     if (data.length > 0) {
         let HTML = "",
+            FooterHTML = "",
             first_navigation,
             d = data[0],
             next_arrow = $('#proto-navbar-next');
-
         data.forEach((e, i) => {
             let social_share = identifySSURL(e);
-
-            if (social_share) {
-                HTML += `<div class="proto-app-navbar-page-links">
-                    <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>
-                        <img src="${getImagePath(social_share['image_name'])}" />
-                    </a>
-                </div>`;
+            if(e.menu && e.menu == "Vertical Footer"){
+                FooterHTML += `<div class="proto-app-navbar-page-links">
+                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+                    </div>`;
             } else {
-                HTML += `<div class="proto-app-navbar-page-links">
-                    <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
-                </div>`;
+                if (social_share) {
+                    HTML += `<div class="proto-app-navbar-page-links">
+                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>
+                            <img src="${getImagePath(social_share['image_name'])}" />
+                        </a>
+                    </div>`;
+                } else {
+                    HTML += `<div class="proto-app-navbar-page-links">
+                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+                    </div>`;
+                }
+
             }
         });
         $('#vertical_nav').html(HTML);
+        $('#vertical_footer_nav').html(FooterHTML);
         initNavbarInteraction(mode);
+        initFooterNavbarInteraction(mode);
 
         if (mode === "mobile") {
             first_navigation = $('.proto-app-navbar-first-navigation span');
@@ -137,7 +145,7 @@ function processAndRenderVerticalNavbar(data, mode) {
 
 function initNavbarInteraction(mode) {
     let width = 0,
-        items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        items = $('.proto-app-navbar-page-navigation .proto-app-navbar-overlay .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
         arrows = [],
         items_count = items.length,
         navBar = $('.proto-app-navbar-page-navigation'),
@@ -148,10 +156,10 @@ function initNavbarInteraction(mode) {
         $e.attr('data-item', i);
         width += e.getBoundingClientRect().width;
     });
-    $('.proto-app-navbar-navigation-scroll').css('width', width);
+    $('#vertical_nav').css('width', width);
     if (width > navBarBBox.width) {
-        var firstElement = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="0"]'),
-            lastElement = $(`.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
+        var firstElement = $('#vertical_nav .proto-app-navbar-page-links[data-item="0"]'),
+            lastElement = $(`#vertical_nav.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
             lastElementBBox = lastElement[0].getBoundingClientRect();
 
         if ((firstElement.offset().left !== navBar.offset().left) || mode === "mobile") {
@@ -166,10 +174,41 @@ function initNavbarInteraction(mode) {
     initArrowEvents(mode);
     initNavbarScrollEvents(mode);
 }
+function initFooterNavbarInteraction(mode) {
+    let width = 0,
+        items = $('.proto-app-navbar-page-navigation-footer .proto-app-navbar-overlay-footer .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        arrows = [],
+        items_count = items.length,
+        navBar = $('.proto-app-navbar-page-footer'),
+        navBarBBox = navBar[0].getBoundingClientRect();
+
+    items.each((i, e) => {
+        var $e = $(e);
+        $e.attr('data-item', i);
+        width += e.getBoundingClientRect().width;
+    });
+    $('#vertical_footer_nav').css('width', width);
+    if (width > navBarBBox.width) {
+        var firstElement = $('#vertical_footer_nav .proto-app-navbar-page-links[data-item="0"]'),
+            lastElement = $(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
+            lastElementBBox = lastElement[0].getBoundingClientRect();
+
+        if ((firstElement.offset().left !== navBar.offset().left)) {
+            arrows.push('.proto-app-footer-left-click-arrow');
+        }
+        if ((lastElement.offset().left + lastElementBBox.width) > (navBar.offset().left + navBar.width())) {
+            arrows.push('.proto-app-footer-right-click-arrow');
+        }
+        $(arrows.join(',')).css('display', 'inline');
+    }
+    initFooterArrowEvents(mode);
+    // initNavbarScrollEvents(mode);
+}
+
 
 function initArrowEvents(mode) {
     var window_items = [],
-        items = $('.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        items = $('.proto-app-navbar-page-navigation .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
         min = 0,
         max = items.length - 1,
         navBar = document.querySelector('.proto-app-navbar-page-navigation'),
@@ -326,6 +365,108 @@ function initNavbarScrollEvents(mode) {
 
         lastScrollTop = currentScrollTop;
     },100));
+}
+
+function initFooterArrowEvents(mode) {
+    var window_items = [],
+        items = $('.proto-app-navbar-page-navigation-footer .proto-app-navbar-overlay-footer .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        min = 0,
+        max = items.length - 1,
+        navBar = document.querySelector('.proto-app-navbar-page-footer'),
+        navBarBBox = navBar.getBoundingClientRect(),
+        stateOfNavbar = [];
+
+    items.each((i, e) => {
+        $(e).attr('data-item', i);
+        let left = $(e).position().left,
+            width = e.getBoundingClientRect().width;
+        if ((left + width) <= navBarBBox.width) {
+            window_items.push(i);
+        }
+    });
+
+    console.log(window_items);
+
+
+    stateOfNavbar.push({
+        window_items: window_items,
+        scrollLeft: 0
+    });
+
+    $('#proto-footer-prev').on('click', (e) => {
+        // if (mode === "mobile" && stateOfNavbar.length === 1) {
+        //     $('.proto-app-navbar-navigation-bar').css('display', 'none');
+        //     $('.proto-app-navbar-logo-holder').css('display', 'inline-block');
+        //     return;
+        // }
+
+        let popedElement = stateOfNavbar.pop(),
+            currentElement = stateOfNavbar[stateOfNavbar.length - 1],
+            next = $('#proto-footer-next');
+
+        window_items = currentElement.window_items;
+
+        if (next.css('display') !== 'inline-block') {
+            next.css('display', 'inline-block');
+        }
+
+        $('.proto-app-navbar-overlay-footer').css('overflow', 'scroll');
+        $('.proto-app-navbar-overlay-footer').animate({
+            scrollLeft: currentElement.scrollLeft
+        }, 'fast');
+        $('.proto-app-navbar-overlay-footer').css('overflow', 'hidden');
+
+        if (stateOfNavbar.length === 1 && mode !== 'mobile') {
+            $('#proto-footer-prev').css('display', 'none');
+            $(".proto-app-navbar-overlay-footer").css('margin-left', "0px");
+        }
+    });
+
+    $('#proto-footer-next').on('click', (e) => {
+        let firstElement = window_items[0],
+            lastElement = window_items[window_items.length - 1],
+            new_width = 0,
+            new_window_items = [],
+            prev = $('#proto-footer-prev');
+
+        if (lastElement !== max) {
+            if (prev.css('display') !== 'inline-block') {
+                prev.css('display', 'inline-block');
+                $(".proto-app-navbar-overlay-footer").css('margin-left', "30px");
+            }
+
+            for (let i = firstElement + 1; i <= max; i++) {
+                let element = document.querySelector(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${i}"]`),
+                    width = element.getBoundingClientRect().width;
+
+                if ((new_width + width) <= navBarBBox.width) {
+                    new_width += width;
+                    new_window_items.push(i);
+                } else {
+                    break;
+                }
+            }
+            window_items = new_window_items.sort((a,b) => a - b);
+
+
+            let nextElem = $(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${window_items[0]}"]`),
+            scrollLeft = $('.proto-app-navbar-overlay-footer').scrollLeft(),
+            newScrollLeft = scrollLeft + nextElem.position().left;
+            stateOfNavbar.push({
+                window_items: window_items,
+                scrollLeft: newScrollLeft
+            });
+
+            $('.proto-app-navbar-overlay-footer').css('overflow', 'scroll');
+            $('.proto-app-navbar-overlay-footer').animate({
+                scrollLeft: newScrollLeft
+            }, 'fast');
+            $('.proto-app-navbar-overlay-footer').css('overflow', 'hidden');
+            if (window_items[window_items.length - 1] === max) {
+                $('#proto-footer-next').css('display', 'none');
+            }
+        }
+    });
 }
 
 function processAndRenderHomepageNavbar(data, mode) {

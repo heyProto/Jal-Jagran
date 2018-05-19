@@ -156,6 +156,24 @@
 	white-space: nowrap;
 }
 
+.proto-app-navbar-page-navigation-footer{
+    /*background: #fafafa;*/
+    overflow-x: scroll;
+    text-align: right;
+    height: 40px;
+    /* height: 65px; */
+    overflow: hidden;
+    white-space: nowrap;
+    color: #333;
+    border-top: 1px solid #efefef;
+    font-size: 12px;
+}
+
+#static_links{
+    float: right;
+    color: #d3d3d3;
+}
+
 .proto-app-navbar-left-click-arrow{
 	/* display: inline-block; */
 	display: none;
@@ -171,6 +189,21 @@
 	background: -o-linear-gradient(left,#ffffff,#ffffff00); /*Opera 11.1-12*/
 	background: -moz-linear-gradient(left,#ffffff,#ffffff00); /*Fx 3.6-15*/
 	background: linear-gradient(to right, #ffffff, #ffffff00); /*Standard*/
+}
+
+.proto-app-footer-left-click-arrow{
+    display: none;
+    position: absolute;
+    left: -75px;
+    z-index: 100;
+    padding-top: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100px;
+    background: -webkit-linear-gradient(left,#ffffff,#ffffff00); /*Safari 5.1-6*/
+    background: -o-linear-gradient(left,#ffffff,#ffffff00); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(left,#ffffff,#ffffff00); /*Fx 3.6-15*/
+    background: linear-gradient(to right, #ffffff, #ffffff00); /*Standard*/
 }
 
 .proto-app-navbar-right-click-arrow{
@@ -189,6 +222,20 @@
 	background: -o-linear-gradient(left,#ffffff00,#ffffff); /*Opera 11.1-12*/
 	background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
 	background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
+}
+
+.proto-app-footer-right-click-arrow{
+    display: none;
+    position: absolute;
+    padding-top: 18px;
+    z-index: 100;
+    right: 665px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: -webkit-linear-gradient(left,#ffffff00,#ffffff); /*Safari 5.1-6*/
+    background: -o-linear-gradient(left,#ffffff00,#ffffff); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
+    background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
 }
 
 .proto-app-navbar-first-navigation {
@@ -232,6 +279,15 @@
     opacity: 1;
 }
 
+.proto-app-navbar-page-footer {
+    max-width: 600px;
+    overflow-x: scroll;
+    overflow: hidden;
+    white-space: nowrap;
+    float:left;
+    display: inline;
+}
+
 @media only screen and (max-width: 400px){
     .desktop-only{
     	display: none;
@@ -271,6 +327,12 @@
         left: 0px;
     }
     .proto-app-navbar-right-click-arrow{
+        padding-right: 0px;
+    }
+    .proto-app-footer-left-click-arrow{
+        left: 0px;
+    }
+    .proto-app-footer-right-click-arrow{
         padding-right: 0px;
     }
 
@@ -314,10 +376,24 @@
 		background: -moz-linear-gradient(left,#ffffff00,#ffffff); /*Fx 3.6-15*/
 		background: linear-gradient(to right, #ffffff00, #ffffff); /*Standard*/
 	}
-	.proto-app-navbar-right-click-arrow, .proto-app-navbar-left-click-arrow {
+	.proto-app-navbar-right-click-arrow, .proto-app-navbar-left-click-arrow{
 		width: 30px;
 	}
-	.proto-app-fixed-navbar {
+	.proto-app-fixed-navbar{
 		width: 100%;
 	}
+
+    .proto-app-footer-right-click-arrow{
+        position: absolute;
+        right: 3px;
+    }
+
+    .proto-app-footer-left-click-arrow{
+        position: absolute;
+        left: -90px
+    }
+
+    .proto-app-navbar-page-footer {
+        width: 100%;
+    }
 }
