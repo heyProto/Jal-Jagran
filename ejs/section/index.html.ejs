@@ -139,6 +139,20 @@
                     </div>
                 </div>
             </div>
+            <% if (major_stream_blockquotes[streams_mapping['cta'].title].length){ %>
+                <div class="proto-col col-16">
+                    <div class="col-16-story-card">
+                        <div id='cta_container'>
+                            <% major_stream_blockquotes[streams_mapping['cta'].title].forEach(function(e) { %>
+                                <div id="<%= e[0]%>">
+                                    <%- e[1] %>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
             <div class="proto-col col-16 proto-nav-sticky">
                 <div class="theiaStickySidebar">
                     <div class="proto-mobile-grid-navigation">
