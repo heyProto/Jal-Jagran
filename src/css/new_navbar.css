@@ -450,7 +450,7 @@
 	}
 
 	.links-area {
-		width: 300px;
+		width: 80%;
 	    margin-left: 50%;
 	    display: inline-block;
 	    transform: translate(-50%,0px);
@@ -460,13 +460,13 @@
 	.right-arrow{
 		position: absolute;
 		right: 15px;
-		padding-top: 25px;
+		/*padding-top: 25px;*/
 	}
 
 	.left-arrow{
 		position: absolute;
 		left: 15px;
-		padding-top: 25px;
+		/*padding-top: 25px;*/
 	}
 
 	.links-scroll-area{
