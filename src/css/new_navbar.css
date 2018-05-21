@@ -453,7 +453,7 @@
 	}
 
 	.proto-footer .links-area {
-		width: 300px;
+		width: 80%;
 	    margin-left: 50%;
 	    display: inline-block;
 	    transform: translate(-50%,0px);
@@ -464,19 +464,18 @@
 	    height: 50px;
 	}
 
-
 	.proto-footer .right-arrow{
 		position: absolute;
 		right: 15px;
-		padding-top: 25px;
 		line-height: 50px;
+		padding-top: 20px;
 	}
 
 	.proto-footer .left-arrow{
 	    line-height: 50px;
 	    position: absolute;
 		left: 15px;
-		padding-top: 25px;
+		padding-top: 20px;
 	}
 
 	.links-scroll-area{
