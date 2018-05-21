@@ -373,10 +373,10 @@ function initNavbarScrollEvents(mode) {
 
 function initFooterArrowEvents(mode) {
     var window_items = [],
-        items = $('.proto-app-navbar-page-navigation-footer .proto-app-navbar-overlay-footer .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+        items = $('#vertical_footer .proto-footer-link'),
         min = 0,
         max = items.length - 1,
-        navBar = document.querySelector('.proto-app-navbar-page-footer'),
+        navBar = document.querySelector('.links-area'),
         navBarBBox = navBar.getBoundingClientRect(),
         stateOfNavbar = [];
 
@@ -388,9 +388,6 @@ function initFooterArrowEvents(mode) {
             window_items.push(i);
         }
     });
-
-    console.log(window_items);
-
 
     stateOfNavbar.push({
         window_items: window_items,
@@ -414,15 +411,14 @@ function initFooterArrowEvents(mode) {
             next.css('display', 'inline-block');
         }
 
-        $('.proto-app-navbar-overlay-footer').css('overflow', 'scroll');
-        $('.proto-app-navbar-overlay-footer').animate({
+        $('.links-area').css('overflow', 'scroll');
+        $('.links-area').animate({
             scrollLeft: currentElement.scrollLeft
         }, 'fast');
-        $('.proto-app-navbar-overlay-footer').css('overflow', 'hidden');
+        $('.links-area').css('overflow', 'hidden');
 
         if (stateOfNavbar.length === 1 && mode !== 'mobile') {
             $('#proto-footer-prev').css('display', 'none');
-            $(".proto-app-navbar-overlay-footer").css('margin-left', "0px");
         }
     });
 
@@ -436,11 +432,11 @@ function initFooterArrowEvents(mode) {
         if (lastElement !== max) {
             if (prev.css('display') !== 'inline-block') {
                 prev.css('display', 'inline-block');
-                $(".proto-app-navbar-overlay-footer").css('margin-left', "30px");
+
             }
 
             for (let i = firstElement + 1; i <= max; i++) {
-                let element = document.querySelector(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${i}"]`),
+                let element = document.querySelector(`#vertical_footer .proto-footer-link[data-item="${i}"]`),
                     width = element.getBoundingClientRect().width;
 
                 if ((new_width + width) <= navBarBBox.width) {
@@ -453,19 +449,19 @@ function initFooterArrowEvents(mode) {
             window_items = new_window_items.sort((a,b) => a - b);
 
 
-            let nextElem = $(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${window_items[0]}"]`),
-            scrollLeft = $('.proto-app-navbar-overlay-footer').scrollLeft(),
+            let nextElem = $(`#vertical_footer .proto-footer-link[data-item="${window_items[0]}"]`),
+            scrollLeft = $('.links-area').scrollLeft(),
             newScrollLeft = scrollLeft + nextElem.position().left;
             stateOfNavbar.push({
                 window_items: window_items,
                 scrollLeft: newScrollLeft
             });
 
-            $('.proto-app-navbar-overlay-footer').css('overflow', 'scroll');
-            $('.proto-app-navbar-overlay-footer').animate({
+            $('.links-area').css('overflow', 'scroll');
+            $('.links-area').animate({
                 scrollLeft: newScrollLeft
             }, 'fast');
-            $('.proto-app-navbar-overlay-footer').css('overflow', 'hidden');
+            $('.links-area').css('overflow', 'hidden');
             if (window_items[window_items.length - 1] === max) {
                 $('#proto-footer-next').css('display', 'none');
             }
