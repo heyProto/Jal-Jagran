@@ -93,9 +93,7 @@ function processAndRenderVerticalNavbar(data, mode) {
         data.forEach((e, i) => {
             let social_share = identifySSURL(e);
             if(e.menu && e.menu == "Vertical Footer"){
-                FooterHTML += `<div class="proto-app-navbar-page-links">
-                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
-                    </div>`;
+                FooterHTML += `<span class='proto-footer-link'><span class="footer-link"><a href="${e.url}" target=${e.new_window ? "_blank" : "_self" }>${e.name}</a></span><span class="light-link dot-seprater">&#8231;</span></span>`;
             } else {
                 if (social_share) {
                     HTML += `<div class="proto-app-navbar-page-links">
@@ -112,9 +110,14 @@ function processAndRenderVerticalNavbar(data, mode) {
             }
         });
         $('#vertical_nav').html(HTML);
-        $('#vertical_footer_nav').html(FooterHTML);
+        if (FooterHTML !== "") {
+            FooterHTML = FooterHTML.replace(/<span class="light-link dot-seprater">&#8231;<\/span><\/span>$/, "</span>");
+        }
+        $('#vertical_footer').html(FooterHTML);
         initNavbarInteraction(mode);
-        initFooterNavbarInteraction(mode);
+        if($('.proto-footer').length){
+            initFooterInteraction(mode);
+        }
 
         if (mode === "mobile") {
             first_navigation = $('.proto-app-navbar-first-navigation span');
@@ -174,12 +177,12 @@ function initNavbarInteraction(mode) {
     initArrowEvents(mode);
     initNavbarScrollEvents(mode);
 }
-function initFooterNavbarInteraction(mode) {
-    let width = 0,
-        items = $('.proto-app-navbar-page-navigation-footer .proto-app-navbar-overlay-footer .proto-app-navbar-navigation-scroll .proto-app-navbar-page-links'),
+function initFooterInteraction(mode) {
+    let width = 1,
+        items = $('#vertical_footer .proto-footer-link'),
         arrows = [],
         items_count = items.length,
-        navBar = $('.proto-app-navbar-page-footer'),
+        navBar = $('.links-area'),
         navBarBBox = navBar[0].getBoundingClientRect();
 
     items.each((i, e) => {
@@ -187,19 +190,20 @@ function initFooterNavbarInteraction(mode) {
         $e.attr('data-item', i);
         width += e.getBoundingClientRect().width;
     });
-    $('#vertical_footer_nav').css('width', width);
+
     if (width > navBarBBox.width) {
-        var firstElement = $('#vertical_footer_nav .proto-app-navbar-page-links[data-item="0"]'),
-            lastElement = $(`#vertical_footer_nav .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
+        $('#vertical_footer').css('width', width);
+        var firstElement = $('#vertical_footer .proto-footer-link[data-item="0"]'),
+            lastElement = $(`#vertical_footer .proto-footer-link[data-item="${items_count - 1}"]`),
             lastElementBBox = lastElement[0].getBoundingClientRect();
 
         if ((firstElement.offset().left !== navBar.offset().left)) {
-            arrows.push('.proto-app-footer-left-click-arrow');
+            arrows.push('.left-arrow');
         }
         if ((lastElement.offset().left + lastElementBBox.width) > (navBar.offset().left + navBar.width())) {
-            arrows.push('.proto-app-footer-right-click-arrow');
+            arrows.push('.right-arrow');
         }
-        $(arrows.join(',')).css('display', 'inline');
+        $(arrows.join(',')).css('display', 'inline-block');
     }
     initFooterArrowEvents(mode);
     // initNavbarScrollEvents(mode);
