@@ -356,6 +356,11 @@
         float: left;
 		text-align: left;
 		max-width: 100%;
+		-ms-overflow-style:none;
+		overflow:-moz-srcollbars-none;
+    }
+    .proto-app-navbar-page-navigation::-webkit-scrollbar{
+    	width:0 !importants;
     }
     .proto-app-navbar-left-click-arrow{
         left: 0px;
@@ -458,6 +463,12 @@
 	    display: inline-block;
 	    transform: translate(-50%,0px);
 	    height: 50px;
+	    -ms-overflow-style:none;
+	    overflow: -moz-scrollbars-none;
+	}
+
+	.proto-footer .links-area::-webkit-scrollbar{
+		width:0 !important;
 	}
 
 	.proto-footer .links-scroll-area{
