@@ -270,7 +270,11 @@
     width: 400px;
     overflow: scroll;
     height: 70px;
+    -ms-overflow-style: none;
+  	overflow: -moz-scrollbars-none;
 }
+
+.proto-footer .links-area::-webkit-scrollbar { width: 0 !important }
 
 .proto-footer ::-webkit-scrollbar{
     display: none;
