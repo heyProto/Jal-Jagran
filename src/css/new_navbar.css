@@ -357,7 +357,7 @@
 		text-align: left;
 		max-width: 100%;
 		-ms-overflow-style:none;
-		overflow:-moz-srcollbars-none;
+		overflow: -moz-scrollbars-none;
     }
     .proto-app-navbar-page-navigation::-webkit-scrollbar{
     	width:0 !importants;
@@ -501,7 +501,7 @@
 	    line-height: 50px;
 	}
 
-	
+
 
 	/*==== end of footer mobile css =====*/
 }
