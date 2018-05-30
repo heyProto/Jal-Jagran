@@ -1,6 +1,6 @@
 .protograph-filters-container {
   width: 298px;
-  height: 612px;
+  height: 352px;
   position: relative;
   /*border-right: 1px solid #efefef;*/
   /*border-left: 1px solid #efefef;*/
@@ -45,7 +45,7 @@
 .protograph-filter-items-container {
   position: absolute;
   width: 100%;
-  max-height: 100vh;
+  max-height: 300px;
   top: 52px;
   left: 0px;
   bottom: 0px;

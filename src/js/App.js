@@ -69,6 +69,8 @@ class App extends React.Component {
           filteredDataJSON: data,
           topoJSON: topo.data,
           filterJSON: filterJSON
+        }, (e) => {
+          this.initF3BTWShareLinks();
         });
     }));
     let dimension = this.getScreenSize();
@@ -76,10 +78,12 @@ class App extends React.Component {
     if(this.props.mode === 'laptop') {
       let sticky_sidebar_options = {
         containerSelector: "#card-list-div",
+        updateSidebarHeight: false,
+        // disableOnResponsiveLayouts: false,
         additionalMarginTop: 50,
         additionalMarginBottom: 10
       };
-      $('.filter-col').theiaStickySidebar(sticky_sidebar_options);
+      $('#sticky').theiaStickySidebar(sticky_sidebar_options);
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -100,14 +104,32 @@ class App extends React.Component {
     }
   }
 
+  initF3BTWShareLinks() {
+    var url = window.location.href,
+      fb_share = $('meta[property="og:description"]').attr('content'),
+      tw_share = $('meta[name="twitter:description"]').attr('content'),
+      fb_share_url,
+      tw_share_url;
+
+    url = url.split("#")[0]
+
+    fb_share_url = `http://www.facebook.com/sharer/sharer.php?u=${url}${fb_share ? '&description=' + encodeURI(fb_share) : ''}`;
+    tw_share_url = `http://twitter.com/share?url=${url}${tw_share ? '&text=' + encodeURI(tw_share) : ''}`;
+
+    document.getElementById('facebook-share-link').href = fb_share_url;
+    document.getElementById('twitter-share-link').href = tw_share_url;
+  }
+
   componentDidUpdate() {
     if(this.props.mode === 'laptop') {
       let sticky_sidebar_options = {
         containerSelector: "#card-list-div",
-        additionalMarginTop: 55,
+        updateSidebarHeight: false,
+        // disableOnResponsiveLayouts: false,
+        additionalMarginTop: 50,
         additionalMarginBottom: 10
       };
-      $('.filter-col').theiaStickySidebar(sticky_sidebar_options);
+      $('#sticky').theiaStickySidebar(sticky_sidebar_options);
       $('.banner-area .sticky-wrapper').css('float', 'left');
       $('.banner-area .sticky-wrapper').css("display", 'inline-block');
     }
@@ -263,13 +285,25 @@ class App extends React.Component {
       return (
         <div className="banner-area">
           <div className="proto-col col-4 filter-col protograph-filter-area">
-            <Filter
-              configurationJSON={this.props.filterConfigurationJSON}
-              dataJSON={this.state.filteredDataJSON}
-              filterJSON={this.state.filterJSON}
-              onChange={(e) => {this.onChange(e);}}
-              hintText="नोट: 5 स्टार का मतलब सबसे अच्छा, 1 स्टार सबेसे बुरा। हर ज़िले की स्टार रेटिंग्स उत्तर प्रदेश के बाक़ी जिलों की तुलना में हैं।"
-            />
+            <div className="summary">
+              <div className="article-share-icons">
+                <a href='#' id='facebook-share-link' target="_blank"><div className="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png" /></div></a>
+                <a href='#' id='twitter-share-link' target="_blank"><div className="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png" /></div></a>
+              </div>
+              {
+                ProtoGraph.page.summary &&
+                  <div className="summary-text">{ProtoGraph.page.summary}</div>
+              }
+            </div>
+            <div id="sticky">
+              <Filter
+                configurationJSON={this.props.filterConfigurationJSON}
+                dataJSON={this.state.filteredDataJSON}
+                filterJSON={this.state.filterJSON}
+                onChange={(e) => {this.onChange(e);}}
+                hintText="नोट: 5 स्टार का मतलब सबसे अच्छा, 1 स्टार सबेसे बुरा। हर ज़िले की स्टार रेटिंग्स उत्तर प्रदेश के बाक़ी जिलों की तुलना में हैं।"
+              />
+            </div>
           </div>
           <div className="proto-col col-12 protograph-app-map-and-list">
               <div className="tabs-area">

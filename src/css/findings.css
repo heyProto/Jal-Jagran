@@ -97,7 +97,7 @@ body{
   background: #efefef !important;
   color: #333;
   border-radius: 0px;
-  border-colorpink;
+  /* border-color: pink; */
 }
 
 ul{
