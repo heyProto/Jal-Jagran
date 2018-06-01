@@ -144,12 +144,30 @@
 
         <div class="proto-grid-container data-page">
             <div class="proto-col col-16" id="col_16_cover_container">
-                <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
+                <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e, i) { %>
+                    <% if (streams_mapping['16c_Hero'].ads && streams_mapping['16c_Hero'].ads[i+1]) { %>
+                            <div id="<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[i+1].height %>px; width:1260px;">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>"); });
+                            </script>
+                            </div>
+                            <div style='margin-bottom: 20px'></div>
+                    <% } %>
                     <div id="<%= e[0]%>">
                         <%- e[1] %>
                     </div>
                     <div style='margin-bottom: 20px'></div>
                 <% }) %>
+                <% Object.keys(streams_mapping['16c_Hero'].ads).forEach(function(e, i){ %>
+                    <% if (e > major_stream_blockquotes[streams_mapping['16c_Hero'].title].length) { %>
+                        <div id="<%= streams_mapping['16c_Hero'].ads[e].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[e].height %>px; width:1260px;">
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[e].div_id %>"); });
+                                </script>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% } %>
+                <% })%>
             </div>
 
             <div class="proto-col col-16 cover-page-overlay no-right-column">
@@ -209,6 +227,16 @@
                             </div>
                             <div style='margin-bottom: 20px'></div>
                         <% }) %>
+                        <% Object.keys(streams_mapping['Narrative'].ads).forEach(function(e, i){ %>
+                            <% if (e > major_stream_blockquotes[streams_mapping['Narrative'].title].length) { %>
+                                <div id="<%= streams_mapping['Narrative'].ads[e].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[e].height %>px; width:540px;">
+                                        <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[e].div_id %>"); });
+                                        </script>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% } %>
+                        <% })%>
                     </div>
                     <div class="default-button read-more-button" id="cont-button">
                         Keep reading
@@ -232,8 +260,18 @@
                                     <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
                                         <%- e[1] %>
                                     </div>
+                                    <div style='margin-bottom: 20px'></div>
                                 <% }) %>
-                                <div style='margin-bottom: 20px'></div>
+                                <% Object.keys(streams_mapping['Related'].ads).forEach(function(e, i){ %>
+                                    <% if (e > major_stream_blockquotes[streams_mapping['Related'].title].length) { %>
+                                        <div id="<%= streams_mapping['Related'].ads[e].div_id %>" style= "height: <%= streams_mapping['Related'].ads[e].height %>px; width:300px;">
+                                                <script>
+                                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[e].div_id %>"); });
+                                                </script>
+                                        </div>
+                                        <div style='margin-bottom: 20px'></div>
+                                    <% } %>
+                                <% })%>
                             </div>
                         </div>
                     </div>

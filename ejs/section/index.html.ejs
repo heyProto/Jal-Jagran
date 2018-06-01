@@ -130,12 +130,31 @@
             <div class="proto-col col-16 stick-to-top">
                 <div class="col-16-story-card">
                     <div id='cover_container'>
-                        <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e) { %>
+                        <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e, i) { %>
+                            <% if (streams_mapping['16c_Hero'].ads && streams_mapping['16c_Hero'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[i+1].height %>px; width:1260px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                            <% } %>
                             <div id="<%= e[0]%>">
                                 <%- e[1] %>
                             </div>
                             <div style='margin-bottom: 20px'></div>
                         <% }) %>
+                        <% Object.keys(streams_mapping['16c_Hero'].ads).forEach(function(e, i){ %>
+                            <% if (e > major_stream_blockquotes[streams_mapping['16c_Hero'].title].length) { %>
+                                <div id="<%= streams_mapping['16c_Hero'].ads[e].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[e].height %>px; width:1260px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[e].div_id %>"); });
+                                            </script>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% } %>
+                        <% })%>
+
                     </div>
                 </div>
             </div>
@@ -143,12 +162,31 @@
                 <div class="proto-col col-16">
                     <div class="col-16-story-card">
                         <div id='cta_container'>
-                            <% major_stream_blockquotes[streams_mapping['cta'].title].forEach(function(e) { %>
+                            <% major_stream_blockquotes[streams_mapping['cta'].title].forEach(function(e, i) { %>
+                                <% if (streams_mapping['cta'].ads && streams_mapping['cta'].ads[i+1]) { %>
+                                    <div id="<%= streams_mapping['cta'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['cta'].ads[i+1].height %>px; width:1260px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['cta'].ads[i+1].div_id %>"); });
+                                    </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
                                 <div id="<%= e[0]%>">
                                     <%- e[1] %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% }) %>
+                            <% Object.keys(streams_mapping['cta'].ads).forEach(function(e, i){ %>
+                                <% if (e > major_stream_blockquotes[streams_mapping['cta'].title].length) { %>
+                                    <div id="<%= streams_mapping['cta'].ads[e].div_id %>" style= "height: <%= streams_mapping['cta'].ads[e].height %>px; width:1260px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['cta'].ads[e].div_id %>"); });
+                                            </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+                            <% })%>
+
                         </div>
                     </div>
                 </div>
@@ -182,6 +220,16 @@
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% }) %>
+                            <% Object.keys(streams_mapping['7c'].ads).forEach(function(e, i) { %>
+                                <% if (e > major_stream_blockquotes[streams_mapping['7c'].title].length) { %>
+                                    <div id="<%= streams_mapping['7c'].ads[e].div_id %>" style= "height: <%= streams_mapping['7c'].ads[e].height %>px; width:540px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['7c'].ads[e].div_id %>"); });
+                                            </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+                            <% })%>
                          </div>
                     </div>
                 </div>
@@ -203,6 +251,16 @@
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% }) %>
+                            <% Object.keys(streams_mapping['4c'].ads).forEach(function(e, i){ %>
+                                <% if (e > major_stream_blockquotes[streams_mapping['4c'].title].length) { %>
+                                    <div id="<%= streams_mapping['4c'].ads[e].div_id %>" style= "height: <%= streams_mapping['4c'].ads[e].height %>px; width:300px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['4c'].ads[e].div_id %>"); });
+                                            </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+                            <% })%>
                         </div>
                     </div>
                 </div>
@@ -224,6 +282,16 @@
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% }) %>
+                            <% Object.keys(streams_mapping['2c'].ads).forEach(function(e, i){ %>
+                                <% if (e > major_stream_blockquotes[streams_mapping['2c'].title].length) { %>
+                                    <div id="<%= streams_mapping['2c'].ads[e].div_id %>" style= "height: <%= streams_mapping['2c'].ads[e].height %>px; width:140px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['2c'].ads[e].div_id %>"); });
+                                            </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+                            <% })%>
                         </div>
                     </div>
                 </div>
@@ -246,6 +314,16 @@
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% }) %>
+                            <% Object.keys(streams_mapping['3c'].ads).forEach(function(e, i){ %>
+                                <% if (e > major_stream_blockquotes[streams_mapping['3c'].title].length) { %>
+                                    <div id="<%= streams_mapping['3c'].ads[e].div_id %>" style= "height: <%= streams_mapping['3c'].ads[e].height %>px; width:220px;">
+                                            <script>
+                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[e].div_id %>"); });
+                                            </script>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                <% } %>
+                            <% })%>
                         </div>
                     </div>
                 </div>
@@ -258,6 +336,16 @@
                                 <%- e[1] %>
                             </div>
                         <% }) %>
+                        <% Object.keys(streams_mapping['credits'].ads).forEach(function(e, i){ %>
+                            <% if (e > major_stream_blockquotes[streams_mapping['credits'].title].length) { %>
+                                <div id="<%= streams_mapping['credits'].ads[e].div_id %>" style= "height: <%= streams_mapping['credits'].ads[e].height %>px; width:1260px;">
+                                        <script>
+                                        googletag.cmd.push(function() { googletag.display("<%= streams_mapping['credits'].ads[e].div_id %>"); });
+                                        </script>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% } %>
+                        <% })%>
                     </div>
                 </div>
             </div>
