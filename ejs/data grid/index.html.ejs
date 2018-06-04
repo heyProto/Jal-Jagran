@@ -37,10 +37,14 @@
         <meta name="twitter:site" content="<%= site.seo_name %>">
         <meta name="twitter:url" content="<%= page.html_key %>">
         <meta name="twitter:title" content="<%= page.headline %>">
+        <% if (page.share_text_facebook) { %>
+            <meta property="og:description" content="<%= page.share_text_facebook %>" />
+        <% } %>
+        <% if (page.share_text_twitter) { %>
+            <meta name="twitter:description" content="<%= page.share_text_twitter %>" />
+        <% } %>
         <% if (page.meta_description) { %>
             <meta name="description" content="<%= page.meta_description %>" />
-            <meta property="og:description" content="<%= page.meta_description %>">
-            <meta name="twitter:description" content="<%= page.meta_description %>">
         <% } %>
         <% if (page.cover_image_url) { %>
             <meta property="og:image" content="<%= page.cover_image_url %>">
