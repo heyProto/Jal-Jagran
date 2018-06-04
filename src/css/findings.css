@@ -480,9 +480,9 @@ ul.scrollspy-child-ul {
   .br-space {
     display: none;
   }
-  .protograph-app-filter-icon {
+  /* .protograph-app-filter-icon {
     display: block;
-  }
+  } */
 
   .article-page .protograph-app-filter-icon{
     display: none !important;

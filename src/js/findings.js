@@ -268,6 +268,7 @@ ProtoGraph.initPage = function initPage() {
 
     if (mode == 'mobile') {
         $('#cont-button').on('click', (e) => {
+            $('#protograph_filter_icon').css('display', 'block');
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
@@ -357,6 +358,7 @@ ProtoGraph.initPage = function initPage() {
                 }
             } else {
                 $("#related_container").siblings(".column-title").hide();
+                $('#related_container').css('display', 'none');
             }
         }
     });
