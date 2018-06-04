@@ -76,7 +76,7 @@ function identifySSURL(link) {
     url_domain = getHost(link.url);
 
     for (let i = 0; i < social_share_domains.length; i++) {
-        if (url_domain === social_share_domains[i].domain) {
+        if (url_domain === social_share_domains[i].domain || (social_share_domains[i].domain.indexOf(url_domain) >= 0)) {
             return social_share_domains[i];
         }
     }
