@@ -318,7 +318,8 @@ function initNavbarScrollEvents(mode) {
         didScroll,
         scrollDirection,
         staticNavbarTop = navbar.offset().top,
-        staticNavbarHeight = navbar.height();
+        staticNavbarHeight = navbar.height(),
+        projectBy = $('.proto-app-navbar-project-by');
 
     $(window).scroll(throttle(function (event) {
         let currentScrollTop = $(window).scrollTop(),
@@ -352,9 +353,11 @@ function initNavbarScrollEvents(mode) {
                     navbar.animate({
                         'top': '0px',
                     }, 250);
+                    projectBy.css('display','inline-block');
                 }
             } else {
                 navbar.removeClass('proto-app-fixed-navbar');
+                projectBy.css('display','none');
             }
         }
 
@@ -477,7 +480,7 @@ function processAndRenderHomepageNavbar(data, mode) {
 
     let nav_title = $(home_navbar).html();
     if (mode !== 'mobile' && homepage_object['show_by_publisher_in_header']) {
-        $('.proto-app-navbar-project-by').css('display', 'inline-block');
+        $('.proto-app-navbar-project-by').css('display', 'none');
     }
     $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
 }
