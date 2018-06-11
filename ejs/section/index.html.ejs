@@ -53,6 +53,16 @@
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/3a22007055b900325586/card.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/58b1b2874072b834cdd5/card.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/c9e5bf64ab18cb01e491/card.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/8c7f4a1291ed39c16d26/card.min.css">
+
+        <script src="<%= AWS_S3_ENDPOINT %>/3a22007055b900325586/card.min.js"></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/58b1b2874072b834cdd5/card.min.js"></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/c9e5bf64ab18cb01e491/card.min.js"></script>
+        <script src="<%= AWS_S3_ENDPOINT %>/8c7f4a1291ed39c16d26/card.min.js"></script>
+
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
             <script>
@@ -130,67 +140,38 @@
             <div class="proto-col col-16 stick-to-top">
                 <div class="col-16-story-card">
                     <div id='cover_container'>
-                        <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e, i) { %>
-                            <% if (streams_mapping['16c_Hero'].ads && streams_mapping['16c_Hero'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[i+1].height %>px; width:1260px;">
-                                    <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>"); });
-                                    </script>
-                                    </div>
-                                    <div style='margin-bottom: 20px'></div>
-                            <% } %>
-                            <div id="<%= e[0]%>">
-                                <%- e[1] %>
-                            </div>
-                            <div style='margin-bottom: 20px'></div>
-                        <% }) %>
-                        <% Object.keys(streams_mapping['16c_Hero'].ads).forEach(function(e, i){ %>
-                            <% if (e > major_stream_blockquotes[streams_mapping['16c_Hero'].title].length) { %>
-                                <div id="<%= streams_mapping['16c_Hero'].ads[e].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[e].height %>px; width:1260px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[e].div_id %>"); });
-                                            </script>
+                        <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
+                            <%= console.log("card", JSON.stringify(card)); %>
+                            <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
+                                <% let cardContent = toStoryCardSSR.render("col16", {"dataJSON": {"card_data": {"data": card.data} } }) %>
+                                <div id="proto_<%= card.view_cast_id %>">
+                                    <%- cardContent.content %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
-                            <% } %>
-                        <% })%>
+                                <script>
+                                    var x = new ProtoGraph.Card.toStory(),
+                                        params = {
+                                            selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                            isFromSSR: true,
+                                            initialState: {
+                                                "dataJSON": {
+                                                    "card_data": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            }
+                                        };
 
+                                        params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                        x.init(params);
+                                        x.renderSixteenCol();
+                                </script>
+                            <% } %>
+                        <% }); %>
                     </div>
                 </div>
             </div>
-            <% if (major_stream_blockquotes[streams_mapping['cta'].title].length){ %>
-                <div class="proto-col col-16">
-                    <div class="col-16-story-card">
-                        <div id='cta_container'>
-                            <% major_stream_blockquotes[streams_mapping['cta'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['cta'].ads && streams_mapping['cta'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['cta'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['cta'].ads[i+1].height %>px; width:1260px;">
-                                    <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['cta'].ads[i+1].div_id %>"); });
-                                    </script>
-                                    </div>
-                                    <div style='margin-bottom: 20px'></div>
-                                <% } %>
-                                <div id="<%= e[0]%>">
-                                    <%- e[1] %>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% }) %>
-                            <% Object.keys(streams_mapping['cta'].ads).forEach(function(e, i){ %>
-                                <% if (e > major_stream_blockquotes[streams_mapping['cta'].title].length) { %>
-                                    <div id="<%= streams_mapping['cta'].ads[e].div_id %>" style= "height: <%= streams_mapping['cta'].ads[e].height %>px; width:1260px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['cta'].ads[e].div_id %>"); });
-                                            </script>
-                                    </div>
-                                    <div style='margin-bottom: 20px'></div>
-                                <% } %>
-                            <% })%>
-
-                        </div>
-                    </div>
-                </div>
-            <% } %>
             <div class="proto-col col-16 proto-nav-sticky">
                 <div class="theiaStickySidebar">
                     <div class="proto-mobile-grid-navigation">
@@ -206,30 +187,108 @@
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="sidebar">
                          <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['7c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['7c'].ads && streams_mapping['7c'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['7c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['7c'].ads[i+1].height %>px; width:540px;">
+
+                            <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
+                                <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
+                                    <% let cardContent = toStoryCardSSR.render("col7", {"dataJSON": {"card_data": {"data": card.data} } }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                     <div style='margin-bottom: 20px'></div>
                                     <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['7c'].ads[i+1].div_id %>"); });
+                                        var x = new ProtoGraph.Card.toStory(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "card_data": {
+                                                            "data": <%- JSON.stringify(card.data) %>
+                                                        }
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderSevenCol();
                                     </script>
+                                <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
+                                    <% let cardContent = toClusterCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                     <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toCluster(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol7();
+                                    </script>
+                                <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
+                                    <% let cardContent = toComposeCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
-                                <% } %>
-                                <div id="<%= e[0]%>" class="ProtoCard-originals">
-                                    <%- e[1] %>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% }) %>
-                            <% Object.keys(streams_mapping['7c'].ads).forEach(function(e, i) { %>
-                                <% if (e > major_stream_blockquotes[streams_mapping['7c'].title].length) { %>
-                                    <div id="<%= streams_mapping['7c'].ads[e].div_id %>" style= "height: <%= streams_mapping['7c'].ads[e].height %>px; width:540px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['7c'].ads[e].div_id %>"); });
-                                            </script>
+                                    <script>
+                                        var x = new ProtoGraph.Card.ComposeCard(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol7();
+                                    </script>
+                                <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
+                                    <% let cardContent = toVideoyoutubeCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toVideoYoutube(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol7();
+                                    </script>
+                                <% } else { %>
+                                    <div id="proto_<%= card.view_cast_id %>"></div>
+                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
-                            <% })%>
+                            <% }); %>
+
                          </div>
                     </div>
                 </div>
@@ -237,30 +296,106 @@
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
                     <div id="digests_container" class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['4c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['4c'].ads &&streams_mapping['4c'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['4c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['4c'].ads[i+1].height %>px; width:300px;">
+                            <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
+                                <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
+                                    <% let cardContent = toStoryCardSSR.render("col4", {"dataJSON": {"card_data": {"data": card.data} } }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                        <div style='margin-bottom: 20px'></div>
                                     <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['4c'].ads[i+1].div_id %>"); });
+                                        var x = new ProtoGraph.Card.toStory(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "card_data": {
+                                                            "data": <%- JSON.stringify(card.data) %>
+                                                        }
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderFourCol();
                                     </script>
+                                <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
+                                    <% let cardContent = toClusterCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
-                                <% } %>
-                                <div id="<%= e[0]%>" class="ProtoCard-digests">
-                                    <%- e[1] %>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% }) %>
-                            <% Object.keys(streams_mapping['4c'].ads).forEach(function(e, i){ %>
-                                <% if (e > major_stream_blockquotes[streams_mapping['4c'].title].length) { %>
-                                    <div id="<%= streams_mapping['4c'].ads[e].div_id %>" style= "height: <%= streams_mapping['4c'].ads[e].height %>px; width:300px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['4c'].ads[e].div_id %>"); });
-                                            </script>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toCluster(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol4();
+                                    </script>
+                                <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
+                                    <% let cardContent = toComposeCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.ComposeCard(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol4();
+                                    </script>
+                                <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
+                                    <% let cardContent = toVideoyoutubeCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toVideoYoutube(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol4();
+                                    </script>
+                                <% } else { %>
+                                    <div id="proto_<%= card.view_cast_id %>"></div>
+                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
-                            <% })%>
+                            <% }); %>
                         </div>
                     </div>
                 </div>
@@ -268,30 +403,106 @@
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
                     <div id='opinions_container' class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['2c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['2c'].ads &&streams_mapping['2c'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['2c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['2c'].ads[i+1].height %>px; width:140px;">
+                            <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
+                                <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
+                                    <% let cardContent = toStoryCardSSR.render("col2", {"dataJSON": {"card_data": {"data": card.data} } }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                        <div style='margin-bottom: 20px'></div>
                                     <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['2c'].ads[i+1].div_id %>"); });
+                                        var x = new ProtoGraph.Card.toStory(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "card_data": {
+                                                            "data": <%- JSON.stringify(card.data) %>
+                                                        }
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderTwoCol();
                                     </script>
+                                <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
+                                    <% let cardContent = toClusterCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
-                                <% } %>
-                                <div id="<%= e[0]%>" class="ProtoCard-opinions">
-                                    <%- e[1] %>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% }) %>
-                            <% Object.keys(streams_mapping['2c'].ads).forEach(function(e, i){ %>
-                                <% if (e > major_stream_blockquotes[streams_mapping['2c'].title].length) { %>
-                                    <div id="<%= streams_mapping['2c'].ads[e].div_id %>" style= "height: <%= streams_mapping['2c'].ads[e].height %>px; width:140px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['2c'].ads[e].div_id %>"); });
-                                            </script>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toCluster(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol2();
+                                    </script>
+                                <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
+                                    <% let cardContent = toComposeCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.ComposeCard(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol2();
+                                    </script>
+                                <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
+                                    <% let cardContent = toVideoyoutubeCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toVideoYoutube(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol2();
+                                    </script>
+                                <% } else { %>
+                                    <div id="proto_<%= card.view_cast_id %>"></div>
+                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
-                            <% })%>
+                            <% }); %>
                         </div>
                     </div>
                 </div>
@@ -299,31 +510,106 @@
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
                     <div id='feeds_container' class="sidebar">
                         <div class="theiaStickySidebar">
-                            <% major_stream_blockquotes[streams_mapping['3c'].title].forEach(function(e, i) { %>
-                                <% if (streams_mapping['3c'].ads && streams_mapping['3c'].ads[i+1]) { %>
-                                    <div id="<%= streams_mapping['3c'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['3c'].ads[i+1].height %>px; width:220px;">
+                            <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
+                                <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
+                                    <% let cardContent = toStoryCardSSR.render("col3", {"dataJSON": {"card_data": {"data": card.data} } }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                        <div style='margin-bottom: 20px'></div>
                                     <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[i+1].div_id %>"); });
-                                    </script>
-                                    </div>
-                                    <div style='margin-bottom: 20px'></div>
-                                <% } %>
+                                        var x = new ProtoGraph.Card.toStory(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "card_data": {
+                                                            "data": <%- JSON.stringify(card.data) %>
+                                                        }
+                                                    }
+                                                }
+                                            };
 
-                                <div id="<%= e[0]%>" class="ProtoCard-feeds">
-                                    <%- e[1] %>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% }) %>
-                            <% Object.keys(streams_mapping['3c'].ads).forEach(function(e, i){ %>
-                                <% if (e > major_stream_blockquotes[streams_mapping['3c'].title].length) { %>
-                                    <div id="<%= streams_mapping['3c'].ads[e].div_id %>" style= "height: <%= streams_mapping['3c'].ads[e].height %>px; width:220px;">
-                                            <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['3c'].ads[e].div_id %>"); });
-                                            </script>
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderThreeCol();
+                                    </script>
+                                <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
+                                    <% let cardContent = toClusterCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toCluster(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol3();
+                                    </script>
+                                <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
+                                    <% let cardContent = toComposeCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.ComposeCard(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol3();
+                                    </script>
+                                <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
+                                    <% let cardContent = toVideoyoutubeCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
+                                    <div id="proto_<%= card.view_cast_id %>">
+                                        <%- cardContent.content %>
+                                    </div>
+                                    <div style='margin-bottom: 20px'></div>
+                                    <script>
+                                        var x = new ProtoGraph.Card.toVideoYoutube(),
+                                            params = {
+                                                selector: document.querySelector("#proto_<%= card.view_cast_id %>"),
+                                                isFromSSR: true,
+                                                initialState: {
+                                                    "dataJSON": {
+                                                        "data": <%- JSON.stringify(card.data) %>
+                                                    }
+                                                }
+                                            };
+
+                                            params['site_configs'] = <%- JSON.stringify(site) %>
+
+                                            x.init(params);
+                                            x.renderCol3();
+                                    </script>
+                                <% } else { %>
+                                    <div id="proto_<%= card.view_cast_id %>"></div>
+                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
-                            <% })%>
+                            <% }); %>
                         </div>
                     </div>
                 </div>
