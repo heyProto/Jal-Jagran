@@ -69,7 +69,7 @@ ProtoGraph.initPage = function initPage() {
             marginDiv.style.marginBottom = "20px";
             cover_container.appendChild(marginDiv);
             setTimeout(function () {
-              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url + "&policy=" + ProtoGraph.page.headline, mode_for_cover, {
+              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url + "&policy=" + ProtoGraph.page.headline + "&origin=" + window.location.origin + "&page_url=" + (ProtoGraph.page.hasOwnProperty("id") ? ProtoGraph.page.id : ""), mode_for_cover, {
                 headerJSON: headerJSON
               });
             }, 0)
