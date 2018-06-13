@@ -144,7 +144,7 @@
                             <%= console.log("card", JSON.stringify(card)); %>
                             <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
                                 <% let cardContent = toStoryCardSSR.render("col16", {"dataJSON": {"card_data": {"data": card.data} } }) %>
-                                <div id="proto_<%= card.view_cast_id %>">
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -191,7 +191,7 @@
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
                                     <% let cardContent = toStoryCardSSR.render("col7", {"dataJSON": {"card_data": {"data": card.data} } }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                      <div style='margin-bottom: 20px'></div>
@@ -216,7 +216,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
                                     <% let cardContent = toClusterCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                      <div style='margin-bottom: 20px'></div>
@@ -239,7 +239,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
                                     <% let cardContent = toComposeCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -262,7 +262,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
                                     <% let cardContent = toVideoyoutubeCardSSR.render("col7", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -299,7 +299,7 @@
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
                                     <% let cardContent = toStoryCardSSR.render("col4", {"dataJSON": {"card_data": {"data": card.data} } }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                         <div style='margin-bottom: 20px'></div>
@@ -324,7 +324,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
                                     <% let cardContent = toClusterCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -347,7 +347,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
                                     <% let cardContent = toComposeCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -370,7 +370,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
                                     <% let cardContent = toVideoyoutubeCardSSR.render("col4", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -406,7 +406,7 @@
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
                                 <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
                                     <% let cardContent = toStoryCardSSR.render("col2", {"dataJSON": {"card_data": {"data": card.data} } }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                         <div style='margin-bottom: 20px'></div>
@@ -431,7 +431,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
                                     <% let cardContent = toClusterCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -454,7 +454,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
                                     <% let cardContent = toComposeCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -477,7 +477,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
                                     <% let cardContent = toVideoyoutubeCardSSR.render("col2", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -513,7 +513,7 @@
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (card.schema_id === "ec6c33c26b5d6015bb40") { %>
                                     <% let cardContent = toStoryCardSSR.render("col3", {"dataJSON": {"card_data": {"data": card.data} } }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                         <div style='margin-bottom: 20px'></div>
@@ -538,7 +538,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "4c23b3f55502fff884c5") { %>
                                     <% let cardContent = toClusterCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -561,7 +561,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "e1b404edee927dfe58d6") { %>
                                     <% let cardContent = toComposeCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -584,7 +584,7 @@
                                     </script>
                                 <% } else if (card.schema_id === "2d19074cd276c06030c3") { %>
                                     <% let cardContent = toVideoyoutubeCardSSR.render("col3", { "dataJSON": {"data": card.data} }) %>
-                                    <div id="proto_<%= card.view_cast_id %>">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>

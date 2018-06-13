@@ -61,22 +61,27 @@ ProtoGraph.initPage = function initPage() {
         })
     }
 
-    // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
-    //     if (err != null) {
-    //         console.error("Error fetching cover stream", err);
-    //     } else {
-    //         if (data.length > 0) {
-    //             data = [data[0]];
-    //             data.map((d, i) => {
-    //                 setTimeout(function () {
-    //                     new ProtoEmbed.initFrame($("#cover_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
-    //                         headerJSON: headerJSON
-    //                     });
-    //                 }, 0)
-    //             })
-    //         }
-    //     }
-    // });
+    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching cover stream", err);
+        } else {
+            if (data.length > 0) {
+                data = [data[0]];
+                data.map((d, i) => {
+                    var element = $("#cover_container #" + d.view_cast_id),
+                        isSSR = element.attr("data-ssr");
+
+                    if (isSSR !== "true") {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame(element[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                })
+            }
+        }
+    });
 
     Util.getJSON(streams['credits'].url, function (err, data) {
         if (err != null) {
@@ -112,42 +117,46 @@ ProtoGraph.initPage = function initPage() {
         }
     });
 
-    // Util.getJSON(streams['7c'].url, function (err, data) {
-    //     if (err != null) {
-    //         console.error("Error fetching originals stream", err);
-    //     } else {
-    //         if (data.length > 0) {
-    //             data.map((d, i) => {
-    //                 if (is_lazy_loading_activated) {
-    //                     $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-    //                     $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
-    //                 } else {
-    //                     setTimeout(function () {
-    //                         new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
-    //                             headerJSON: headerJSON
-    //                         });
-    //                     }, 0)
-    //                 }
-    //             });
-    //             if (is_lazy_loading_activated) {
-    //                 inView('.ProtoCard-originals')
-    //                     .on('enter', (e) => {
-    //                         let $e = $(e);
-    //                         if (!$e.find('iframe').length) {
-    //                             new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-    //                                 headerJSON: headerJSON
-    //                             });
-    //                         }
-    //                     });
-    //             }
-    //             if (mode === 'laptop') {
-    //                 $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
-    //             }
-    //         } else {
-    //             $(originals_container).siblings(".column-title").hide();
-    //         }
-    //     }
-    // });
+    Util.getJSON(streams['7c'].url, function (err, data) {
+        if (err != null) {
+            console.error("Error fetching originals stream", err);
+        } else {
+            if (data.length > 0) {
+
+                data.map((d, i) => {
+                    var element = $("#originals_container #" + d.view_cast_id),
+                        isSSR = element.attr("data-ssr");
+
+                    if (is_lazy_loading_activated) {
+                        $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+                        $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
+                    } else {
+                        setTimeout(function () {
+                            new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+                                headerJSON: headerJSON
+                            });
+                        }, 0)
+                    }
+                });
+                if (is_lazy_loading_activated) {
+                    inView('.ProtoCard-originals')
+                        .on('enter', (e) => {
+                            let $e = $(e);
+                            if (!$e.find('iframe').length) {
+                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                                    headerJSON: headerJSON
+                                });
+                            }
+                        });
+                }
+                if (mode === 'laptop') {
+                    $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
+                }
+            } else {
+                $(originals_container).siblings(".column-title").hide();
+            }
+        }
+    });
 
     // Util.getJSON(streams['4c'].url, function (err, data) {
     //     if (err != null) {
