@@ -1,15 +1,10 @@
 .protograph-filters-container {
-  width: 298px;
-  height: 352px;
   position: relative;
-  /*border-right: 1px solid #efefef;*/
-  /*border-left: 1px solid #efefef;*/
-  /*border-bottom: 1px solid #efefef;*/
-  /* overflow: hidden; */
   font-family: "cabin";
+  margin-bottom: 25px;
 }
 .protograph-filters-header {
-  height: 52px;
+  height: 48px;
 }
 .protograph-filters-active-count {
   padding: 10px;
@@ -19,7 +14,7 @@
 .protograph-filters-selected-filter-toggle {
   display: inline-block;
   padding: 15px 0px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .protograph-filters-reset-filter {
   float: right;
@@ -43,12 +38,13 @@
   cursor: pointer;
 }
 .protograph-filter-items-container {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
-  max-height: 300px;
-  top: 52px;
-  left: 0px;
-  bottom: 0px;
+  /* height: 300px; */
+  max-height: 500px;
+  /* top: 52px; */
+  /* left: 0px; */
+  /* bottom: 0px; */
   font-family: "cabin";
   overflow-y: auto;
   overflow-x: hidden;
@@ -64,11 +60,11 @@
 }
 .protograph-filter-item:hover {
   cursor: pointer;
-  border-left: 2px solid#e03832;
-  color:#e03832;
+  border-left: 2px solid #FAA10C;
+  color:#FAA10C;
 }
 .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-item {
-  border-left: 2px solid#e03832;
+  border-left: 2px solid #FAA10C;
 }
 .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item, .protograph-filter-item-detail.protograph-show-more-filters .protograph-filter-sub-items-container .protograph-filter-item-name {
   border-left: 1px solid #fafafa;
@@ -81,7 +77,7 @@
   display: table-cell;
   width: 90%;
   padding: 10px;
-  font-size: 14px;
+  font-size: 12px;
   color: rgba(0,0,0,0.75);
   border-left: 1px solid #efefef;
 }
@@ -91,7 +87,11 @@
 }
 
 .protograph-filter-item:hover .protograph-filter-item-name{
-  color:#e03832;
+  color: #FAA10C;
+}
+
+.protograph-filter-item-name:hover{
+  color: #FAA10C;
 }
 
 .protograph-filters-left-align {
@@ -107,7 +107,7 @@
 
 .protograph-filter-item-arrow {
   display: table-cell;
-  padding: 10px 17px;
+  /*padding: 10px 17px;*/
   width: 10%;
   text-align: left;
   font-family: cabin;
@@ -130,7 +130,7 @@
   overflow: hidden;
 }
 .protograph-filter-item-detail.protograph-show-more-filters > .protograph-filter-body {
-  max-height: 1000px;
+  max-height: 12450px;
   transition: max-height 350ms ease-out;
 }
 .protograph-filter-body {
@@ -173,7 +173,7 @@
 
 @media only screen and (max-width: 450px) {
   .protograph-filters-container {
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
   }
   .protograph-filters-open {
