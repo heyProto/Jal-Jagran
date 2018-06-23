@@ -582,6 +582,6 @@ function getJSONPromise(url) {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    ProtoGraph.renderNavbar();
-    ProtoGraph.initBackToTop();
+    // ProtoGraph.renderNavbar();
+    // ProtoGraph.initBackToTop();
 });
