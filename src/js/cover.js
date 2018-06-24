@@ -61,102 +61,274 @@ ProtoGraph.initPage = function initPage() {
         })
     }
 
-    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching cover stream", err);
-        } else {
-            if (data.length > 0) {
-                data = [data[0]];
-                data.map((d, i) => {
-                    var element = $("#cover_container #" + d.view_cast_id),
-                        isSSR = element.attr("data-ssr");
+    if ($('#cover_container').length) {
+        $('#cover_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
 
-                    if (isSSR !== "true") {
-                        setTimeout(function () {
-                            new ProtoEmbed.initFrame(element[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
-                                headerJSON: headerJSON
-                            });
-                        }, 0)
-                    }
-                })
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', render_mode);
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
             }
-        }
-    });
-
-    Util.getJSON(streams['credits'].url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching cover stream", err);
-        } else {
-            if (data.length > 0) {
-                data = [data[0]];
-                data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#credits_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-originals')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
                             headerJSON: headerJSON
                         });
-                    }, 0)
-                })
-            }
-        }
-    });
-
-    Util.getJSON(streams['cta'].url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching cover stream", err);
-        } else {
-            if (data.length > 0) {
-                data = [data[0]];
-                data.map((d, i) => {
-                    setTimeout(function () {
-                        new ProtoEmbed.initFrame($("#cta_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
-                            headerJSON: headerJSON
-                        });
-                    }, 0)
-                })
-            }
-        }
-    });
-
-    Util.getJSON(streams['7c'].url, function (err, data) {
-        if (err != null) {
-            console.error("Error fetching originals stream", err);
-        } else {
-            if (data.length > 0) {
-
-                data.map((d, i) => {
-                    var element = $("#originals_container #" + d.view_cast_id),
-                        isSSR = element.attr("data-ssr");
-
-                    if (is_lazy_loading_activated) {
-                        $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-                        $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
-                    } else {
-                        setTimeout(function () {
-                            new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
-                                headerJSON: headerJSON
-                            });
-                        }, 0)
                     }
                 });
-                if (is_lazy_loading_activated) {
-                    inView('.ProtoCard-originals')
-                        .on('enter', (e) => {
-                            let $e = $(e);
-                            if (!$e.find('iframe').length) {
-                                new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-                                    headerJSON: headerJSON
-                                });
-                            }
-                        });
-                }
-                if (mode === 'laptop') {
-                    $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
-                }
-            } else {
-                $(originals_container).siblings(".column-title").hide();
-            }
         }
-    });
+        if (mode === 'laptop') {
+            $('#cover_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    }
+
+    if ($('#originals_container .theiaStickySidebar').length) {
+        $('#originals_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', render_mode);
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, render_mode, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-originals')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    } else {
+        $(originals_container).siblings(".column-title").hide();
+    }
+
+    if ($('#digests_container .theiaStickySidebar').length) {
+        $('#digests_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', "col4");
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, "col4", {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-digests')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#digests_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    } else {
+        $(digests_container).siblings(".column-title").hide();
+    }
+
+    if ($('#opinions_container .theiaStickySidebar').length) {
+        $('#opinions_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', "col2");
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, "col2", {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-opinions')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#opinions_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    } else {
+        $(opinions_container).siblings(".column-title").hide();
+    }
+
+    if ($('#feeds_container .theiaStickySidebar').length) {
+        $('#feeds_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', render_mode_for_feed);
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, render_mode_for_feed, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-feeds')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#feeds_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    } else {
+        $(feeds_container).siblings(".column-title").hide();
+    }
+    // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
+    //     if (err != null) {
+    //         console.error("Error fetching cover stream", err);
+    //     } else {
+    //         if (data.length > 0) {
+    //             data = [data[0]];
+    //             data.map((d, i) => {
+    //                 var element = $("#cover_container #" + d.view_cast_id),
+    //                     isSSR = element.attr("data-ssr");
+
+    //                 if (isSSR !== "true") {
+    //                     setTimeout(function () {
+    //                         new ProtoEmbed.initFrame(element[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
+    //                             headerJSON: headerJSON
+    //                         });
+    //                     }, 0)
+    //                 }
+    //             })
+    //         }
+    //     }
+    // });
+
+    // Util.getJSON(streams['credits'].url, function (err, data) {
+    //     if (err != null) {
+    //         console.error("Error fetching cover stream", err);
+    //     } else {
+    //         if (data.length > 0) {
+    //             data = [data[0]];
+    //             data.map((d, i) => {
+    //                 setTimeout(function () {
+    //                     new ProtoEmbed.initFrame($("#credits_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
+    //                         headerJSON: headerJSON
+    //                     });
+    //                 }, 0)
+    //             })
+    //         }
+    //     }
+    // });
+
+    // Util.getJSON(streams['cta'].url, function (err, data) {
+    //     if (err != null) {
+    //         console.error("Error fetching cover stream", err);
+    //     } else {
+    //         if (data.length > 0) {
+    //             data = [data[0]];
+    //             data.map((d, i) => {
+    //                 setTimeout(function () {
+    //                     new ProtoEmbed.initFrame($("#cta_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
+    //                         headerJSON: headerJSON
+    //                     });
+    //                 }, 0)
+    //             })
+    //         }
+    //     }
+    // });
+
+    // Util.getJSON(streams['7c'].url, function (err, data) {
+    //     if (err != null) {
+    //         console.error("Error fetching originals stream", err);
+    //     } else {
+    //         if (data.length > 0) {
+
+    //             data.map((d, i) => {
+    //                 var element = $("#originals_container #" + d.view_cast_id),
+    //                     isSSR = element.attr("data-ssr");
+
+    //                 if (is_lazy_loading_activated) {
+    //                     $("#originals_container #" + d.view_cast_id).attr('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+    //                     $("#originals_container #" + d.view_cast_id).attr('mode', render_mode);
+    //                 } else {
+    //                     setTimeout(function () {
+    //                         new ProtoEmbed.initFrame($("#originals_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, render_mode, {
+    //                             headerJSON: headerJSON
+    //                         });
+    //                     }, 0)
+    //                 }
+    //             });
+    //             if (is_lazy_loading_activated) {
+    //                 inView('.ProtoCard-originals')
+    //                     .on('enter', (e) => {
+    //                         let $e = $(e);
+    //                         if (!$e.find('iframe').length) {
+    //                             new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+    //                                 headerJSON: headerJSON
+    //                             });
+    //                         }
+    //                     });
+    //             }
+    //             if (mode === 'laptop') {
+    //                 $('#originals_container').theiaStickySidebar(sticky_sidebar_options);
+    //             }
+    //         } else {
+    //             $(originals_container).siblings(".column-title").hide();
+    //         }
+    //     }
+    // });
 
     // Util.getJSON(streams['4c'].url, function (err, data) {
     //     if (err != null) {
