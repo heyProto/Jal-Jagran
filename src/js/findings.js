@@ -74,14 +74,13 @@ function initScroll() {
     });
 }
 
-
 ProtoGraph.initPage = function initPage() {
     let dimension = Util.getScreenSize(),
         mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
         render_mode = (dimension.width <= 500) ? 'col4' : 'col7',
         cover_height = (dimension.width <= 500) ? '250px' : '430px',
         background_size = (dimension.width <= 500) ? 'cover' : '100%',
-        streams = ProtoGraph.streams,
+        mode_for_cover = (mode === 'mobile') ? "col4" : "col16",
         page = ProtoGraph.page,
         headerJSON = ProtoGraph.headerJSON,
         navigation_items = $("#myNavbar ul li"),
@@ -131,139 +130,145 @@ ProtoGraph.initPage = function initPage() {
                 updateSidebarHeight: false
             });
         });
-        if (more_in_the_series && Object.keys(more_in_the_series).length) {
-            // Util.getJSON(more_in_the_series.url, function (err, data) {
-            //     if (err != null) {
-            //         console.error("Error fetching more in series stream", err);
-            //     } else {
-            //         let originals_container = document.getElementById("more_articles_container");
-            //         if (data.length > 0) {
-            //             let len;
-            //             data.length <= 4 ? len = data.length : len = 4;
-            //             for (let i = 0; i < len; i++) {
-            //                 let createDiv = document.createElement('div');
-            //                 createDiv.id = 'ProtoCard_more_articles' + i;
-            //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-            //                 createDiv.setAttribute('mode', "col4");
-            //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-series-articles';
-            //                 originals_container.appendChild(createDiv);
-            //                 let createMarginDiv = document.createElement('div');
 
-            //                 if (is_lazy_loading_activated) {
-            //                     inView('.ProtoCard-more-in-series-articles')
-            //                         .on('enter', (e) => {
-            //                             let $e = $(e);
-            //                             if (!$e.find('iframe').length) {
-            //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-            //                                     headerJSON: headerJSON
-            //                                 });
-            //                             }
-            //                         });
-            //                 } else {
-            //                     setTimeout(function () {
-            //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
-            //                             headerJSON: headerJSON
-            //                         });
-            //                     }, 0)
-            //                 }
-            //             }
-            //         } else {
-            //             $(originals_container).siblings(".column-title").hide();
-            //         }
-            //     }
-            // });
-        } else {
-            $("#more_articles_container").siblings(".column-title").hide();
-        }
-        if (more_in_the_intersection && Object.keys(more_in_the_intersection).length) {
-            // Util.getJSON(more_in_the_intersection.url, function (err, data) {
-            //     if (err != null) {
-            //         console.error("Error fetching more in interaction stream", err);
-            //     } else {
-            //         let originals_container = document.getElementById("more_intersections_container");
-            //         if (data.length > 0) {
-            //             let len;
-            //             data.length <= 4 ? len = data.length : len = 4;
-            //             for (let i = 0; i < len; i++) {
-            //                 let createDiv = document.createElement('div');
-            //                 createDiv.id = 'ProtoCard_more_intersections' + i;
-            //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-            //                 createDiv.setAttribute('mode', "col4");
-            //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-interaction-articles';
-            //                 originals_container.appendChild(createDiv);
-            //                 let createMarginDiv = document.createElement('div');
+        //Temp code
+        $("#more_articles_container").siblings(".column-title").hide();
+        $("#more_intersections_container").siblings(".column-title").hide();
+        $("#more_sub_intersections_container").siblings(".column-title").hide();
 
-            //                 if (is_lazy_loading_activated) {
-            //                     inView('.ProtoCard-more-in-interaction-articles')
-            //                         .on('enter', (e) => {
-            //                             let $e = $(e);
-            //                             if (!$e.find('iframe').length) {
-            //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-            //                                     headerJSON: headerJSON
-            //                                 });
-            //                             }
-            //                         });
-            //                 } else {
-            //                     setTimeout(function () {
-            //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
-            //                             headerJSON: headerJSON
-            //                         });
-            //                     }, 0)
-            //                 }
+        // if (more_in_the_series && Object.keys(more_in_the_series).length) {
+        //     // Util.getJSON(more_in_the_series.url, function (err, data) {
+        //     //     if (err != null) {
+        //     //         console.error("Error fetching more in series stream", err);
+        //     //     } else {
+        //     //         let originals_container = document.getElementById("more_articles_container");
+        //     //         if (data.length > 0) {
+        //     //             let len;
+        //     //             data.length <= 4 ? len = data.length : len = 4;
+        //     //             for (let i = 0; i < len; i++) {
+        //     //                 let createDiv = document.createElement('div');
+        //     //                 createDiv.id = 'ProtoCard_more_articles' + i;
+        //     //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+        //     //                 createDiv.setAttribute('mode', "col4");
+        //     //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-series-articles';
+        //     //                 originals_container.appendChild(createDiv);
+        //     //                 let createMarginDiv = document.createElement('div');
 
-            //             }
-            //         } else {
-            //             $(originals_container).siblings(".column-title").hide();
-            //         }
-            //     }
-            // });
-        } else {
-            $("#more_intersections_container").siblings(".column-title").hide();
-        }
-        if (more_in_the_sub_intersection && Object.keys(more_in_the_sub_intersection).length) {
-            // Util.getJSON(more_in_the_sub_intersection.url, function (err, data) {
-            //     if (err != null) {
-            //         console.error("Error fetching more in sub interaction stream", err);
-            //     } else {
-            //         let originals_container = document.getElementById("more_sub_intersections_container");
-            //         if (data.length > 0) {
-            //             let len;
-            //             data.length <= 4 ? len = data.length : len = 4;
-            //             for (let i = 0; i < len; i++) {
-            //                 let createDiv = document.createElement('div');
-            //                 createDiv.id = 'ProtoCard_more_sub_intersections' + i;
-            //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
-            //                 createDiv.setAttribute('mode', "col4");
-            //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-sub-interaction-articles';
-            //                 originals_container.appendChild(createDiv);
-            //                 let createMarginDiv = document.createElement('div');
+        //     //                 if (is_lazy_loading_activated) {
+        //     //                     inView('.ProtoCard-more-in-series-articles')
+        //     //                         .on('enter', (e) => {
+        //     //                             let $e = $(e);
+        //     //                             if (!$e.find('iframe').length) {
+        //     //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+        //     //                                     headerJSON: headerJSON
+        //     //                                 });
+        //     //                             }
+        //     //                         });
+        //     //                 } else {
+        //     //                     setTimeout(function () {
+        //     //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_articles" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+        //     //                             headerJSON: headerJSON
+        //     //                         });
+        //     //                     }, 0)
+        //     //                 }
+        //     //             }
+        //     //         } else {
+        //     //             $(originals_container).siblings(".column-title").hide();
+        //     //         }
+        //     //     }
+        //     // });
+        // } else {
+        //     $("#more_articles_container").siblings(".column-title").hide();
+        // }
+        // if (more_in_the_intersection && Object.keys(more_in_the_intersection).length) {
+        //     // Util.getJSON(more_in_the_intersection.url, function (err, data) {
+        //     //     if (err != null) {
+        //     //         console.error("Error fetching more in interaction stream", err);
+        //     //     } else {
+        //     //         let originals_container = document.getElementById("more_intersections_container");
+        //     //         if (data.length > 0) {
+        //     //             let len;
+        //     //             data.length <= 4 ? len = data.length : len = 4;
+        //     //             for (let i = 0; i < len; i++) {
+        //     //                 let createDiv = document.createElement('div');
+        //     //                 createDiv.id = 'ProtoCard_more_intersections' + i;
+        //     //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+        //     //                 createDiv.setAttribute('mode', "col4");
+        //     //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-interaction-articles';
+        //     //                 originals_container.appendChild(createDiv);
+        //     //                 let createMarginDiv = document.createElement('div');
 
-            //                 if (is_lazy_loading_activated) {
-            //                     inView('.ProtoCard-more-in-sub-interaction-articles')
-            //                         .on('enter', (e) => {
-            //                             let $e = $(e);
-            //                             if (!$e.find('iframe').length) {
-            //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
-            //                                     headerJSON: headerJSON
-            //                                 });
-            //                             }
-            //                         });
-            //                 } else {
-            //                     setTimeout(function () {
-            //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_sub_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
-            //                             headerJSON: headerJSON
-            //                         });
-            //                     }, 0)
-            //                 }
-            //             }
-            //         } else {
-            //             $(originals_container).siblings(".column-title").hide();
-            //         }
-            //     }
-            // });
-        } else {
-            $("#more_sub_intersections_container").siblings(".column-title").hide();
-        }
+        //     //                 if (is_lazy_loading_activated) {
+        //     //                     inView('.ProtoCard-more-in-interaction-articles')
+        //     //                         .on('enter', (e) => {
+        //     //                             let $e = $(e);
+        //     //                             if (!$e.find('iframe').length) {
+        //     //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+        //     //                                     headerJSON: headerJSON
+        //     //                                 });
+        //     //                             }
+        //     //                         });
+        //     //                 } else {
+        //     //                     setTimeout(function () {
+        //     //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+        //     //                             headerJSON: headerJSON
+        //     //                         });
+        //     //                     }, 0)
+        //     //                 }
+
+        //     //             }
+        //     //         } else {
+        //     //             $(originals_container).siblings(".column-title").hide();
+        //     //         }
+        //     //     }
+        //     // });
+        // } else {
+        //     $("#more_intersections_container").siblings(".column-title").hide();
+        // }
+        // if (more_in_the_sub_intersection && Object.keys(more_in_the_sub_intersection).length) {
+        //     // Util.getJSON(more_in_the_sub_intersection.url, function (err, data) {
+        //     //     if (err != null) {
+        //     //         console.error("Error fetching more in sub interaction stream", err);
+        //     //     } else {
+        //     //         let originals_container = document.getElementById("more_sub_intersections_container");
+        //     //         if (data.length > 0) {
+        //     //             let len;
+        //     //             data.length <= 4 ? len = data.length : len = 4;
+        //     //             for (let i = 0; i < len; i++) {
+        //     //                 let createDiv = document.createElement('div');
+        //     //                 createDiv.id = 'ProtoCard_more_sub_intersections' + i;
+        //     //                 createDiv.setAttribute('iframe-url', `${data[i].iframe_url}%26domain=${location.hostname}`);
+        //     //                 createDiv.setAttribute('mode', "col4");
+        //     //                 createDiv.className = 'ProtoCard-more-articles ProtoCard-more-in-sub-interaction-articles';
+        //     //                 originals_container.appendChild(createDiv);
+        //     //                 let createMarginDiv = document.createElement('div');
+
+        //     //                 if (is_lazy_loading_activated) {
+        //     //                     inView('.ProtoCard-more-in-sub-interaction-articles')
+        //     //                         .on('enter', (e) => {
+        //     //                             let $e = $(e);
+        //     //                             if (!$e.find('iframe').length) {
+        //     //                                 new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+        //     //                                     headerJSON: headerJSON
+        //     //                                 });
+        //     //                             }
+        //     //                         });
+        //     //                 } else {
+        //     //                     setTimeout(function () {
+        //     //                         new ProtoEmbed.initFrame(document.getElementById("ProtoCard_more_sub_intersections" + i), `${data[i].iframe_url}%26domain=${location.hostname}`, "col4", {
+        //     //                             headerJSON: headerJSON
+        //     //                         });
+        //     //                     }, 0)
+        //     //                 }
+        //     //             }
+        //     //         } else {
+        //     //             $(originals_container).siblings(".column-title").hide();
+        //     //         }
+        //     //     }
+        //     // });
+        // } else {
+        //     $("#more_sub_intersections_container").siblings(".column-title").hide();
+        // }
     }
 
     if (mode == 'mobile') {
@@ -327,6 +332,73 @@ ProtoGraph.initPage = function initPage() {
             $('#protograph_filter_close_icon').css('display', 'none');
         }));
     }
+
+    if ($('#related_container').length > 1) {
+        $('#related_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', "col4");
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, "col4", {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-related-articles')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+    } else {
+        $("#related_container").siblings(".column-title").hide();
+        $('#related_container').css('display', 'none');
+    }
+
+
+    if ($('#article').length > 1) {
+        $('#article div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', render_mode);
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, render_mode, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-articles')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+    } else {
+        $('#cont-button').css('display', 'none');
+    }
+
 
     // Util.getJSON(streams['Related'].url, function (err, data) {
     //     if (err != null) {
@@ -397,7 +469,34 @@ ProtoGraph.initPage = function initPage() {
     //     }
     // });
 
-    if (streams['16c_Hero']) {
+    if ($("#col_16_cover_container").length) {
+        $('#col_16_cover_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                view_cast_id = $element.attr("data-view_cast_id"),
+                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+
+            if (is_lazy_loading_activated) {
+                $element.attr('iframe-url', url);
+                $element.attr('mode', mode_for_cover);
+            } else {
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+            }
+        });
+        if (is_lazy_loading_activated) {
+            inView('#col_16_cover_container')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
         // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
         //     if (err != null) {
         //         console.error("Error fetching 16c stream", err);

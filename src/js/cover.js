@@ -69,7 +69,7 @@ ProtoGraph.initPage = function initPage() {
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
-                $element.attr('mode', render_mode);
+                $element.attr('mode', mode_for_cover);
             } else {
                 setTimeout(function () {
                     new ProtoEmbed.initFrame(element, url, mode_for_cover, {
