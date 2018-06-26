@@ -69,6 +69,14 @@
             }
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
+
+        <% let list_of_cards = Object.keys(ssr_card_code); %>
+
+        <% list_of_cards.forEach(e => { %>
+            <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.css">
+            <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js"></script>
+        <% }) %>
+
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
             <script>
@@ -95,6 +103,11 @@
                 var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
             </script>
         <% } %>
+        <style>
+            body {
+                overflow: auto;
+            }
+        </style>
 
         <div class="proto-app-navbar-masthead" id="site_header">
             <div class="proto-app-navbar-proto-container">
@@ -144,30 +157,22 @@
 
         <div class="proto-grid-container data-page">
             <div class="proto-col col-16" id="col_16_cover_container">
-                <% major_stream_blockquotes[streams_mapping['16c_Hero'].title].forEach(function(e, i) { %>
-                    <% if (streams_mapping['16c_Hero'].ads && streams_mapping['16c_Hero'].ads[i+1]) { %>
-                            <div id="<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[i+1].height %>px; width:1260px;">
-                            <script>
-                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[i+1].div_id %>"); });
-                            </script>
-                            </div>
-                            <div style='margin-bottom: 20px'></div>
-                    <% } %>
-                    <div id="<%= e[0]%>">
-                        <%- e[1] %>
-                    </div>
-                    <div style='margin-bottom: 20px'></div>
-                <% }) %>
-                <% Object.keys(streams_mapping['16c_Hero'].ads).forEach(function(e, i){ %>
-                    <% if (e > major_stream_blockquotes[streams_mapping['16c_Hero'].title].length) { %>
-                        <div id="<%= streams_mapping['16c_Hero'].ads[e].div_id %>" style= "height: <%= streams_mapping['16c_Hero'].ads[e].height %>px; width:1260px;">
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['16c_Hero'].ads[e].div_id %>"); });
-                                </script>
+                <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
+                    <% if (ssr_card_code[card.s3_identifier]) { %>
+                        <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) %>
+                        <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col16", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                        <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                            <%- cardContent.content %>
+                            <%- cardScript %>
+                        </div>
+                        <div style='margin-bottom: 20px'></div>
+                    <% } else { %>
+                        <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>">
+                            <%- card.seo_blockquote %>
                         </div>
                         <div style='margin-bottom: 20px'></div>
                     <% } %>
-                <% })%>
+                <% }); %>
             </div>
 
             <div class="proto-col col-16 cover-page-overlay no-right-column">
@@ -198,7 +203,7 @@
                                         <% navigation_json.forEach(function(item, i) { %>
                                             <% if (item['section'].length) { %>
                                                 <li class="nav-item">
-                                                    <a href="#article_<%= item['view_cast_identifier'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
+                                                    <a href="#proto_<%= item['view_cast_id'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
                                                         <%= item['section'] %>
                                                     </a>
                                                 </li>
@@ -213,30 +218,22 @@
                 <div class="proto-col col-7 proto-articles-container">
                     <div class="article-area-small" id="article">
                         <div class="fade-area"></div>
-                        <% major_stream_blockquotes[streams_mapping['Narrative'].title].forEach(function(e, i) { %>
-                            <% if (streams_mapping['Narrative'].ads && streams_mapping['Narrative'].ads[i+1]) { %>
-                                <div id="<%= streams_mapping['Narrative'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[i+1].height %>px; width:540px;">
-                                <script>
-                                googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[i+1].div_id %>"); });
-                                </script>
+                        <% streams_mapping['Narrative'].cards.forEach(function(card,i) { %>
+                            <% if (ssr_card_code[card.s3_identifier]) { %>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render("col7", {"dataJSON": card.data_json}) %>
+                                <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col7", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                    <%- cardContent.content %>
+                                    <%- cardScript %>
+                                </div>
+                                <div style='margin-bottom: 20px'></div>
+                            <% } else { %>
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-articles">
+                                    <%- card.seo_blockquote %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } %>
-                            <div id="article_<%= e[0]%>" class="ProtoCard-articles">
-                                <%- e[1] %>
-                            </div>
-                            <div style='margin-bottom: 20px'></div>
-                        <% }) %>
-                        <% Object.keys(streams_mapping['Narrative'].ads).forEach(function(e, i){ %>
-                            <% if (e > major_stream_blockquotes[streams_mapping['Narrative'].title].length) { %>
-                                <div id="<%= streams_mapping['Narrative'].ads[e].div_id %>" style= "height: <%= streams_mapping['Narrative'].ads[e].height %>px; width:540px;">
-                                        <script>
-                                            googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Narrative'].ads[e].div_id %>"); });
-                                        </script>
-                                </div>
-                                <div style='margin-bottom: 20px'></div>
-                            <% } %>
-                        <% })%>
+                        <% }); %>
                     </div>
                     <div class="default-button read-more-button" id="cont-button">
                         Keep reading
@@ -248,30 +245,22 @@
                             <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
-                                <% major_stream_blockquotes[streams_mapping['Related'].title].forEach(function(e, i) { %>
-                                    <% if (streams_mapping['Related'].ads && streams_mapping['Related'].ads[i+1]) { %>
-                                        <div id="<%= streams_mapping['Related'].ads[i+1].div_id %>" style= "height: <%= streams_mapping['Related'].ads[i+1].height %>px; width:540px;">
-                                        <script>
-                                        googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[i+1].div_id %>"); });
-                                        </script>
+                                <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
+                                    <% if (ssr_card_code[card.s3_identifier]) { %>
+                                        <% let cardContent = ssr_card_code[card.s3_identifier].render("col4", {"dataJSON": card.data_json}) %>
+                                        <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col4", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                        <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                            <%- cardContent.content %>
+                                            <%- cardScript %>
+                                        </div>
+                                        <div style='margin-bottom: 20px'></div>
+                                    <% } else { %>
+                                        <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-related-articles">
+                                            <%- card.seo_blockquote %>
                                         </div>
                                         <div style='margin-bottom: 20px'></div>
                                     <% } %>
-                                    <div id="ProtoCard_related_articles_<%= e[0]%>" class="ProtoCard-related-articles">
-                                        <%- e[1] %>
-                                    </div>
-                                    <div style='margin-bottom: 20px'></div>
-                                <% }) %>
-                                <% Object.keys(streams_mapping['Related'].ads).forEach(function(e, i){ %>
-                                    <% if (e > major_stream_blockquotes[streams_mapping['Related'].title].length) { %>
-                                        <div id="<%= streams_mapping['Related'].ads[e].div_id %>" style= "height: <%= streams_mapping['Related'].ads[e].height %>px; width:300px;">
-                                                <script>
-                                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['Related'].ads[e].div_id %>"); });
-                                                </script>
-                                        </div>
-                                        <div style='margin-bottom: 20px'></div>
-                                    <% } %>
-                                <% })%>
+                                <% }); %>
                             </div>
                         </div>
                     </div>
@@ -346,14 +335,13 @@
         <% }); %>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
-            ProtoGraph.streams = <%- JSON.stringify(streams_mapping) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
             ProtoGraph.page = <%- JSON.stringify(page_object) %>;
             ProtoGraph.site = <%- JSON.stringify(site) %>;
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
-            ProtoGraph.more_in_the_series = <%- JSON.stringify(more_in_the_series) %>;
+            ProtoGraph.more_in_the_series = <%- JSON.stringify(more_in_the_series || {}) %>;
             ProtoGraph.more_in_the_intersection = <%- JSON.stringify(more_in_the_intersection || {}) %>;
             ProtoGraph.more_in_the_sub_intersection = <%- JSON.stringify(more_in_the_sub_intersection || {}) %>;
         </script>

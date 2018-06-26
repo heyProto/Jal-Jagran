@@ -51,6 +51,9 @@
                 border-bottom: 2px solid <%- site.house_colour %>;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/systemtheme.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/theme.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/layout.css">
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
@@ -86,6 +89,11 @@
                 var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
             </script>
         <% } %>
+        <style>
+            body {
+                overflow: auto;
+            }
+        </style>
 
         <div class="proto-app-navbar-masthead" id="site_header">
             <div class="proto-app-navbar-proto-container">
@@ -134,18 +142,20 @@
         </div>
 
         <div class="proto-grid-container">
-            <div class="proto-col col-16 stick-to-top">
-                <div class="col-16-story-card">
+            <div class="pro-col pro-col-16 t-proto-col t-col-16 stick-to-top">
+                <div class="col-16-story-card pro-row-5">
                     <div id='cover_container'>
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) %>
+                                <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col16", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
                                 <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content %>
+                                    <%- cardScript %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } else { %>
-                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false">
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>">
                                     <%- card.seo_blockquote %>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -165,19 +175,22 @@
                 </div>
             </div>
             <div id="cover" class="proto-col col-16 cover-page-overlay no-right-column">
-                <div class="proto-col col-7 proto-tab-content proto-tab-active-content">
+                <div class="pro-col pro-col-7 t-proto-col t-col-7 proto-tab-content proto-tab-active-content">
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
-                    <div id="originals_container" class="sidebar">
+                    <div id="originals_container" class="pro-row-3 sidebar">
                          <div class="theiaStickySidebar">
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col7", {"dataJSON": card.data_json}) %>
+                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col7", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
+                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>"
+                                    data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-originals">
                                         <%- card.seo_blockquote %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -186,19 +199,22 @@
                          </div>
                     </div>
                 </div>
-                <div class="proto-col col-4 proto-tab-content">
+                <div class="pro-col pro-col-4 t-proto-col t-col-4 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
-                    <div id="digests_container" class="sidebar">
+                    <div id="digests_container" class="pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col4", {"dataJSON": card.data_json}) %>
+                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col4", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
+                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>"
+                                    data-template_card_id="<%= card.s3_identifier %>"  class="ProtoCard-digests">
                                         <%- card.seo_blockquote %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -207,19 +223,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="proto-col col-2 proto-tab-content">
+                <div class="pro-col pro-col-2 t-proto-col t-col-2 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
-                    <div id='opinions_container' class="sidebar">
+                    <div id='opinions_container' class="pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col2", {"dataJSON": card.data_json}) %>
+                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col2", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
+                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-opinions">
                                         <%- card.seo_blockquote %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -228,19 +246,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="proto-col col-3 proto-tab-content no-right-margin">
+                <div class="pro-col pro-col-3 t-proto-col t-col-3 proto-tab-content no-right-margin">
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
-                    <div id='feeds_container' class="sidebar">
+                    <div id='feeds_container' class="pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col3", {"dataJSON": card.data_json}) %>
+                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col3", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
+                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false">
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-feeds">
                                         <%- card.seo_blockquote %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
