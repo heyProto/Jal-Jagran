@@ -333,11 +333,12 @@ ProtoGraph.initPage = function initPage() {
         }));
     }
 
-    if ($('#related_container').length > 1) {
+    if ($('#related_container').children().length > 1) {
         $('#related_container div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
+                template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`;
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
@@ -367,11 +368,12 @@ ProtoGraph.initPage = function initPage() {
     }
 
 
-    if ($('#article').length > 1) {
+    if ($('#article').children().length > 1) {
         $('#article div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
+                template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
@@ -469,11 +471,12 @@ ProtoGraph.initPage = function initPage() {
     //     }
     // });
 
-    if ($("#col_16_cover_container").length) {
+    if ($('#col_16_cover_container div[data-ssr="false]').length) {
         $('#col_16_cover_container div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
+                template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${view_cast_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`;
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
