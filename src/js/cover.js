@@ -238,6 +238,28 @@ ProtoGraph.initPage = function initPage() {
     } else {
         $(feeds_container).siblings(".column-title").hide();
     }
+
+    let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
+    ssr_cards.forEach((s) => {
+        ProtoGraph.ssr_cards[s].forEach((card) => {
+            let x = new ProtoGraph.Card[card.instance]();
+            x.init({
+                "selector": document.querySelector(`#proto_${card.view_cast_id}`),
+                "isFromSSR": true,
+                "initialState": card.dataJSON,
+                "site_configs": ProtoGraph.site
+            });
+            x.render();
+        });
+    });
+
+    inView('.proto-lazy-load-image')
+        .on('enter', (e) => {
+            let img_src = $(e).attr('data-src');
+            e.src = img_src
+            e.classList.remove('proto-lazy-load-image')
+        });
+
     // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
     //     if (err != null) {
     //         console.error("Error fetching cover stream", err);
