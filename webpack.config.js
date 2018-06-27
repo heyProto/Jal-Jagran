@@ -8,7 +8,7 @@ const init = require('./webpack.config.init.js');
 
 let input, options;
 
-input = ['./src/css/grid.css', './src/css/navbar.css', './src/css/new_navbar.css', './src/css/common.css'];
+input = ['./src/css/grid.css', './src/css/navbar.css', './src/css/new_navbar.css', './src/css/common.css','./src/css/new_style.css'];
 options = {
   output: "proto-app-style.min.css"
 }

@@ -60,8 +60,7 @@
 
         <% list_of_cards.forEach(e => { %>
             <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.css">
-            <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js"></script>
-        <% }) %>
+        <% }) -%>
 
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
@@ -79,9 +78,10 @@
         <% } %>
     </head>
 
-    <% let language = site.primary_language.toLowerCase(); %>
-    <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
-    <% let site_name = site.name ? `By ${site.name}` : ""; %>
+    <% let language = site.primary_language.toLowerCase(); -%>
+    <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; -%>
+    <% let site_name = site.name ? `By ${site.name}` : ""; -%>
+    <% let ssr_cards = {}; -%>
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -109,9 +109,9 @@
                 <div class="proto-app-navbar">
                     <div class="proto-app-navbar-logo-holder">
                         <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                            <%- ref_category_object['name_html'] %>
+                            <%- ref_category_object['name_html'] -%>
                         </h1>
-                        <div class="proto-app-navbar-project-by"><%- site_name %></div>
+                        <div class="proto-app-navbar-project-by"><%- site_name -%></div>
                         <div class="proto-app-navbar-first-navigation">
                             <span></span>
                             <div class="fade-effect"></div>
@@ -141,17 +141,22 @@
             </div>
         </div>
 
-        <div class="proto-grid-container">
-            <div class="pro-col pro-col-16 t-proto-col t-col-16 stick-to-top">
-                <div class="col-16-story-card pro-row-5">
+        <div class="pro-container">
+            <div class="pro-col pro-col-16 stick-to-top">
+                <div class="pro-row pro-row-5">
                     <div id='cover_container'>
+                        <% ssr_cards['16c_Hero'] = []; -%>
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
-                                <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) %>
-                                <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col16", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) -%>
+                                <% ssr_cards['16c_Hero'].push({
+                                    instance: ssr_card_code[card.s3_identifier].instance,
+                                    view_cast_id: card.view_cast_id,
+                                    datacast_identifier: card.datacast_identifier,
+                                    dataJSON: {"dataJSON": card.data_json}
+                                }); -%>
                                 <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
-                                    <%- cardContent.content %>
-                                    <%- cardScript %>
+                                    <%- cardContent.content -%>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } else { %>
@@ -164,7 +169,7 @@
                     </div>
                 </div>
             </div>
-            <div class="proto-col col-16 proto-nav-sticky">
+            <div class="pro-col pro-col-16 proto-nav-sticky">
                 <div class="theiaStickySidebar">
                     <div class="proto-mobile-grid-navigation">
                         <div class="proto-mobile-grid-navigatio-tab proto-active-tab"><%= streams_mapping['7c']['name_of_stream'] %></div>
@@ -174,18 +179,23 @@
                     </div>
                 </div>
             </div>
-            <div id="cover" class="proto-col col-16 cover-page-overlay no-right-column">
-                <div class="pro-col pro-col-7 t-proto-col t-col-7 proto-tab-content proto-tab-active-content">
+            <div id="cover" class="pro-col pro-col-16 cover-page-overlay no-right-column">
+                <div class="pro-col pro-col-7 proto-tab-content proto-tab-active-content">
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
-                    <div id="originals_container" class="pro-row-3 sidebar">
+                    <div id="originals_container" class="pro-row pro-row-3 sidebar">
                          <div class="theiaStickySidebar">
+                            <% ssr_cards['7c'] = []; -%>
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col7", {"dataJSON": card.data_json}) %>
-                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col7", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                    <% ssr_cards['7c'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
-                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
@@ -199,17 +209,22 @@
                          </div>
                     </div>
                 </div>
-                <div class="pro-col pro-col-4 t-proto-col t-col-4 proto-tab-content">
+                <div class="pro-col pro-col-4 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
-                    <div id="digests_container" class="pro-row-3 sidebar">
+                    <div id="digests_container" class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
+                            <% ssr_cards['4c'] = []; -%>
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col4", {"dataJSON": card.data_json}) %>
-                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col4", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                    <% ssr_cards['4c'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
-                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
@@ -223,17 +238,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="pro-col pro-col-2 t-proto-col t-col-2 proto-tab-content">
+                <div class="pro-col pro-col-2 proto-tab-content">
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
-                    <div id='opinions_container' class="pro-row-3 sidebar">
+                    <div id='opinions_container' class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
+                            <% ssr_cards['2c'] = []; -%>
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
-                                <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col2", {"dataJSON": card.data_json}) %>
-                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col2", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                            <% if (ssr_card_code[card.s3_identifier]) { %>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col2", {"dataJSON": card.data_json}) -%>
+                                    <% ssr_cards['2c'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
-                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
@@ -246,17 +266,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="pro-col pro-col-3 t-proto-col t-col-3 proto-tab-content no-right-margin">
+                <div class="pro-col pro-col-3 proto-tab-content no-right-margin">
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
-                    <div id='feeds_container' class="pro-row-3 sidebar">
+                    <div id='feeds_container' class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
+                            <% ssr_cards['3c'] = []; -%>
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render("col3", {"dataJSON": card.data_json}) %>
-                                    <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col3", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                    <% ssr_cards['3c'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
-                                        <%- cardScript %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
@@ -270,7 +295,7 @@
                     </div>
                 </div>
             </div>
-            <div class="proto-col col-16">
+            <div class="pro-col pro-col-16">
                 <div class="col-16-story-card-credits">
                     <div id='credits_container'>
                     </div>
@@ -297,6 +322,9 @@
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
         </div>
+        <% list_of_cards.forEach(e => { %>
+            <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js" defer></script>
+        <% }) -%>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.site = <%- JSON.stringify(site) %>
@@ -304,6 +332,7 @@
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
+            ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
         </script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>
