@@ -84,11 +84,11 @@
         border-bottom: 2px solid#e03832;
     }
     .proto-tab-content {
-        display: none;
+        display: none !important;
     }
     .proto-tab-content.proto-tab-active-content {
-        display: block;
-    }
+        display: block !important;
+    }   
 
     div.col-2> div:nth-of-type(even) {
       margin-right: 0px;

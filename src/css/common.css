@@ -35,7 +35,7 @@
   background-image: linear-gradient(253deg,rgba(51,51,51,0.2),rgba(51,51,51,0.8));
 }
 
-.proto-grid-container {
+.pro-grid-container {
     display: inline-block;
     overflow: hidden;
 }

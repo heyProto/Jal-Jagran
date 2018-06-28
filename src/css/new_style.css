@@ -49,6 +49,12 @@ body {
     width: 1260px;
     margin-right: 0px !important; }
 
+@media screen and (max-width: 480px) {
+  .pro-container {
+    width: 100vw;
+    overflow: hidden; }
+    .pro-container .pro-col-2, .pro-container .pro-col-3, .pro-container .pro-col-4, .pro-container .pro-col-7, .pro-container .pro-col-8, .pro-container .pro-col-10, .pro-container .pro-col-12, .pro-container .pro-col-14, .pro-container .pro-col-16 {
+      width: 100vw; } }
 .pro-card {
   display: inline-block;
   position: relative;

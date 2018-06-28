@@ -242,14 +242,17 @@ ProtoGraph.initPage = function initPage() {
     let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
     ssr_cards.forEach((s) => {
         ProtoGraph.ssr_cards[s].forEach((card) => {
-            let x = new ProtoGraph.Card[card.instance]();
-            x.init({
-                "selector": document.querySelector(`#proto_${card.view_cast_id}`),
-                "isFromSSR": true,
-                "initialState": card.dataJSON,
-                "site_configs": ProtoGraph.site
-            });
-            x.render();
+            setTimeout((e)=>{
+                let x = new ProtoGraph.Card[card.instance]();
+                console.log(card)
+                x.init({
+                    "selector": document.querySelector(`#proto_${card.view_cast_id}`),
+                    "isFromSSR": true,
+                    "initialState": card.dataJSON,
+                    "site_configs": ProtoGraph.site
+                });
+                x.render();
+            },0)
         });
     });
 

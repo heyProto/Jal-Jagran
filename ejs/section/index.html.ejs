@@ -60,7 +60,7 @@
         <% }) -%>
 
         <% if (site.is_ad_enabled) { %>
-            <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
+            <script src='https://www.googletagservices.com/tag/js/gpt.js' defer ></script>
             <script>
                 var googletag = googletag || {};
                 googletag.cmd = googletag.cmd || [];
@@ -176,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover" class="proto-grid-container cover-page-overlay no-right-column">
+            <div id="cover" class="pro-grid-container cover-page-overlay no-right-column">
                 <div class="pro-col pro-col-7 proto-tab-content proto-tab-active-content">
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="pro-row pro-row-3 sidebar">
