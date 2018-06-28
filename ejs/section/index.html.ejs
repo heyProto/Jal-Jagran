@@ -51,9 +51,6 @@
                 border-bottom: 2px solid <%- site.house_colour %>;
             }
         </style>
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/systemtheme.css">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/theme.css">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/layout.css">
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
@@ -179,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover" class="pro-col pro-col-16 cover-page-overlay no-right-column">
+            <div id="cover" class="proto-grid-container cover-page-overlay no-right-column">
                 <div class="pro-col pro-col-7 proto-tab-content proto-tab-active-content">
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="pro-row pro-row-3 sidebar">
