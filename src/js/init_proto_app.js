@@ -3,27 +3,27 @@ window.ProtoGraph = window.ProtoGraph || {};
 
 ProtoGraph.renderNavbar = function () {
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
-    fetchNavbarObjects().then((data) => {
-        processAndRenderVerticalNavbar(data[0], mode);
-        processAndRenderHomepageNavbar(data[1], mode);
-        processAndRenderSiteHeader(data[2]);
-        ProtoGraph.headerJSON = data[2];
-        ProtoGraph.initPage();
-        if (ProtoGraph.initDataApp && ProtoGraph.initDataApp.constructor === Function) {
-            ProtoGraph.initDataApp();
-        }
-    }).catch((reject) => {
-        console.error("Error fetching data : ", reject);
-    })
+    processAndRenderVerticalNavbar(ProtoGraph.vertical_header_json, mode);
+    processAndRenderHomepageNavbar(ProtoGraph.homepage_header_json, mode);
+    processAndRenderSiteHeader(ProtoGraph.site_header_json);
+    ProtoGraph.headerJSON = ProtoGraph.site_header_json;
+    ProtoGraph.initPage();
+    if (ProtoGraph.initDataApp && ProtoGraph.initDataApp.constructor === Function) {
+        ProtoGraph.initDataApp();
+    }
+    // fetchNavbarObjects().then((data) => {
+    // }).catch((reject) => {
+    //     console.error("Error fetching data : ", reject);
+    // })
 }
 
-function fetchNavbarObjects() {
-    return Promise.all([
-        getJSONPromise(ProtoGraph.vertical_header_json_url),
-        getJSONPromise(ProtoGraph.homepage_header_json_url),
-        getJSONPromise(ProtoGraph.site_header_json_url)
-    ]);
-}
+// function fetchNavbarObjects() {
+//     return Promise.all([
+//         getJSONPromise(ProtoGraph.vertical_header_json_url),
+//         getJSONPromise(ProtoGraph.homepage_header_json_url),
+//         getJSONPromise(ProtoGraph.site_header_json_url)
+//     ]);
+// }
 
 ProtoGraph.initBackToTop = function() {
     $(window).scroll((e) => {

@@ -54,7 +54,7 @@
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
 
-        
+
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/ssr-cards.min.css">
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' defer ></script>
@@ -327,6 +327,10 @@
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
             ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
+
+            ProtoGraph.vertical_header_json = <%- vertical_header_json %>;
+            ProtoGraph.homepage_header_json = <%- homepage_header_json %>;
+            ProtoGraph.site_header_json = <%- site_header_json %>;
         </script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>
