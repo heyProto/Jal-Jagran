@@ -143,6 +143,27 @@
             <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
             <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
         </div>
+        <div class="proto-col col-16">
+            <div class="col-16-story-card-credits">
+                <div id='credits_container'>
+                    <% major_stream_blockquotes[streams_mapping['credits'].title].forEach(function(e) { %>
+                        <div id="<%= e[0]%>">
+                            <%- e[1] %>
+                        </div>
+                    <% }) %>
+                    <% Object.keys(streams_mapping['credits'].ads).forEach(function(e, i){ %>
+                        <% if (e > major_stream_blockquotes[streams_mapping['credits'].title].length) { %>
+                            <div id="<%= streams_mapping['credits'].ads[e].div_id %>" style= "height: <%= streams_mapping['credits'].ads[e].height %>px; width:1260px;">
+                                    <script>
+                                    googletag.cmd.push(function() { googletag.display("<%= streams_mapping['credits'].ads[e].div_id %>"); });
+                                    </script>
+                            </div>
+                            <div style='margin-bottom: 20px'></div>
+                        <% } %>
+                    <% })%>
+                </div>
+            </div>
+        </div>
         <div class="proto-footer">
             <div class="footer-content-area">
                 <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev">
