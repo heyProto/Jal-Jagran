@@ -142,7 +142,7 @@
                         <% ssr_cards['16c_Hero'] = []; -%>
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
-                                <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) -%>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
                                 <% ssr_cards['16c_Hero'].push({
                                     instance: ssr_card_code[card.s3_identifier].instance,
                                     view_cast_id: card.view_cast_id,
@@ -181,7 +181,7 @@
                             <% ssr_cards['7c'] = []; -%>
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col7", {"dataJSON": card.data_json}) %>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     <% ssr_cards['7c'].push({
                                         instance: ssr_card_code[card.s3_identifier].instance,
                                         view_cast_id: card.view_cast_id,
@@ -210,7 +210,7 @@
                             <% ssr_cards['4c'] = []; -%>
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col4", {"dataJSON": card.data_json}) %>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     <% ssr_cards['4c'].push({
                                         instance: ssr_card_code[card.s3_identifier].instance,
                                         view_cast_id: card.view_cast_id,
@@ -239,7 +239,7 @@
                             <% ssr_cards['2c'] = []; -%>
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col2", {"dataJSON": card.data_json}) -%>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
                                     <% ssr_cards['2c'].push({
                                         instance: ssr_card_code[card.s3_identifier].instance,
                                         view_cast_id: card.view_cast_id,
@@ -267,7 +267,7 @@
                             <% ssr_cards['3c'] = []; -%>
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render("col3", {"dataJSON": card.data_json}) %>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     <% ssr_cards['3c'].push({
                                         instance: ssr_card_code[card.s3_identifier].instance,
                                         view_cast_id: card.view_cast_id,

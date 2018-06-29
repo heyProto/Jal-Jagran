@@ -13,7 +13,6 @@
         <meta charset="utf-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
@@ -72,13 +71,10 @@
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
 
-        <% list_of_cards.forEach(e => { %>
-            <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.css">
-            <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js"></script>
-        <% }) %>
+        
 
         <% if (site.is_ad_enabled) { %>
-            <script src='https://www.googletagservices.com/tag/js/gpt.js' ></script>
+            <script src='https://www.googletagservices.com/tag/js/gpt.js' defer></script>
             <script>
                 var googletag = googletag || {};
                 googletag.cmd = googletag.cmd || [];
@@ -96,6 +92,7 @@
     <% let language = site.primary_language.toLowerCase(); %>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
     <% let site_name = site.name ? `By ${site.name}` : ""; %>
+    <% let ssr_cards = {}; -%>
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -114,7 +111,7 @@
                 <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
                 <div class="proto-app-navbar-menu-icon">
                     MENU
-                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" />
+                    <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" alt="menu-icon"/>
                 </div>
             </div>
         </div>
@@ -129,18 +126,18 @@
                         <div class="proto-app-navbar-first-navigation">
                             <span></span>
                             <div class="fade-effect"></div>
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" alt="go to top"/>
                         </div>
                     </div>
                     <div class="proto-app-navbar-logo">
                         <a href="https://pro.to" target="_blank">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" />
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" />
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" alt="proto"/>
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" alt="proto"/>
                         </a>
                     </div>
                     <div class="proto-app-navbar-navigation-bar">
                         <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" />
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" alt="arrow-left"/>
                         </div>
                         <div class="proto-app-navbar-page-navigation">
                             <div class="proto-app-navbar-overlay">
@@ -148,22 +145,29 @@
                             </div>
                         </div>
                         <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" alt="arrow-right"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="proto-grid-container data-page">
-            <div class="proto-col col-16" id="col_16_cover_container">
+        <div class="pro-container data-page">
+            <div class="pro-col pro-col-16" id="col_16_cover_container">
+                <% ssr_cards['16c_Hero'] = []; -%>
                 <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                     <% if (ssr_card_code[card.s3_identifier]) { %>
-                        <% let cardContent = ssr_card_code[card.s3_identifier].render("col16", {"dataJSON": card.data_json}) %>
-                        <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col16", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                        <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
+                        <% ssr_cards['16c_Hero'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
+                        
                         <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                             <%- cardContent.content %>
-                            <%- cardScript %>
+                            
                         </div>
                         <div style='margin-bottom: 20px'></div>
                     <% } else { %>
@@ -175,16 +179,16 @@
                 <% }); %>
             </div>
 
-            <div class="proto-col col-16 cover-page-overlay no-right-column">
-                <div class="proto-col col-4 navigation-links">
+            <div class="pro-col pro-col-16 cover-page-overlay no-right-column">
+                <div class="pro-col pro-col-4 navigation-links">
                     <div class="summary">
                         <div class="article-share-icons">
                             <div class="article-share-icons">
                                 <a href="#" id='facebook-share-link' target="_blank">
-                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png"></div>
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-facebook.png" alt="facebook"></div>
                                 </a>
                                 <a href="#" id='twitter-share-link' target="_blank">
-                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png"></div>
+                                    <div class="single-share-icon"><img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/article-share-twitter.png" alt="twitter"></div>
                                 </a>
                             </div>
                         </div>
@@ -215,16 +219,23 @@
                         <% } %>
                     </div>
                 </div>
-                <div class="proto-col col-7 proto-articles-container">
+                <div class="pro-col pro-col-7 proto-articles-container">
                     <div class="article-area-small" id="article">
                         <div class="fade-area"></div>
+                        <% ssr_cards['7c'] = []; -%>
                         <% streams_mapping['Narrative'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
-                                <% let cardContent = ssr_card_code[card.s3_identifier].render("col7", {"dataJSON": card.data_json}) %>
-                                <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col7", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
+                                
+                                <% ssr_cards['7c'].push({
+                                        instance: ssr_card_code[card.s3_identifier].instance,
+                                        view_cast_id: card.view_cast_id,
+                                        datacast_identifier: card.datacast_identifier,
+                                        dataJSON: {"dataJSON": card.data_json}
+                                    }); -%>
                                 <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content %>
-                                    <%- cardScript %>
+                                    
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } else { %>
@@ -239,19 +250,26 @@
                         Keep reading
                     </div>
                 </div>
-                <div class="proto-col col-4 col-1-offset no-margin-right">
+                <div class="pro-col pro-col-4 col-1-offset no-margin-right">
                     <div class="related-articles-link">
                         <div class="theiaStickySidebar">
                             <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
+                                <% ssr_cards['4c'] = []; -%>
                                 <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
                                     <% if (ssr_card_code[card.s3_identifier]) { %>
-                                        <% let cardContent = ssr_card_code[card.s3_identifier].render("col4", {"dataJSON": card.data_json}) %>
-                                        <% let cardScript = ssr_card_code[card.s3_identifier].getScriptString("col4", {"dataJSON": card.data_json}, `#proto_${card.view_cast_id}`, site) %>
+                                        <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
+                                        
+                                        <% ssr_cards['7c'].push({
+                                            instance: ssr_card_code[card.s3_identifier].instance,
+                                            view_cast_id: card.view_cast_id,
+                                            datacast_identifier: card.datacast_identifier,
+                                            dataJSON: {"dataJSON": card.data_json}
+                                        }); -%>
                                         <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
                                             <%- cardContent.content %>
-                                            <%- cardScript %>
+                                            
                                         </div>
                                         <div style='margin-bottom: 20px'></div>
                                     <% } else { %>
@@ -268,12 +286,12 @@
             </div>
 
             <% if (more_in_the_intersection) { %>
-                <div class="proto-col col-16 more-articles-link-div">
+                <div class="pro-col pro-col-16 more-articles-link-div">
                     <div class="more-articles-link">
                         <div class="column-title">
                             <%= more_in_the_intersection.name_of_stream %>
                             <a href="<%= more_in_the_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;" alt="rss-icon">
                             </a>
                         </div>
                         <div id="more_intersections_container" class="more-articles-container"></div>
@@ -281,12 +299,12 @@
                 </div>
             <% } %>
             <% if (more_in_the_sub_intersection) { %>
-                <div class="proto-col col-16 more-articles-link-div">
+                <div class="pro-col pro-col-16 more-articles-link-div">
                     <div class="more-articles-link">
                         <div class="column-title">
                             <%= more_in_the_sub_intersection.name_of_stream %>
                             <a href="<%= more_in_the_sub_intersection['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;" alt="rss-black-icon">
                             </a>
                         </div>
                         <div id="more_sub_intersections_container" class="more-articles-container"></div>
@@ -294,12 +312,12 @@
                 </div>
             <% } %>
             <% if (more_in_the_series) { %>
-                <div class="proto-col col-16 more-articles-link-div">
+                <div class="pro-col pro-col-16 more-articles-link-div">
                     <div class="more-articles-link">
                         <div class="column-title">
                             <%= more_in_the_series.name_of_stream %>
                             <a href="<%= more_in_the_series['rss_url'] %>" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;">
+                                <img src="https://cdn.protograph.pykih.com/Assets/rss-black-icon.png" height="12px" width="12px" style="margin-left: 7px;" alt="rss-black-icon">
                             </a>
                         </div>
                         <div id="more_articles_container" class="more-articles-container"></div>
@@ -311,12 +329,12 @@
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
         <div class="proto-footer">
             <div class="footer-content-area">
-                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev">
+                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev" alt="left-arrow">
                 <div class="links-area">
                     <div class="links-scroll-area" id='vertical_footer'>
                     </div>
                 </div>
-                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" class="right-arrow" id='proto-footer-next'>
+                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" class="right-arrow" id='proto-footer-next' alt="right arrow">
                 <div class="privacy-details">
                     <span class="footer-link light-link">Powered by Proto</span>
                     <span class="light-link dot-seprater">&#8231;</span>
@@ -333,6 +351,12 @@
         <% ["headline", "cover_image_url", "cover_image_url_7_column"].forEach(function(e){ %>
             <% page_object[e] = page[e]; %>
         <% }); %>
+
+        <% list_of_cards.forEach(e => { %>
+            <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.css">
+            <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js" defer></script>
+        <% }) %>
+
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
@@ -344,6 +368,8 @@
             ProtoGraph.more_in_the_series = <%- JSON.stringify(more_in_the_series || {}) %>;
             ProtoGraph.more_in_the_intersection = <%- JSON.stringify(more_in_the_intersection || {}) %>;
             ProtoGraph.more_in_the_sub_intersection = <%- JSON.stringify(more_in_the_sub_intersection || {}) %>;
+            ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
+
         </script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib-article.min.js" defer></script>

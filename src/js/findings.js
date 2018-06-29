@@ -401,6 +401,21 @@ ProtoGraph.initPage = function initPage() {
         $('#cont-button').css('display', 'none');
     }
 
+    let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
+    ssr_cards.forEach((s) => {
+        ProtoGraph.ssr_cards[s].forEach((card) => {
+            setTimeout((e)=>{
+                let x = new ProtoGraph.Card[card.instance]();
+                x.init({
+                    "selector": document.querySelector(`#proto_${card.view_cast_id}`),
+                    "isFromSSR": true,
+                    "initialState": card.dataJSON,
+                    "site_configs": ProtoGraph.site
+                });
+                x.render();
+            },0)
+        });
+    });
 
     // Util.getJSON(streams['Related'].url, function (err, data) {
     //     if (err != null) {

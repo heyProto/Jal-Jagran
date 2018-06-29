@@ -244,7 +244,6 @@ ProtoGraph.initPage = function initPage() {
         ProtoGraph.ssr_cards[s].forEach((card) => {
             setTimeout((e)=>{
                 let x = new ProtoGraph.Card[card.instance]();
-                // console.log(card)
                 x.init({
                     "selector": document.querySelector(`#proto_${card.view_cast_id}`),
                     "isFromSSR": true,
