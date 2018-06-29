@@ -14,7 +14,6 @@
         <meta charset="UTF-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
@@ -55,10 +54,8 @@
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
 
-        <% list_of_cards.forEach(e => { %>
-            <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.css">
-        <% }) -%>
-
+        
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/ssr-cards.min.css">
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' defer ></script>
             <script>

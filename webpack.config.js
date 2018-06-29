@@ -10,13 +10,19 @@ let input, options;
 
 input = ['./src/css/grid.css', './src/css/navbar.css', './src/css/new_navbar.css', './src/css/common.css','./src/css/new_style.css'];
 options = {
-  output: "proto-app-style.min.css"
+  output: "proto-app-main.min.css"
 }
 minifier.minify(input, options);
 
 input = ['./src/css/fonts.css'];
 options = {
   output: "proto-app-fonts.min.css"
+}
+minifier.minify(input, options);
+
+input = ['proto-app-lib.min.css','proto-app-main.min.css'];
+options = {
+  output:"proto-app-style.min.css"
 }
 minifier.minify(input, options);
 

@@ -244,7 +244,7 @@ ProtoGraph.initPage = function initPage() {
         ProtoGraph.ssr_cards[s].forEach((card) => {
             setTimeout((e)=>{
                 let x = new ProtoGraph.Card[card.instance]();
-                console.log(card)
+                // console.log(card)
                 x.init({
                     "selector": document.querySelector(`#proto_${card.view_cast_id}`),
                     "isFromSSR": true,
@@ -259,7 +259,9 @@ ProtoGraph.initPage = function initPage() {
     inView('.proto-lazy-load-image')
         .on('enter', (e) => {
             let img_src = $(e).attr('data-src');
+            // console.log(img_src)
             e.src = img_src
+
             e.classList.remove('proto-lazy-load-image')
         });
 
