@@ -1,4 +1,4 @@
-import {throttle } from './utility.js'
+import { throttle } from './utility.js'
 window.ProtoGraph = window.ProtoGraph || {};
 
 ProtoGraph.renderNavbar = function () {
@@ -85,35 +85,34 @@ function identifySSURL(link) {
 
 function processAndRenderVerticalNavbar(data, mode) {
     if (data.length > 0) {
-        let HTML = "",
-            FooterHTML = "",
-            first_navigation,
+        let first_navigation,
             d = data[0],
             next_arrow = $('#proto-navbar-next');
-        data.forEach((e, i) => {
-            let social_share = identifySSURL(e);
-            if(e.menu && e.menu == "Vertical Footer"){
-                FooterHTML += `<span class='proto-footer-link'><span class="footer-link"><a href="${e.url}" target=${e.new_window ? "_blank" : "_self" }>${e.name}</a></span><span class="light-link dot-seprater">&#8231;</span></span>`;
-            } else {
-                if (social_share) {
-                    HTML += `<div class="proto-app-navbar-page-links">
-                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>
-                            <img src="${getImagePath(social_share['image_name'])}" />
-                        </a>
-                    </div>`;
-                } else {
-                    HTML += `<div class="proto-app-navbar-page-links">
-                        <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
-                    </div>`;
-                }
 
-            }
-        });
-        $('#vertical_nav').html(HTML);
-        if (FooterHTML !== "") {
-            FooterHTML = FooterHTML.replace(/<span class="light-link dot-seprater">&#8231;<\/span><\/span>$/, "</span>");
-        }
-        $('#vertical_footer').html(FooterHTML);
+        // data.forEach((e, i) => {
+        //     let social_share = identifySSURL(e);
+        //     if(e.menu && e.menu == "Vertical Footer"){
+        //         FooterHTML += `<span class='proto-footer-link'><span class="footer-link"><a href="${e.url}" target=${e.new_window ? "_blank" : "_self" }>${e.name}</a></span><span class="light-link dot-seprater">&#8231;</span></span>`;
+        //     } else {
+        //         if (social_share) {
+        //             HTML += `<div class="proto-app-navbar-page-links">
+        //                 <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>
+        //                     <img src="${getImagePath(social_share['image_name'])}" />
+        //                 </a>
+        //             </div>`;
+        //         } else {
+        //             HTML += `<div class="proto-app-navbar-page-links">
+        //                 <a href="${e.url}" target=${e.new_window ? "_blank" : "_self"}>${e.name}</a>
+        //             </div>`;
+        //         }
+
+        //     }
+        // });
+        // $('#vertical_nav').html(HTML);
+        // if (FooterHTML !== "") {
+        //     FooterHTML = FooterHTML.replace(/<span class="light-link dot-seprater">&#8231;<\/span><\/span>$/, "</span>");
+        // }
+        // $('#vertical_footer').html(FooterHTML);
         initNavbarInteraction(mode);
         if($('.proto-footer').length){
             initFooterInteraction(mode);
