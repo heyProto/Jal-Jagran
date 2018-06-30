@@ -52,9 +52,6 @@
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
 
-        <% let list_of_cards = Object.keys(ssr_card_code); %>
-
-
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/ssr-cards.min.css">
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' defer ></script>
@@ -89,9 +86,13 @@
             }
         </style>
 
-        <div class="proto-app-navbar-masthead" id="site_header">
+        <div class="proto-app-navbar-masthead" id="site_header" style="<%= site_header_json['header_background_color'] -%>">
             <div class="proto-app-navbar-proto-container">
-                <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
+                <div class="proto-app-navbar-site-logo proto-app-navbar-position-<%= site_header_json['header_logo_position'] -%>">
+                    <a href="<%= site_header_json['header_jump_to_link'] %>" target="_blank" title="<%= site_header_json['header_tooltip'] ? site_header_json['header_tooltip'] : '' %>" >
+                        <img src="<%= site_header_json['header_logo_url'] %>" height="50px" />
+                    </a>
+                </div>
                 <div class="proto-app-navbar-menu-icon">
                     MENU
                     <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" />
@@ -118,12 +119,14 @@
                             <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
                         </div>
                     </div>
-                    <div class="proto-app-navbar-logo">
-                        <a href="https://pro.to" target="_blank">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" />
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" />
-                        </a>
-                    </div>
+                    <% if(site_header_json['show_proto_logo']) { -%>
+                        <div class="proto-app-navbar-logo">
+                            <a href="https://pro.to" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" />
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" />
+                            </a>
+                        </div>
+                    <% } -%>
                     <div class="proto-app-navbar-navigation-bar">
                         <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
                             <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" />
@@ -322,6 +325,7 @@
         <div class="proto-app-scroll-to-top" title="Scroll to top">
             <i class="angle up icon"></i>
         </div>
+        <% let list_of_cards = Object.keys(ssr_card_code); %>
         <% list_of_cards.forEach(e => { %>
             <script src="<%= AWS_S3_ENDPOINT %>/<%= e %>/card.min.js" defer></script>
         <% }) -%>

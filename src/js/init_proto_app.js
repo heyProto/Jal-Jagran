@@ -5,7 +5,7 @@ ProtoGraph.renderNavbar = function () {
     let mode = window.innerWidth <= 500 ? 'mobile' : 'laptop';
     processAndRenderVerticalNavbar(ProtoGraph.vertical_header_json, mode);
     processAndRenderHomepageNavbar(ProtoGraph.homepage_header_json, mode);
-    processAndRenderSiteHeader(ProtoGraph.site_header_json);
+    // processAndRenderSiteHeader(ProtoGraph.site_header_json);
     ProtoGraph.headerJSON = ProtoGraph.site_header_json;
     ProtoGraph.initPage();
     if (ProtoGraph.initDataApp && ProtoGraph.initDataApp.constructor === Function) {
@@ -548,17 +548,17 @@ function processAndRenderHomepageNavbar(data, mode) {
 //     }
 // }
 
-function processAndRenderSiteHeader(data) {
-    if (data) {
-        $('#site_header').css('background', data.header_background_color);
-        let logo_div = $('#site_header .proto-app-navbar-proto-container .proto-app-navbar-site-logo');
-        logo_div.addClass(`proto-app-navbar-position-${data.header_logo_position}`);
-        logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank" title="${data.header_tooltip ? data.header_tooltip : '' }" ><img src="${data.header_logo_url}" height="50px" /></a>`);
-        if (data.show_proto_logo) {
-            $('.proto-app-navbar-logo').css('display', 'inline-block');
-        }
-    }
-}
+// function processAndRenderSiteHeader(data) {
+//     if (data) {
+//         $('#site_header').css('background', data.header_background_color);
+//         let logo_div = $('#site_header .proto-app-navbar-proto-container .proto-app-navbar-site-logo');
+//         logo_div.addClass(`proto-app-navbar-position-${data.header_logo_position}`);
+//         logo_div.append(`<a href="${data.header_jump_to_link}" target="_blank" title="${data.header_tooltip ? data.header_tooltip : '' }" ><img src="${data.header_logo_url}" height="50px" /></a>`);
+//         if (data.show_proto_logo) {
+//             $('.proto-app-navbar-logo').css('display', 'inline-block');
+//         }
+//     }
+// }
 
 function getJSONPromise(url) {
     return new Promise((resolve, reject) => {
