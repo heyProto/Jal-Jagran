@@ -103,7 +103,13 @@
                 <div class="proto-app-navbar">
                     <div class="proto-app-navbar-logo-holder">
                         <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                            <%- ref_category_object['name_html'] -%>
+                            <% let ref_category_html_name = ref_category_object['name'] -%>
+                            <% let homepage_object = homepage_header_json.filter((e, i) => {
+                                return e.name === ref_category_html_name
+                            })[0] -%>
+                            <a href="<%= homepage_object['url'] -%>" >
+                                <%- homepage_object['name_html'] -%>
+                            </a>
                         </h1>
                         <div class="proto-app-navbar-project-by"><%- site_name -%></div>
                         <div class="proto-app-navbar-first-navigation">
@@ -328,9 +334,9 @@
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
             ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
 
-            ProtoGraph.vertical_header_json = <%- vertical_header_json %>;
-            ProtoGraph.homepage_header_json = <%- homepage_header_json %>;
-            ProtoGraph.site_header_json = <%- site_header_json %>;
+            ProtoGraph.vertical_header_json = <%- JSON.stringify(vertical_header_json) %>;
+            ProtoGraph.homepage_header_json = <%- JSON.stringify(homepage_header_json) %>;
+            ProtoGraph.site_header_json = <%- JSON.stringify(site_header_json) %>;
         </script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/proto-app-lib.min.js" defer></script>

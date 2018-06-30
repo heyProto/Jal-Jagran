@@ -353,11 +353,11 @@ function initNavbarScrollEvents(mode) {
                     navbar.animate({
                         'top': '0px',
                     }, 250);
-                    projectBy.css('display','inline-block');
+                    // projectBy.css('display','inline-block');
                 }
             } else {
                 navbar.removeClass('proto-app-fixed-navbar');
-                projectBy.css('display','none');
+                // projectBy.css('display','none');
             }
         }
 
@@ -475,14 +475,11 @@ function initFooterArrowEvents(mode) {
 function processAndRenderHomepageNavbar(data, mode) {
     let homepage_object = data.filter((e, i) => {
         return e.name === ProtoGraph.ref_category_object.name
-    })[0],
-    home_navbar = '#homepage_nav';
+    })[0];
 
-    let nav_title = $(home_navbar).html();
     if (mode !== 'mobile' && homepage_object['show_by_publisher_in_header']) {
-        $('.proto-app-navbar-project-by').css('display', 'none');
+        $('.proto-app-navbar-project-by').css('display', 'inline-block');
     }
-    $(home_navbar).html(`<a href="${homepage_object.url}" >${nav_title}</a>`);
 }
 
 // Old Homepage Navbar
