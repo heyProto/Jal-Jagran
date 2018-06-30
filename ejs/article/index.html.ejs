@@ -89,6 +89,46 @@
         <% } %>
     </head>
 
+    <%
+        function getHost(url) {
+            let urlComponents = url_parser(url);
+            return urlComponents.hostname;
+        }
+
+        function getImagePath(image_name) {
+            return `https://cdn.protograph.pykih.com/Assets/proto-app/img/${image_name}`;
+        }
+
+        function identifySSURL(link) {
+            let social_share_domains = [
+                {
+                    domain: "www.facebook.com",
+                    image_name: "fb-colour-icon.png"
+                },
+                {
+                    domain: "twitter.com",
+                    image_name: "twitter-colour-icon.png"
+                },
+                {
+                    domain: "www.youtube.com",
+                    image_name: "youtube-colour-icon.png"
+                },
+                {
+                    domain: "www.instagram.com",
+                    image_name: "insta-colour-icon.png"
+                }
+            ],
+            url_domain = getHost(link.url);
+
+            for (let i = 0; i < social_share_domains.length; i++) {
+                if (url_domain === social_share_domains[i].domain || (social_share_domains[i].domain.indexOf(url_domain) >= 0)) {
+                    return social_share_domains[i];
+                }
+            }
+            return false;
+        }
+    %>
+
     <% let language = site.primary_language.toLowerCase(); %>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
     <% let site_name = site.name ? `By ${site.name}` : ""; %>
@@ -106,9 +146,13 @@
             }
         </style>
 
-        <div class="proto-app-navbar-masthead" id="site_header">
+        <div class="proto-app-navbar-masthead" id="site_header" style="<%= site_header_json['header_background_color'] -%>">
             <div class="proto-app-navbar-proto-container">
-                <div class="proto-app-navbar-site-logo proto-app-navbar-position-left"></div>
+                <div class="proto-app-navbar-site-logo proto-app-navbar-position-<%= site_header_json['header_logo_position'] -%>">
+                    <a href="<%= site_header_json['header_jump_to_link'] %>" target="_blank" title="<%= site_header_json['header_tooltip'] ? site_header_json['header_tooltip'] : '' %>" >
+                        <img src="<%= site_header_json['header_logo_url'] %>" height="50px" />
+                    </a>
+                </div>
                 <div class="proto-app-navbar-menu-icon">
                     MENU
                     <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/menu-icon.png" alt="menu-icon"/>
@@ -120,7 +164,13 @@
                 <div class="proto-app-navbar">
                     <div class="proto-app-navbar-logo-holder">
                         <h1 class="proto-app-navbar-project-name" id="homepage_nav">
-                            <%- ref_category_object['name_html'] %>
+                            <% let ref_category_html_name = ref_category_object['name'] -%>
+                            <% let homepage_object = homepage_header_json.filter((e, i) => {
+                                return e.name === ref_category_html_name
+                            })[0] -%>
+                            <a href="<%= homepage_object['url'] -%>" >
+                                <%- homepage_object['name_html'] -%>
+                            </a>
                         </h1>
                         <div class="proto-app-navbar-project-by"><%- site_name %></div>
                         <div class="proto-app-navbar-first-navigation">
@@ -129,23 +179,42 @@
                             <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" alt="go to top"/>
                         </div>
                     </div>
-                    <div class="proto-app-navbar-logo">
-                        <a href="https://pro.to" target="_blank">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" alt="proto"/>
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" alt="proto"/>
-                        </a>
-                    </div>
+                    <% if(site_header_json['show_proto_logo']) { -%>
+                        <div class="proto-app-navbar-logo">
+                            <a href="https://pro.to" target="_blank">
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-color-logo.png" class="colored-logo" height="29px" width="26px" />
+                                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/proto-grey-logo.png" class="grey-logo" height="29px" width="26px" />
+                            </a>
+                        </div>
+                    <% } -%>
                     <div class="proto-app-navbar-navigation-bar">
                         <div class="proto-app-navbar-left-click-arrow" id="proto-navbar-prev">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" alt="arrow-left"/>
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" />
                         </div>
                         <div class="proto-app-navbar-page-navigation">
                             <div class="proto-app-navbar-overlay">
-                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav"></div>
+                                <div class="proto-app-navbar-navigation-scroll" id="vertical_nav">
+                                    <% vertical_header_json.Header.forEach((e) => { %>
+                                        <%  let social_share = identifySSURL(e); %>
+                                        <% if (social_share) { %>
+                                            <div class="proto-app-navbar-page-links">
+                                                <a href="<%= e.url %>" target="<%= e.new_window ? '_blank' : '_self' -%>" >
+                                                    <img src="<%= getImagePath(social_share['image_name']) -%>" />
+                                                </a>
+                                            </div>
+                                        <% } else { %>
+                                            <div class="proto-app-navbar-page-links">
+                                                <a href="<%= e.url %>" target="<%= e.new_window ? '_blank' : '_self' %>">
+                                                    <%= e.name %>
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                    <% }) %>
+                                </div>
                             </div>
                         </div>
                         <div class="proto-app-navbar-right-click-arrow" id="proto-navbar-next">
-                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" alt="arrow-right"/>
+                            <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" />
                         </div>
                     </div>
                 </div>
@@ -329,12 +398,24 @@
         <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
         <div class="proto-footer">
             <div class="footer-content-area">
-                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev" alt="left-arrow">
+                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev">
                 <div class="links-area">
                     <div class="links-scroll-area" id='vertical_footer'>
+                        <%  vertical_header_json.Footer.forEach((e,i) => {  -%>
+                            <span class='proto-footer-link'>
+                                <span class="footer-link">
+                                    <a href="<%= e.url %>" target="<%= e.new_window ? '_blank' : '_self' %>" }>
+                                        <%= e.name  %>
+                                    </a>
+                                </span>
+                                <% if( i < (vertical_header_json.Footer.length - 1)) { -%>
+                                    <span class="light-link dot-seprater">&#8231;</span>
+                                <% } -%>
+                            </span>
+                        <% }) -%>
                     </div>
                 </div>
-                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" class="right-arrow" id='proto-footer-next' alt="right arrow">
+                <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-right.png" class="right-arrow" id='proto-footer-next'>
                 <div class="privacy-details">
                     <span class="footer-link light-link">Powered by Proto</span>
                     <span class="light-link dot-seprater">&#8231;</span>
@@ -369,6 +450,10 @@
             ProtoGraph.more_in_the_intersection = <%- JSON.stringify(more_in_the_intersection || {}) %>;
             ProtoGraph.more_in_the_sub_intersection = <%- JSON.stringify(more_in_the_sub_intersection || {}) %>;
             ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
+
+            ProtoGraph.vertical_header_json = <%- JSON.stringify(vertical_header_json) %>;
+            ProtoGraph.homepage_header_json = <%- JSON.stringify(homepage_header_json) %>;
+            ProtoGraph.site_header_json = <%- JSON.stringify(site_header_json) %>;
 
         </script>
         <script type="text/javascript" src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
