@@ -239,21 +239,52 @@ ProtoGraph.initPage = function initPage() {
         $(feeds_container).siblings(".column-title").hide();
     }
 
-    let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
-    ssr_cards.forEach((s) => {
-        ProtoGraph.ssr_cards[s].forEach((card) => {
-            setTimeout((e)=>{
-                let x = new ProtoGraph.Card[card.instance]();
-                x.init({
-                    "selector": document.querySelector(`#proto_${card.view_cast_id}`),
-                    "isFromSSR": true,
-                    "initialState": card.dataJSON,
-                    "site_configs": ProtoGraph.site
-                });
-                x.render();
-            },0)
+    // let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
+    // ssr_cards.forEach((s) => {
+    //     ProtoGraph.ssr_cards[s].forEach((card) => {
+    //         console.log("1",card.dataJSON)
+    //         setTimeout((e)=>{
+    //             let x = new ProtoGraph.Card[card.instance]();
+    //             x.init({
+    //                 "selector": document.querySelector(`#proto_${card.view_cast_id}`),
+    //                 "isFromSSR": true,
+    //                 "initialState": card.dataJSON,
+    //                 "site_configs": ProtoGraph.site
+    //             });
+    //         },0)
+    //     });
+    // });
+
+    inView('.proto-lazy-load-card1')
+        .on('enter', (e) => {
+
+            
+
+
+            e.classList.remove('proto-lazy-load-card1')
+            let card_s3_identifier = $(e).attr('card-id');
+            let instance = $(e).attr('card-instance');
+            let view_cast_id = $(e).attr('card-viewcast-id');
+            let url = "https://d8mb500a7948r.cloudfront.net/" + card_s3_identifier + "/data.json"    //url to fetch card from s3
+            
+            console.log(url)
+            if(instance && view_cast_id){
+                    let x = new ProtoGraph.Card[instance]();
+                    x.init({
+                        "selector": document.querySelector(`#proto_${view_cast_id}`),
+                        "isFromSSR": true,
+                        "data_url" : url,
+                        "site_configs": ProtoGraph.site
+                    });
+                    x.render();
+            
+            }
+            
+            
+            img.classList.remove('proto-lazy-load-image')
+            
+
         });
-    });
 
     inView('.proto-lazy-load-image')
         .on('enter', (e) => {

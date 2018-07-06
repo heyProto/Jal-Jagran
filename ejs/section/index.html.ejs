@@ -70,6 +70,20 @@
     </head>
 
     <%
+        function url_parser(url){
+            var match = url.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+            return match && {
+                href: url,
+                protocol: match[1],
+                host: match[2],
+                hostname: match[3],
+                port: match[4],
+                pathname: match[5],
+                search: match[6],
+                hash: match[7]
+            }
+        }
+
         function getHost(url) {
             let urlComponents = url_parser(url);
             return urlComponents.hostname;
@@ -113,6 +127,7 @@
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; -%>
     <% let site_name = site.name ? `By ${site.name}` : ""; -%>
     <% let ssr_cards = {}; -%>
+    <% let srr_test = {}; -%>
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -215,7 +230,8 @@
                                     datacast_identifier: card.datacast_identifier,
                                     dataJSON: {"dataJSON": card.data_json}
                                 }); -%>
-                                <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                
+                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card1" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content -%>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -254,7 +270,7 @@
                                         datacast_identifier: card.datacast_identifier,
                                         dataJSON: {"dataJSON": card.data_json}
                                     }); -%>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -283,7 +299,7 @@
                                         datacast_identifier: card.datacast_identifier,
                                         dataJSON: {"dataJSON": card.data_json}
                                     }); -%>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -312,7 +328,7 @@
                                         datacast_identifier: card.datacast_identifier,
                                         dataJSON: {"dataJSON": card.data_json}
                                     }); -%>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -340,7 +356,7 @@
                                         datacast_identifier: card.datacast_identifier,
                                         dataJSON: {"dataJSON": card.data_json}
                                     }); -%>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
                                     <div style='margin-bottom: 20px'></div>
@@ -407,6 +423,7 @@
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
             ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
 
+            var test = "<%- streams_mapping %>";
             ProtoGraph.vertical_header_json = <%- JSON.stringify(vertical_header_json) %>;
             ProtoGraph.homepage_header_json = <%- JSON.stringify(homepage_header_json) %>;
             ProtoGraph.site_header_json = <%- JSON.stringify(site_header_json) %>;

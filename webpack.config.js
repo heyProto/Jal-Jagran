@@ -20,7 +20,7 @@ options = {
 }
 minifier.minify(input, options);
 
-input = ['proto-app-lib.min.css','proto-app-main.min.css'];
+input = ['proto-app-main.min.css','proto-app-lib.min.css'];
 options = {
   output:"proto-app-style.min.css"
 }
