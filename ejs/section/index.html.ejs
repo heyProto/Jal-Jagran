@@ -224,15 +224,13 @@
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
                                 
                                 
-                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content -%>
                                 </div>
-                                <div style='margin-bottom: 20px'></div>
                             <% } else { %>
-                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>">
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %> "data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
                                     <%- card.seo_blockquote %>
                                 </div>
-                                <div style='margin-bottom: 20px'></div>
                             <% } %>
                         <% }); %>
                     </div>
@@ -257,16 +255,14 @@
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     
-                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>"
                                     data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-originals">
                                         <%- card.seo_blockquote %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
                             <% }); %>
                          </div>
@@ -280,16 +276,14 @@
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     
-                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>"
                                     data-template_card_id="<%= card.s3_identifier %>"  class="ProtoCard-digests">
                                         <%- card.seo_blockquote %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
                             <% }); %>
                         </div>
@@ -303,15 +297,13 @@
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
                                     
-                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-opinions">
                                         <%- card.seo_blockquote %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
                             <% }); %>
                         </div>
@@ -325,15 +317,13 @@
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
                                     
-                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } else { %>
                                     <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-feeds">
                                         <%- card.seo_blockquote %>
                                     </div>
-                                    <div style='margin-bottom: 20px'></div>
                                 <% } %>
                             <% }); %>
                         </div>

@@ -64,20 +64,16 @@ ProtoGraph.initPage = function initPage() {
     if ($('#cover_container').length) {
         $('#cover_container div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
-                template_card_id = $element.attr("data-template_card_id"),
-                view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
-
-            if (is_lazy_loading_activated) {
-                $element.attr('iframe-url', url);
-                $element.attr('mode', mode_for_cover);
-            } else {
+                iframe_url = $element.attr("iframe-url"),
+                
+                url = `${iframe_url}%26domain=${location.hostname}`
+                console.log(url)
                 setTimeout(function () {
                     new ProtoEmbed.initFrame(element, url, mode_for_cover, {
                         headerJSON: headerJSON
                     });
                 }, 0)
-            }
+            
         });
         if (is_lazy_loading_activated) {
             inView('.ProtoCard-originals')
@@ -262,7 +258,7 @@ ProtoGraph.initPage = function initPage() {
             let card_s3_identifier = $(e).attr('card-id');
             let instance = $(e).attr('card-instance');
             let view_cast_id = $(e).attr('card-viewcast-id');
-            let url = "https://d8mb500a7948r.cloudfront.net/" + card_s3_identifier + "/data.json"    //url to fetch card from s3
+            let url = card_s3_identifier;    //url to fetch card from s3
             // console.log(url)
             if(instance && view_cast_id){
                     let x = new ProtoGraph.Card[instance]();
