@@ -2,6 +2,18 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,800");
 @import url("https://fonts.googleapis.com/css?family=Eczar:400,500");
 @import url("https://fonts.googleapis.com/css?family=Crimson+Text");
+@font-face {
+  font-family: AvenirLTStd-Book;
+  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Book.otf") format("opentype"); }
+@font-face {
+  font-family: AvenirLTStd-Medium;
+  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Medium.otf") format("opentype"); }
+@font-face {
+  font-family: AvenirLTStd-Roman;
+  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Roman.otf") format("opentype"); }
+@font-face {
+  font-family: Avenir-Bold;
+  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AEH.ttf") format("opentype"); }
 
 body {
   margin: 0px !important; }

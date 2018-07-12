@@ -126,8 +126,7 @@
     <% let language = site.primary_language.toLowerCase(); -%>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; -%>
     <% let site_name = site.name ? `By ${site.name}` : ""; -%>
-    <% let ssr_cards = {}; -%>
-    <% let srr_test = {}; -%>
+    
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -219,19 +218,13 @@
         <div class="pro-container">
             <div class="pro-col pro-col-16 stick-to-top">
                 <div class="pro-row pro-row-5">
-                    <div id='cover_container'>
-                        <% ssr_cards['16c_Hero'] = []; -%>
+                    <div id='cover_container' class="cover-tostory-card">
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-                                <% ssr_cards['16c_Hero'].push({
-                                    instance: ssr_card_code[card.s3_identifier].instance,
-                                    view_cast_id: card.view_cast_id,
-                                    datacast_identifier: card.datacast_identifier,
-                                    dataJSON: {"dataJSON": card.data_json}
-                                }); -%>
                                 
-                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card1" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                
+                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                     <%- cardContent.content -%>
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
@@ -260,16 +253,10 @@
                     <div class="column-title"><%= streams_mapping['7c']['name_of_stream'] %></div>
                     <div id="originals_container" class="pro-row pro-row-3 sidebar">
                          <div class="theiaStickySidebar">
-                            <% ssr_cards['7c'] = []; -%>
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    <% ssr_cards['7c'].push({
-                                        instance: ssr_card_code[card.s3_identifier].instance,
-                                        view_cast_id: card.view_cast_id,
-                                        datacast_identifier: card.datacast_identifier,
-                                        dataJSON: {"dataJSON": card.data_json}
-                                    }); -%>
+                                    
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -289,16 +276,10 @@
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
                     <div id="digests_container" class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
-                            <% ssr_cards['4c'] = []; -%>
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    <% ssr_cards['4c'].push({
-                                        instance: ssr_card_code[card.s3_identifier].instance,
-                                        view_cast_id: card.view_cast_id,
-                                        datacast_identifier: card.datacast_identifier,
-                                        dataJSON: {"dataJSON": card.data_json}
-                                    }); -%>
+                                    
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -318,16 +299,10 @@
                     <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
                     <div id='opinions_container' class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
-                            <% ssr_cards['2c'] = []; -%>
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-                                    <% ssr_cards['2c'].push({
-                                        instance: ssr_card_code[card.s3_identifier].instance,
-                                        view_cast_id: card.view_cast_id,
-                                        datacast_identifier: card.datacast_identifier,
-                                        dataJSON: {"dataJSON": card.data_json}
-                                    }); -%>
+                                    
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -342,20 +317,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="pro-col pro-col-3 proto-tab-content no-right-margin">
+                <div class="pro-col pro-col-3 proto-tab-content no-right-margin ">
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
-                    <div id='feeds_container' class="pro-row pro-row-3 sidebar">
-                        <div class="theiaStickySidebar">
-                            <% ssr_cards['3c'] = []; -%>
+                    <div id='feeds_container' class="sidebar">
+                        <div class="theiaStickySidebar feeds-column">
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    <% ssr_cards['3c'].push({
-                                        instance: ssr_card_code[card.s3_identifier].instance,
-                                        view_cast_id: card.view_cast_id,
-                                        datacast_identifier: card.datacast_identifier,
-                                        dataJSON: {"dataJSON": card.data_json}
-                                    }); -%>
+                                    
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.datacast_identifier %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -421,9 +390,7 @@
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";
-            ProtoGraph.ssr_cards = <%- JSON.stringify(ssr_cards) %>;
 
-            var test = "<%- streams_mapping %>";
             ProtoGraph.vertical_header_json = <%- JSON.stringify(vertical_header_json) %>;
             ProtoGraph.homepage_header_json = <%- JSON.stringify(homepage_header_json) %>;
             ProtoGraph.site_header_json = <%- JSON.stringify(site_header_json) %>;

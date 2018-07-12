@@ -255,19 +255,15 @@ ProtoGraph.initPage = function initPage() {
     //     });
     // });
 
-    inView('.proto-lazy-load-card1')
+    inView('.proto-lazy-load-card')
         .on('enter', (e) => {
 
-            
-
-
-            e.classList.remove('proto-lazy-load-card1')
+            e.classList.remove('proto-lazy-load-card')
             let card_s3_identifier = $(e).attr('card-id');
             let instance = $(e).attr('card-instance');
             let view_cast_id = $(e).attr('card-viewcast-id');
             let url = "https://d8mb500a7948r.cloudfront.net/" + card_s3_identifier + "/data.json"    //url to fetch card from s3
-            
-            console.log(url)
+            // console.log(url)
             if(instance && view_cast_id){
                     let x = new ProtoGraph.Card[instance]();
                     x.init({
@@ -277,13 +273,7 @@ ProtoGraph.initPage = function initPage() {
                         "site_configs": ProtoGraph.site
                     });
                     x.render();
-            
             }
-            
-            
-            img.classList.remove('proto-lazy-load-image')
-            
-
         });
 
     inView('.proto-lazy-load-image')
