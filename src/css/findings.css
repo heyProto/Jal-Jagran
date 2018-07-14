@@ -1,3 +1,16 @@
+@font-face {
+  font-family: AvenirLTStd-Book;
+  src: url("../fonts/AvenirLTStd-Book.otf") format("opentype"); }
+@font-face {
+  font-family: AvenirLTStd-Medium;
+  src: url("../fonts/AvenirLTStd-Medium.otf") format("opentype"); }
+@font-face {
+  font-family: AvenirLTStd-Roman;
+  src: url("../fonts/AvenirLTStd-Roman.otf") format("opentype"); }
+@font-face {
+  font-family: Avenir-Bold;
+  src: url("../fonts/AEH.ttf") format("opentype"); }
+
 body{
 	position:relative;
 }
@@ -69,7 +82,7 @@ body{
 
 .list-items{
   margin-bottom: 35px;
-  font-family: "Noto Serif", serif;
+  font-family: "AvenirLTStd-Book", serif;
   font-size: 14px;
   color:#4a4a4a;
 }
@@ -86,7 +99,7 @@ body{
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   border-radius: 0px;
-  font-family: roboto;
+  font-family: AvenirLTStd-Book;
 }
 .list-group-item:hover{
   border-left: 3px solid red;
@@ -240,7 +253,7 @@ ul.scrollspy-child-ul {
 	font-size: 16px;
 	line-height: 28px;
 	color:#707175;
-	font-family: cabin;
+	font-family: 'AvenirLTStd-Book';
 	margin-bottom: 20px;
 	display: inline-block;
 }
@@ -252,7 +265,7 @@ ul.scrollspy-child-ul {
 .article-h2{
 	font-size: 22px;
 	color: #333;
-	font-family: cabin;
+	font-family: 'AvenirLTStd-Book';
 	line-height: 36px;
 	margin-top: 10px;
 	font-weight: bold;
@@ -324,7 +337,7 @@ ul.scrollspy-child-ul {
 }
 
 .default-button{
-	font-family: cabin;
+	font-family: 'AvenirLTStd-Book';
 	color: #333;
 	border-radius: 4px;
 	border: 1px solid #777;
@@ -361,7 +374,7 @@ ul.scrollspy-child-ul {
 	display:inline-block;
 	border-left: 2px solid white;
 	color: rgba(51,51,51,0.75);
-	font-family: cabin;
+	font-family: 'AvenirLTStd-Book';
 	font-size: 14px;
 	box-sizing: border-box;
 	text-decoration: none;
@@ -402,7 +415,7 @@ ul.scrollspy-child-ul {
 	display: inline-block;
 	width: 300px;
   box-sizing: border-box;
-  font-family: "cabin";
+  font-family: 'AvenirLTStd-Book';
   font-size: 14px;
   color: #333;
   word-wrap: break-word;
@@ -426,7 +439,7 @@ ul.scrollspy-child-ul {
 	text-align:center;
 	display: inline-block;
 	float: left;
-	font-family: cabin;
+	font-family: 'AvenirLTStd-Book';
 	font-size: 14px;
 	font-weight: bold;
 	padding-bottom: 10px;
@@ -468,7 +481,7 @@ ul.scrollspy-child-ul {
   text-transform: uppercase;
   font-size: 14px;
   color: #333;
-  font-family: cabin;
+  font-family: 'AvenirLTStd-Book';
   margin-bottom: 12px;
   font-weight: bold;
 }
