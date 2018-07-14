@@ -18,6 +18,9 @@
 body {
   margin: 0px !important; }
 
+  .pro-grid-container {
+    margin-top:20px;
+  }  
 .proto-grid-container {
   width: 1300px;
   margin-left: auto;
