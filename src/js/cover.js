@@ -250,7 +250,7 @@ ProtoGraph.initPage = function initPage() {
     //         },0)
     //     });
     // });
-
+    
     inView('.proto-lazy-load-card')
         .on('enter', (e) => {
 
@@ -272,15 +272,7 @@ ProtoGraph.initPage = function initPage() {
             }
         });
 
-    inView('.proto-lazy-load-image')
-        .on('enter', (e) => {
-            let img_src = $(e).attr('data-src');
-            // console.log(img_src)
-            e.src = img_src
-
-            e.classList.remove('proto-lazy-load-image')
-        });
-
+        
     // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
     //     if (err != null) {
     //         console.error("Error fetching cover stream", err);

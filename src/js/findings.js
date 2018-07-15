@@ -401,21 +401,46 @@ ProtoGraph.initPage = function initPage() {
         $('#cont-button').css('display', 'none');
     }
 
-    let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
-    ssr_cards.forEach((s) => {
-        ProtoGraph.ssr_cards[s].forEach((card) => {
-            setTimeout((e)=>{
-                let x = new ProtoGraph.Card[card.instance]();
-                x.init({
-                    "selector": document.querySelector(`#proto_${card.view_cast_id}`),
-                    "isFromSSR": true,
-                    "initialState": card.dataJSON,
-                    "site_configs": ProtoGraph.site
-                });
-                x.render();
+    // let ssr_cards = Object.keys(ProtoGraph.ssr_cards);
+    // ssr_cards.forEach((s) => {
+    //     ProtoGraph.ssr_cards[s].forEach((card) => {
+    //         setTimeout((e)=>{
+    //             let x = new ProtoGraph.Card[card.instance]();
+    //             x.init({
+    //                 "selector": document.querySelector(`#proto_${card.view_cast_id}`),
+    //                 "isFromSSR": true,
+    //                 "initialState": card.dataJSON,
+    //                 "site_configs": ProtoGraph.site
+    //             });
+    //             x.render();
+    //         },0)
+    //     });
+    // });
+
+
+    inView('.proto-lazy-load-card')
+        .on('enter', (e) => {
+
+            e.classList.remove('proto-lazy-load-card')
+            let card_s3_identifier = $(e).attr('card-id');
+            let instance = $(e).attr('card-instance');
+            let view_cast_id = $(e).attr('card-viewcast-id');
+            let url = card_s3_identifier;    //url to fetch card from s3
+            console.log(view_cast_id,url,instance)
+            setTimeout(function(){
+                if(instance && view_cast_id){
+                        let x = new ProtoGraph.Card[instance]();
+                        x.init({
+                            "selector": document.querySelector(`#proto_${view_cast_id}`),
+                            "isFromSSR": true,
+                            "data_url" : url,
+                            "site_configs": ProtoGraph.site
+                        });
+                        x.render();
+                }
             },0)
         });
-    });
+
 
     // Util.getJSON(streams['Related'].url, function (err, data) {
     //     if (err != null) {
