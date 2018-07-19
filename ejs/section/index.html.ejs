@@ -188,6 +188,7 @@
                         <div class="proto-app-navbar-page-navigation">
                             <div class="proto-app-navbar-overlay">
                                 <div class="proto-app-navbar-navigation-scroll" id="vertical_nav">
+                                    <% if(vertical_header_json.Header){ %>
                                     <% vertical_header_json.Header.forEach((e) => { %>
                                         <%  let social_share = identifySSURL(e); %>
                                         <% if (social_share) { %>
@@ -204,6 +205,7 @@
                                             </div>
                                         <% } %>
                                     <% }) %>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

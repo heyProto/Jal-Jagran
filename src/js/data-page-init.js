@@ -48,72 +48,115 @@ ProtoGraph.initPage = function initPage() {
     });
   }
 
-  if (page && streams['16c_Hero']) {
-    Util.getJSON(streams['16c_Hero'].url, function (err, data) {
-      if (err != null) {
-        console.error("Error fetching 16c stream", err);
-      } else {
-        let cover_container = document.getElementById("col_16_cover_container"),
-          mode_for_cover = (mode === 'mobile') ? "col4" : "col16";
-
-        if (data.length > 0) {
-          data = [data[0]];
-          data.map((d, i) => {
-            let div = document.createElement('div'),
-              marginDiv = document.createElement('div');
-
-            div.id = `ProtoCard_16c_cover_${i}`;
-            div.className = "ProtoCard-cover";
-            cover_container.appendChild(div);
-
-            marginDiv.style.marginBottom = "20px";
-            cover_container.appendChild(marginDiv);
-            setTimeout(function () {
-              var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url + "&policy=" + ProtoGraph.page.headline, mode_for_cover, {
-                headerJSON: headerJSON
-              });
-            }, 0)
-          })
-        } else {
-          $('#col_16_cover_container').append(`
-            <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
-              ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
-              <h1 class="page-title bottom-pull-div">
-                  ${page.headline}
-              </h1>
-            </div>
-          `);
-          if (page.cover_image_url || page.cover_image_url_7_column) {
-            setTimeout((e) => {
-              $('#proto_col_16_cover_blank').css({
-                'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
-                'height': cover_height,
-                'background-size': background_size,
-                'background-repeat': "no-repeat"
-              })
-            });
-          }
-        }
-      }
-    });
-  } else {
-    $('#col_16_cover_container').append(`
-      <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
-        ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
-        <h1 class="page-title bottom-pull-div">
-            ${page.headline}
-        </h1>
-      </div>
-    `);
-    if (page.cover_image_url || page.cover_image_url_7_column) {
-      setTimeout((e) => {
-        $('#proto_col_16_cover_blank').css({
-          'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
-          'height': cover_height,
-          'background-size': background_size,
-          'background-repeat': "no-repeat"
-        });
+  if ($('#cover_container').length) {
+      $('#cover_container div[data-ssr="false"]').each((index, element) => {
+          let $element = $(element),
+              iframe_url = $element.attr("iframe-url"),
+              
+              url = `${iframe_url}%26domain=${location.hostname}`
+              console.log(url)
+              setTimeout(function () {
+                  new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                      headerJSON: headerJSON
+                  });
+              }, 0)
+          
       });
-    }
+      
   }
+
+  inView('.proto-lazy-load-card')
+        .on('enter', (e) => {
+
+            e.classList.remove('proto-lazy-load-card')
+            let card_s3_identifier = $(e).attr('card-id');
+            let instance = $(e).attr('card-instance');
+            let view_cast_id = $(e).attr('card-viewcast-id');
+            let url = card_s3_identifier;    //url to fetch card from s3
+            console.log(view_cast_id,url)
+            if(instance && view_cast_id){
+                    let x = new ProtoGraph.Card[instance]();
+                    x.init({
+                        "selector": document.querySelector(`#proto_${view_cast_id}`),
+                        "isFromSSR": true,
+                        "data_url" : url,
+                        "site_configs": ProtoGraph.site
+                    });
+                    x.render();
+            }
+        });
+
+
+
+
+
+
+  // if (page && streams['16c_Hero']) {
+  //   Util.getJSON(streams['16c_Hero'].url, function (err, data) {
+  //     if (err != null) {
+  //       console.error("Error fetching 16c stream", err);
+  //     } else {
+  //       let cover_container = document.getElementById("col_16_cover_container"),
+  //         mode_for_cover = (mode === 'mobile') ? "col4" : "col16";
+
+  //       if (data.length > 0) {
+  //         data = [data[0]];
+  //         data.map((d, i) => {
+  //           let div = document.createElement('div'),
+  //             marginDiv = document.createElement('div');
+
+  //           div.id = `ProtoCard_16c_cover_${i}`;
+  //           div.className = "ProtoCard-cover";
+  //           cover_container.appendChild(div);
+
+  //           marginDiv.style.marginBottom = "20px";
+  //           cover_container.appendChild(marginDiv);
+  //           setTimeout(function () {
+  //             var sandbox_iframe = new ProtoEmbed.initFrame(document.getElementById(`ProtoCard_16c_cover_${i}`), data[i].iframe_url + "&policy=" + ProtoGraph.page.headline, mode_for_cover, {
+  //               headerJSON: headerJSON
+  //             });
+  //           }, 0)
+  //         })
+  //       } else {
+  //         $('#col_16_cover_container').append(`
+  //           <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+  //             ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
+  //             <h1 class="page-title bottom-pull-div">
+  //                 ${page.headline}
+  //             </h1>
+  //           </div>
+  //         `);
+  //         if (page.cover_image_url || page.cover_image_url_7_column) {
+  //           setTimeout((e) => {
+  //             $('#proto_col_16_cover_blank').css({
+  //               'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
+  //               'height': cover_height,
+  //               'background-size': background_size,
+  //               'background-repeat': "no-repeat"
+  //             })
+  //           });
+  //         }
+  //       }
+  //     }
+  //   });
+  // } else {
+  //   $('#col_16_cover_container').append(`
+  //     <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
+  //       ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
+  //       <h1 class="page-title bottom-pull-div">
+  //           ${page.headline}
+  //       </h1>
+  //     </div>
+  //   `);
+  //   if (page.cover_image_url || page.cover_image_url_7_column) {
+  //     setTimeout((e) => {
+  //       $('#proto_col_16_cover_blank').css({
+  //         'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
+  //         'height': cover_height,
+  //         'background-size': background_size,
+  //         'background-repeat': "no-repeat"
+  //       });
+  //     });
+  //   }
+  // }
 }
