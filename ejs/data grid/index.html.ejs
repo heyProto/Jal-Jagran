@@ -75,7 +75,80 @@
             }
         </style>
         <script>var newOpera = (navigator.userAgent.match(/Opera|OPR\//) ? true : false);if(window.newOpera){ $('body').addClass('operaBody'); }</script>
+        <% let list_of_cards = Object.keys(ssr_card_code); %>
+
+        
+
+        <% if (site.is_ad_enabled) { %>
+            <script src='https://www.googletagservices.com/tag/js/gpt.js' defer></script>
+            <script>
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function() {
+                    <% page.ad_integrations.forEach(function(e) { %>
+                        googletag.defineSlot( "<%= e.slot_text %>", [<%= e.width %>, <%= e.height %>], "<%= e.div_id %>").addService(googletag.pubads());
+                    <% }) %>
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                });
+            </script>
+        <% } %>
+   
     </head>
+
+    <%
+        function url_parser(url){
+            var match = url.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+            return match && {
+                href: url,
+                protocol: match[1],
+                host: match[2],
+                hostname: match[3],
+                port: match[4],
+                pathname: match[5],
+                search: match[6],
+                hash: match[7]
+            }
+        }
+        
+        function getHost(url) {
+            let urlComponents = url_parser(url);
+            return urlComponents.hostname;
+        }
+
+        function getImagePath(image_name) {
+            return `https://cdn.protograph.pykih.com/Assets/proto-app/img/${image_name}`;
+        }
+
+        function identifySSURL(link) {
+            let social_share_domains = [
+                {
+                    domain: "www.facebook.com",
+                    image_name: "fb-colour-icon.png"
+                },
+                {
+                    domain: "twitter.com",
+                    image_name: "twitter-colour-icon.png"
+                },
+                {
+                    domain: "www.youtube.com",
+                    image_name: "youtube-colour-icon.png"
+                },
+                {
+                    domain: "www.instagram.com",
+                    image_name: "insta-colour-icon.png"
+                }
+            ],
+            url_domain = getHost(link.url);
+
+            for (let i = 0; i < social_share_domains.length; i++) {
+                if (url_domain === social_share_domains[i].domain || (social_share_domains[i].domain.indexOf(url_domain) >= 0)) {
+                    return social_share_domains[i];
+                }
+            }
+            return false;
+        }
+    %>
 
     <% let language = site.primary_language.toLowerCase(); %>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>

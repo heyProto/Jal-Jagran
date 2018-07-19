@@ -18,9 +18,9 @@
 	font-family: "bitter";
 }
 
-/*========= font-family: cabin ==========*/
+/*========= font-family: AvenirLTStd-Book ==========*/
 .page-navigation-options a, .single-link, .mobile-navigation, .article-para, .article-h2, .single-index-value, .summary-text, .single-tab-value, .column-title, .single-tab, .protograph-map-legends-container, .default-button, .data-card-content .data-card-title, .column-title, .proto-mobile-grid-navigatio-tab, .protograph-filter-item-arrow, .protograph-filter-items-container, .protograph-filters-container, .list-group-item, .proto-card .card-title{
-	font-family: "cabin" !important;
+	font-family: "AvenirLTStd-Book" !important;
 }
 
 /*============ font-weight: bold ============*/

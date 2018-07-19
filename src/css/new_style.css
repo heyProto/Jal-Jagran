@@ -437,20 +437,11 @@ h1 {
         line-height: 22px;
         font-family: AvenirLTStd-Medium; }
     .pro-col-3 .toaggregation-card .context h1 {
-<<<<<<< HEAD
-      font-size: 14px;
-      color: black;
-      font-weight: 100;
-      margin: 0px;
-      line-height: 18px;
-      font-family: Avenir-Medium;
-=======
       font-size: 16px;
       color: black;
       margin: 0px;
       line-height: 22px;
       font-family: Avenir-Bold;
->>>>>>> bc83191123b0ec6b6b39390e3dfd14392966df56
       overflow: hidden;
       display: inline-block;
       box-sizing: border-box; }
