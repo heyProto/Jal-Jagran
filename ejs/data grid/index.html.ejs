@@ -170,7 +170,7 @@
         <div class="pro-container data-page">
             <div class="pro-col pro-col-16 stick-to-top">
                 <div class="pro-row pro-row-5">
-                    <div id='cover_container' class="cover-tostory-card">
+                    <div id='cover_container' class="cover-tostory-card" style="margin-bottom:20px">
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
