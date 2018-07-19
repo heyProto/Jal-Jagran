@@ -426,7 +426,6 @@ ProtoGraph.initPage = function initPage() {
             let instance = $(e).attr('card-instance');
             let view_cast_id = $(e).attr('card-viewcast-id');
             let url = card_s3_identifier;    //url to fetch card from s3
-            console.log(view_cast_id,url,instance)
             setTimeout(function(){
                 if(instance && view_cast_id){
                         let x = new ProtoGraph.Card[instance]();
