@@ -293,6 +293,26 @@
                          </div>
                     </div>
                 </div>
+                <div class="pro-col pro-col-2 proto-tab-content">
+                    <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
+                    <div id='opinions_container' class="pro-row pro-row-3 sidebar">
+                        <div class="theiaStickySidebar">
+                            <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
+                            <% if (ssr_card_code[card.s3_identifier]) { %>
+                                    <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
+
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
+                                        <%- cardContent.content %>
+                                    </div>
+                                <% } else { %>
+                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-opinions">
+                                        <%- card.seo_blockquote %>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
                 <div class="pro-col pro-col-4 proto-tab-content">
                     <% if (streams_mapping['4c']){ %>
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
@@ -316,26 +336,6 @@
                         </div>
                     </div>
                     <% } %>
-                </div>
-                <div class="pro-col pro-col-2 proto-tab-content">
-                    <div class="column-title"><%= streams_mapping['2c']['name_of_stream'] %></div>
-                    <div id='opinions_container' class="pro-row pro-row-3 sidebar">
-                        <div class="theiaStickySidebar">
-                            <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
-                            <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-
-                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
-                                        <%- cardContent.content %>
-                                    </div>
-                                <% } else { %>
-                                    <div id="proto_<%= card.view_cast_id %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-opinions">
-                                        <%- card.seo_blockquote %>
-                                    </div>
-                                <% } %>
-                            <% }); %>
-                        </div>
-                    </div>
                 </div>
                 <div class="pro-col pro-col-3 proto-tab-content no-right-margin ">
                     <div class="column-title"><%= streams_mapping['3c']['name_of_stream'] %></div>
