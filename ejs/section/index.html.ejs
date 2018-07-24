@@ -13,6 +13,9 @@
         <% } %>
         <meta charset="UTF-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
+        <% if (page.description) { %>
+            <meta name="description" content="<%= page.description %>" />
+        <% } %>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-cover.min.css">
@@ -67,6 +70,26 @@
                 });
             </script>
         <% } %>
+        <% if(vertical_header_json.Header){ %>
+            <script type="application/ld+json">
+                [
+                   <% vertical_header_json.Header.forEach((e,i) => { %>
+                        {"@context":"http:\/\/schema.org","@type":"SiteNavigationElement","name":"<%= e.name %>","url":"<%= e.url %>"}
+                        <% if( i < (vertical_header_json.Header.length - 1)) { -%>,<% } -%>
+                    <% }) %>
+                ]
+            </script>
+        <% } %>
+        <script type="application/ld+json">
+            {"@context":"https://schema.org",
+            "@type":"Organization",
+            "name":"<%= site.seo_name %>",
+            "url":"<%= site.cdn_endpoint %>",
+            "logo":"<%= site.logo_url %>",
+            //"sameAs":["https://www.facebook.com/indianexpress","https://twitter.com/indianexpress","https://www.youtube.com/IndianExpress"]}
+        </script>
+
+        <meta name="robots" content="noodp,noydir" />
     </head>
 
     <%
@@ -126,7 +149,7 @@
     <% let language = site.primary_language.toLowerCase(); -%>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; -%>
     <% let site_name = site.name ? `By ${site.name}` : ""; -%>
-    
+
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -224,8 +247,8 @@
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-                                
-                                
+
+
                                 <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
                                     <%- cardContent.content -%>
                                 </div>
@@ -256,7 +279,7 @@
                             <% streams_mapping['7c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    
+
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -273,13 +296,13 @@
                 <div class="pro-col pro-col-4 proto-tab-content">
                     <% if (streams_mapping['4c']){ %>
                     <div class="column-title"><%= streams_mapping['4c']['name_of_stream'] %></div>
-                    
+
                     <div id="digests_container" class="pro-row pro-row-3 sidebar">
                         <div class="theiaStickySidebar">
                             <% streams_mapping['4c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    
+
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier%>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -301,7 +324,7 @@
                             <% streams_mapping['2c'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-                                    
+
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
@@ -321,7 +344,7 @@
                             <% streams_mapping['3c'].cards.forEach(function(card,i) { %>
                                 <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render( {"dataJSON": card.data_json}) %>
-                                    
+
                                     <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" data-ssr="true">
                                         <%- cardContent.content %>
                                     </div>
