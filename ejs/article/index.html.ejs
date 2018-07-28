@@ -12,6 +12,9 @@
         <% } %>
         <meta charset="utf-8">
         <title><%= page.headline %> | <%= site.seo_name %></title>
+        <% if (page.description) { %>
+            <meta name="description" content="<%= page.description %>" />
+        <% } %>
         <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.css">
@@ -71,7 +74,7 @@
 
         <% let list_of_cards = Object.keys(ssr_card_code); %>
 
-        
+
 
         <% if (site.is_ad_enabled) { %>
             <script src='https://www.googletagservices.com/tag/js/gpt.js' defer></script>
@@ -87,6 +90,41 @@
                 });
             </script>
         <% } %>
+
+        <script type="application/ld+json">
+            {"@context":"https://schema.org",
+            "@type":"Organization",
+            "name":"<%= site.seo_name %>",
+            "url":"<%= site.cdn_endpoint %>",
+            "logo":"<%= site.logo_url %>"//,
+            //"sameAs":["https://www.facebook.com/indianexpress","https://twitter.com/indianexpress","https://www.youtube.com/IndianExpress"]
+        }
+        </script>
+
+        <script type="application/ld+json">
+            {"@context":"http:\/\/schema.org",
+            "@type":"NewsArticle",
+            "mainEntityOfPage":
+                {"@type":"WebPage","@id":"<%= page_url %>"
+            },
+            "headline":"<%= page.headline %>",
+            "datePublished":"<%= page.published_at %>",
+            //"dateModified":"2018-07-23T16:51:28+05:30",
+            "publisher":
+                {"@type":"Organization",
+                "name":"<%= site.seo_name %>",
+                "logo":"<%= site.logo_url %>"
+            },
+            "author":
+                {"@type":"Person",
+                "name":"<%= page_author %>"
+            },
+            "image": "<%= page_imageurl %>"
+        }
+        </script>
+
+        <meta name="robots" content="noodp,noydir" />
+
     </head>
 
     <%
@@ -103,7 +141,7 @@
                 hash: match[7]
             }
         }
-        
+
         function getHost(url) {
             let urlComponents = url_parser(url);
             return urlComponents.hostname;
@@ -242,11 +280,11 @@
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-                                
-                                
+
+
                                 <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true" >
                                     <%- cardContent.content %>
-                                    
+
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } else { %>
@@ -257,7 +295,7 @@
                             <% } %>
                         <% }); %>
                     </div>
-                </div>        
+                </div>
             </div>
 
             <div class="pro-grid-container cover-page-overlay no-right-column">
@@ -306,11 +344,11 @@
                         <% streams_mapping['Narrative'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-                                
-                                
+
+
                                 <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
                                     <%- cardContent.content %>
-                                    
+
                                 </div>
                                 <div style='margin-bottom: 20px'></div>
                             <% } else { %>
@@ -335,11 +373,11 @@
                                 <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
                                     <% if (ssr_card_code[card.s3_identifier]) { %>
                                         <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-                                        
-                                        
+
+
                                         <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
                                             <%- cardContent.content %>
-                                            
+
                                         </div>
                                         <div style='margin-bottom: 20px'></div>
                                     <% } else { %>
@@ -350,7 +388,7 @@
                                     <% } %>
                                 <% }); %>
                             </div>
-                        <% } %>    
+                        <% } %>
                         </div>
                     </div>
                 </div>
