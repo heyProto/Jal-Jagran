@@ -99,36 +99,25 @@ ProtoGraph.initPage = function initPage() {
         // Note: Dont remove the updateSidebarHeight: false, fixes very weard errors. Also this is not there in documentation of library.
         $('#cont-button').on('click', (e) => {
             $('#cont-button').css('display', 'none');
-            $("#related_container .fade-area").css('display', 'none');
+            $("#article .fade-area").css('display', 'none');
 
-            $("#sticker .fade-area").css('display', 'none');
-            $("#sticker").removeClass('proto-hidden-article-content');
+            // $("#sticker .fade-area").css('display', 'none');
+            // $("#sticker").removeClass('proto-hidden-article-content');
 
             $("#related_container .fade-area").css('display', 'none');
             $("#related_container").removeClass('proto-hidden-article-content');
 
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
-            $('body').scrollspy({
-                target: '#myNavbar',
-                offset: 70
-            });
-            initScroll();
-            $('#sticker').theiaStickySidebar({
-                containerSelector: ".cover-page-overlay",
-                sidebarBehavior: "stick-to-top",
-                customScrollCalculations: true,
-                additionalMarginTop: 50,
-                additionalMarginBottom: 20,
-                updateSidebarHeight: false
-            });
-            $('.related-articles-link').theiaStickySidebar({
-                containerSelector: ".cover-page-overlay",
-                sidebarBehavior: "stick-to-top",
-                additionalMarginTop: 50,
-                additionalMarginBottom: 20,
-                updateSidebarHeight: false
-            });
+            // initScroll();
+            // $('#sticker').theiaStickySidebar({
+            //     containerSelector: ".cover-page-overlay",
+            //     sidebarBehavior: "stick-to-top",
+            //     customScrollCalculations: true,
+            //     additionalMarginTop: 50,
+            //     additionalMarginBottom: 20,
+            //     updateSidebarHeight: false
+            // });
         });
 
         //Temp code
@@ -274,20 +263,17 @@ ProtoGraph.initPage = function initPage() {
     if (mode == 'mobile') {
         $('#cont-button').on('click', (e) => {
             $('#protograph_filter_icon').css('display', 'block');
+
             $('#cont-button').css('display', 'none');
             document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
 
             $("#sticker .fade-area").css('display', 'none');
             $("#sticker").removeClass('proto-hidden-article-content');
-
+            $(".related-articles-link").css('display', 'block');
             $("#related_container .fade-area").css('display', 'none');
             $("#related_container").removeClass('proto-hidden-article-content');
 
-            $('body').scrollspy({
-                target: '#myNavbar',
-                offset: 70
-            });
             $('.single-index-value').on('click', (e) => {
                 setTimeout(function () {
                     $('.navigation-links').removeClass('navigation-links-slide-up');
@@ -300,13 +286,13 @@ ProtoGraph.initPage = function initPage() {
             });
         })
 
-        $('.hamburger-icon').on('click', (e) => {
-            $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
-        });
+        // $('.hamburger-icon').on('click', (e) => {
+        //     $('.mobile-navigations-screen').addClass('mobile-navigations-screen-slide-in')
+        // });
 
-        $('.close-icon').on('click', (e) => {
-            $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
-        })
+        // $('.close-icon').on('click', (e) => {
+        //     $('.mobile-navigations-screen').removeClass('mobile-navigations-screen-slide-in')
+        // })
 
         $('#protograph_filter_icon').on('click', ((e) => {
             $('.protograph-app-filter-icon').addClass('block-events');
@@ -338,7 +324,7 @@ ProtoGraph.initPage = function initPage() {
             let $element = $(element),
                 template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`;
+                url = $element.attr("iframe-url");
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
@@ -373,7 +359,7 @@ ProtoGraph.initPage = function initPage() {
             let $element = $(element),
                 template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`
+                url = $element.attr("iframe-url");
 
             if (is_lazy_loading_activated) {
                 $element.attr('iframe-url', url);
@@ -510,26 +496,25 @@ ProtoGraph.initPage = function initPage() {
     //     }
     // });
 
-    if ($('#col_16_cover_container div[data-ssr="false]').length) {
-        $('#col_16_cover_container div[data-ssr="false"]').each((index, element) => {
+    if ($('#cover_container div[data-ssr="false"]').length) {
+        $('#cover_container div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
                 template_card_id = $element.attr("data-template_card_id"),
                 view_cast_id = $element.attr("data-view_cast_id"),
-                url = `https://cdn.protograph.pykih.com/${template_card_id}/index.html?view_cast_id=${view_cast_id}%26base_url=${window.location.origin}%26domain=${location.hostname}`;
+                url = $element.attr('iframe-url');
 
             if (is_lazy_loading_activated) {
-                $element.attr('iframe-url', url);
                 $element.attr('mode', mode_for_cover);
             } else {
                 setTimeout(function () {
-                    new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                    new ProtoEmbed.initFrame($element, url, mode_for_cover, {
                         headerJSON: headerJSON
                     });
                 }, 0)
             }
         });
         if (is_lazy_loading_activated) {
-            inView('#col_16_cover_container')
+            inView('#cover_container div[data-ssr="false"]')
                 .on('enter', (e) => {
                     let $e = $(e);
                     if (!$e.find('iframe').length) {
@@ -577,24 +562,5 @@ ProtoGraph.initPage = function initPage() {
         //         }
         //     }
         // });
-    } else {
-        $('#col_16_cover_container').append(`
-            <div class="fixed-cover-block fixed-cover-block-small" id="proto_col_16_cover_blank">
-                ${page.cover_image_url || page.cover_image_url_7_column ? '<div class="proto-black-background"></div>' : ''}
-                <h1 class="page-title bottom-pull-div">
-                    ${page.headline}
-                </h1>
-            </div>
-        `);
-        if (page.cover_image_url || page.cover_image_url_7_column) {
-            setTimeout((e) => {
-                $('#proto_col_16_cover_blank').css({
-                    'background-image': `url(${page.cover_image_url || page.cover_image_url_7_column})`,
-                    'height': cover_height,
-                    'background-size': background_size,
-                    'background-repeat': "no-repeat"
-                })
-            });
-        }
     }
 }
