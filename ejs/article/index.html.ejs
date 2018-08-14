@@ -324,6 +324,7 @@
 
                 <div class="pro-col pro-col-9 article-page-content">
                     <div class="article-area-small" id="article">
+                        <div class="fade-area"></div>
                         <% streams_mapping['Narrative'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
