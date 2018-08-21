@@ -378,7 +378,7 @@
             </div>
 
         <div style='margin-bottom: 20px;clear:both'></div>
-        <% if (more_in_the_intersection) { %>
+        <% if (more_in_the_intersection && streams_mapping['more_in_the_intersection'].cards.length) { %>
             <div class="pro-container">
                 <div class="more-articles-link-div">
                     <div class="more-articles-link">
@@ -406,7 +406,7 @@
             </div>
             <div style='margin-bottom: 20px'></div>
         <% } %>
-        <% if (more_in_the_sub_intersection) { %>
+        <% if (more_in_the_sub_intersection && streams_mapping['more_in_the_sub_intersection'].cards.length) { %>
             <div class="pro-container">
                 <div class="more-articles-link-div">
                     <div class="more-articles-link">
@@ -434,7 +434,7 @@
             </div>
             <div style='margin-bottom: 20px'></div>
         <% } %>
-        <% if (more_in_the_series) { %>
+        <% if (more_in_the_series && streams_mapping['more_in_the_series'].cards.length) { %>
             <div class="pro-container">
                 <div class="more-articles-link-div">
                     <div class="more-articles-link">
