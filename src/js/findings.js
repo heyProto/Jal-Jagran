@@ -103,11 +103,10 @@ ProtoGraph.initPage = function initPage() {
 
             // $("#sticker .fade-area").css('display', 'none');
             // $("#sticker").removeClass('proto-hidden-article-content');
-
+            $("#article").css('height', 'auto');
             $("#related_container .fade-area").css('display', 'none');
             $("#related_container").removeClass('proto-hidden-article-content');
 
-            document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
             // initScroll();
             // $('#sticker').theiaStickySidebar({
@@ -263,9 +262,10 @@ ProtoGraph.initPage = function initPage() {
     if (mode == 'mobile') {
         $('#cont-button').on('click', (e) => {
             $('#protograph_filter_icon').css('display', 'block');
-
-            $('#cont-button').css('display', 'none');
-            document.getElementById('article').className = 'article-area';
+            $("#article .fade-area").css('display', 'none');
+            // $('#cont-button').css('display', 'none');
+            $("#article").css('height', 'auto');
+            // document.getElementById('article').className = 'article-area';
             $('.single-index-value').addClass('activate-click');
 
             $("#sticker .fade-area").css('display', 'none');

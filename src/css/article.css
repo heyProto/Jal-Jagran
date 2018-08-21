@@ -367,6 +367,8 @@ body {
     padding-left: 80px;
     padding-right: 80px;
     box-sizing: border-box;
+    height: 700px;
+    overflow: hidden;
 }
 
 .pro-article-page .pro-container .article-page-content .article-media {
@@ -415,11 +417,6 @@ body {
     cursor: pointer;
 }
 
-
-.read-more-button {
-    margin-bottom: 80px;
-}
-
 .article-area .fade-area {
     display: none;
 }
@@ -445,10 +442,12 @@ body {
 
 .fade-area {
     height: 200px;
-    background: linear-gradient(#ffffff00, #ffffff);
+    background: linear-gradient(#ffffff00,#ffffffa3,#fff);;
     position: absolute;
     width: 100%;
     bottom: 0px;
+    margin-left: -80px;
+    z-index: 100;
 }
 .default-button {
     font-family: 'AvenirLTStd-Book';
@@ -467,12 +466,13 @@ body {
 }
 
 .read-more-button {
-    margin-bottom: 80px;
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 0px;
+    background: white;
 }
 
 .article-area-small, .proto-hidden-article-content {
-    height: 700px;
-    overflow: hidden;
     position: relative;
 }
 
@@ -651,10 +651,12 @@ body {
         text-align: center;
         margin-right: auto;
         margin-left: auto;
-        margin-top: 10px;
+        margin-bottom: 40px;
+        margin-top: 40px;
     }
     .pro-article-page .pro-container .social-share-options img {
-        margin-right: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
         cursor: pointer;
     }
     .article-page .protograph-app-filter-icon {
@@ -710,6 +712,29 @@ body {
         display: none;
     }
 
+    .fade-area{
+        margin-left: -20px;
+    }
+
+    .pro-article-page .pro-container .article-page-navigation {
+        padding-right: 0px;
+    }
+
+
+    .pro-article-page .pro-container .article-page-navigation .page-list ul {
+        padding-left: 0px;
+        text-align: center;
+    }
+
+    .pro-article-page .pro-container .article-page-navigation .page-list ul li{
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px dotted #efefef;
+    }
+
+    .pro-article-page .pro-container .article-page-navigation .page-list ul li a{
+        font-size: 16px !important;
+    }
 
 }
 
