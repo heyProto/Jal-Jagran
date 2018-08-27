@@ -79,9 +79,64 @@
 
     </head>
 
+    <%
+        function url_parser(url){
+            var match = url.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+            return match && {
+                href: url,
+                protocol: match[1],
+                host: match[2],
+                hostname: match[3],
+                port: match[4],
+                pathname: match[5],
+                search: match[6],
+                hash: match[7]
+            }
+        }
+
+        function getHost(url) {
+            let urlComponents = url_parser(url);
+            return urlComponents.hostname;
+        }
+
+        function getImagePath(image_name) {
+            return `https://cdn.protograph.pykih.com/Assets/proto-app/img/${image_name}`;
+        }
+
+        function identifySSURL(link) {
+            let social_share_domains = [
+                {
+                    domain: "www.facebook.com",
+                    image_name: "fb-colour-icon.png"
+                },
+                {
+                    domain: "twitter.com",
+                    image_name: "twitter-colour-icon.png"
+                },
+                {
+                    domain: "www.youtube.com",
+                    image_name: "youtube-colour-icon.png"
+                },
+                {
+                    domain: "www.instagram.com",
+                    image_name: "insta-colour-icon.png"
+                }
+            ],
+            url_domain = getHost(link.url);
+
+            for (let i = 0; i < social_share_domains.length; i++) {
+                if (url_domain === social_share_domains[i].domain || (social_share_domains[i].domain.indexOf(url_domain) >= 0)) {
+                    return social_share_domains[i];
+                }
+            }
+            return false;
+        }
+    %>
+
     <% let language = site.primary_language.toLowerCase(); %>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; %>
     <% let site_name = site.name ? `By ${site.name}` : ""; %>
+    <% let ssr_cards = {}; -%>
 
     <body class="<%= body_class %>">
         <% if (site.comscore_code) { %>
@@ -174,13 +229,13 @@
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
                                 <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
-                                
-                                
+
+
                                 <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
                                     <%- cardContent.content -%>
                                 </div>
                             <% } else { %>
-                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %> "data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %>" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
                                     <%- card.seo_blockquote %>
                                 </div>
                             <% } %>
@@ -193,7 +248,7 @@
             <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
             <div class="protograph-app-filter-icon protograph-app-filter-close-button" id="protograph_filter_close_icon"><i class="remove icon"></i></div>
         </div>
-        
+
         <div class="proto-footer">
             <div class="footer-content-area">
                 <img src="https://cdn.protograph.pykih.com/Assets/proto-app/img/arrow-left.png" class="left-arrow" id="proto-footer-prev">
@@ -225,11 +280,11 @@
         <% }) -%>
         <script>
             window.ProtoGraph = window.ProtoGraph || {};
-            ProtoGraph.streams = <%- JSON.stringify(streams) %>;
+            ProtoGraph.streams = <%- JSON.stringify(streams || {}) %>;
             ProtoGraph.site = <%- JSON.stringify(site) %>;
             ProtoGraph.page = <%- JSON.stringify(page_object) %>;
             ProtoGraph.ref_category_object = <%- JSON.stringify(ref_category_object) %>;
-            
+
             ProtoGraph.vertical_header_json_url = "<%- vertical_header_json_url %>";
             ProtoGraph.homepage_header_json_url = "<%- homepage_header_json_url %>";
             ProtoGraph.site_header_json_url = "<%- site_header_json_url %>";

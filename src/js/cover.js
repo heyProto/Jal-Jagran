@@ -65,7 +65,7 @@ ProtoGraph.initPage = function initPage() {
         $('#cover_container div[data-ssr="false"]').each((index, element) => {
             let $element = $(element),
                 iframe_url = $element.attr("iframe-url"),
-                
+
                 url = `${iframe_url}%26domain=${location.hostname}`
                 console.log(url)
                 setTimeout(function () {
@@ -73,7 +73,7 @@ ProtoGraph.initPage = function initPage() {
                         headerJSON: headerJSON
                     });
                 }, 0)
-            
+
         });
         if (is_lazy_loading_activated) {
             inView('.ProtoCard-originals')
@@ -88,6 +88,36 @@ ProtoGraph.initPage = function initPage() {
         }
         if (mode === 'laptop') {
             $('#cover_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    }
+
+    if ($('#cta_container').length) {
+        $('#cta_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                iframe_url = $element.attr("iframe-url"),
+
+                url = `${iframe_url}%26domain=${location.hostname}`
+                console.log(url)
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-originals')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#cta_container').theiaStickySidebar(sticky_sidebar_options);
         }
     }
 
@@ -250,7 +280,7 @@ ProtoGraph.initPage = function initPage() {
     //         },0)
     //     });
     // });
-    
+
     inView('.proto-lazy-load-card')
         .on('enter', (e) => {
 
@@ -271,7 +301,7 @@ ProtoGraph.initPage = function initPage() {
             }
         });
 
-        
+
     // Util.getJSON(streams['16c_Hero'].url, function (err, data) {
     //     if (err != null) {
     //         console.error("Error fetching cover stream", err);
@@ -311,22 +341,7 @@ ProtoGraph.initPage = function initPage() {
     //     }
     // });
 
-    // Util.getJSON(streams['cta'].url, function (err, data) {
-    //     if (err != null) {
-    //         console.error("Error fetching cover stream", err);
-    //     } else {
-    //         if (data.length > 0) {
-    //             data = [data[0]];
-    //             data.map((d, i) => {
-    //                 setTimeout(function () {
-    //                     new ProtoEmbed.initFrame($("#cta_container #" + d.view_cast_id)[0], `${data[i].iframe_url}%26domain=${location.hostname}`, mode_for_cover,{
-    //                         headerJSON: headerJSON
-    //                     });
-    //                 }, 0)
-    //             })
-    //         }
-    //     }
-    // });
+
 
     // Util.getJSON(streams['7c'].url, function (err, data) {
     //     if (err != null) {

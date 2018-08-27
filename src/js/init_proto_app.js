@@ -510,7 +510,7 @@ function processAndRenderHomepageNavbar(data, mode) {
         return e.name === ProtoGraph.ref_category_object.name
     })[0];
 
-    if (mode !== 'mobile' && homepage_object['show_by_publisher_in_header']) {
+    if (mode !== 'mobile' && homepage_object && homepage_object['show_by_publisher_in_header']) {
         $('.proto-app-navbar-project-by').css('display', 'inline-block');
     }
 }

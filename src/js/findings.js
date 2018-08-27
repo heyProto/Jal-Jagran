@@ -106,7 +106,8 @@ ProtoGraph.initPage = function initPage() {
             $("#article").css('height', 'auto');
             $("#related_container .fade-area").css('display', 'none');
             $("#related_container").removeClass('proto-hidden-article-content');
-
+            $("#related_container").css("height", "auto");
+            $("#related_container").css("overflow", "visible");
             $('.single-index-value').addClass('activate-click');
             // initScroll();
             // $('#sticker').theiaStickySidebar({
@@ -503,6 +504,7 @@ ProtoGraph.initPage = function initPage() {
                 view_cast_id = $element.attr("data-view_cast_id"),
                 url = $element.attr('iframe-url');
 
+            url = `${url}%26page_url=${location.href}`;
             if (is_lazy_loading_activated) {
                 $element.attr('mode', mode_for_cover);
             } else {
@@ -518,7 +520,7 @@ ProtoGraph.initPage = function initPage() {
                 .on('enter', (e) => {
                     let $e = $(e);
                     if (!$e.find('iframe').length) {
-                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                        new ProtoEmbed.initFrame($e[0], `${$e.attr('iframe-url')}%26page_url=${location.href}`, $e.attr('mode'), {
                             headerJSON: headerJSON
                         });
                     }

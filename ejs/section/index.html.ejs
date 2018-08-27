@@ -149,6 +149,11 @@
     <% let language = site.primary_language.toLowerCase(); -%>
     <% let body_class = language !== 'english' ? `language-${language}` : "proto-app-body"; -%>
     <% let site_name = site.name ? `By ${site.name}` : ""; -%>
+    <style>
+        body {
+            overflow: auto;
+        }
+    </style>
 
 
     <body class="<%= body_class %>">
@@ -157,13 +162,8 @@
                 var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "<%= site.comscore_code %>" }); (function() {var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];s.async = true;s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b")+ ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
             </script>
         <% } %>
-        <style>
-            body {
-                overflow: auto;
-            }
-        </style>
 
-        <div class="proto-app-navbar-masthead" id="site_header" style="<%= site_header_json['header_background_color'] -%>">
+        <div class="proto-app-navbar-masthead" id="site_header" style="background: <%= site_header_json['header_background_color'] -%>">
             <div class="proto-app-navbar-proto-container">
                 <div class="proto-app-navbar-site-logo proto-app-navbar-position-<%= site_header_json['header_logo_position'] -%>">
                     <a href="<%= site_header_json['header_jump_to_link'] %>" target="_blank" title="<%= site_header_json['header_tooltip'] ? site_header_json['header_tooltip'] : '' %>" >
@@ -253,7 +253,7 @@
                                     <%- cardContent.content -%>
                                 </div>
                             <% } else { %>
-                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %>" "data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %>" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
                                     <%- card.seo_blockquote %>
                                 </div>
                             <% } %>
@@ -261,6 +261,30 @@
                     </div>
                 </div>
             </div>
+
+            <% if (streams_mapping['cta'] && streams_mapping['cta'].cards){ %>
+                <div class="proto-col col-16">
+                    <div class="col-16-story-card">
+                        <div id='cta_container'>
+                            <% streams_mapping['cta'].cards.forEach(function(card,i) { %>
+                            <% if (ssr_card_code[card.s3_identifier]) { %>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
+
+
+                                <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
+                                    <%- cardContent.content -%>
+                                </div>
+                            <% } else { %>
+                                <div id="proto_<%= card.view_cast_id %>" data-ssr="false" iframe-url="<%= card.iframe_url %>" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" >
+                                    <%- card.seo_blockquote %>
+                                </div>
+                            <% } %>
+                        <% }); %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
             <div class="pro-col pro-col-16 proto-nav-sticky">
                 <div class="theiaStickySidebar">
                     <div class="proto-mobile-grid-navigation">

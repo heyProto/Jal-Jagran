@@ -4,6 +4,7 @@ ProtoGraph.initPage = function initPage() {
   let dimension = Util.getScreenSize(),
     mode = (dimension.width <= 500) ? 'mobile' : 'laptop',
     render_mode = (dimension.width <= 500) ? 'col4' : 'col7',
+    mode_for_cover = (mode === 'mobile') ? "col4" : "col16",
     cover_height = (dimension.width <= 500) ? '250px' : '430px',
     background_size = (dimension.width <= 500) ? 'cover' : '100%',
     streams = ProtoGraph.streams,
@@ -52,17 +53,16 @@ ProtoGraph.initPage = function initPage() {
       $('#cover_container div[data-ssr="false"]').each((index, element) => {
           let $element = $(element),
               iframe_url = $element.attr("iframe-url"),
-              
-              url = `${iframe_url}%26domain=${location.hostname}`
-              console.log(url)
+
+              url = `${iframe_url}%26domain=${location.hostname}%26policy=${ProtoGraph.page.headline}`;
               setTimeout(function () {
-                  new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                  new ProtoEmbed.initFrame(element, url , mode_for_cover, {
                       headerJSON: headerJSON
                   });
               }, 0)
-          
+
       });
-      
+
   }
 
   inView('.proto-lazy-load-card')
@@ -73,7 +73,7 @@ ProtoGraph.initPage = function initPage() {
             let instance = $(e).attr('card-instance');
             let view_cast_id = $(e).attr('card-viewcast-id');
             let url = card_s3_identifier;    //url to fetch card from s3
-            
+
             if(instance && view_cast_id){
                     let x = new ProtoGraph.Card[instance]();
                     x.init({

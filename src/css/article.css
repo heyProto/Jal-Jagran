@@ -421,6 +421,14 @@ body {
     display: none;
 }
 
+#related_container {
+    height: 680px;
+    overflow: hidden;
+}
+
+#related_container .fade-area {
+    margin-left: 0px !important
+}
 .proto-footer .privacy-details{
     float: right;
 }
