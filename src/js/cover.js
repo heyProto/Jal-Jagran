@@ -67,7 +67,7 @@ ProtoGraph.initPage = function initPage() {
                 iframe_url = $element.attr("iframe-url"),
 
                 url = `${iframe_url}%26domain=${location.hostname}`
-                console.log(url)
+
                 setTimeout(function () {
                     new ProtoEmbed.initFrame(element, url, mode_for_cover, {
                         headerJSON: headerJSON
@@ -295,7 +295,8 @@ ProtoGraph.initPage = function initPage() {
                         "selector": document.querySelector(`#proto_${view_cast_id}`),
                         "isFromSSR": true,
                         "data_url" : url,
-                        "site_configs": ProtoGraph.site
+                        "site_configs": ProtoGraph.site,
+                        "mode": mode_for_cover
                     });
                     x.render();
             }
