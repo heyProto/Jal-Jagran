@@ -15,7 +15,6 @@
         <% if (page.description) { %>
             <meta name="description" content="<%= page.description %>" />
         <% } %>
-        <link href="https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,400i,500,700" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
@@ -277,7 +276,9 @@
 
         <div class="pro-article-page">
             <div class="pro-container">
-                <div id='cover_container' class="cover-tostory-card">
+                <div class="pro-col pro-col-16 stick-to-top">
+                    <div class="pro-row pro-row-5">
+                        <div id='cover_container' class="cover-tostory-card">
                     <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                         <% if (ssr_card_code[card.s3_identifier]) { %>
                             <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json, "mode": mode}) %>
@@ -293,6 +294,8 @@
                             </div>
                         <% } %>
                     <% }); %>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="pro-col pro-col-3">
