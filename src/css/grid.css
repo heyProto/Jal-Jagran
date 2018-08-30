@@ -1,23 +1,19 @@
-@import url("https://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,500,600,700,900");
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,800");
-@import url("https://fonts.googleapis.com/css?family=Eczar:400,500");
-@import url("https://fonts.googleapis.com/css?family=Crimson+Text");
 @font-face {
   font-family: AvenirLTStd-Book;
-  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Book.otf") format("opentype"); }
+  src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Book.otf") format("opentype"); }
 @font-face {
   font-family: AvenirLTStd-Medium;
-  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Medium.otf") format("opentype"); }
+  src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Medium.otf") format("opentype"); }
 @font-face {
   font-family: AvenirLTStd-Roman;
-  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AvenirLTStd-Roman.otf") format("opentype"); }
+  src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Roman.otf") format("opentype"); }
 @font-face {
   font-family: Avenir-Bold;
-  src: url("https://s3.ap-south-1.amazonaws.com/dev.cdn.protograph/lib/AEH.ttf") format("opentype"); }
+  src: url("https://cdn.protograph.pykih.com/lib/AEH.ttf") format("opentype"); }
 
 body {
   margin: 0px !important; }
- 
+
 .proto-grid-container {
   width: 1300px;
   margin-left: auto;
@@ -278,7 +274,7 @@ body {
   .col-2 {
     width: 300px;
     margin-left: 50%;
-    transform: translate(-50%, 0); } 
+    transform: translate(-50%, 0); }
 
   div.col-2> div:nth-of-type(even) {
       margin-right: 0px;
