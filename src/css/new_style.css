@@ -607,6 +607,7 @@ h1 {
     padding: 5px 10px;
     box-sizing: border-box;
     margin-top: -5px;
+    padding-top: 22px !important;
 }
 
 .pro-col-3 .toaggregation-card {

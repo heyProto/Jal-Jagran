@@ -227,7 +227,7 @@
                     <div id='cover_container' class="cover-tostory-card">
                         <% streams_mapping['16c_Hero'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
-                                <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json, "mode": mode }) -%>
+                                <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) -%>
 
 
                                 <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
