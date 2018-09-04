@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>About | CEEW</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-style.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/0f0626a32cd514568f6f/proto-app-article.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.protograph.pykih.com/lib/proto-app-fonts.min.css">
@@ -46,6 +47,7 @@
     .single-tab-value.active-value {
         border-bottom: 2px solid #2780e8;
         color: #2780e8;
+    }
     }
     </style>
     <script>
@@ -129,7 +131,7 @@
             </div>
         </div>
     </div>
-    <div class="pro-article-page">
+    <div class="pro-article-page" style="display: flex; flex-direction: column">
         <div class="pro-container">
             <div id="cover_container" class="cover-tostory-card">
                 <div class="pro-col pro-col-16 cover-story-card">
@@ -154,9 +156,9 @@
                     </div>
                 </div>
             </div>
-            <div class="pro-col pro-col-3">
+            <div class="pro-col pro-col-3" style="position: sticky; top: -40px">
                 <div class="article-page-navigation navigation-links">
-                    <div class="social-share-options"><a href="#" id="facebook-share-link" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/fb-share.png"> </a><a href="#" id="twitter-share-link" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/tw-share.png"></a></div>
+                    <div class="social-share-options" style="padding-bottom: 40px"><a href="#" id="facebook-share-link" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/fb-share.png"> </a><a href="#" id="twitter-share-link" target="_blank"><img src="https://cdn.protograph.pykih.com/Assets/tw-share.png"></a></div>
                     <div class="page-list">
                         <ul>
                             <li><a href="#proto_49385" class="nav-link single-index-value">Need for a Decision Support Tool</a></li>
