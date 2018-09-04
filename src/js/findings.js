@@ -265,7 +265,8 @@ ProtoGraph.initPage = function initPage() {
                             "selector": document.querySelector(`#proto_${view_cast_id}`),
                             "isFromSSR": true,
                             "data_url" : url,
-                            "site_configs": ProtoGraph.site
+                            "site_configs": ProtoGraph.site,
+                            "mode": mode_for_cover
                         });
                         x.render();
                 }
