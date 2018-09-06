@@ -49,13 +49,12 @@
 }
 
 /*============ font-size: 16px ============*/
-.article-para, #protograph_tooltip, .protograph-filters-active-count, .protograph-filters-selected-filter-toggle, .protograph-star-small {
+.article-para, #protograph_tooltip, .protograph-filters-active-count, .single-tab, .protograph-star-small {
   font-size: 16px !important;
 }
 
-.single-tab {
+.protograph-filters-selected-filter-toggle {
   font-size: 14px !important;
-  text-transform: uppercase !important;
 }
 
 /*============ font-size: 20px ============*/
