@@ -1,3 +1,18 @@
+@font-face {
+  font-family: AvenirLTStd-Book;
+  src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: AvenirLTStd-Medium;
+  src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Avenir-Bold;
+  src: url("https://cdn.protograph.pykih.com/lib/AEH.ttf") format("opentype");
+}
+
 /* Old jaljagran-style.css  */
 .cover-image {
   background-image: url("../../../img/cover-image.png");
@@ -136,7 +151,7 @@
 
 .single-tab {
   font-size: 16px;
-  font-family: cabin;
+  font-family: AvenirLTStd-Book;
   border-bottom: 3px solid white;
   display: inline-block;
   padding: 12px 25px 12px;
@@ -229,7 +244,7 @@
   text-align: left;
   position: absolute;
   right: 0px;
-  font-family: cabin;
+  font-family: AvenirLTStd-Book;
   font-size: 14px;
   color: rgba(0,0,0,0.75);
 }
@@ -292,7 +307,7 @@
   font-size: 14px;
   color: #333;
   font-weight: normal;
-  font-family: cabin;
+  font-family: AvenirLTStd-Book;
   margin-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -482,7 +497,7 @@
 .summary{
   /* height: 175px; */
   color: grey;
-  font-family: cabin;
+  font-family: AvenirLTStd-Book;
   margin-bottom: 20px;
   overflow: hidden;
 }

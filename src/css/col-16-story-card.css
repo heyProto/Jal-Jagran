@@ -16,7 +16,7 @@
 .col-16-story-card .article-title{
 	font-size: 32px;
 	color: white;
-	font-family: bitter;
+	font-family: Avenir-Bold;
 	font-weight: 900;
 	display: inline-block;
 	margin-top: 12px;
@@ -27,7 +27,7 @@
 .by-line{
 	font-size: 10px;
 	color: white;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
 	font-weight: 100;
 	letter-spacing: 0.5px;
 }

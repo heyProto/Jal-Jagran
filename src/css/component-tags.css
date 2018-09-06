@@ -19,7 +19,7 @@
 	box-sizing: border-box;
 	padding-left: 5px;
 	border-radius: 4px;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
 	margin-top: 2px;
 }
 
@@ -34,7 +34,7 @@
 	padding: 2px 5px;
 	box-sizing: border-box;
 	margin-left: 3px;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
 	border-radius: 4px;
 }
 
@@ -48,7 +48,7 @@
 	display: inline-block;
 	box-sizing: border-box;
 	margin-left: 5px;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
 }
 
 .card-tags .sub-gener-dark{
@@ -61,5 +61,5 @@
 	display: inline-block;
 	box-sizing: border-box;
 	margin-left: 5px;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
 }
