@@ -170,7 +170,9 @@
                                 <%- homepage_object['name_html'] -%>
                             </a>
                         </h1>
-                        <div class="proto-app-navbar-project-by"><%- site_name -%></div>
+                        <% if(site_header_json['show_by_site_name']) { -%>
+                            <div class="proto-app-navbar-project-by"><%- site_name -%></div>
+                        <% } -%>
                         <div class="proto-app-navbar-first-navigation">
                             <span></span>
                             <div class="fade-effect"></div>
