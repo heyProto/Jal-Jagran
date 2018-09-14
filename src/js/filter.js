@@ -25,7 +25,7 @@ export default class Filter extends React.Component {
     };
 
     this.state = stateVars;
-
+    console.log('hello')
     this.toggleFilter = this.toggleFilter.bind(this);
     this.registerFilter = this.registerFilter.bind(this);
     this.unRegisterFilter = this.unRegisterFilter.bind(this);
