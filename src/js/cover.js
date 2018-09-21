@@ -97,7 +97,6 @@ ProtoGraph.initPage = function initPage() {
                 iframe_url = $element.attr("iframe-url"),
 
                 url = `${iframe_url}%26domain=${location.hostname}`
-                console.log(url)
                 setTimeout(function () {
                     new ProtoEmbed.initFrame(element, url, mode_for_cover, {
                         headerJSON: headerJSON
@@ -118,6 +117,35 @@ ProtoGraph.initPage = function initPage() {
         }
         if (mode === 'laptop') {
             $('#cta_container').theiaStickySidebar(sticky_sidebar_options);
+        }
+    }
+
+    if ($('#credits_container').length) {
+        $('#credits_container div[data-ssr="false"]').each((index, element) => {
+            let $element = $(element),
+                iframe_url = $element.attr("iframe-url"),
+
+                url = `${iframe_url}%26domain=${location.hostname}`
+                setTimeout(function () {
+                    new ProtoEmbed.initFrame(element, url, mode_for_cover, {
+                        headerJSON: headerJSON
+                    });
+                }, 0)
+
+        });
+        if (is_lazy_loading_activated) {
+            inView('.ProtoCard-originals')
+                .on('enter', (e) => {
+                    let $e = $(e);
+                    if (!$e.find('iframe').length) {
+                        new ProtoEmbed.initFrame($e[0], $e.attr('iframe-url'), $e.attr('mode'), {
+                            headerJSON: headerJSON
+                        });
+                    }
+                });
+        }
+        if (mode === 'laptop') {
+            $('#credits_container').theiaStickySidebar(sticky_sidebar_options);
         }
     }
 
