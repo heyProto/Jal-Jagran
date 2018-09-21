@@ -41,7 +41,7 @@
 	float: right;
 	line-height: 50px;
 	color: white;
-	font-family: "cabin";
+	font-family: "AvenirLTStd-Book";
 	font-size: 14px;
 	letter-spacing: 1px;
 	font-weight: 100;
@@ -69,7 +69,7 @@
 	width: 1260px;
 	height: 50px;
 	font-size: 14px;
-	font-family: "cabin";
+	font-family: "AvenirLTStd-Book";
 	color: #4E4E4E;
 	background: white;
 	z-index: 100;
@@ -99,7 +99,7 @@
 	font-size: 22px;
 	font-weight: bold;
 	color: black;
-	font-family: "bitter";
+	font-family: "Avenir-Bold";
 	text-transform: uppercase;
 	margin-left: 0px;
 	margin-top: 8px;
@@ -118,7 +118,7 @@
 	/* display: inline-block; */
 	font-size: 9px;
 	color: #333;
-	font-family: "cabin";
+	font-family: "AvenirLTStd-Book";
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	margin-left: 10px;
@@ -127,7 +127,7 @@
 }
 
 .proto-app-navbar-page-links, .proto-app-navbar-first-navigation span{
-	font-family: "cabin";
+	font-family: "AvenirLTStd-Book";
 	font-size: 12px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -259,7 +259,7 @@
 
 .proto-footer .footer-link{
     font-size: 12px;
-    font-family: "cabin";
+    font-family: "AvenirLTStd-Book";
     color: #333;
     line-height: 70px;
     letter-spacing: 0.5px;

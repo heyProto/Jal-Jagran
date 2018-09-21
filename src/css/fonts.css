@@ -13,9 +13,9 @@
 	font-color: #333333 !important;
 }
 
-/*========= font-family: bitter (for english)==========*/
+/*========= font-family: Avenir-Bold (for english)==========*/
 .proto-vertical-name, .branding, .proto-card .card-text, .list-items{
-	font-family: "bitter";
+	font-family: "Avenir-Bold";
 }
 
 /*========= font-family: AvenirLTStd-Book ==========*/
@@ -49,8 +49,12 @@
 }
 
 /*============ font-size: 16px ============*/
-.article-para, #protograph_tooltip, .protograph-filters-active-count, .protograph-filters-selected-filter-toggle, .protograph-star-small, .single-tab {
+.article-para, #protograph_tooltip, .protograph-filters-active-count, .single-tab, .protograph-star-small {
   font-size: 16px !important;
+}
+
+.protograph-filters-selected-filter-toggle {
+  font-size: 14px !important;
 }
 
 /*============ font-size: 20px ============*/
@@ -123,7 +127,7 @@
 }
 .page-title {
   font-size: 42px;
-  font-family: 'bitter', sans-serif;
+  font-family: 'Avenir-Bold', sans-serif;
 }
 /* ============= data.css ===========*/
 .proto-card .card-title {

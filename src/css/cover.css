@@ -1,3 +1,18 @@
+@font-face {
+    font-family: AvenirLTStd-Book;
+    src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+    font-family: AvenirLTStd-Medium;
+    src: url("https://cdn.protograph.pykih.com/lib/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Avenir-Bold;
+    src: url("https://cdn.protograph.pykih.com/lib/AEH.ttf") format("opentype");
+}
+
 .proto-mobile-grid-navigation {
     display: none;
 }
@@ -28,7 +43,7 @@
     text-transform: uppercase;
     font-size: 14px;
     color: #333;
-    font-family: cabin;
+    font-family: AvenirLTStd-Book;
     margin-bottom: 12px;
     font-weight: bold;
 }
@@ -71,7 +86,7 @@
         padding: 17px 12px;
         font-size: 11px;
         display: inline-block;
-        font-family: "cabin";
+        font-family: "AvenirLTStd-Book";
         /*width: 75px;*/
         /*width: 25%;*/
         text-transform: uppercase;

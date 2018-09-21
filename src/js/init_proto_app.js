@@ -192,6 +192,9 @@ function initNavbarInteraction(mode) {
         $e.attr('data-item', i);
         width += e.getBoundingClientRect().width;
     });
+
+    width += 2;
+
     $('#vertical_nav').css('width', width);
     if (width > navBarBBox.width) {
         var firstElement = $('#vertical_nav .proto-app-navbar-page-links[data-item="0"]'),

@@ -188,7 +188,9 @@
                                 <%- homepage_object['name_html'] -%>
                             </a>
                         </h1>
+                        <% if(site_header_json['show_by_site_name']) { -%>
                         <div class="proto-app-navbar-project-by"><%- site_name -%></div>
+                        <% } -%>
                         <div class="proto-app-navbar-first-navigation">
                             <span></span>
                             <div class="fade-effect"></div>
@@ -442,9 +444,9 @@
                 <div class="privacy-details">
                     <span class="footer-link light-link">Powered by Proto</span>
                     <span class="light-link dot-seprater">&#8231;</span>
-                    <span class="footer-link light-link">Terms</span>
+                    <span class="footer-link light-link"><a href="https://www.pro.to/legal/terms">Terms</a></span>
                     <span class="light-link dot-seprater">&#8231;</span>
-                    <span class="footer-link light-link">Privacy</span>
+                    <span class="footer-link light-link"><a href="https://www.pro.to/legal/privacy">Privacy</a></span>
                 </div>
             </div>
         </div>

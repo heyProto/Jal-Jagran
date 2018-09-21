@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Bitter:400,700|Cabin:400,500,700');
-
 body{
 	margin: 0px;
 }
@@ -69,7 +67,7 @@ body{
 }
 
 .proto-vertical-name{
-	font-family: "bitter";
+	font-family: "Avenir-Bold";
 	font-size: 20px;
 	letter-spacing: 0px;
 	display: inline-block;
@@ -91,7 +89,7 @@ body{
 .page-navigation-options a{
 	color: white;
 	opacity: 0.4;
-	font-family: "cabin";
+	font-family: "AvenirLTStd-Book";
 	font-size: 12px;
 	font-weight: 100;
 	line-height: 70px;
@@ -118,7 +116,7 @@ h1.navbar-project-title{
 	float: left;
 	padding: 7px 15px;
 	opacity: 0.5;
-	font-family: cabin;
+	font-family: AvenirLTStd-Book;
     font-size: 14px;
 }
 
@@ -224,7 +222,7 @@ h1.navbar-project-title{
 
 .branding{
 	float: left;
-	font-family: 'Bitter', serif;
+	font-family: 'Avenir-Bold', serif;
 	/* font-weight: bold; */
 	font-size: 20px;
 	margin-right: 25px;
@@ -266,7 +264,7 @@ h1.navbar-project-title{
 	    padding: 20px;
 	    box-sizing: border-box;
 	    background: linear-gradient(to bottom,#333,rgb(102, 102, 102));
-	    font-family: 'Cabin', sans-serif;
+	    font-family: 'AvenirLTStd-Book', sans-serif;
 	    font-size: 12px;
 	    text-transform: uppercase;
 	    z-index: 999;
