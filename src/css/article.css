@@ -49,7 +49,7 @@ body {
 }
 
 .pro-container .pro-col .pro-row-3 .pro-card {
-    height: 250px;
+    max-height: 250px;
 }
 
 .pro-container .pro-col .pro-row-5 .pro-card {
@@ -402,6 +402,15 @@ body {
     color: #333;
     margin-top: 0px;
     margin-bottom: 1.5em;
+}
+
+.pro-article-page .pro-container .article-page-content li {
+    line-height: 28px;
+}
+
+.pro-article-page .pro-container .article-page-content ul + ol, .pro-article-page .pro-container .article-page-content ul + ul,
+.pro-article-page .pro-container .article-page-content ol + ul, .pro-article-page .pro-container .article-page-content ol + ol {
+    padding-left: 80px;
 }
 
 .pro-article-page .pro-container .social-share-options {

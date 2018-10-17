@@ -30,7 +30,7 @@ body {
 }
 
 .pro-container .pro-col .pro-row-3 .pro-card {
-    height: 250px;
+    max-height: 250px;
 }
 
 .pro-container .pro-col .pro-row-5 .pro-card {
