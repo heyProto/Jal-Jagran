@@ -349,7 +349,7 @@
                 <div class="pro-col pro-col-4 ">
                     <div class="related-articles-link">
                         <% if(streams_mapping['Related']){ %>
-                            <div class="column-title"><%= streams_mapping['Related'].name_of_stream %></div>
+                            <div class="column-title" style='margin-bottom: 20px;'><%= streams_mapping['Related'].name_of_stream %></div>
                             <div class="proto-hidden-article-content" id="related_container">
                                 <div class="fade-area"></div>
                                 <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
