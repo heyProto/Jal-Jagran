@@ -321,7 +321,7 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '<%= site.ga_code %>');
+                gtag('config', '<%= site.ga_code %>', 'auto');
             </script>
         <% } %>
         <script src="<%= AWS_S3_ENDPOINT %>/lib/protoGraph.min.js" defer></script>
