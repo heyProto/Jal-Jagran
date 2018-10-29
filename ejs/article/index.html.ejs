@@ -59,7 +59,7 @@
                 border-left: 3px solid <%- site.house_colour %>;
             }
             .single-index-value.active{
-                border-left: 2px solid <%- site.house_colour %>;
+                /* border-left: 2px solid <%- site.house_colour %>; */
                 color: <%- site.house_colour %>;
             }
             .article-share-icons{
@@ -364,12 +364,11 @@
                                     <% if (ssr_card_code[card.s3_identifier]) { %>
                                         <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
 
-
-                                        <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
-                                            <%- cardContent.content %>
-
+                                        <div class="pro-row-3" style='margin-bottom: 20px'>
+                                            <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
+                                                <%- cardContent.content %>
+                                            </div>
                                         </div>
-                                        <div style='margin-bottom: 20px'></div>
                                     <% } else { %>
                                         <div id="proto_<%= card.view_cast_id %>" iframe-url="<%= card.iframe_url %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-related-articles">
                                             <%- card.seo_blockquote %>

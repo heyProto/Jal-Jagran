@@ -195,7 +195,7 @@ function initNavbarInteraction(mode) {
 
     width += 2;
 
-    $('#vertical_nav').css('width', width);
+    // $('#vertical_nav').css('width', width);
     if (width > navBarBBox.width) {
         var firstElement = $('#vertical_nav .proto-app-navbar-page-links[data-item="0"]'),
             lastElement = $(`#vertical_nav.proto-app-navbar-navigation-scroll .proto-app-navbar-page-links[data-item="${items_count - 1}"]`),
