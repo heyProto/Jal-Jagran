@@ -405,7 +405,10 @@ body {
 }
 
 .pro-article-page .pro-container .article-page-content li {
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 33px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .pro-article-page .pro-container .article-page-content ul + ol, .pro-article-page .pro-container .article-page-content ul + ul,

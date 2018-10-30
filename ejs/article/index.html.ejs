@@ -356,7 +356,7 @@
                                     <% if (ssr_card_code[card.s3_identifier]) { %>
                                         <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
 
-                                        <div class="pro-row-3" style='margin-bottom: 20px'>
+                                        <div class="pro-row-3">
                                             <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
                                                 <%- cardContent.content %>
                                             </div>
