@@ -65,6 +65,22 @@ ProtoGraph.initPage = function initPage() {
 
   }
 
+  if ($('#footer_container').length) {
+      $('#footer_container div[data-ssr="false"]').each((index, element) => {
+          let $element = $(element),
+              iframe_url = $element.attr("iframe-url"),
+
+              url = `${iframe_url}%26domain=${location.hostname}%26policy=${ProtoGraph.page.headline}`;
+              setTimeout(function () {
+                  new ProtoEmbed.initFrame(element, url , mode_for_cover, {
+                      headerJSON: headerJSON
+                  });
+              }, 0)
+
+      });
+
+  }
+
   inView('.proto-lazy-load-card')
         .on('enter', (e) => {
 
