@@ -274,8 +274,8 @@
     float: left;
     display: inline-block;
     width: 400px;
-    overflow: scroll;
     height: 70px;
+    overflow: hidden;
     -ms-overflow-style: none;
   	overflow: -moz-scrollbars-none;
 }

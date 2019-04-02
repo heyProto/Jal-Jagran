@@ -449,8 +449,6 @@ function initFooterArrowEvents(mode) {
         if (next.css('display') !== 'inline-block') {
             next.css('display', 'inline-block');
         }
-
-        $('.links-area').css('overflow', 'scroll');
         $('.links-area').animate({
             scrollLeft: currentElement.scrollLeft
         }, 'fast');
