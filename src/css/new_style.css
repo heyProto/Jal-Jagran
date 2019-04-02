@@ -331,6 +331,8 @@ h1 {
     position: absolute;
     top: 212px;
     left: 0px;
+    display: flex;
+    align-items: center;
 }
 
 .pro-col-7 .pro-row-3 .tostory-card .publishing-info .byline {
@@ -815,7 +817,7 @@ h1 {
     .pro-col-7 .pro-row-3 .tostory-card .card-background img {
         width: 100vw;
         border-radius: 0px;
-        min-height: 180px;
+        height: auto;
     }
     .pro-col-7 .pro-row-3 .tostory-card .context {
         width: 100vw;
@@ -912,6 +914,7 @@ h1 {
         width: 80px;
         height: 48px;
         border-radius: 0px;
+        padding-right: 10px;
     }
     .pro-col-4 .pro-row-3 .tostory-card .card-background img {
         width: 80px;
