@@ -16,7 +16,7 @@
             <meta name="description" content="<%= page.description %>" />
         <% } %>
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-style.min.css">
-        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-article.min.css">
+        <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/<%= template_page_s3 %>/proto-app-compendium.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/proto-app-fonts.min.css">
         <link rel="stylesheet" type="text/css" href="<%= AWS_S3_ENDPOINT %>/lib/ssr-cards.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -292,40 +292,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="pro-col pro-col-3">
-                    <div class='article-page-navigation navigation-links'>
-                        <div class="social-share-options">
-                            <a href="#" id="facebook-share-link" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/fb-share.png">
-                            </a>
-                            <a href="#" id="twitter-share-link" target="_blank">
-                                <img src="https://cdn.protograph.pykih.com/Assets/tw-share.png">
-                            </a>
-                        </div>
-
-                        <% if (navigation_json && navigation_json.length) { %>
-                            <div class="page-list">
-                                <ul>
-                                    <% navigation_json.forEach(function(item, i) { %>
-                                        <% if (item['section'].length) { %>
-                                            <li>
-                                                <a href="#proto_<%= item['view_cast_id'] %>" class="nav-link single-index-value <%= (i === 0) ? 'active' : '' %>">
-                                                    <%= item['section'] %>
-                                                </a>
-                                            </li>
-                                        <% } %>
-                                    <% }); %>
-                                </ul>
-                            </div>
-                        <% } %>
-                    </div>
-                </div>
-
-                <div class="pro-col pro-col-9 article-page-content"  id="article">
-                    <div class="fade-area">
-                        <div class="default-button read-more-button" id="cont-button">Keep reading</div>
-                    </div>
+            <div class="pro-container">
+                <div class="pro-col pro-col-8 article-page-content pro-col-4-offset compendium-page-content">
                     <div class="article-area-small">
                         <% streams_mapping['Narrative'].cards.forEach(function(card,i) { %>
                             <% if (ssr_card_code[card.s3_identifier]) { %>
@@ -353,119 +323,30 @@
                         <% }); %>
                     </div>
                 </div>
-                <div class="pro-col pro-col-4">
-                    <div class="related-articles-link">
-                        <% if(streams_mapping['Related']){ %>
-                            <div class="column-title" style='margin-bottom: 20px;'><%= streams_mapping['Related'].name_of_stream %></div>
-                            <div class="proto-hidden-article-content" id="related_container">
-                                <div class="fade-area"></div>
-                                <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
-                                    <% if (ssr_card_code[card.s3_identifier]) { %>
-                                        <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-
-                                        <div class="pro-row-3">
-                                            <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
-                                                <%- cardContent.content %>
-                                            </div>
-                                        </div>
-                                    <% } else { %>
-                                        <div id="proto_<%= card.view_cast_id %>" iframe-url="<%= card.iframe_url %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-related-articles">
-                                            <%- card.seo_blockquote %>
-                                        </div>
-                                        <div style='margin-bottom: 20px'></div>
-                                    <% } %>
-                                <% }); %>
-                            </div>
-                        <% } %>
-                    </div>
-                </div>
             </div>
 
-        <div style='margin-bottom: 20px;clear:both'></div>
-        <% if (more_in_the_intersection && streams_mapping['more_in_the_intersection'].cards.length) { %>
             <div class="pro-container">
-                <div class="more-articles-link-div">
-                    <div class="more-articles-link">
-                        <div class="column-title">
-                            <%= more_in_the_intersection.name_of_stream %>
-                        </div>
-                        <div id="more_intersection_container" class="more-articles-container">
-                                <% streams_mapping['more_in_the_intersection'].cards.forEach(function(card,i) { %>
-                                <% if (ssr_card_code[card.s3_identifier]) { %>
+                <div class="pro-compendium-container pro-col pro-col-16">
+                    <% streams_mapping['Related'].cards.forEach(function(card,i) { %>
+                        <div class="pro-col pro-col-7">
+                            <div class="pro-row pro-row-3">
+
+                            <% if (ssr_card_code[card.s3_identifier]) { %>
                                     <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
 
-                                    <div class="pro-col pro-col-4 ">
-                                        <div class="pro-row pro-row-3">
-                                            <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
-                                                <%- cardContent.content %>
-
-                                            </div>
-                                        </div>
+                                    <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
+                                        <%- cardContent.content %>
                                     </div>
-                                <% } %>
-                            <% }); %>
+                            <% } else { %>
+                                <div id="proto_<%= card.view_cast_id %>" iframe-url="<%= card.iframe_url %>" data-ssr="false" data-view_cast_id="<%= card.datacast_identifier %>" data-template_card_id="<%= card.s3_identifier %>" class="ProtoCard-related-articles">
+                                    <%- card.seo_blockquote %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
+                    <% }); %>
                 </div>
             </div>
-            <div style='margin-bottom: 20px'></div>
-        <% } %>
-        <% if (more_in_the_sub_intersection && streams_mapping['more_in_the_sub_intersection'].cards.length) { %>
-            <div class="pro-container">
-                <div class="more-articles-link-div">
-                    <div class="more-articles-link">
-                        <div class="column-title">
-                            <%= more_in_the_sub_intersection.name_of_stream %>
-                        </div>
-                        <div id="more_sub_intersection_container" class="more-articles-container">
-                                <% streams_mapping['more_in_the_sub_intersection'].cards.forEach(function(card,i) { %>
-                                <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-
-                                    <div class="pro-col pro-col-4 ">
-                                        <div class="pro-row pro-row-3">
-                                            <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
-                                                <%- cardContent.content %>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                <% } %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style='margin-bottom: 20px'></div>
-        <% } %>
-        <% if (more_in_the_series && streams_mapping['more_in_the_series'].cards.length) { %>
-            <div class="pro-container">
-                <div class="more-articles-link-div">
-                    <div class="more-articles-link">
-                        <div class="column-title">
-                            <%= more_in_the_series.name_of_stream %>
-                        </div>
-                        <div id="more_series_container" class="more-articles-container">
-                                <% streams_mapping['more_in_the_series'].cards.forEach(function(card,i) { %>
-                                <% if (ssr_card_code[card.s3_identifier]) { %>
-                                    <% let cardContent = ssr_card_code[card.s3_identifier].render({"dataJSON": card.data_json}) %>
-
-                                    <div class="pro-col pro-col-4 ">
-                                        <div class="pro-row pro-row-3">
-                                            <div id="proto_<%= card.view_cast_id %>" class="proto-lazy-load-card" card-id="<%= card.data_url %>" card-instance = "<%= ssr_card_code[card.s3_identifier].instance %>"  card-viewcast-id="<%= card.view_cast_id %>" card-s3="<%= card.s3_identifier %>" data-ssr="true">
-                                                <%- cardContent.content %>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                <% } %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style='margin-bottom: 20px'></div>
-        <% } %>
         </div>
 
         <div class="protograph-app-filter-icon" id="protograph_filter_icon">&#9776;</div>
@@ -491,7 +372,7 @@
         </div>
         <div class="proto-footer">
             <div class="footer-content-area">
-            <% if (ref_category_object.name == "GlobalGoals") {%>
+                <% if (ref_category_object.name == "GlobalGoals") {%>
                     <span class="footer-link light-link"><a href="https://www.responsiblebiz.org/privacy-policy.html">GGLI Privacy Policy</a></span>
                 <% } %>
                 <div class="privacy-details">

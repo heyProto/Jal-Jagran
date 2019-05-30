@@ -49,8 +49,10 @@ ProtoGraph.initPage = function initPage() {
     });
   }
 
-  if ($('#cover_container').length) {
-      $('#cover_container div[data-ssr="false"]').each((index, element) => {
+  console.log("test1");
+  if ($('#footer_container').length) {
+    console.log("test");
+      $('#footer_container div[data-ssr="false"]').each((index, element) => {
           let $element = $(element),
               iframe_url = $element.attr("iframe-url"),
 
@@ -65,8 +67,8 @@ ProtoGraph.initPage = function initPage() {
 
   }
 
-  if ($('#footer_container').length) {
-      $('#footer_container div[data-ssr="false"]').each((index, element) => {
+  if ($('#cover_container').length) {
+      $('#cover_container div[data-ssr="false"]').each((index, element) => {
           let $element = $(element),
               iframe_url = $element.attr("iframe-url"),
 

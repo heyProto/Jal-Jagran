@@ -116,8 +116,8 @@ class App extends React.Component {
     fb_share_url = `http://www.facebook.com/sharer/sharer.php?u=${url}${fb_share ? '&description=' + encodeURI(fb_share) : ''}`;
     tw_share_url = `http://twitter.com/share?url=${url}${tw_share ? '&text=' + encodeURI(tw_share) : ''}`;
 
-    document.getElementById('facebook-share-link').href = fb_share_url;
-    document.getElementById('twitter-share-link').href = tw_share_url;
+    if(document.getElementById('facebook-share-link')) {document.getElementById('facebook-share-link').href = fb_share_url;}
+    if(document.getElementById('twitter-share-link')) {document.getElementById('twitter-share-link').href = tw_share_url;}
   }
 
   componentDidUpdate() {

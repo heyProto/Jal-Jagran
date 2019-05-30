@@ -1,0 +1,33 @@
+/*(60+20 x no. of columns - 20)*/
+.pro-container .pro-col-4-offset {
+  margin-left: 300px;
+}
+
+.pro-container .pro-compendium-container{
+  margin-left: 60px
+}
+
+.compendium-page-content {
+  height: auto !important;
+}
+
+@media screen and (max-width: 600px) {
+  .pro-container .pro-col .pro-row-3 .pro-card {
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  .pro-container .pro-col-4-offset {
+    margin-left: auto !important;
+  }
+
+  .pro-container .pro-col-8 {
+    width: 100vw;
+    padding: 20px;
+  }
+
+  .pro-container .pro-compendium-container{
+    margin-left: 0px
+  }
+
+}
