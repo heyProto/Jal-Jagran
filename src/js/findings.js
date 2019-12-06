@@ -8,7 +8,7 @@ function initFBTWShareLinks() {
         tw_share_url;
 
     fb_share_url = `http://www.facebook.com/sharer/sharer.php?u=${url}${fb_share ? '&description=' + encodeURI(fb_share) : ''}`;
-    tw_share_url = `http://twitter.com/share?url=${url}${tw_share ? '&text=' + encodeURI(tw_share) : ''}`;
+    tw_share_url = `http://twitter.com/share?url=${url}${tw_share ? '&text=' + encodeURIComponent(tw_share) : ''}`;
 
     if(document.getElementById('facebook-share-link')) {document.getElementById('facebook-share-link').href = fb_share_url;}
     if(document.getElementById('twitter-share-link')) {document.getElementById('twitter-share-link').href = tw_share_url;}
